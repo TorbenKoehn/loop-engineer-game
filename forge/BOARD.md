@@ -37,9 +37,9 @@ generated: true
 | [E020](epics/m3/E020-m3-onboarding-and-accessibility-complete/EPIC.md) | M3 Onboarding and accessibility complete | backlog | p3 | 0/0 |
 | [E021](epics/m3/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
-| [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 4/9 |
+| [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 4/12 |
 
-## Backlog (70)
+## Backlog (71)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -113,17 +113,20 @@ generated: true
 | [T085](epics/m1/E011-juice-audio-settings-and-tutorial/T085-ascii-portraits-for-slice-harnesses-and.md) | ASCII portraits for slice harnesses and enemies | E011 | p2 | sonnet | S |
 | [T090](epics/m0/E023-harness-upkeep/T090-split-tsconfig-into-app-and-tools-projec.md) | Split tsconfig into app and tools projects | E023 | p2 | opus | M |
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
+| [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 
-## Ready (6)
+## Ready (8)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
 | [T005](epics/m0/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
 | [T011](epics/m1/E005-vertical-slice-content/T011-harness-and-system-prompt-data-for-m1.md) | Harness and system prompt data for M1 | E005 | p1 | sonnet | S |
+| [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p1 | opus | M |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
+| [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
 
 ## In Progress (3/3)
 

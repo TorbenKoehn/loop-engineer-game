@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m0/E023-harness-upkeep"
-summary: "Index of forge/epics/m0/E023-harness-upkeep: 10 files, 0 subdirectories"
-keywords: ["harness", "biome", "code-budgets", "enforced_by", "epics", "milestone", "ts-nocheck", "tsconfig"]
+summary: "Index of forge/epics/m0/E023-harness-upkeep: 13 files, 0 subdirectories"
+keywords: ["harness", "biome", "milestone", "budgets", "code-budgets", "determinism", "enforced_by", "epics"]
 type: index
 status: active
 updated: 2026-10-01
@@ -25,3 +25,6 @@ generated: true
 | [T092-harness-counts-suppression-markers-and-d.md](T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | Harness lint counts @ts-expect-error, lint-disable comments and @ts-nocheck repo-wide and measures duplicated-line percentage, closing the last budgets that nothing enforces. | ts_expect_error, eslint_disable, ts-nocheck, duplication_pct, harness, enforced_by |
 | [T093-harden-the-src-sim-determinism-ban.md](T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | Biome rejects aliased Math, globalThis, crypto and computed Math.random access in src/sim; the ban test lints isolated temp files; biome.jsonc stops claiming noTsIgnore covers @ts-nocheck. | sim-ban, determinism, biome, gritql, globalThis, crypto, ts-nocheck |
 | [T094-batch-git-calls-so-harness-lint-stays-un.md](T094-batch-git-calls-so-harness-lint-stays-un.md) | Batch git calls so harness lint stays under lint_s | harness:lint takes ~14 s (budget lint_s 10 s) because forge integrity and drift checks spawn one git process per file; batch them. | task, batch, calls, harness, lint, stays |
+| [T095-harness-diff-measures-production-diff-li.md](T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | npm run harness:diff prints production and total changed lines of the staged diff with the budgets.md exclusions and fails over task_diff_lines or 2x total; forge-review and delegate name it. | harness-diff, task_diff_lines, numstat, production-lines, budgets, review |
+| [T096-one-determinism-ban-biome-covers-src-sim.md](T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | The Biome determinism ban applies to src/run as well as src/sim and the duplicate regex ban (BANNED_GLOBALS in tests/architecture/checker.ts) is deleted; model.window and { window: 1 } stay legal. | determinism, biome, gritql, src-run, banned-globals, architecture-test |
+| [T097-required-milestone-and-linked-worktree-n.md](T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | harness:new epic fails without --milestone, and Claude Code worktrees get node_modules symlinked from the main tree via worktree.symlinkDirectories instead of npm ci. | scaffold, milestone, worktree, node_modules, symlinkDirectories, gitignore |

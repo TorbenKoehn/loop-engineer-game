@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m0"
 summary: "Index of forge/epics/m0: 0 files, 2 subdirectories"
-keywords: ["biome", "arch-test", "code-budgets", "determinism", "enforced_by", "epics", "harness", "milestone"]
+keywords: ["biome", "determinism", "arch-test", "budgets", "code-budgets", "enforced_by", "epics", "harness"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,4 +16,4 @@ generated: true
 | Directory | Summary | Keywords |
 |---|---|---|
 | [E001-game-foundation/](E001-game-foundation/INDEX.md) | Index of forge/epics/m0/E001-game-foundation: 9 files, 0 subdirectories | testing, determinism, biome, rng, typescript, vite, vitest, arch-test |
-| [E023-harness-upkeep/](E023-harness-upkeep/INDEX.md) | Index of forge/epics/m0/E023-harness-upkeep: 10 files, 0 subdirectories | harness, biome, code-budgets, enforced_by, epics, milestone, ts-nocheck, tsconfig |
+| [E023-harness-upkeep/](E023-harness-upkeep/INDEX.md) | Index of forge/epics/m0/E023-harness-upkeep: 13 files, 0 subdirectories | harness, biome, milestone, budgets, code-budgets, determinism, enforced_by, epics |
