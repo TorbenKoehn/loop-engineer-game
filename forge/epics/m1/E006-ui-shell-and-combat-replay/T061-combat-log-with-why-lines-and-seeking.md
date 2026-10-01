@@ -5,7 +5,7 @@ title: Combat log with why lines and seeking
 summary: "Terminal-panel combat log: one t()-rendered line per event in the fixed format with why modifiers, filters, virtualisation to 200 rows, and click-to-seek with highlights."
 keywords: ["combat-log", "ui", "why", "seeking", "virtualisation"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ The log is the show: every number in the fight can be traced to its cause, which
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

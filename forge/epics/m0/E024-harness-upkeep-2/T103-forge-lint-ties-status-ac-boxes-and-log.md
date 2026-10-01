@@ -5,7 +5,7 @@ title: Forge lint ties status, AC boxes and Log
 summary: "Three forge integrity errors: a done task with an unchecked AC, a checked AC in review or done without an `AC<n> verified` Log line, and a `done (R###)` Log line on a task not done."
 keywords: ["forge", "lint", "integrity", "acceptance-criteria", "log", "status", "bookkeeping"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: sonnet
 size: S
@@ -54,3 +54,4 @@ and `npm run check` instead of by the orchestrator's memory.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)
