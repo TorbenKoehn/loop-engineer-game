@@ -5,7 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts]
+related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -65,6 +65,8 @@ Conventions:
 - **Zone index**: `zone` in `fightStart`, `damage` and `zoneChanged` (`v`, `from`, `to`) is
   the array index 0 Cold, 1 Focused, 2 Rot, 3 Overflow. `damage.zone` is the zone when the
   hit lands.
+- **`tokens`**: `v` is the actual change in `F` (after clamping); no event is emitted when
+  the change is 0.
 - **Dropped spawn**: a `spawn` intent blocked by its limits emits `spawn` with `src` the
   spawner, **no `dst`**, `v: 0` and `d.index: -1` (`reason: 'intent'`). No enemy is added.
 - **`statusOff` on expiry**: `src: 'sys'`, `v: 0`.
@@ -81,7 +83,8 @@ re-deriving rules. Adding a kind or a field is a **log format change**: bump
 - Events are appended in the exact order effects happen within the tick order; `seq`
   breaks ties for equal `t`.
 - One activation produces, in order: `toolFired`, `primeUsed*` (one per consumed prime), its effect events (`damage`, `guard`,
-  …), `tokens` (output), `zoneChanged?`, `compaction?`, `pipe?`, skill-triggered events.
+  …), `tokens` (output), `zoneChanged?` (at most one per activation: the zone is updated
+  once, after `F` changed), `compaction?`, `pipe?`, skill-triggered events.
 - The UI must never reorder events; playback is strictly by `seq`.
 
 ## Canonical serialisation and hashing

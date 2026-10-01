@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -61,6 +61,20 @@ export interface RunState {
   result: null | { outcome: 'shipped' | 'ctrlc' | 'abandoned'; td: number };
 }
 ```
+
+```ts
+type ItemRef = { at: ItemKind | 'stash'; ix: number } | { at: 'gained' };
+type RewardCard = { kind: 'tool' | 'skill'; id: ToolId | SkillId; rarity: Rarity };
+type Pending =
+  | { kind: 'promptOffer'; prompts: PromptId[] }
+  | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] } // already paid
+  | { kind: 'discard'; item: OwnedItem; next: Mode };  // gained without space
+// RunStats: { nodesVisited; taskPicksNoRare }  (Task offers in a row without a rare; pity at 6)
+```
+
+`ItemRef` names an equipped slot (`at` = kind, `ix`), a stash index, or the gained item
+awaiting space. Release win: `continue` enters `reward`, then returns to `map`; `phaseEnd`
+is deferred (E008/E012).
 
 `OwnedTool = { id, version, weightMod }`. Everything is plain JSON-compatible data
 (no `Map`, `Set`, `Date`, class instances, `undefined` values).

@@ -59,8 +59,9 @@ means damage, Guardrails and healing from tools; it never modifies token amounts
 
 When a tool fires: resolve its effects first (with the zone **before** the activation),
 then add `out = max(0, tool.output + Σ outputMods)` to `S`. Then check compaction.
-Negative output (e.g. `summarize`) is a **removal**: remove from `N` first, then from
-`S`, never below `B`.
+Negative output (e.g. `summarize`) and `removeCtx` are **removals**: remove from `N`
+first, then from `S`, never below `B`. Token amounts never take the zone %. One
+activation counts as one change of `F` (one zone update).
 
 ## Noise
 
