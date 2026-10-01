@@ -37,4 +37,4 @@ generated: true
 | [E020-m3-onboarding-and-accessibility-complete/](E020-m3-onboarding-and-accessibility-complete/INDEX.md) | Index of forge/epics/E020-m3-onboarding-and-accessibility-complete: 1 files, 0 subdirectories | accessibility, m3, onboarding, remapping, screen-reader, settings |
 | [E021-m3-art-themes-and-title/](E021-m3-art-themes-and-title/INDEX.md) | Index of forge/epics/E021-m3-art-themes-and-title: 1 files, 0 subdirectories | art, ascii-art, logo, m3, themes, title |
 | [E022-m3-aa-release-readiness/](E022-m3-aa-release-readiness/INDEX.md) | Index of forge/epics/E022-m3-aa-release-readiness: 1 files, 0 subdirectories | copy-edit, m3, performance, playtest, release, soak-test |
-| [E023-harness-upkeep/](E023-harness-upkeep/INDEX.md) | Index of forge/epics/E023-harness-upkeep: 9 files, 0 subdirectories | harness, biome, code-budgets, enforced_by, epics, milestone, ts-nocheck, tsconfig |
+| [E023-harness-upkeep/](E023-harness-upkeep/INDEX.md) | Index of forge/epics/E023-harness-upkeep: 10 files, 0 subdirectories | harness, biome, code-budgets, enforced_by, epics, milestone, ts-nocheck, tsconfig |
