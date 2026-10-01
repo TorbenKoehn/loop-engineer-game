@@ -68,7 +68,7 @@ function jsonType(v: unknown): string {
   return v === null ? 'null' : typeof v;
 }
 
-function load<T>(text: string, fields: Record<string, string>): Loaded<T> {
+function load<T>(text: string, fields: Record<string, string>, schema: number): Loaded<T> {
   let raw: unknown;
   try {
     raw = JSON.parse(text);
@@ -77,12 +77,14 @@ function load<T>(text: string, fields: Record<string, string>): Loaded<T> {
   }
   const rec = (jsonType(raw) === 'object' ? raw : {}) as Record<string, unknown>;
   const shaped = Object.entries(fields).every(([k, type]) => jsonType(rec[k]) === type);
-  if (rec.schema !== SAVE_SCHEMA || !shaped) return { ok: false, error: 'schema' };
+  if (rec.schema !== schema || !shaped) return { ok: false, error: 'schema' };
   const { checksum, ...body } = rec;
   if (checksum !== checksumOf(body)) return { ok: false, error: 'checksum' };
   return { ok: true, save: rec as T };
 }
 
 /** Parses a stored run save; rejects bad JSON, another schema or a wrong checksum. */
-export const parseRunSave = (text: string): Loaded<RunSaveV1> => load(text, RUN_FIELDS);
-export const parseMetaSave = (text: string): Loaded<MetaSaveV1> => load(text, META_FIELDS);
+export const parseRunSave = (text: string, schema = SAVE_SCHEMA): Loaded<RunSaveV1> =>
+  load(text, RUN_FIELDS, schema);
+export const parseMetaSave = (text: string, schema = SAVE_SCHEMA): Loaded<MetaSaveV1> =>
+  load(text, META_FIELDS, schema);

@@ -6,7 +6,7 @@ type: doc
 status: active
 updated: 2026-10-01
 related: [run-state.md, testing.md, overview.md, adr/adr-005-save-action-log.md]
-related_code: [src/save/schema.ts, src/save/storage.ts, src/save/checksum.ts, src/save/codec.ts]
+related_code: [src/save/schema.ts, src/save/storage.ts, src/save/checksum.ts, src/save/codec.ts, src/save/migrations/index.ts]
 ---
 
 # Save system and migrations
@@ -85,17 +85,23 @@ another schema or shape (`schema`) and a wrong checksum (`checksum`).
 ## Migrations
 
 ```ts
-export const migrations: Record<number, (s: unknown) => unknown> = {
-  // 1: (s: RunSaveV1) => RunSaveV2, added when schema 2 exists
+export const runMigrations: MigrationTable = {
+  // 1: (s) => ({ ...s, schema: 2, ... }), added when schema 2 exists
 };
-export function migrate(raw: unknown): RunSaveLatest; // applies n -> n+1 in order, validates
+export const metaMigrations: MigrationTable = {};
+export function migrate(raw: unknown, kind: 'run' | 'meta'): Migrated<RunSaveV1 | MetaSaveV1>;
+// -> { ok: true, save, replayable } | { ok: false, error: 'parse' | 'schema' | 'checksum' }
 ```
+
+`migrate` (`src/save/migrations/index.ts`) takes stored text or parsed JSON, verifies the
+input checksum, applies steps n -> n+1 in order, re-seals a migrated save and validates it
+against the latest shape. A current-schema save passes through unchanged.
 
 - One migration per schema step, each with a unit test using a frozen fixture save
   (`tests/fixtures/saves/run-v1-*.txt`). Fixtures are never edited after creation.
 - Migrations transform the snapshot and, where needed, actions. If an action cannot be
-  migrated, the action log is dropped and the save is marked `replayable: false`; the
-  snapshot still loads.
+  migrated, the step returns `dropActions(save)`: the log is dropped and the save is marked
+  `replayable: false`; the snapshot still loads.
 - Meta saves migrate the same way with their own table.
 
 ## Content changes and replays

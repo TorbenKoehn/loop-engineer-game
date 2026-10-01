@@ -5,7 +5,7 @@ title: Save migration framework and frozen fixtures
 summary: "migrate() applying n to n+1 steps with validation, separate run and meta tables, frozen v1 fixture saves, and the replayable:false fallback for unmigratable actions."
 keywords: ["save", "migrations", "fixtures", "versioning", "schema"]
 type: task
-status: in-progress
+status: done
 priority: p2
 model: sonnet
 size: S
@@ -30,15 +30,15 @@ Prepare M2: saves from this build must load later, so the migration path and fro
 
 ## Acceptance Criteria
 
-- [ ] migrate(raw) applies steps in order and validates; a schema-1 save passes through unchanged (test)
-- [ ] Frozen fixtures tests/fixtures/saves/run-v1-*.txt and meta-v1-*.txt load via migrate (test)
-- [ ] An unmigratable action log yields replayable:false while the snapshot still loads (test with a synthetic step)
+- [x] migrate(raw) applies steps in order and validates; a schema-1 save passes through unchanged (test)
+- [x] Frozen fixtures tests/fixtures/saves/run-v1-*.txt and meta-v1-*.txt load via migrate (test)
+- [x] An unmigratable action log yields replayable:false while the snapshot still loads (test with a synthetic step)
 
 ## Subtasks
 
-- [ ] Migration tables
-- [ ] Fixtures
-- [ ] Fallback
+- [x] Migration tables
+- [x] Fixtures
+- [x] Fallback
 
 ## Notes
 
@@ -48,3 +48,8 @@ Prepare M2: saves from this build must load later, so the migration path and fro
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: AC1 verified: npx vitest run src/save/migrations (schema-1 passthrough and ordered steps passed)
+- 2026-10-01: AC2 verified: frozen run-v1-map.txt and meta-v1-new.txt load via migrate (migrations.test.ts)
+- 2026-10-01: AC3 verified: synthetic step using dropActions gives replayable:false, snapshot equal (migrations.test.ts)
+- 2026-10-01: review requested
+- 2026-10-01: done (R062)

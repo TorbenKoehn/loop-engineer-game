@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E008"
-summary: "Index of forge/reviews/E008: 4 files, 0 subdirectories"
-keywords: ["review", "meta", "save", "agents", "codec", "export", "history", "import"]
+summary: "Index of forge/reviews/E008: 5 files, 0 subdirectories"
+keywords: ["review", "save", "meta", "agents", "codec", "export", "fixtures", "framework"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R051-T049.md](R051-T049.md) | Review of T049: Meta state, history and AGENTS.md lessons | Review of T049 (approved) | review, meta, state, history, agents, lessons |
 | [R055-T050.md](R055-T050.md) | Review of T050: Run and meta save schema with storage adapt… | Review of T050 (approved) | review, meta, save, schema, with, storage |
 | [R056-T051.md](R056-T051.md) | Review of T051: Export and import save string codec | Review of T051 (approved) | review, export, import, save, string, codec |
+| [R062-T052.md](R062-T052.md) | Review of T052: Save migration framework and frozen fixtures | Review of T052 (approved) | review, save, migration, framework, frozen, fixtures |
