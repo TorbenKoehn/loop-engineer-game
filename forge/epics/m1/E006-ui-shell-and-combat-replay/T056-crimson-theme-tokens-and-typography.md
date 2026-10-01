@@ -5,7 +5,7 @@ title: Crimson theme tokens and typography
 summary: "Crimson colour and zone tokens as CSS custom properties, self-hosted JetBrains Mono at the documented sizes, and reusable zone encoding classes (colour, pattern, label)."
 keywords: ["theme", "css", "tokens", "typography", "crimson", "zones"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -47,3 +47,4 @@ Give every screen the slice look from one token set, so later themes only swap t
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

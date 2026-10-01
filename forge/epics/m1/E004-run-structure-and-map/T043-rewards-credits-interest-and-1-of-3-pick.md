@@ -5,7 +5,7 @@ title: "Rewards: credits, interest and 1-of-3 picks"
 summary: "Fight payouts with rolls and interest, 1-of-3 reward cards by kind and rarity with pity and fallbacks, duplicate version merges, skip credits and the discard flow."
 keywords: ["rewards", "credits", "interest", "rarity", "pity", "economy"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ Winning a fight pays out and offers a meaningful pick, with exactly the odds and
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
