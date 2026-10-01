@@ -51,3 +51,4 @@ Bots play thousands of runs so balance and regressions are measured, not guessed
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (opus)
+- 2026-10-01: maxTurns hit, resumed
