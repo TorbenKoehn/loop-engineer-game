@@ -40,7 +40,7 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 3/9 |
 
-## Backlog (36)
+## Backlog (35)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -55,7 +55,6 @@ generated: true
 | [T110](epics/m1/E009-run-screens-and-build-panel/T110-build-panel-tool-reorder-by-drag-and-alt.md) | Build panel tool reorder by drag and Alt+Arrow | E009 | p1 | sonnet | S |
 | [T111](epics/m1/E009-run-screens-and-build-panel/T111-build-panel-policy-combat-lock-and-narro.md) | Build panel policy, combat lock and narrow drawer | E009 | p1 | sonnet | S |
 | [T117](epics/m1/E011-juice-audio-settings-and-tutorial/T117-tutorial-fight-scripted-pauses.md) | Tutorial fight scripted pauses | E011 | p1 | opus | M |
-| [T119](epics/m0/E024-harness-upkeep-2/T119-check-stays-green-under-parallel-load.md) | Check stays green under parallel load | E024 | p1 | sonnet | S |
 | [T030](epics/m1/E003-context-window-mechanic/T030-context-scaled-effects-and-window-modifi.md) | Context-scaled effects and window modifiers | E003 | p2 | opus | S |
 | [T031](epics/m1/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
@@ -81,12 +80,10 @@ generated: true
 | [T115](epics/m1/E011-juice-audio-settings-and-tutorial/T115-audio-buses-autoplay-safe-start-and-hidd.md) | Audio buses, autoplay-safe start and hidden mute | E011 | p2 | sonnet | S |
 | [T116](epics/m1/E011-juice-audio-settings-and-tutorial/T116-settings-overlay-with-volume-motion-and.md) | Settings overlay with volume, motion and CRT | E011 | p2 | sonnet | M |
 
-## Ready (8)
+## Ready (6)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T107](epics/m0/E024-harness-upkeep-2/T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | E024 | p0 | sonnet | S |
-| [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel tree: loadout, stash, equip and chips | E009 | p1 | opus | M |
 | [T104](epics/m0/E024-harness-upkeep-2/T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | E024 | p1 | opus | M |
 | [T118](epics/m0/E024-harness-upkeep-2/T118-lint-warns-on-pinned-sim-numbers-in-e2e.md) | Lint warns on pinned sim numbers in e2e specs | E024 | p1 | sonnet | S |
 | [T069](epics/m1/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Sim preview: 6 s firing order dry run | E009 | p2 | opus | S |
@@ -94,9 +91,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T107](epics/m0/E024-harness-upkeep-2/T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | E024 | p0 | sonnet | S |
+| [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel tree: loadout, stash, equip and chips | E009 | p1 | opus | M |
+| [T119](epics/m0/E024-harness-upkeep-2/T119-check-stays-green-under-parallel-load.md) | Check stays green under parallel load | E024 | p1 | sonnet | S |
 
 ## Review (0/3)
 

@@ -5,7 +5,7 @@ title: "Build panel tree: loadout, stash, equip and chips"
 summary: "Explorer build panel with tools, skills, memory and stash, baseline, start zone and breakpoint chips from run selectors, and equip, unequip and swap with the context-full message."
 keywords: ["ui", "build-panel", "loadout", "stash", "equip", "breakpoints"]
 type: task
-status: ready
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -53,3 +53,4 @@ equip actions; reorder (T110), policy and drawer (T111) and the preview (T112) b
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

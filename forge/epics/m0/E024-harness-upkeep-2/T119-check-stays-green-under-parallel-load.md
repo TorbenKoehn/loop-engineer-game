@@ -5,7 +5,7 @@ title: Check stays green under parallel load
 summary: "npm run check caps Playwright workers via CHECK_E2E_WORKERS (default 2) and the run reducer's fast-check property tests get timeouts of at least 20 s, so parallel worktree checks stop flaking."
 keywords: ["check", "flaky", "playwright", "workers", "fast-check", "timeout", "parallel"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -51,3 +51,4 @@ concurrent runs.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

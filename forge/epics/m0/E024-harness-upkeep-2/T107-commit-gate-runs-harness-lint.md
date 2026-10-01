@@ -5,7 +5,7 @@ title: Commit gate runs harness lint
 summary: "A PreToolUse hook on Bash `git commit` runs the harness lint and blocks the commit on any error; a clean tree commits."
 keywords: ["hook", "pretooluse", "git-commit", "lint", "gate", "bookkeeping"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: sonnet
 size: S
@@ -51,3 +51,4 @@ harness lint has errors, with the findings as the reason.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)
