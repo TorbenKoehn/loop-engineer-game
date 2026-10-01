@@ -44,6 +44,8 @@ Give the player the central build decision of the slice: compact early and lose 
 
 ## Notes
 
+- Orchestrator 2026-10-01: re-add `policy` and `lastCompactT` to the Ctx row in docs/architecture/sim-core.md when they land (removed by gardening because not yet shipped).
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

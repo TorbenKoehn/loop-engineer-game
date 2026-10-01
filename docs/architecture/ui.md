@@ -5,6 +5,7 @@ keywords: [ui, preact, signals, replay-player, screens, fx, test-hooks]
 type: doc
 status: active
 updated: 2026-10-01
+related_code: [src/ui/i18n.ts, src/ui/store/**]
 related: [overview.md, run-state.md, event-log.md, ../game/ux/screens.md, ../game/ux/juice-audio.md, adr/adr-003-dom-ui.md]
 ---
 
@@ -108,7 +109,13 @@ transform on the shell root. A Pixi-based `Fx` can replace it behind the same in
 
 `t(key, params)` from `src/ui/i18n.ts` reads `src/content/strings/<locale>.ts`.
 Number and clock formatting helpers live next to it. See
-[localisation](../game/ux/localisation.md).
+[localisation](../game/ux/localisation.md). A missing key renders the key itself; in dev
+builds only it also logs `console.error` (never throws).
+
+## Dev sandbox route
+
+`?sandbox` opens the dev combat sandbox (`src/ui/sandbox/`, linked from Title), a plain
+terminal-style combat view outside the normal screen flow.
 
 ## Test hooks (`window.__game`, dev and e2e builds only)
 

@@ -5,7 +5,7 @@ keywords: [sim, determinism, tick, rng, integer-math, combat, api]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts, src/sim/combat/deadline.ts, src/sim/combat/end.ts, src/sim/combat/order/**]
+related_code: [src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts, src/sim/combat/deadline.ts, src/sim/combat/end.ts, src/sim/combat/order/**, src/sim/combat/context/ctx.ts]
 related: [event-log.md, overview.md, content-model.md, ../game/systems/combat.md, ../game/systems/context.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -60,7 +60,7 @@ being in the starting line (e.g. Side Quest). The sim resolves spawn ids against
 |---|---|
 | `Agent` | `trust`, `maxTrust`, `guard`, `statuses`, `tools: ToolRt[]`, `ctx: Ctx`, `flags` (once-per-fight/run) |
 | `ToolRt` | `slot`, `def`, `version`, `progress` (ms × 100), `statuses`, `piped`, `primes` |
-| `Ctx` | `W`, `B`, `S`, `N`, `zone`, `policy`, `lastCompactT` |
+| `Ctx` | `W`, `B` (readonly), `S`, `N`, `zone`, `coldPenalty` (readonly, % from model accuracy: high 15, normal 25, low 35); policy and compaction state added by T029 |
 | `EnemyRt` | `uid` (monotonic spawn id), `def`, `sev`, `maxSev`, `guard`, `armor`, `statuses`, `intentIx`, `progress`, `traitState` |
 | `SummonRt` | `uid`, `sourceSlot`, `value`, `bornT`, `lifeMs`, `nextHitT` |
 | `Sim` | `t`, `seq`, `rng`, `agent`, `enemies` (array, index 0 = front), `summons`, `events`, `deadline` |

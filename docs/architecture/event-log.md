@@ -5,7 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts]
+related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -62,6 +62,9 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 
 Conventions:
 
+- **Zone index**: `zone` in `fightStart`, `damage` and `zoneChanged` (`v`, `from`, `to`) is
+  the array index 0 Cold, 1 Focused, 2 Rot, 3 Overflow. `damage.zone` is the zone when the
+  hit lands.
 - **Dropped spawn**: a `spawn` intent blocked by its limits emits `spawn` with `src` the
   spawner, **no `dst`**, `v: 0` and `d.index: -1` (`reason: 'intent'`). No enemy is added.
 - **`statusOff` on expiry**: `src: 'sys'`, `v: 0`.
