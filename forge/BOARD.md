@@ -39,7 +39,7 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
-## Backlog (57)
+## Backlog (56)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -60,7 +60,6 @@ generated: true
 | [T049](epics/m1/E008-run-end-meta-state-and-saves/T049-meta-state-history-and-agents-md-lessons.md) | Meta state, history and AGENTS.md lessons | E008 | p1 | opus | M |
 | [T050](epics/m1/E008-run-end-meta-state-and-saves/T050-run-and-meta-save-schema-with-storage-ad.md) | Run and meta save schema with storage adapter | E008 | p1 | opus | M |
 | [T057](epics/m1/E006-ui-shell-and-combat-replay/T057-debug-test-hooks-and-url-flags.md) | Debug test hooks and URL flags | E006 | p1 | sonnet | S |
-| [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 | [T059](epics/m1/E006-ui-shell-and-combat-replay/T059-combat-screen-agent-tools-enemies-clock.md) | Combat screen: agent, tools, enemies, clock | E006 | p1 | opus | M |
 | [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
@@ -110,12 +109,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
 | [T043](epics/m1/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
+| [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 
 ## Review (0/3)
 

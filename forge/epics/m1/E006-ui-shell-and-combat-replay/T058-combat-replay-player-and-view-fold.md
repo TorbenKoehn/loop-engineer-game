@@ -5,7 +5,7 @@ title: Combat replay player and view fold
 summary: "Playback with an injectable clock, cursor, speeds 1x/2x/4x/skip and pause, a pure foldEvent view, 100-event checkpoints for seeking, and hit-stop holds."
 keywords: ["replay", "playback", "clock", "view-fold", "seeking", "ui"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ The UI never computes rules: it plays the recorded event log, so what the player
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
