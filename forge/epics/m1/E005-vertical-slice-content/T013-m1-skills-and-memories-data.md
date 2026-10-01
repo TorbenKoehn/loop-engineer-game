@@ -5,7 +5,7 @@ title: M1 skills and memories data
 summary: "The 8 vertical-slice skills and 4 memories as DSL rule data with rarity, weight, unlock refs and strings."
 keywords: ["content", "skills", "memories", "rules", "dsl"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -49,3 +49,4 @@ Provide the M1 skill and memory pool as rule data so rewards, shop and Free Tier
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)
