@@ -1,7 +1,7 @@
 ---
 title: "Index: forge"
 summary: "Index of forge: 2 files, 2 subdirectories"
-keywords: ["biome", "check", "balance", "board", "budgets", "canvas", "combat", "compaction"]
+keywords: ["accessibility", "agents-md", "art", "ascii-art", "biome", "board", "boss", "check"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,8 +15,8 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 6 subdirectories | determinism, balance, biome, budgets, canvas, check, combat, compaction |
-| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 2 files, 0 subdirectories | review, biome, check, preact, scaffold, script, strict, typescript |
+| [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 22 subdirectories | m2, m3, agents-md, boss, content, accessibility, art, ascii-art |
+| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 4 files, 0 subdirectories | review, forkable, integer, seeded, biome, check, preact, scaffold |
 
 ## Files
 

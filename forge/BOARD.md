@@ -15,45 +15,140 @@ generated: true
 
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
-| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 2/6 |
-| [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 0/0 |
-| [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/0 |
-| [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/0 |
-| [E005](epics/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p1 | 0/0 |
-| [E006](epics/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 0/0 |
+| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 3/8 |
+| [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 0/8 |
+| [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
+| [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
+| [E005](epics/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 0/8 |
+| [E006](epics/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 0/8 |
+| [E007](epics/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
+| [E008](epics/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
+| [E009](epics/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 0/8 |
+| [E010](epics/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 0/8 |
+| [E011](epics/E011-juice-audio-settings-and-tutorial/EPIC.md) | Juice, audio, settings and tutorial | backlog | p1 | 0/7 |
+| [E012](epics/E012-m2-phases-2-and-3-and-the-full-run/EPIC.md) | M2 Phases 2 and 3 and the full run | backlog | p2 | 0/0 |
+| [E013](epics/E013-m2-swarm-orchestrator-and-yolo-mode/EPIC.md) | M2 Swarm Orchestrator and YOLO Mode | backlog | p2 | 0/0 |
+| [E014](epics/E014-m2-full-item-and-event-catalogue/EPIC.md) | M2 Full item and event catalogue | backlog | p2 | 0/0 |
+| [E015](epics/E015-m2-meta-progression-and-unlock-tree/EPIC.md) | M2 Meta progression and unlock tree | backlog | p2 | 0/0 |
+| [E016](epics/E016-m2-endless-lint-rules-and-daily-seed/EPIC.md) | M2 Endless, lint rules and daily seed | backlog | p2 | 0/0 |
+| [E017](epics/E017-m2-achievements-stats-codex-and-strings/EPIC.md) | M2 Achievements, stats, codex and strings | backlog | p2 | 0/0 |
+| [E018](epics/E018-m2-full-game-balance-and-performance/EPIC.md) | M2 Full-game balance and performance | backlog | p2 | 0/0 |
+| [E019](epics/E019-m3-juice-particles-and-music/EPIC.md) | M3 Juice, particles and music | backlog | p3 | 0/0 |
+| [E020](epics/E020-m3-onboarding-and-accessibility-complete/EPIC.md) | M3 Onboarding and accessibility complete | backlog | p3 | 0/0 |
+| [E021](epics/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
+| [E022](epics/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 
-## Backlog (2)
+## Backlog (77)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
+| [T018](epics/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
+| [T019](epics/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
+| [T020](epics/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
+| [T021](epics/E002-combat-simulation-core/T021-enemy-intent-cycles-action-verbs-and-pha.md) | Enemy intent cycles, action verbs and phase scaling | E002 | p0 | opus | M |
+| [T025](epics/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
+| [T032](epics/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
+| [T033](epics/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
+| [T040](epics/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
 | [T005](epics/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
+| [T010](epics/E005-vertical-slice-content/T010-generated-plain-english-text-from-templa.md) | Generated plain-English text from templates | E005 | p1 | opus | M |
+| [T011](epics/E005-vertical-slice-content/T011-harness-and-system-prompt-data-for-m1.md) | Harness and system prompt data for M1 | E005 | p1 | sonnet | S |
+| [T012](epics/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
+| [T013](epics/E005-vertical-slice-content/T013-m1-skills-and-memories-data.md) | M1 skills and memories data | E005 | p1 | sonnet | S |
+| [T014](epics/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
+| [T015](epics/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
+| [T016](epics/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
+| [T022](epics/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
+| [T023](epics/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
+| [T024](epics/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
+| [T026](epics/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
+| [T027](epics/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
+| [T028](epics/E003-context-window-mechanic/T028-auto-compaction-on-overflow.md) | Auto-compaction on overflow | E003 | p1 | opus | M |
+| [T029](epics/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
+| [T034](epics/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
+| [T035](epics/E007-item-rules-enemy-traits-and-bosses/T035-tag-breakpoints-posix-refactor-indexed-t.md) | Tag breakpoints POSIX, Refactor, Indexed, TDD | E007 | p1 | opus | S |
+| [T036](epics/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
+| [T037](epics/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
+| [T039](epics/E007-item-rules-enemy-traits-and-bosses/T039-m1-item-behaviour-tests-over-real-conten.md) | M1 item behaviour tests over real content | E007 | p1 | opus | M |
+| [T041](epics/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
+| [T042](epics/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
+| [T043](epics/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
+| [T044](epics/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
+| [T045](epics/E004-run-structure-and-map/T045-build-actions-and-loadout-selectors.md) | Build actions and loadout selectors | E004 | p1 | opus | M |
+| [T048](epics/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
+| [T049](epics/E008-run-end-meta-state-and-saves/T049-meta-state-history-and-agents-md-lessons.md) | Meta state, history and AGENTS.md lessons | E008 | p1 | opus | M |
+| [T050](epics/E008-run-end-meta-state-and-saves/T050-run-and-meta-save-schema-with-storage-ad.md) | Run and meta save schema with storage adapter | E008 | p1 | opus | M |
+| [T055](epics/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
+| [T056](epics/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
+| [T057](epics/E006-ui-shell-and-combat-replay/T057-debug-test-hooks-and-url-flags.md) | Debug test hooks and URL flags | E006 | p1 | sonnet | S |
+| [T058](epics/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
+| [T059](epics/E006-ui-shell-and-combat-replay/T059-combat-screen-agent-tools-enemies-clock.md) | Combat screen: agent, tools, enemies, clock | E006 | p1 | opus | M |
+| [T060](epics/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
+| [T061](epics/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
+| [T063](epics/E009-run-screens-and-build-panel/T063-title-harness-select-and-system-prompt-s.md) | Title, harness select and system prompt screens | E009 | p1 | opus | M |
+| [T064](epics/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
+| [T068](epics/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel: loadout, stash, policy, breakpoints | E009 | p1 | opus | M |
+| [T071](epics/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
+| [T072](epics/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
+| [T073](epics/E010-balance-sim-bots-and-m1-exit-gates/T073-balance-targets-file-and-ci-gate.md) | Balance targets file and CI gate | E010 | p1 | sonnet | S |
+| [T075](epics/E010-balance-sim-bots-and-m1-exit-gates/T075-run-level-golden-logs-on-20-seeds.md) | Run-level golden logs on 20 seeds | E010 | p1 | opus | M |
+| [T077](epics/E010-balance-sim-bots-and-m1-exit-gates/T077-m1-balance-tuning-to-exit-targets.md) | M1 balance tuning to exit targets | E010 | p1 | opus | M |
+| [T078](epics/E010-balance-sim-bots-and-m1-exit-gates/T078-playwright-full-run-smoke-and-save-round.md) | Playwright full-run smoke and save round trip | E010 | p1 | opus | M |
+| [T084](epics/E011-juice-audio-settings-and-tutorial/T084-tutorial-first-run-and-scripted-fight-pa.md) | Tutorial first run and scripted fight pauses | E011 | p1 | opus | M |
+| [T030](epics/E003-context-window-mechanic/T030-context-scaled-effects-and-window-modifi.md) | Context-scaled effects and window modifiers | E003 | p2 | opus | S |
+| [T031](epics/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
+| [T038](epics/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
+| [T046](epics/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
+| [T047](epics/E004-run-structure-and-map/T047-standup-events-and-next-fight-modifiers.md) | Standup events and next-fight modifiers | E004 | p2 | opus | M |
+| [T051](epics/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
+| [T052](epics/E008-run-end-meta-state-and-saves/T052-save-migration-framework-and-frozen-fixt.md) | Save migration framework and frozen fixtures | E008 | p2 | sonnet | S |
+| [T053](epics/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
+| [T054](epics/E008-run-end-meta-state-and-saves/T054-desync-detection-and-replay-vs-snapshot.md) | Desync detection and replay-vs-snapshot test | E008 | p2 | opus | M |
+| [T062](epics/E006-ui-shell-and-combat-replay/T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | E006 | p2 | opus | M |
+| [T065](epics/E009-run-screens-and-build-panel/T065-reward-and-discard-screens.md) | Reward and discard screens | E009 | p2 | sonnet | S |
+| [T066](epics/E009-run-screens-and-build-panel/T066-package-registry-shop-screen.md) | Package Registry shop screen | E009 | p2 | sonnet | S |
+| [T067](epics/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
+| [T069](epics/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Build preview: 6 s firing order dry run | E009 | p2 | opus | M |
+| [T070](epics/E009-run-screens-and-build-panel/T070-run-end-summary-and-agents-md-screens.md) | Run end summary and AGENTS.md screens | E009 | p2 | opus | M |
+| [T074](epics/E010-balance-sim-bots-and-m1-exit-gates/T074-seed-replay-cli-from-save-strings.md) | Seed replay CLI from save strings | E010 | p2 | sonnet | S |
+| [T076](epics/E010-balance-sim-bots-and-m1-exit-gates/T076-sim-fast-forward-with-stepping-equivalen.md) | Sim fast-forward with stepping equivalence | E010 | p2 | opus | M |
+| [T079](epics/E011-juice-audio-settings-and-tutorial/T079-fx-bus-and-combat-juice-pops-flashes-sha.md) | Fx bus and combat juice: pops, flashes, shake | E011 | p2 | opus | M |
+| [T080](epics/E011-juice-audio-settings-and-tutorial/T080-compaction-moment-and-fight-end-juice.md) | Compaction moment and fight-end juice | E011 | p2 | opus | M |
+| [T081](epics/E011-juice-audio-settings-and-tutorial/T081-procedural-sfx-via-zzfx-with-rate-limits.md) | Procedural SFX via zzfx with rate limits | E011 | p2 | opus | M |
+| [T082](epics/E011-juice-audio-settings-and-tutorial/T082-settings-overlay-volume-reduced-motion-c.md) | Settings overlay: volume, reduced motion, CRT | E011 | p2 | opus | M |
+| [T083](epics/E011-juice-audio-settings-and-tutorial/T083-keyboard-controls-for-combat-and-shell.md) | Keyboard controls for combat and shell | E011 | p2 | sonnet | S |
+| [T085](epics/E011-juice-audio-settings-and-tutorial/T085-ascii-portraits-for-slice-harnesses-and.md) | ASCII portraits for slice harnesses and enemies | E011 | p2 | sonnet | S |
 
-## Ready (1)
+## Ready (4)
+
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T007](epics/E001-game-foundation/T007-architecture-import-rule-test.md) | Architecture import-rule test | E001 | p0 | sonnet | S |
+| [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
+| [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
+| [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
+
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T002](epics/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
 
-## In Progress (0/3)
+## Review (0/3)
 
 _none_
-
-## Review (1/3)
-
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T003](epics/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
 
 ## Blocked (0)
 
 _none_
 
-## Done (2)
+## Done (3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T006](epics/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
+| [T003](epics/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
 | [T001](epics/E001-game-foundation/T001-scaffold-vite-preact-and-strict-typescri.md) | Scaffold Vite, Preact and strict TypeScript app | E001 | p0 | sonnet | S |
 
 ## Cancelled (0)

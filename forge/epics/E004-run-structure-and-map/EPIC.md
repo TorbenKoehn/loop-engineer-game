@@ -1,39 +1,40 @@
 ---
 id: E004
 title: Run structure and map
-summary: "Run layer in the sim: seeded StS-style map per phase, node types, run reducer over serializable actions, shop, rewards, rest and events, plus seed and action-log saves."
-keywords: ["run", "map", "reducer", "shop", "rewards", "save-system"]
+summary: "Pure run reducer in src/run for Phase 1: RunState, actions, seeded map, encounters, fight nodes, rewards with interest and pity, shop, rest, Free Tier, events, build actions (M1)."
+keywords: ["run", "map", "reducer", "shop", "rewards", "events", "m1"]
 type: epic
 status: backlog
 priority: p1
 updated: 2026-10-01
-related: ["../../../docs/research/game/game-design-proposal.md", "../../../docs/research/game/tech-stack.md"]
+related: ["../../../docs/architecture/run-state.md", "../../../docs/game/systems/run-map.md", "../../../docs/game/systems/economy.md", "../../../docs/game/systems/harness-loadout.md", "../../../docs/game/content/events.md", "../../../docs/game/vertical-slice.md"]
 ---
 
 # E004: Run structure and map
 
 ## Goal
 
-Provide the 3-phase run loop as a pure reducer (RunState, Action) so UI, bots, tests and replays share one dispatch, with saves stored as seed plus action log.
+M1 vertical slice. After this epic a Phase-1 run can be played headless from harness pick to the boss through `apply(state, action)`: map, every node type, rewards, shop and build actions, all seeded by fork paths so UI, bots, tests and replays share one dispatch.
 
 ## Scope
 
-- Seeded map generation with placement rules (7 rows, branching)
-- Node types: Task, Critical Bug, Registry, Standup, Idle Cycle, Free Tier, Release
-- Run reducer, rewards (pick 1 of 3), shop with reroll, sell and interest
-- Build phase: tool order, stash, policies
-- Per-node RNG forks
-- Versioned save format (seed + action log) with replay
+- RunState, Action union, newRun/apply/legalActions/replay ([run state](../../../docs/architecture/run-state.md))
+- Seeded 7×5 map with placement rules and encounter selection ([run and map](../../../docs/game/systems/run-map.md))
+- Fight nodes building CombatInput and resolving via resolveCombat
+- Credits, interest, 1-of-3 rewards with pity, shop with sale, reroll and sell ([economy](../../../docs/game/systems/economy.md))
+- Idle Cycle, Free Tier, elite memory, the 4 M1 Standup events and next-fight modifiers
+- Build actions (move, equip, unequip, swap, policy) and selectors for the UI ([loadout](../../../docs/game/systems/harness-loadout.md))
 
 ## Out of Scope
 
-- Meta-progression, AGENTS.md and daily seed
-- Map and shop UI (E006)
-- Content volume beyond the slice (E005)
+- Run end, meta state, lessons and saves (E008)
+- Phases 2–3, phase transitions, Prune service, Endless (E012, E016)
+- Any UI (E009); bots and balance (E010)
 
 ## Definition of Done
 
-- [ ] A full run can be played headless by a bot to Release or defeat
-- [ ] Same seed and actions reproduce the same RunState
-- [ ] Changing shop choices does not change later map or fight RNG
-- [ ] Save round-trip test passes
+- [ ] All E004 tasks done with approved reviews
+- [ ] Property test: legalActions only returns actions apply accepts, over random legal sequences
+- [ ] replay(seed, actions) deep-equals the incrementally built state (test)
+- [ ] A combat seed depends only on run seed and node id (fork-independence test)
+- [ ] src/run line coverage ≥ 90%, branches ≥ 85%

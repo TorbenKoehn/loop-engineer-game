@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/E001-game-foundation"
-summary: "Index of forge/epics/E001-game-foundation: 7 files, 0 subdirectories"
-keywords: ["testing", "biome", "determinism", "rng", "typescript", "vite", "budgets", "check"]
+summary: "Index of forge/epics/E001-game-foundation: 9 files, 0 subdirectories"
+keywords: ["testing", "determinism", "biome", "rng", "typescript", "vite", "vitest", "arch-test"]
 type: index
 status: active
 updated: 2026-10-01
@@ -22,3 +22,5 @@ generated: true
 | [T004-event-log-types-and-golden-log-test-harn.md](T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | Define the CombatEvent log types and a golden-log test harness that diffs seed-to-log output against stored snapshots, so sim changes are reviewed as log diffs. | event-log, golden, snapshot, testing, types, combat |
 | [T005-playwright-smoke-test-setup.md](T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | Set up @playwright/test with Chromium and a smoke test that loads the app and asserts visible text and roles, plus an e2e script. | playwright, e2e, smoke, testing, chromium |
 | [T006-unified-check-script-tsc-biome-vitest-ha.md](T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | Add one npm run check that chains tsc, Biome, Vitest and harness:check, fails fast with clear step labels, and is the single gate agents run before review. | check, tsc, biome, vitest, harness, gate |
+| [T007-architecture-import-rule-test.md](T007-architecture-import-rule-test.md) | Architecture import-rule test | tests/arch.test.ts parses every import under src/ and fails on forbidden module directions or banned nondeterministic globals in src/sim and src/run. | architecture, imports, layering, arch-test, determinism, boundaries |
+| [T008-per-area-coverage-gates-in-vitest.md](T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | Vitest v8 coverage with per-area thresholds from the testing strategy (sim 95/90, run 90/85, save 90/85, content 90, ui logic 70) and a test:coverage script. | coverage, vitest, thresholds, quality-gate, testing |
