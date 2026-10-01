@@ -2,6 +2,7 @@
 // Plain JSON data only: no Map, Set, Date, class instances or undefined values.
 // Fights, rewards, events and run end add their fields with their tasks (E004, E008).
 import type {
+  EncounterId,
   HarnessId,
   LessonId,
   MemoryId,
@@ -59,10 +60,24 @@ export interface SetupSnapshot {
   tutorial: boolean;
 }
 
+/** docs/game/systems/run-map.md#node-types; `release` is the boss. */
+export type NodeType =
+  | 'task'
+  | 'criticalBug'
+  | 'registry'
+  | 'standup'
+  | 'idleCycle'
+  | 'freeTier'
+  | 'release';
+
 export interface MapNode {
   id: NodeId;
+  /** 1-7; the boss is row 8. */
   row: number;
   col: number;
+  type: NodeType;
+  /** Chosen at generation so the map can preview it; null on non-fight nodes. */
+  encounter: EncounterId | null;
 }
 
 export interface MapState {

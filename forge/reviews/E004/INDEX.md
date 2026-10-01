@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E004"
-summary: "Index of forge/reviews/E004: 1 files, 0 subdirectories"
-keywords: ["reducer", "review", "skeleton", "walking"]
+summary: "Index of forge/reviews/E004: 2 files, 0 subdirectories"
+keywords: ["review", "encounter", "generation", "reducer", "seeded", "selection", "skeleton", "walking"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,3 +16,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [R034-T040.md](R034-T040.md) | Review of T040: Run reducer walking skeleton: new run to map | Review of T040 (approved) | review, reducer, walking, skeleton |
+| [R038-T041.md](R038-T041.md) | Review of T041: Seeded map generation and encounter selecti… | Review of T041 (approved) | review, seeded, generation, encounter, selection |

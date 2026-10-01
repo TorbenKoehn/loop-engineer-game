@@ -4,7 +4,7 @@ import { content } from '../content/index.ts';
 import type { HarnessDef } from '../content/types/harness.ts';
 import type { PromptId } from '../content/types/ids.ts';
 import type { UnlockId, UnlockRef } from '../content/types/refs.ts';
-import { stubMap } from './map-stub.ts';
+import { generateMap } from './map/generate.ts';
 import type { MetaView, RunSetup, RunState, SetupSnapshot } from './state.ts';
 
 /** Credits at run start (docs/game/systems/economy.md). */
@@ -41,7 +41,7 @@ export function initialState(setup: SetupSnapshot): RunState {
     mode: 'promptPick',
     phase: 1,
     loop: 0,
-    map: stubMap(snap.seed),
+    map: generateMap(snap.seed, 1, snap.tutorial),
     agent: {
       trust: h.model.trust,
       maxTrust: h.model.trust,

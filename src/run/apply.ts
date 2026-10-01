@@ -1,7 +1,7 @@
 // The pure run reducer: validate, then return a new state; never mutate the input.
 // See docs/architecture/run-state.md#reducer and #modes.
 import type { Action, ActionError, ApplyResult } from './actions.ts';
-import { reachable } from './map-stub.ts';
+import { reachable } from './map/graph.ts';
 import type { NodeId, RunState } from './state.ts';
 
 const fail = (error: ActionError): ApplyResult => ({ ok: false, error });
