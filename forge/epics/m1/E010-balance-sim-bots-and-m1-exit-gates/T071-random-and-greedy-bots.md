@@ -5,7 +5,7 @@ title: Random and greedy bots
 summary: "Pure seeded bots for tools/balance: random (uniform over legal actions) and greedy (documented heuristic, interest-aware), playing full Phase-1 runs headless."
 keywords: ["bots", "balance", "greedy", "random", "headless"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Bots play thousands of runs so balance and regressions are measured, not guessed
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

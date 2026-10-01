@@ -40,19 +40,17 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (36)
+## Backlog (33)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T035](epics/m1/E007-item-rules-enemy-traits-and-bosses/T035-tag-breakpoints-posix-refactor-indexed-t.md) | Tag breakpoints POSIX, Refactor, Indexed, TDD | E007 | p1 | opus | S |
-| [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
 | [T039](epics/m1/E007-item-rules-enemy-traits-and-bosses/T039-m1-item-behaviour-tests-over-real-conten.md) | M1 item behaviour tests over real content | E007 | p1 | opus | M |
 | [T045](epics/m1/E004-run-structure-and-map/T045-build-actions-and-loadout-selectors.md) | Build actions and loadout selectors | E004 | p1 | opus | M |
 | [T057](epics/m1/E006-ui-shell-and-combat-replay/T057-debug-test-hooks-and-url-flags.md) | Debug test hooks and URL flags | E006 | p1 | sonnet | S |
 | [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel: loadout, stash, policy, breakpoints | E009 | p1 | opus | M |
-| [T071](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
 | [T072](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
 | [T073](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T073-balance-targets-file-and-ci-gate.md) | Balance targets file and CI gate | E010 | p1 | sonnet | S |
 | [T075](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T075-run-level-golden-logs-on-20-seeds.md) | Run-level golden logs on 20 seeds | E010 | p1 | opus | M |
@@ -65,7 +63,6 @@ generated: true
 | [T053](epics/m1/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
 | [T054](epics/m1/E008-run-end-meta-state-and-saves/T054-desync-detection-and-replay-vs-snapshot.md) | Desync detection and replay-vs-snapshot test | E008 | p2 | opus | M |
 | [T062](epics/m1/E006-ui-shell-and-combat-replay/T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | E006 | p2 | opus | M |
-| [T066](epics/m1/E009-run-screens-and-build-panel/T066-package-registry-shop-screen.md) | Package Registry shop screen | E009 | p2 | sonnet | S |
 | [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 | [T069](epics/m1/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Build preview: 6 s firing order dry run | E009 | p2 | opus | M |
 | [T070](epics/m1/E009-run-screens-and-build-panel/T070-run-end-summary-and-agents-md-screens.md) | Run end summary and AGENTS.md screens | E009 | p2 | opus | M |
@@ -89,9 +86,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
+| [T071](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
+| [T066](epics/m1/E009-run-screens-and-build-panel/T066-package-registry-shop-screen.md) | Package Registry shop screen | E009 | p2 | sonnet | S |
 
 ## Review (0/3)
 

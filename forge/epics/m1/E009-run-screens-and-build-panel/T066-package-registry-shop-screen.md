@@ -5,7 +5,7 @@ title: Package Registry shop screen
 summary: "Shop screen listing 5 offers as packages with price and sale tag, reroll with its cost, buy and sell actions and disabled reasons."
 keywords: ["ui", "shop", "registry", "reroll", "screens"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: sonnet
 size: S
@@ -47,3 +47,4 @@ The shop presents offers and costs clearly so spending and interest become a rea
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

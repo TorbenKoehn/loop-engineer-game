@@ -5,7 +5,7 @@ title: Armor trait, handler registry and Legacy Monolith
 summary: "Armor layers with Edit-only full damage and break stuns, a typed handler registry, Legacy Monolith stage switches A/B/C and Undocumented Behavior adds."
 keywords: ["boss", "armor", "handlers", "legacy-monolith", "stages"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -53,3 +53,4 @@ The phase-1 boss tests sustained Edit damage and context control under add noise
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
