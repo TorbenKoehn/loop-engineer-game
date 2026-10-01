@@ -16,7 +16,7 @@ generated: true
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
 | [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 7/8 |
-| [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 1/8 |
+| [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 2/8 |
 | [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
 | [E005](epics/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 2/8 |
@@ -130,11 +130,9 @@ generated: true
 | [T089](epics/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (0/3)
 
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T018](epics/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
+_none_
 
 ## Review (0/3)
 
@@ -144,12 +142,13 @@ _none_
 
 _none_
 
-## Done (12)
+## Done (13)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T094](epics/E023-harness-upkeep/T094-batch-git-calls-so-harness-lint-stays-un.md) | Batch git calls so harness lint stays under lint_s | E023 | p0 | sonnet | S |
 | [T093](epics/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
+| [T018](epics/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 | [T010](epics/E005-vertical-slice-content/T010-generated-plain-english-text-from-templa.md) | Generated plain-English text from templates | E005 | p1 | opus | M |
 | [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |

@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 13 files, 0 subdirectories"
-keywords: ["review", "integer", "biome", "forkable", "harness", "seeded", "test", "vitest"]
+summary: "Index of forge/reviews: 15 files, 0 subdirectories"
+keywords: ["review", "integer", "biome", "combat", "enemy", "forkable", "harness", "seeded"]
 type: index
 status: active
 updated: 2026-10-01
@@ -28,3 +28,5 @@ generated: true
 | [R011-T094.md](R011-T094.md) | Review of T094: Batch git calls in harness lint | Review of T094 (approved) | review, batch, calls, harness, lint, stays |
 | [R012-T007.md](R012-T007.md) | Review of T007: Architecture import-rule test | Review of T007 (approved) | review, architecture, import, rule, test |
 | [R013-T010.md](R013-T010.md) | Review of T010: Generated plain-English text from templates | Review of T010 (approved) | review, generated, plain, english, text, from |
+| [R014-T018.md](R014-T018.md) | Review of T018: combat walking skeleton | Round 1, changes-requested: code meets all 5 AC and follows the tick order, but the 583-line diff breaches task_diff_lines (400) with no allowed override. | review, combat, walking, skeleton, tool, enemy |
+| [R015-T018.md](R015-T018.md) | Review of T018: Combat walking skeleton: one tool vs one enemy | Review of T018 (approved) | review, combat, walking, skeleton, tool, enemy |
