@@ -5,7 +5,7 @@ keywords: [content, dsl, effects, triggers, types, validation, data-driven]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/content/types/**, src/content/dsl/**, src/content/strings/en.ts, tools/content/**]
+related_code: [src/content/types/**, src/content/dsl/**, src/content/strings/en.ts, tools/content/**, src/sim/handlers/**]
 related: [sim-core.md, run-state.md, ../game/content/tools.md, ../game/content/skills.md, ../game/ux/localisation.md, adr/adr-004-content-typed-ts.md]
 ---
 
@@ -111,11 +111,15 @@ export const grepFirst = defineSkill({
 
 ## Custom handlers
 
-Bosses and a few traits need logic that the DSL does not express (stage switches, Hidden
-reveal, SLA timer). They live in `src/sim/handlers/` as named pure functions
-`(sim, args) => void` registered in a typed `handlers` map. Rules: a handler emits events
-like any effect; each has a unit test; content may only reference handler ids that exist
-(validated). Target: ≤ 10 handlers in the full game.
+Bosses and a few items need logic that the DSL does not express (stage switches, Hidden
+reveal, SLA timer, passive item quirks). Every id is registered in the typed `HANDLERS` map
+in `src/sim/handlers/index.ts` with one of two shapes: `enemy` handlers are pure functions
+`(sim, enemy) => void` named by `EnemyDef.handler` and run after the enemy advances its
+intent (`monolith_stage`: stage switch on armor breaks); `hook` handlers are passive `custom`
+effects that the sim queries at one fixed point ([sim-core](sim-core.md) "Custom hooks").
+Rules: a handler emits events like any effect; each has a unit test; content may only
+reference registered ids (`validateContent(..., { handlers: HANDLER_IDS })`, tested in
+`src/run/boss.test.ts`). Target: ≤ 10 handlers in the full game.
 
 ## Generated text
 

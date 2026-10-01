@@ -25,7 +25,7 @@ export function filterKey(f: Filter): string {
 
 /** Ticks until the tool fires at its current rate; a halted tool never does. */
 function ticksToFire(sim: Sim, tool: ToolRt): number {
-  const rate = toolRate(sim.agent, tool);
+  const rate = toolRate(sim, tool);
   if (rate === 0) return Number.MAX_SAFE_INTEGER;
   const left = tool.def.cooldownMs * PROGRESS_PER_MS - tool.progress;
   return left <= 0 ? 0 : ceilDiv(left, TICK_MS * rate);

@@ -89,9 +89,9 @@ describe('Rot charge rate', () => {
     const [tool] = rot.agent.tools;
     const [enemy] = rot.enemies;
     if (!tool || !enemy) throw new Error('setup');
-    expect([toolRate(rot.agent, tool), enemyRate(enemy)]).toEqual([70, 100]);
+    expect([toolRate(rot, tool), enemyRate(enemy)]).toEqual([70, 100]);
     rot.agent.ctx.zone = 'focused';
-    expect(toolRate(rot.agent, tool)).toBe(100);
+    expect(toolRate(rot, tool)).toBe(100);
   });
 
   it('a Rot fight fires grep every 4300 ms while the Typo still acts every 3000 ms', () => {

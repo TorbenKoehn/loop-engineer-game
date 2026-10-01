@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E007"
-summary: "Index of forge/reviews/E007: 4 files, 0 subdirectories"
-keywords: ["review", "traits", "conditions", "effects", "enemy", "engine", "grow", "harness"]
+summary: "Index of forge/reviews/E007: 5 files, 0 subdirectories"
+keywords: ["review", "traits", "armor", "conditions", "effects", "enemy", "engine", "grow"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R058-T033.md](R058-T033.md) | Review of T033: Passive stat modifiers (mod effects) | Review of T033 (approved) | review, passive, stat, modifiers, effects |
 | [R064-T034.md](R064-T034.md) | Review of T034: Harness traits, system prompts and lessons… | Review of T034 (approved) | review, harness, traits, system, prompts, lessons |
 | [R067-T036.md](R067-T036.md) | Review of T036: Enemy traits Split, Grow, Outage, Blocked | Review of T036 (approved) | review, enemy, traits, split, grow, outage |
+| [R073-T037.md](R073-T037.md) | Review of T037: Armor trait, handler registry and Legacy Mo… | Review of T037 (approved) | review, armor, trait, handler, registry, legacy |

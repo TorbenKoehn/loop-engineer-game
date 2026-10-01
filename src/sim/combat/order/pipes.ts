@@ -1,5 +1,7 @@
 // Pipes (docs/game/systems/combat.md "Pipes"): `pipeMs: P` adds P x 100 progress to the right
 // neighbour, capped at full; the left-to-right fire loop then fires it in the same step.
+// Feedback Loop (feedback_loop hook) wraps: the rightmost tool also pipes into the leftmost.
+import { feedbackMs } from '../mods/custom.ts';
 import { activeSum } from '../mods/mods.ts';
 import { emit, PROGRESS_PER_MS, type Sim, type ToolRt, toolRef } from '../state.ts';
 import { hasStatus } from '../status/statuses.ts';
@@ -11,12 +13,14 @@ export const CHAIN_WINDOW_MS = 1000;
 const halted = (sim: Sim, tool: ToolRt): boolean =>
   hasStatus(tool, 'throttle') || hasStatus(tool, 'stun') || hasStatus(sim.agent, 'stun');
 
-/** Pipes from `from` into its right neighbour; never wraps (Feedback Loop: E007). */
+/** Pipes from `from` into its right neighbour; the rightmost wraps only with Feedback Loop. */
 export function pipe(sim: Sim, from: ToolRt): void {
-  const own = from.def.pipeMs ?? 0; // pipeMs mods lengthen existing pipes only
-  const ms = own > 0 ? own + activeSum(sim, 'pipeMs', from) : 0;
-  const to = sim.agent.tools[from.slot + 1];
-  if (ms <= 0 || !to || halted(sim, to)) return;
+  const { tools } = sim.agent;
+  const last = from.slot === tools.length - 1;
+  const own = last ? feedbackMs(sim) : (from.def.pipeMs ?? 0);
+  const ms = own > 0 ? own + activeSum(sim, 'pipeMs', from) : 0; // mods lengthen pipes only
+  const to = tools[last ? 0 : from.slot + 1];
+  if (ms <= 0 || !to || to === from || halted(sim, to)) return;
   to.progress = Math.min(to.def.cooldownMs * PROGRESS_PER_MS, to.progress + ms * PROGRESS_PER_MS);
   to.piped = true;
   const d = { chain: chainStep(sim) };

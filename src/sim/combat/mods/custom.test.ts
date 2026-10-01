@@ -1,12 +1,21 @@
 // T034: passive custom hooks - double_first_resolve (step_by_step), context_noise_cut and
-// throttle_shorter (lessons). Real content is tested through the run in src/run/combat.test.ts.
+// throttle_shorter (lessons); T037: rot_no_slow and feedback_loop (skills). Real content is
+// tested through the run in src/run/combat.test.ts.
 import { describe, expect, it } from 'vitest';
 import type { Effect, Family, LessonDef } from '../../../content/types/index.ts';
 import type { CombatEvent } from '../../events.ts';
-import { fight, makeEnemy, makeRule, makeSkill, withSkills } from '../../testing/builders.ts';
+import {
+  fight,
+  makeEnemy,
+  makeRule,
+  makeSkill,
+  makeTool,
+  withSkills,
+} from '../../testing/builders.ts';
 import { injectNoise } from '../context/noise.ts';
 import { resolveCombat } from '../resolve.ts';
 import { createSim, type EnemyRt, type ToolRt } from '../state.ts';
+import { toolRate } from '../status/charge.ts';
 import { applyStatus } from '../status/statuses.ts';
 import type { CombatInput } from '../types.ts';
 
@@ -87,5 +96,35 @@ describe('throttle_shorter', () => {
 
   it('Throttle from a non-enemy source is not cut', () => {
     expect(applied('t0', 3000)).toEqual([3000]);
+  });
+});
+
+describe('rot_no_slow', () => {
+  const rateInRot = (...then: Effect[]): number => {
+    const sim = createSim(withLesson(fight(), ...then), true);
+    sim.agent.ctx.zone = 'rot';
+    return toolRate(sim, sim.agent.tools[0] as ToolRt);
+  };
+
+  it('Rot no longer slows tools', () => {
+    expect([rateInRot(), rateInRot(custom('rot_no_slow'))]).toEqual([70, 100]);
+  });
+});
+
+describe('feedback_loop', () => {
+  const tools = [makeTool({ cooldownMs: 3000 }), makeTool({ id: 'cat', cooldownMs: 1000 })];
+  const loop = custom('feedback_loop', { ms: 1000 });
+  const pipes = (...then: Effect[]) =>
+    kinds(resolveCombat(withLesson(fight({ tools }), ...then)).events, 'pipe');
+
+  it('the rightmost tool pipes 1000 ms into the leftmost tool', () => {
+    expect(pipes()).toEqual([]);
+    const first = pipes(loop)[0];
+    expect([first?.t, first?.src, first?.dst, first?.v]).toEqual([1000, 't1', 't0', 1000]);
+  });
+
+  it('pipeMs mods lengthen the wrapped pipe', () => {
+    const longer = pipes(loop, { do: 'mod', stat: 'pipeMs', v: 500 })[0];
+    expect(longer?.v).toBe(1500);
   });
 });

@@ -1,6 +1,6 @@
 // Mutable working copy of one fight, created from CombatInput; plus the event emitter.
 // Plain data only, so a snapshot is structuredClone-able (docs/architecture/sim-core.md).
-import type { EnemyDef, Status, ToolDef, Value } from '../../content/types/index.ts';
+import type { EnemyDef, Status, ToolDef, Trait, Value } from '../../content/types/index.ts';
 import type { CombatEvent, Ref } from '../events.ts';
 import { createRng, type Rng } from '../rng.ts';
 import { type Ctx, createCtx } from './context/ctx.ts';
@@ -68,6 +68,10 @@ export interface EnemyRt {
   readonly spawned: Record<string, number>;
   /** Timed traits (enemy/traits.ts): ms in the fight, counted in step 2; Grow attack bonus. */
   readonly traitState: { ms: number; dmg: number };
+  /** Armor trait: layers left and the current layer's hp (0 and 0 without armor). */
+  readonly armor: { layers: number; hp: number };
+  /** Index of the active entry in `def.stages`, -1 without stages: its cycle replaces `cycle`. */
+  stage: number;
 }
 
 export interface AgentRt {
@@ -148,9 +152,19 @@ const createTool = (setup: ToolSetup, slot: number, rate: number): ToolRt => ({
   dealt: 0,
 });
 
+type Armor = Extract<Trait, { trait: 'armor' }>;
+
+/** Index of the stage of `def` whose armor-layer range holds `layers`; -1 if none. */
+export const stageAt = (def: EnemyDef, layers: number): number =>
+  (def.stages ?? []).findIndex(
+    ({ layers: r }) => r !== undefined && r[0] <= layers && layers <= r[1],
+  );
+
 /** A fresh enemy at full, phase-scaled Severity on its first intent. */
 export function createEnemy(def: EnemyDef, uid: number, phase: Phase): EnemyRt {
   const sev = scaleSev(def, phase);
+  const armor = def.traits.find((t): t is Armor => t.trait === 'armor');
+  const layers = armor?.layers ?? 0;
   return {
     uid,
     def,
@@ -163,6 +177,8 @@ export function createEnemy(def: EnemyDef, uid: number, phase: Phase): EnemyRt {
     killedBy: 'sys',
     spawned: {},
     traitState: { ms: 0, dmg: 0 },
+    armor: { layers, hp: armor?.hp ?? 0 },
+    stage: stageAt(def, layers),
   };
 }
 

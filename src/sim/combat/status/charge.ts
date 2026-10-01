@@ -2,7 +2,8 @@
 import type { Status } from '../../../content/types/index.ts';
 import { clamp, mulDiv } from '../../int.ts';
 import { ROT_RATE_PCT } from '../context/ctx.ts';
-import { type AgentRt, type EnemyRt, type Sim, TICK_MS, type ToolRt } from '../state.ts';
+import { rotSlows } from '../mods/custom.ts';
+import { type EnemyRt, type Sim, TICK_MS, type ToolRt } from '../state.ts';
 import { hasStatus } from './statuses.ts';
 
 export const MIN_RATE = 10;
@@ -22,12 +23,12 @@ export function chargeRate(add: number, has: HasStatus, rot = false): number {
   return rate;
 }
 
-/** A tool's rate add, own statuses, a Stun on the agent (stops all its tools), the Rot zone. */
-export const toolRate = (agent: AgentRt, tool: ToolRt): number =>
+/** Rate add, own statuses, an agent Stun (stops all tools), Rot (unless rot_no_slow). */
+export const toolRate = (sim: Sim, tool: ToolRt): number =>
   chargeRate(
     tool.rate,
-    (s) => hasStatus(tool, s) || (s === 'stun' && hasStatus(agent, s)),
-    agent.ctx.zone === 'rot',
+    (s) => hasStatus(tool, s) || (s === 'stun' && hasStatus(sim.agent, s)),
+    rotSlows(sim),
   );
 
 export const enemyRate = (enemy: EnemyRt): number =>
@@ -35,6 +36,6 @@ export const enemyRate = (enemy: EnemyRt): number =>
 
 /** Tick step 3: every tool and enemy intent gains `50 × rate` progress; rate 0 keeps it. */
 export function chargeAll(sim: Sim): void {
-  for (const tool of sim.agent.tools) tool.progress += TICK_MS * toolRate(sim.agent, tool);
+  for (const tool of sim.agent.tools) tool.progress += TICK_MS * toolRate(sim, tool);
   for (const enemy of sim.enemies) enemy.progress += TICK_MS * enemyRate(enemy);
 }

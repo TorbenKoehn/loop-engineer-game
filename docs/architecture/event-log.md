@@ -50,8 +50,8 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 | `compaction` | ctx | stun ms | `{ kind: 'auto'\|'planned'\|'tool', S, lostBuff? }` |
 | `statusOn` / `statusOff` | t/e -> a/t/e | duration ms | `{ status, remaining }` |
 | `prime` / `primeUsed` | t -> t | pct | `{ filter }` |
-| `trait` | e (-> t) | value | `{ trait, what }` (Grow `sev` and `dmg` with the gain; Outage `timedOut` -> the timed-out tool, v 0, after its `primeUsed*`; Leak, Flaky toggle, StageTimer reset…) |
-| `armorBroken` | t -> e | layer ix | `{ remaining }` |
+| `trait` | e (-> t) | value | `{ trait, what }` (Grow `sev` and `dmg` with the gain; Outage `timedOut` -> the timed-out tool, v 0, after its `primeUsed*`; boss `stage` switch with v layers left and `what` the stage id; Leak, Flaky toggle, StageTimer reset…) |
+| `armorBroken` | t/s/sys -> e | layer ix (0 = first broken) | `{ remaining }`; after the hit's `damage` (`d.armor` = hp the layer lost, `v` 0 while armored), then `statusOn` Stun 1500 ms |
 | `enemyActed` | e -> a | — | `{ intent, verbs }` |
 | `redirect` | e -> a | — | `{ consumed }` |
 | `summon` / `summonEnd` | t -> s | value / report tokens | `{ lifeMs }` |

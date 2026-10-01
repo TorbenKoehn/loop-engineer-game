@@ -39,7 +39,7 @@ function best(sim: Sim, score: Score): ToolRt[] {
   let top: ToolRt | undefined;
   let topScore = 0;
   for (const tool of sim.agent.tools) {
-    const s = score(tool, toolRate(sim.agent, tool));
+    const s = score(tool, toolRate(sim, tool));
     if (s === undefined || (top && s <= topScore)) continue;
     top = tool;
     topScore = s;

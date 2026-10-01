@@ -1,6 +1,7 @@
-// Enemy traits Split, Grow, Outage and Blocked (docs/game/systems/statuses.md "Enemy traits").
-// Armor and the M2 traits join with their tasks.
+// Enemy traits Split, Grow, Outage, Blocked and Armor (docs/game/systems/statuses.md "Enemy
+// traits"). The M2 traits join with their tasks.
 import type { Trait } from '../../../content/types/index.ts';
+import type { Ref } from '../../events.ts';
 import { mulDiv } from '../../int.ts';
 import { hooks } from '../mods/custom.ts';
 import {
@@ -13,6 +14,7 @@ import {
   type ToolRt,
   toolRef,
 } from '../state.ts';
+import { applyStatus } from '../status/statuses.ts';
 import { announceIntent } from './cycle.ts';
 import { defOf, MAX_ENEMIES } from './spawn.ts';
 
@@ -93,4 +95,35 @@ export function timedOut(sim: Sim, by: EnemyRt, tool: ToolRt): void {
 export function isBlocked(sim: Sim, enemy: EnemyRt): boolean {
   if (!traitOf(enemy, 'blocked')) return false;
   return sim.enemies.some((e) => e.sev > 0 && !traitOf(e, 'blocked'));
+}
+
+/** A broken armor layer stuns its enemy this long. */
+export const ARMOR_STUN_MS = 1500;
+
+/**
+ * Armor(layers, hp): a hit lands on the current layer only, [Edit] damage at 100% and other
+ * damage at 50% (floor); the excess is discarded. Returns the hp the layer lost.
+ */
+export function hitArmor(enemy: EnemyRt, amount: number, edit: boolean): number {
+  const absorbed = Math.min(enemy.armor.hp, edit ? amount : mulDiv(amount, 50, 100));
+  enemy.armor.hp -= absorbed;
+  return absorbed;
+}
+
+/** After the hit: an emptied layer breaks (`armorBroken`, v: its index) and stuns 1500 ms. */
+export function breakArmor(sim: Sim, src: Ref, enemy: EnemyRt): void {
+  const { armor } = enemy;
+  const trait = traitOf(enemy, 'armor');
+  if (!trait || armor.layers === 0 || armor.hp > 0) return;
+  armor.layers--;
+  armor.hp = armor.layers > 0 ? trait.hp : 0;
+  const d = { remaining: armor.layers };
+  emit(sim, {
+    kind: 'armorBroken',
+    src,
+    dst: enemyRef(enemy),
+    v: trait.layers - armor.layers - 1,
+    d,
+  });
+  applyStatus(sim, src, enemy, { status: 'stun', ms: ARMOR_STUN_MS });
 }

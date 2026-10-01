@@ -4,9 +4,9 @@ import type { Family } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
 import { pct as scale } from '../int.ts';
 import { zoneIx } from './context/ctx.ts';
-import { isBlocked } from './enemy/traits.ts';
+import { breakArmor, hitArmor, isBlocked } from './enemy/traits.ts';
 import { raise } from './rules/state.ts';
-import { emit, type Sim } from './state.ts';
+import { emit, type Sim, toolRef } from './state.ts';
 import { hpOf, isAgent, setHp, type Unit, unitRef } from './targeting.ts';
 
 /** Floor of the summed percent mods. */
@@ -31,7 +31,7 @@ export interface Amount {
   readonly amount: number;
   /** Mod ids in application order: flat adds first, then % mods. */
   readonly why: readonly string[];
-  readonly bypass?: boolean; // Deadline damage: skips Guardrails and armor (E007).
+  readonly bypass?: boolean; // Deadline damage: skips Guardrails and armor.
 }
 
 /** `max(1, floor(((base + flat) * (100 + pct) + 50) / 100))`; also for guard and heal. */
@@ -53,11 +53,24 @@ export function computeAmount(base: number, mods: readonly Mod[] = []): Amount {
 const gate = (sim: Sim, unit: Unit, a: Amount): Amount =>
   !(a.bypass || isAgent(unit)) && isBlocked(sim, unit) ? { ...a, amount: 0 } : a;
 
-/** Lands an amount on a unit and emits `damage`; returns the Trust or Severity lost. */
+/** Damage from a tool with the [Edit] tag (full damage against armor). */
+const isEdit = (sim: Sim, src: Ref): boolean =>
+  sim.agent.tools.some((t) => toolRef(t) === src && t.def.tags.includes('Edit'));
+
+/** Armor takes the whole enemy hit while a layer is left: returns the hp it absorbed or -1. */
+function armorStep(sim: Sim, src: Ref, unit: Unit, a: Amount): number {
+  if (a.bypass || isAgent(unit) || unit.armor.layers === 0) return -1;
+  return hitArmor(unit, a.amount, isEdit(sim, src));
+}
+
+/** Lands a hit (enemy: gate, armor, Guardrails, Severity), emits `damage`; returns hp lost. */
 export function dealDamage(sim: Sim, src: Ref, unit: Unit, raw: Amount): number {
   const a = gate(sim, unit, raw);
-  const guard = a.bypass ? 0 : Math.min(unit.guard, a.amount);
-  const dealt = Math.min(hpOf(unit), a.amount - guard);
+  const absorbed = armorStep(sim, src, unit, a);
+  const armor = Math.max(0, absorbed);
+  const amount = absorbed < 0 ? a.amount : 0;
+  const guard = a.bypass ? 0 : Math.min(unit.guard, amount);
+  const dealt = Math.min(hpOf(unit), amount - guard);
   unit.guard -= guard;
   setHp(unit, hpOf(unit) - dealt);
   if (isAgent(unit)) {
@@ -66,9 +79,10 @@ export function dealDamage(sim: Sim, src: Ref, unit: Unit, raw: Amount): number 
     if (src.startsWith('e')) raise(sim.rules, { on: 'damaged', n: a.amount });
     if (dealt > 0) raise(sim.rules, { on: 'trustBelow', n: unit.trust });
   } else if (unit.sev === 0) unit.killedBy = src;
-  // Armor and damage-taken mods arrive with E007. `zone`: the bar's zone index at the hit.
+  // `armor`: hp the armor layer lost. `zone`: the bar's zone index at the hit.
   const zone = zoneIx(sim.agent.ctx.zone);
-  const d = { base: a.base, flat: a.flat, pct: a.pct, armor: 0, guard, sev: hpOf(unit), zone };
+  const d = { base: a.base, flat: a.flat, pct: a.pct, armor, guard, sev: hpOf(unit), zone };
   emit(sim, { kind: 'damage', src, dst: unitRef(unit), v: dealt, d: { ...d, why: a.why } });
+  if (absorbed >= 0 && !isAgent(unit)) breakArmor(sim, src, unit);
   return dealt;
 }

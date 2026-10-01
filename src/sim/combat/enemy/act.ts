@@ -1,4 +1,6 @@
 // Tick step 6: enemies act front to back, then advance to their next intent and reset progress.
+// An enemy handler (boss stage switch, src/sim/handlers) runs after the advance.
+import { enemyHandler } from '../../handlers/index.ts';
 import { runRules } from '../rules/engine.ts';
 import { emit, enemyRef, PROGRESS_PER_MS, type Sim } from '../state.ts';
 import { advanceIntent, announceIntent, currentIntent } from './cycle.ts';
@@ -16,6 +18,7 @@ export function enemiesAct(sim: Sim, ctx: ContextHooks = CONTEXT): void {
     runRules(sim); // damaged, trustBelow, compaction
     enemy.progress = 0;
     advanceIntent(enemy);
+    enemyHandler(enemy.def.handler)?.(sim, enemy);
     announceIntent(sim, enemy);
   }
 }

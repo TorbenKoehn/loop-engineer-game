@@ -38,9 +38,9 @@ describe('charge rate formula', () => {
     const [a, b] = sim.agent.tools;
     if (!a || !b) throw new Error('no tools');
     applyStatus(sim, 'e1', a, { status: 'throttle', ms: 1000 });
-    expect([toolRate(sim.agent, a), toolRate(sim.agent, b)]).toEqual([0, 150]);
+    expect([toolRate(sim, a), toolRate(sim, b)]).toEqual([0, 150]);
     applyStatus(sim, 'e1', sim.agent, { status: 'stun', ms: 1000 });
-    expect([toolRate(sim.agent, a), toolRate(sim.agent, b)]).toEqual([0, 0]);
+    expect([toolRate(sim, a), toolRate(sim, b)]).toEqual([0, 0]);
   });
 
   it('enemies use base 100 with their own statuses', () => {

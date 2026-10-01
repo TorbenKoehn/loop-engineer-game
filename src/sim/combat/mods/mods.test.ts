@@ -75,7 +75,7 @@ describe('tool stats', () => {
   it('rate adds to the harness speed per tool, filtered by weight', () => {
     const input = withMods(fight({ tools: [makeTool(), edit] }), mod('rate', 10, { maxWeight: 3 }));
     const sim = createSim(input, true);
-    expect(sim.agent.tools.map((t) => toolRate(sim.agent, t))).toEqual([110, 100]);
+    expect(sim.agent.tools.map((t) => toolRate(sim, t))).toEqual([110, 100]);
   });
 
   it('dmgPct is filtered by tag and named in the why list', () => {

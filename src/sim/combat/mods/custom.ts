@@ -1,6 +1,7 @@
 // Passive `custom` effects (docs/architecture/content-model.md "Custom handlers"): hooks the sim
-// asks at fixed points (sim-core.md "Custom hooks"). Ids without a hook here have no effect yet.
-import type { Family, HandlerId } from '../../../content/types/index.ts';
+// asks at fixed points (sim-core.md "Custom hooks"). Hook ids are registered in src/sim/handlers.
+import type { Family } from '../../../content/types/index.ts';
+import type { HookId } from '../../handlers/index.ts';
 import { mulDiv } from '../../int.ts';
 import { condsPass } from '../rules/conds.ts';
 import type { RuleRt } from '../rules/state.ts';
@@ -12,7 +13,7 @@ export interface Hook {
 }
 
 /** The passive `custom` effects naming `handler` whose rule's conds hold, in slot order. */
-export function hooks(sim: Sim, handler: HandlerId): Hook[] {
+export function hooks(sim: Sim, handler: HookId): Hook[] {
   return sim.rules.list.flatMap((rule) => {
     if (rule.rule.when.on !== 'passive' || !condsPass(sim, rule, undefined)) return [];
     return rule.rule.then.flatMap((e) =>
@@ -48,3 +49,10 @@ export function throttleCut(sim: Sim): Cut {
   const list = hooks(sim, 'throttle_shorter');
   return { ms: sum(list, 'ms'), min: Math.max(0, ...list.map((h) => h.args.min ?? 0)) };
 }
+
+/** rot_no_slow: whether the Rot zone slows tools now (noise is still doubled). */
+export const rotSlows = (sim: Sim): boolean =>
+  sim.agent.ctx.zone === 'rot' && hooks(sim, 'rot_no_slow').length === 0;
+
+/** feedback_loop: ms the rightmost tool pipes into the leftmost tool; 0 without the hook. */
+export const feedbackMs = (sim: Sim): number => sum(hooks(sim, 'feedback_loop'), 'ms');
