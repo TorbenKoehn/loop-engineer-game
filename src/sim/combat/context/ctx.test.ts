@@ -87,7 +87,9 @@ describe('zoneOf', () => {
 });
 
 describe('zoneMods', () => {
-  const ctx = (zone: Ctx['zone']): Ctx => ({ W: 60, B: 20, S: 20, N: 0, zone, coldPenalty: 35 });
+  const ctx = (zone: Ctx['zone']): Ctx => {
+    return { W: 60, B: 20, S: 20, N: 0, zone, coldPenalty: 35, block: 0 };
+  };
   it('Focused +20, Cold minus the accuracy penalty, nothing in Rot or Overflow', () => {
     expect(zoneMods(ctx('focused'))).toEqual([{ id: 'zone:focused', pct: 20 }]);
     expect(zoneMods(ctx('cold'))).toEqual([{ id: 'zone:cold', pct: -35 }]);

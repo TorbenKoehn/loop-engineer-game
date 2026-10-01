@@ -7,6 +7,7 @@ export type Phase = EnemyDef['homePhase'];
 
 export const SEV_SCALE: Readonly<Record<Phase, number>> = { 1: 100, 2: 170, 3: 260 };
 export const DMG_SCALE: Readonly<Record<Phase, number>> = { 1: 100, 2: 150, 3: 210 };
+export const PHASE_NOISE_SCALE: Readonly<Record<Phase, number>> = { 1: 100, 2: 125, 3: 150 };
 
 type Scale = Readonly<Record<Phase, number>>;
 
@@ -21,3 +22,7 @@ export const scaleSev = (def: EnemyDef, phase: Phase): number =>
 /** Base damage `n` of an attack by `def` in `phase`. */
 export const scaleDmg = (def: EnemyDef, phase: Phase, n: number): number =>
   scaled(DMG_SCALE, n, def.homePhase, phase);
+
+/** Noise `n` injected by `def` in `phase`, before Rot and blockers. */
+export const scaleNoise = (def: EnemyDef, phase: Phase, n: number): number =>
+  scaled(PHASE_NOISE_SCALE, n, def.homePhase, phase);

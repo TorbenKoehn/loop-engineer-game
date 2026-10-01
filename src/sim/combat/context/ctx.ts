@@ -1,6 +1,6 @@
 // Context bar quantities, baseline and zones (docs/game/systems/context.md "Quantities",
 // "Zones", "Tuning knobs"). Pure: no Sim, no events; zone.ts emits zoneChanged.
-import type { Accuracy, Zone } from '../../../content/types/index.ts';
+import type { Accuracy, FightModifier, ModStat, Zone } from '../../../content/types/index.ts';
 import type { Mod } from '../damage.ts';
 import type { CombatInput } from '../types.ts';
 
@@ -30,6 +30,8 @@ export interface Ctx {
   zone: Zone;
   /** Percent subtracted from tool effects in Cold, from model accuracy. */
   readonly coldPenalty: number;
+  /** Blocker budget left this fight: `noiseBlock` mods (.gitignore) absorb the first noise. */
+  block: number;
 }
 
 /** Integer zone tests on F = S + N against W. */
@@ -51,13 +53,43 @@ export function baseline(input: CombatInput): number {
   return agent.model.baseWeight + prompt.weight + tools + items + lessons.length;
 }
 
-/** Fight-start bar: S = B, N = 0. Window mods: T030; start modifiers and overflow: T027. */
+/** Sum of passive `mod` effects on `stat` from the prompt, skills, memories and lessons. */
+export function passiveMod(input: CombatInput, stat: ModStat): number {
+  const { prompt, skills, memories, lessons } = input;
+  const rules = [prompt, ...skills, ...memories, ...lessons].flatMap((def) => def.rules);
+  const effects = rules.filter((r) => r.when.on === 'passive').flatMap((r) => r.then);
+  return effects.reduce((sum, e) => (e.do === 'mod' && e.stat === stat ? sum + e.v : sum), 0);
+}
+
+/** Blockers subtract from incoming noise until the fight's budget is spent; returns the rest. */
+export function blockNoise(ctx: Ctx, n: number): number {
+  const blocked = Math.min(n, ctx.block);
+  ctx.block -= blocked;
+  return n - blocked;
+}
+
+/** Summed tokens of the startNoise and startSignal fight modifiers (events). */
+function startTokens(mods: readonly FightModifier[]): { noise: number; signal: number } {
+  const start = { noise: 0, signal: 0 };
+  for (const m of mods) {
+    if (m.mod === 'startNoise') start.noise += m.tokens;
+    else if (m.mod === 'startSignal') start.signal += m.tokens;
+  }
+  return start;
+}
+
+/** Fight-start bar: S = B + startSignal, N = startNoise through blockers. Window mods: T030. */
 export function createCtx(input: CombatInput): Ctx {
   const { model } = input.agent;
   const W = Math.max(WINDOW_MIN, model.window);
   const B = baseline(input);
   const coldPenalty = COLD_PENALTY_PCT[model.accuracy];
-  return { W, B, S: B, N: 0, zone: zoneOf(B, W), coldPenalty };
+  const start = startTokens(input.modifiers);
+  const block = passiveMod(input, 'noiseBlock');
+  const ctx: Ctx = { W, B, S: B + start.signal, N: 0, zone: 'cold', coldPenalty, block };
+  ctx.N = blockNoise(ctx, start.noise);
+  ctx.zone = zoneOf(ctx.S + ctx.N, W);
+  return ctx;
 }
 
 /** Damage-formula mod of the current zone for tool damage, Guardrails and healing. */

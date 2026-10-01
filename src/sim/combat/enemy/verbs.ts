@@ -1,7 +1,7 @@
 // Enemy action verbs (docs/game/systems/statuses.md "Enemy action verbs"). Attacks and
 // statuses target the agent and its tools; guard and heal go to the acting enemy itself.
 import type { Status, Verb, VerbSel } from '../../../content/types/index.ts';
-import type { Ref } from '../../events.ts';
+import { injectNoise } from '../context/noise.ts';
 import { computeAmount, dealDamage } from '../damage.ts';
 import { gainGuard, heal } from '../effects.ts';
 import { type EnemyRt, enemyRef, type Sim } from '../state.ts';
@@ -10,14 +10,14 @@ import { applyStatus } from '../status/statuses.ts';
 import { scaleDmg } from './phase.ts';
 import { spawnEnemy } from './spawn.ts';
 
-/** Context bar entry points the verbs call; the context bar (E003) supplies them. */
+/** Context bar entry points the verbs call; tests may pass spies. */
 export interface ContextHooks {
-  /** Raw `n` of a noise verb; phase noise scale, Rot and blockers are applied by the bar. */
-  readonly noise: (sim: Sim, src: Ref, n: number) => void;
+  /** Raw `n` of a noise verb by `enemy`; the bar applies phase noise scale, Rot and blockers. */
+  readonly noise: (sim: Sim, enemy: EnemyRt, n: number) => void;
 }
 
-// TODO(T027): the real noise injection into the context bar.
-export const NO_CONTEXT: ContextHooks = { noise: () => undefined };
+/** The context bar (src/sim/combat/context/). */
+export const CONTEXT: ContextHooks = { noise: injectNoise };
 
 /** One resolving intent: the acting enemy, its intent id and the context hooks. */
 export interface Act {
@@ -44,7 +44,7 @@ const HANDLERS: Handlers = {
   multiHit: (act, v) => {
     for (let i = 0; i < v.times; i++) hitAgent(act, v.n);
   },
-  noise: ({ sim, enemy, ctx }, v) => ctx.noise(sim, enemyRef(enemy), v.n),
+  noise: ({ sim, enemy, ctx }, v) => ctx.noise(sim, enemy, v.n),
   throttle: (act, v) => statusTools(act, 'throttle', v.sel, v.ms),
   slow: (act, v) => statusTools(act, 'slow', v.sel, v.ms),
   stun: ({ sim, enemy }, v) =>

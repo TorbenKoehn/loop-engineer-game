@@ -60,7 +60,7 @@ being in the starting line (e.g. Side Quest). The sim resolves spawn ids against
 |---|---|
 | `Agent` | `trust`, `maxTrust`, `guard`, `statuses`, `tools: ToolRt[]`, `ctx: Ctx`, `flags` (once-per-fight/run) |
 | `ToolRt` | `slot`, `def`, `version`, `progress` (ms × 100), `statuses`, `piped`, `primes` |
-| `Ctx` | `W`, `B` (readonly), `S`, `N`, `zone`, `coldPenalty` (readonly, % from model accuracy: high 15, normal 25, low 35); policy and compaction state added by T029 |
+| `Ctx` | `W`, `B` (readonly), `S`, `N`, `zone`, `coldPenalty` (readonly, % from model accuracy: high 15, normal 25, low 35), `block` (blocker budget left this fight, from `noiseBlock` passives); `createCtx` applies `startSignal`/`startNoise` (through blockers); policy and compaction state added by T029 |
 | `EnemyRt` | `uid` (monotonic spawn id), `def`, `sev`, `maxSev`, `guard`, `armor`, `statuses`, `intentIx`, `progress`, `traitState` |
 | `SummonRt` | `uid`, `sourceSlot`, `value`, `bornT`, `lifeMs`, `nextHitT` |
 | `Sim` | `t`, `seq`, `rng`, `agent`, `enemies` (array, index 0 = front), `summons`, `events`, `deadline` |

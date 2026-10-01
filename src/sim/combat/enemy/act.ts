@@ -1,9 +1,9 @@
 // Tick step 6: enemies act front to back, then advance to their next intent and reset progress.
 import { emit, enemyRef, PROGRESS_PER_MS, type Sim } from '../state.ts';
 import { advanceIntent, announceIntent, currentIntent } from './cycle.ts';
-import { type ContextHooks, NO_CONTEXT, runVerb } from './verbs.ts';
+import { CONTEXT, type ContextHooks, runVerb } from './verbs.ts';
 
-export function enemiesAct(sim: Sim, ctx: ContextHooks = NO_CONTEXT): void {
+export function enemiesAct(sim: Sim, ctx: ContextHooks = CONTEXT): void {
   // A snapshot of the line: spawned enemies enter it but do not act in this step.
   for (const enemy of [...sim.enemies]) {
     const intent = currentIntent(enemy);

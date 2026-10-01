@@ -108,7 +108,7 @@ describe('enemy action verbs', () => {
     expect(enemyOf(sim).sev).toBe(50);
   });
 
-  it('noise(n) calls the context hook with the enemy ref and raw n', () => {
+  it('noise(n) calls the context hook with the acting enemy and raw n', () => {
     const sim = setup(2);
     const noise = vi.fn<ContextHooks['noise']>();
     const verbs: [Verb, Verb] = [
@@ -116,8 +116,9 @@ describe('enemy action verbs', () => {
       { verb: 'noise', n: 5 },
     ];
     expect(act(sim, verbs, { noise })).toHaveLength(1);
-    expect(noise).toHaveBeenCalledExactlyOnceWith(sim, 'e1', 5);
-    expect(act(setup(), [{ verb: 'noise', n: 5 }])).toEqual([]); // default hook: no-op
+    expect(noise).toHaveBeenCalledExactlyOnceWith(sim, enemyOf(sim), 5);
+    // The default hook is the context bar (context/noise.test.ts).
+    expect(summary(act(setup(), [{ verb: 'noise', n: 5 }]))).toEqual([['tokens', 'e1', 'ctx', 5]]);
   });
 
   it('redirect and custom are not M1 verbs and do nothing', () => {

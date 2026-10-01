@@ -3,7 +3,10 @@ import type { Ref } from '../../events.ts';
 import { emit, type Sim, type ToolRt, toolRef } from '../state.ts';
 import { updateZone } from './zone.ts';
 
-function emitTokens(sim: Sim, src: Ref, v: number, kind: 'output' | 'removal'): void {
+type Kind = 'output' | 'removal' | 'noise';
+
+/** A tokens event with the bar after the change. */
+export function emitTokens(sim: Sim, src: Ref, v: number, kind: Kind): void {
   const { S, N } = sim.agent.ctx;
   emit(sim, { kind: 'tokens', src, dst: 'ctx', v, d: { S, N, F: S + N, kind } });
 }

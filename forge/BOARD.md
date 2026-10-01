@@ -17,7 +17,7 @@ generated: true
 |---|---|---|---|---|
 | [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 8/8 |
 | [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 7/8 |
-| [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 2/7 |
+| [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 3/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 5/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 4/9 |
@@ -106,11 +106,10 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
 | [T059](epics/m1/E006-ui-shell-and-combat-replay/T059-combat-screen-agent-tools-enemies-clock.md) | Combat screen: agent, tools, enemies, clock | E006 | p1 | opus | M |
 
 ## Review (0/3)
@@ -121,9 +120,9 @@ _none_
 
 _none_
 
-## Done (40)
+## Done (41)
 
-_Showing the last 20 of 40 done tasks._
+_Showing the last 20 of 41 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -142,10 +141,10 @@ _Showing the last 20 of 40 done tasks._
 | [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
 | [T041](epics/m1/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
 | [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
+| [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
 | [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
 | [T025](epics/m1/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
 | [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
-| [T021](epics/m1/E002-combat-simulation-core/T021-enemy-intent-cycles-action-verbs-and-pha.md) | Enemy intent cycles, action verbs and phase scaling | E002 | p0 | opus | M |
 
 ## Cancelled (0)

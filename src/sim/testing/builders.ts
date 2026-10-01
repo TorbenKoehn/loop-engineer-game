@@ -2,8 +2,10 @@
 // Defaults mirror slice content: makeTool() is grep, makeEnemy() is Typo.
 import type {
   Accuracy,
+  Effect,
   EnemyDef,
   Intent,
+  MemoryDef,
   ModelStats,
   ToolDef,
   Verb,
@@ -35,6 +37,15 @@ export function hitIntent(n: number, windupMs = 3000, id = 'hit'): Intent {
 /** An intent with one or two verbs. */
 export function intent(id: string, windupMs: number, ...verbs: [Verb] | [Verb, Verb]): Intent {
   return { id, windupMs, verbs };
+}
+
+/** A memory with one passive rule; defaults to .gitignore (weight 1, block 12 noise). */
+export function makeMemory(
+  then: readonly Effect[] = [{ do: 'mod', stat: 'noiseBlock', v: 12 }],
+  over: Partial<MemoryDef> = {},
+): MemoryDef {
+  const rules = [{ when: { on: 'passive' }, then }] as const;
+  return { id: 'gitignore', rarity: 'common', weight: 1, rules, unlock: 'base', ...over };
 }
 
 /** An enemy def; defaults to Typo (Severity 30, Nitpick: hit 2 every 3000 ms). */
