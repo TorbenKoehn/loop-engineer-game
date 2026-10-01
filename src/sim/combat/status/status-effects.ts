@@ -1,5 +1,6 @@
 // Tool effects status, clearStatus and charge, and how their selectors pick recipients.
 import type { Effect, Selector } from '../../../content/types/index.ts';
+import type { Mod } from '../damage.ts';
 import { emit, PROGRESS_PER_MS, type Sim, type ToolRt, toolRef, valueAt } from '../state.ts';
 import { selectTargets } from '../targeting.ts';
 import { pickTools, type ToolPick } from './select.ts';
@@ -11,6 +12,8 @@ type StatusEffect = Extract<Effect, { do: 'status' | 'clearStatus' | 'charge' }>
 export interface Activation {
   readonly tool: ToolRt;
   readonly picks: Map<string, Holder[]>;
+  /** Damage-formula mods for every amount of this activation, e.g. consumed primes. */
+  readonly mods: readonly Mod[];
 }
 
 const TOOL_PICKS: ReadonlySet<Selector> = new Set<Selector>([

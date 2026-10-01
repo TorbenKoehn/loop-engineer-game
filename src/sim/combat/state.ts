@@ -4,7 +4,7 @@ import type { EnemyDef, Status, ToolDef, Value } from '../../content/types/index
 import type { CombatEvent, Ref } from '../events.ts';
 import { createRng, type Rng } from '../rng.ts';
 import { type Phase, scaleSev } from './enemy/phase.ts';
-import type { CombatInput, Version } from './types.ts';
+import type { CombatInput, ToolSetup, Version } from './types.ts';
 
 export const TICK_MS = 50;
 /** Progress unit is ms x 100; a rate is an integer percent. */
@@ -17,12 +17,27 @@ export interface StatusRt {
   remaining: number;
 }
 
+/** A one-shot damage-formula buff waiting for its tool's next activation. */
+export interface PrimeRt {
+  /** Who primed: src of the `prime` and `primeUsed` events. */
+  readonly src: Ref;
+  /** Mod id in the why list: `prime:<source id>`. */
+  readonly id: string;
+  readonly pct: number;
+  /** Filter as logged, e.g. `tag:Edit`. */
+  readonly filter: string;
+}
+
 export interface ToolRt {
   readonly slot: number;
   readonly def: ToolDef;
   readonly version: Version;
   progress: number;
   statuses: StatusRt[];
+  /** Received pipe progress since its own last activation. */
+  piped: boolean;
+  /** Consumed together on the next activation. */
+  primes: PrimeRt[];
   /** Damage dealt this fight (stats). */
   dealt: number;
 }
@@ -72,6 +87,8 @@ export interface Sim {
   readonly agent: AgentRt;
   /** Index 0 = front. */
   enemies: EnemyRt[];
+  /** Step of the last pipe and t of the chain's first pipe. */
+  readonly pipeChain: { step: number; startT: number };
 }
 
 export function createSim(input: CombatInput, log: boolean): Sim {
@@ -92,12 +109,23 @@ export function createSim(input: CombatInput, log: boolean): Sim {
       guard: 0,
       speed: agent.model.speed,
       statuses: [],
-      tools: agent.tools.map((s, slot) => ({ ...s, slot, progress: 0, statuses: [], dealt: 0 })),
+      tools: agent.tools.map(createTool),
       taken: 0,
     },
     enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1, encounter.phase)),
+    pipeChain: { step: 0, startT: 0 },
   };
 }
+
+const createTool = (setup: ToolSetup, slot: number): ToolRt => ({
+  ...setup,
+  slot,
+  progress: 0,
+  statuses: [],
+  piped: false,
+  primes: [],
+  dealt: 0,
+});
 
 /** A fresh enemy at full, phase-scaled Severity on its first intent. */
 export function createEnemy(def: EnemyDef, uid: number, phase: Phase): EnemyRt {

@@ -28,7 +28,8 @@ describe('sandbox view fold', () => {
     expect(view.enemies.every((e) => e.resolvedAt !== undefined)).toBe(true);
     expect(sevLost(view.enemies)).toBe(sum(result.stats.toolDamage));
     expect(view.tools.map((t) => t.dealt)).toEqual(result.stats.toolDamage);
-    expect(view.end).toEqual({ outcome: 'win', reason: 'resolved', trust: 60, t: result.endT });
+    const { outcome, reason, endT, agentAfter } = result;
+    expect(view.end).toEqual({ outcome, reason, trust: agentAfter.trust, t: endT });
     expect(view.cursor).toBe(result.events.length);
   });
 
