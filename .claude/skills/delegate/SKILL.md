@@ -47,6 +47,10 @@ Fill the template in `docs/harness/delegation.md#prompt-template`:
     `areas.gen.ts` (via `npm run content:index`);
   - an AC that names Playwright: `tests/e2e/<name>.spec.ts`;
   - a new `Action` variant: `src/ui/screens/placeholder.tsx`;
+  - a file an AC names (T095 blocked on `delegate/SKILL.md`);
+  - a change to fight outcomes (`src/sim/**`, content numbers, `src/run/combat.ts`):
+    `src/run/combat.test.ts`, `tests/e2e/combat.spec.ts` and `tools/golden/fixtures/**`
+    via `npm run golden:update` (T029, T033, T046, T024, RT004);
 - for worktrees: "You run in a git worktree: run `npm ci` if node_modules is missing.
   Edit files only inside this worktree."
 
@@ -69,6 +73,8 @@ Check, in order, and stop at the first failure:
 3. `git diff -U0 -- <task file>`: under Acceptance Criteria only `[ ]` → `[x]` changes.
 4. Every checked AC has an evidence line in the Log.
 5. The check sequence from `CLAUDE.md`, each command piped through `tail -n 15`; all exit 0.
+   The diff touches `src/` or content: also `npm run build` and `npm run e2e` (not in
+   `check` yet; T029 broke combat.spec unnoticed). Again on main after a worktree merge.
 6. `git add -A -- <allowed paths>`, then `npm run harness:diff`: exit 0, or the breach is
    flagged in the task's Notes (budgets.md#measuring-task-diffs).
 

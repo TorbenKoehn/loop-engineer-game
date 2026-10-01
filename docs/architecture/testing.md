@@ -122,3 +122,6 @@ Speed: ≥ 200 full runs per second per core (logs off). 1000 runs per harness i
 - Assert on events (`expectEvents(log).toContain({ kind: 'compaction', v: 1000 })`)
   rather than internal fields.
 - No sleeps or real timers; inject the clock.
+- Only goldens pin fight outcomes. Other tests and e2e specs assert format and roles
+  (`/-\d+ Trust/`, not `-20 Trust`) and search seeds for the outcome they need instead
+  of fixing one, so a balance change does not break them (T029, T033, RT004).

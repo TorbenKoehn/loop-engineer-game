@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/retros"
-summary: "Index of forge/retros: 3 files, 0 subdirectories"
-keywords: ["diff-budget", "retro", "parallel", "sizing", "worktrees", "allowed-paths", "doc-drift", "e001"]
+summary: "Index of forge/retros: 4 files, 0 subdirectories"
+keywords: ["diff-budget", "retro", "parallel", "sizing", "worktrees", "allowed-paths", "bookkeeping", "css"]
 type: index
 status: active
 updated: 2026-10-01
@@ -18,3 +18,4 @@ generated: true
 | [RT001-first-retro-e001-foundation-and-early-e0.md](RT001-first-retro-e001-foundation-and-early-e0.md) | First retro: E001 foundation and early E002/E005/E023 | 12 tasks done, 11 approved first round. task_diff_lines now counts production lines only; parallel worktrees keep shared config serial; orchestrator gets a narrow hotfix exception. | retro, diff-budget, worktrees, hotfix, sizing, e001 |
 | [RT002-second-retro-e005-content-e002-combat-sa.md](RT002-second-retro-e005-content-e002-combat-sa.md) | Second retro: E005 content, E002 combat, sandbox | 14 tasks done, 9/13 approved first round. Implementers measure the diff mid-task and stop over budget; parallel independence covers hub files and API edges; generated files are no review finding. | retro, diff-budget, worktrees, parallel, review-noise, e005, e002 |
 | [RT003-third-retro-e003-e004-e006-run-and-ui-ba.md](RT003-third-retro-e003-e004-e006-run-and-ui-ba.md) | Third retro: E003, E004, E006 run and UI batch | 18 tasks done, 18/18 approved first round. Allowed paths now include companion docs and files; deleted dead files are free in the diff budget; grown Notes trigger a re-size. | retro, diff-budget, allowed-paths, doc-drift, sizing, parallel, e006, e004 |
+| [RT004-fourth-retro-e007-e008-e009-sim-save-and.md](RT004-fourth-retro-e007-e008-e009-sim-save-and.md) | Fourth retro: E007, E008, E009 sim, save and screens | 14 tasks done, 12/14 approved first round. Implementer maxTurns 60 to 90; fight-outcome tests and e2e join allowed paths and verification; CSS gets its own 300-line cap. | retro, max-turns, e2e, diff-budget, css, bookkeeping |

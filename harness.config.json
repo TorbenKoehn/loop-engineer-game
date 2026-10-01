@@ -339,7 +339,7 @@
     "retro_actions_max": { "value": 3, "severity": "process", "unit": "actions", "description": "Max actions per retro", "area": "forge", "enforced_by": "process" },
     "subagent_prompt_tokens": { "value": 2000, "severity": "process", "unit": "tokens", "description": "Max tokens in a delegation prompt", "area": "agents", "enforced_by": "process" },
     "subagent_report_tokens": { "value": 2000, "severity": "process", "unit": "tokens", "description": "Max tokens in a subagent report", "area": "agents", "enforced_by": "process" },
-    "subagent_turns_impl": { "value": 60, "severity": "error", "unit": "turns", "description": "Max maxTurns for writer agents", "area": "agents", "enforced_by": "harness" },
+    "subagent_turns_impl": { "value": 90, "severity": "error", "unit": "turns", "description": "Max maxTurns for writer agents", "area": "agents", "enforced_by": "harness" },
     "subagent_turns_research": { "value": 30, "severity": "error", "unit": "turns", "description": "Max maxTurns for read-only agents", "area": "agents", "enforced_by": "harness" },
     "subagent_context_tokens": { "value": 200000, "severity": "process", "unit": "tokens", "description": "Max peak context of a subagent", "area": "agents", "enforced_by": "process" },
     "parallel_subagents": { "value": 4, "severity": "process", "unit": "agents", "description": "Max concurrent subagents", "area": "agents", "enforced_by": "process" },

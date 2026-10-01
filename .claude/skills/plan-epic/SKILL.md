@@ -33,7 +33,8 @@ Critical rules:
    - S: one concern, within `route_sonnet_max_diff_lines` and `route_sonnet_max_files`.
    - M: within `task_diff_lines` and `task_files_changed`.
    - Bigger, or more than `acceptance_criteria_max` AC: split again.
-   - Size by production lines (budgets.md#measuring-task-diffs); aim M at ~300. Split
+   - Size by production lines (budgets.md#measuring-task-diffs); aim M at ~300, and a
+     screen's CSS separately at 300 or less (T063, T064). Split
      these: a type module plus its consumers (T009), one template per kind of a union
      (T010), API types plus the loop using them (T018), adopting a tool or rule plus
      fixing every existing finding (T002), a screen's components plus its route, e2e

@@ -8,7 +8,7 @@ status: backlog
 priority: p1
 milestone: m0
 updated: 2026-10-01
-related: ["../../../retros/RT003-third-retro-e003-e004-e006-run-and-ui-ba.md", "../E023-harness-upkeep/EPIC.md"]
+related: ["../../../retros/RT003-third-retro-e003-e004-e006-run-and-ui-ba.md", "../../../retros/RT004-fourth-retro-e007-e008-e009-sim-save-and.md", "../E023-harness-upkeep/EPIC.md"]
 ---
 
 # E024: Harness upkeep 2
@@ -37,5 +37,5 @@ before review. Sources: RT003 proposals P1 and P2.
 - [ ] `npm run harness:diff` prints the companion docs of a staged diff (vitest case)
 - [ ] `npm run check` exits 0
 
-- Orchestrator 2026-10-01: proposal - harness lint error when a `done` task has unchecked Acceptance Criteria (T051 slipped through).
-- Orchestrator 2026-10-01: proposal (p0) - run `npm run e2e` in the `npm run check` gate (or a pre-commit step); T029 changed fight outcomes and broke an e2e assertion unnoticed.
+Proposals from RT003 (P1, P2) and RT004 (P1-P4, incl. the e2e gate and the done-task
+AC lint the orchestrator raised) are listed in each retro's Actions.

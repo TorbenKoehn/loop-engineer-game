@@ -16,6 +16,10 @@ once, in `budgets` in `harness.config.json`. The generated
 [budgets-table.md](budgets-table.md) lists them (`npm run harness:budgets`); this page
 never repeats values. Rationale and sources: [research](../research/budgets/budgets.md).
 
+## Contents
+
+Severities · Breach ladder · Measuring task diffs · Overrides · Changing a budget
+
 ## Severities
 
 | Severity | Checked by | Effect |
@@ -54,18 +58,19 @@ The measure (`tools/harness/budgets/forge/diff.ts`), applied to
 `git diff --cached --numstat -M --diff-filter=d`:
 
 - Per file it counts added lines plus the deleted lines they replace:
-  `added + min(added, deleted)`. A modified line counts twice (old and new), as before.
-  Deletions beyond the additions are pure dead-code removal and are free, in kept files
-  too (T101 decision).
-- Deleting a whole file is free: `--diff-filter=d` drops it from both numbers (RT003;
-  T100 measured 1378 with them, 552 without).
+  `added + min(added, deleted)`, so a modified line counts twice (old and new).
+  Deletions beyond the additions are dead-code removal and free, in kept files too (T101).
+- Deleting a whole file is free: `--diff-filter=d` drops it from both numbers (RT003).
 - A pure rename counts 0. To move and edit a file, `git mv` it first and stage the move,
-  so `-M` sees a rename and counts only the edits (T100's undetected moves counted as
-  all-new).
+  so `-M` sees a rename and counts only the edits.
 - `production` excludes `*.test.ts(x)`, `tests/`, `**/testing/`, `**/fixtures/`,
   `*.jsonl`, `package-lock.json` and Markdown (docs, task and review files); `total`
   keeps them. Data and string tables count. Tests are excluded so the budget never
   pushes an implementer toward thinner tests (RT001).
+- Stylesheets (`*.css`) have their own cap of 300 lines and leave `production` (RT004:
+  T063 and T064 needed ~275 CSS lines each; styles split from their screen are
+  ceremony). Until harness:diff measures it (E024), report `css=<n>` from numstat and
+  subtract it; a breach by CSS alone within the cap needs no override.
 
 ## Overrides
 

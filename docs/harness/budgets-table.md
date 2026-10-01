@@ -140,7 +140,7 @@ Severity process budgets are checked by the orchestrator or reviewer, not linted
 |---|---|---|---|---|---|
 | `subagent_prompt_tokens` | 2000 tokens |  | process | process | Max tokens in a delegation prompt |
 | `subagent_report_tokens` | 2000 tokens |  | process | process | Max tokens in a subagent report |
-| `subagent_turns_impl` | 60 turns |  | error | harness | Max maxTurns for writer agents |
+| `subagent_turns_impl` | 90 turns |  | error | harness | Max maxTurns for writer agents |
 | `subagent_turns_research` | 30 turns |  | error | harness | Max maxTurns for read-only agents |
 | `subagent_context_tokens` | 200000 tokens |  | process | process | Max peak context of a subagent |
 | `parallel_subagents` | 4 agents |  | process | process | Max concurrent subagents |

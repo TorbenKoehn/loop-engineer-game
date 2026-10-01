@@ -118,7 +118,7 @@ changes-requested verdict counts as a round (`review_rounds`).
 | changes-requested on Sonnet | Fresh run on **Opus** with the review file | Re-plan | Blocked |
 | changes-requested on Opus | Re-plan: planner splits or rewrites the task | Blocked | |
 | Agent stops with questions | Answer in the task Notes, fresh run | Re-plan | |
-| Partial report (`maxTurns` hit) | Resume once if progress is visible | Split the task | |
+| Partial report (`maxTurns` hit) | Log `maxTurns hit, resumed`; resume once if progress is visible | Split the task | |
 | Tool or network flake | Retry once | Blocked with the error | |
 
 Re-plan means the planner (Opus) splits the task or rewrites Context; the old task gets

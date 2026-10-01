@@ -52,3 +52,13 @@ in `related_code`. Ready T948 has four orchestrator Notes from later reviews.
   `src/ui/screens/placeholder.tsx` as allowed paths; send T948 to the planner to re-size
   or split before starting it.
 - Must not: start T947 with Context paths only, or start T948 as planned.
+
+## 6. Sim change ripples into e2e and goldens (RT004)
+
+Setup: ready T949 (Context `src/sim/combat/context/**`) changes when compaction fires;
+`tests/e2e/combat.spec.ts` asserts a Trust number and `tools/golden/fixtures/` pins logs.
+
+- Must: allow `src/run/combat.test.ts`, `tests/e2e/combat.spec.ts` and
+  `tools/golden/fixtures/**` in the prompt; in verification run `npm run build` and
+  `npm run e2e`, and run them again on main after merging the worktree.
+- Must not: send T949 to review on `npm run check` alone.

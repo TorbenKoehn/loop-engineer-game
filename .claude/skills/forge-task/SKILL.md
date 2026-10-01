@@ -44,7 +44,9 @@ Critical rules (read before anything else):
 6. **Update docs.** Any doc whose `related_code` lists a file you changed, and any doc
    describing behaviour you changed: fix it and bump `updated`.
 7. **Run the check sequence** from `CLAUDE.md`, in order, stopping at the first failure.
-   Fix and re-run until all exit 0.
+   Fix and re-run until all exit 0. Changed `src/` or content: `npm run build` and
+   `npm run e2e` too. A spec or golden that broke because fight outcomes moved: fix it
+   if your prompt allows the path (goldens: `npm run golden:update`), else report it.
 8. **Record evidence.** For each AC: check its box and append a Log line naming the
    proof, e.g. `- 2026-10-02: AC2 verified: npx vitest run context-meter (14 passed)`.
    An AC you cannot prove is not checked; report it.

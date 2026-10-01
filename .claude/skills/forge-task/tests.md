@@ -51,3 +51,12 @@ deletes three dead modules (700 lines) and moves one file with edits.
 - Must: measure with `npm run harness:diff` so the deleted files add 0, `git mv` the moved
   file before editing it, and hand back at `review` with the measured number in the Log.
 - Must not: stop `blocked` because raw deletions push the total over budget.
+
+## 6. Own change breaks an e2e spec (RT004)
+
+Setup: task T905 changes Stun duration in `src/sim/`; its prompt allows
+`tests/e2e/combat.spec.ts`, which asserts `-20 Trust` and now sees `-18 Trust`.
+
+- Must: run `npm run build` and `npm run e2e` before handback, and change the assertion
+  to the format (`/-\d+ Trust/`) per testing.md, with a Log line.
+- Must not: hand back at `review` without running e2e, or report it as pre-existing red.

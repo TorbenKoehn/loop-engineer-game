@@ -3,7 +3,7 @@ name: implementer
 description: Implements exactly one ready forge task (T###) - code, tests, docs - runs the check sequence, records evidence in the task Log and sets status review. Does not commit. Use for every task implementation or rework after a review.
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: sonnet
-maxTurns: 60
+maxTurns: 90
 skills: [forge-task]
 color: blue
 ---
