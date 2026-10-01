@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m0/E024-harness-upkeep-2"
-summary: "Index of forge/epics/m0/E024-harness-upkeep-2: 8 files, 0 subdirectories"
-keywords: ["harness-diff", "bookkeeping", "dir-files", "e2e", "gate", "lint", "acceptance-criteria", "apply"]
+summary: "Index of forge/epics/m0/E024-harness-upkeep-2: 10 files, 0 subdirectories"
+keywords: ["e2e", "harness-diff", "lint", "playwright", "bookkeeping", "check", "dir-files", "gate"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,7 +15,7 @@ generated: true
 
 | File | Title | Summary | Keywords |
 |---|---|---|---|
-| [EPIC.md](EPIC.md) | Harness upkeep 2 | Retro follow-ups from RT003 and RT004: e2e in the check gate, forge bookkeeping lint, a commit gate, a fairer harness:diff with companion docs, and code folders below dir_files warn_at. | epic, harness, upkeep, dir-files, e2e, harness-diff, retro |
+| [EPIC.md](EPIC.md) | Harness upkeep 2 | Retro follow-ups from RT003-RT005: e2e in the check gate, forge bookkeeping lint, a commit gate, a fairer harness:diff with companion docs, and code folders below dir_files warn_at. | epic, harness, upkeep, dir-files, e2e, harness-diff, retro |
 | [T102-npm-run-check-runs-build-and-e2e.md](T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | npm run check runs vite build and the Playwright suite after vitest when the working tree changes src/ or tests/e2e/, else prints a skip reason; a failing spec fails check. | check, e2e, playwright, build, gate, verification |
 | [T103-forge-lint-ties-status-ac-boxes-and-log.md](T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | Three forge integrity errors: a done task with an unchecked AC, a checked AC in review or done without an `AC<n> verified` Log line, and a `done (R###)` Log line on a task not done. | forge, lint, integrity, acceptance-criteria, log, status, bookkeeping |
 | [T104-harness-diff-counts-css-and-skips-genera.md](T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | harness:diff prints production, css and total; stylesheets leave production under a new task_css_lines cap of 300; golden fixtures, *.gen.ts and generated indexes leave both numbers. | harness-diff, css, task_css_lines, generated, goldens, diff-budget |
@@ -23,3 +23,5 @@ generated: true
 | [T106-harness-diff-lists-companion-docs.md](T106-harness-diff-lists-companion-docs.md) | harness:diff lists companion docs | harness:diff prints `companion: <doc>` for each unstaged doc whose related_code names a staged file, still exiting 0; forge-review step 3 reads the line. | harness-diff, companion-docs, related-code, doc-drift, review |
 | [T107-commit-gate-runs-harness-lint.md](T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | A PreToolUse hook on Bash `git commit` runs the harness lint and blocks the commit on any error; a clean tree commits. | hook, pretooluse, git-commit, lint, gate, bookkeeping |
 | [T108-split-run-apply-and-legalactions-under-f.md](T108-split-run-apply-and-legalactions-under-f.md) | Split run apply and legalActions under fn_lines | apply() and legalActions() in the run reducer drop below the fn_lines warn_at of 30 via handler tables, with unchanged behaviour, tests and goldens. | apply, legalActions, fn-lines, run-reducer, refactor, dispatch |
+| [T118-lint-warns-on-pinned-sim-numbers-in-e2e.md](T118-lint-warns-on-pinned-sim-numbers-in-e2e.md) | Lint warns on pinned sim numbers in e2e specs | Harness lint rule e2e_pinned_number warns on string or regex literals in e2e text assertions that pin fight numbers next to Trust, Credits, dmg or an arrow; templates and digit patterns pass. | lint, e2e, playwright, pinned-numbers, balance, harness |
+| [T119-check-stays-green-under-parallel-load.md](T119-check-stays-green-under-parallel-load.md) | Check stays green under parallel load | npm run check caps Playwright workers via CHECK_E2E_WORKERS (default 2) and the run reducer's fast-check property tests get timeouts of at least 20 s, so parallel worktree checks stop flaking. | check, flaky, playwright, workers, fast-check, timeout, parallel |

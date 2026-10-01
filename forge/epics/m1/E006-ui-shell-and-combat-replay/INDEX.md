@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m1/E006-ui-shell-and-combat-replay"
-summary: "Index of forge/epics/m1/E006-ui-shell-and-combat-replay: 12 files, 0 subdirectories"
-keywords: ["ui", "combat", "task", "clock", "combat-view", "replay", "sandbox", "seeking"]
+summary: "Index of forge/epics/m1/E006-ui-shell-and-combat-replay: 13 files, 0 subdirectories"
+keywords: ["ui", "combat", "task", "tooltips", "zones", "accessibility", "clock", "combat-view"]
 type: index
 status: active
 updated: 2026-10-01
@@ -23,7 +23,8 @@ generated: true
 | [T059-combat-screen-agent-tools-enemies-clock.md](T059-combat-screen-agent-tools-enemies-clock.md) | Combat screen: agent, tools, enemies, clock | Combat screen with agent card, tool row with cooldown bars and next values, enemy line with intent chips and countdowns, Deadline clock, speed controls and the result strip. | combat-view, ui, tools, enemies, intents, clock |
 | [T060-context-bar-component.md](T060-context-bar-component.md) | Context bar component | Full-width context bar with baseline, signal and hatched noise segments, 25%/70% ticks, policy marker, F/W and zone label, noise source hover and policy-disabled warning. | context-bar, ui, zones, noise, policy |
 | [T061-combat-log-with-why-lines-and-seeking.md](T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | Terminal-panel combat log: one t()-rendered line per event in the fixed format with why modifiers, filters, virtualisation to 200 rows, and click-to-seek with highlights. | combat-log, ui, why, seeking, virtualisation |
-| [T062-tooltips-with-plain-english-lines-and-fo.md](T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | Tooltips for items, enemies, statuses, traits and zones with name, generated line, stats and the damage formula with current numbers, on hover and keyboard focus. | tooltips, ui, formula, plain-english, accessibility |
+| [T062-tooltips-with-plain-english-lines-and-fo.md](T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltip component and item tooltips with formula | Reusable tooltip (250 ms hover, keyboard focus, Esc) and tool, skill and memory tooltips with name, plain-English line, stats and the damage formula with current numbers. | tooltips, ui, formula, plain-english, accessibility, items |
 | [T098-dev-combat-sandbox-page.md](T098-dev-combat-sandbox-page.md) | Dev combat sandbox page | A first visible build: the browser start page runs a real Phase-1 fight with M1 content and replays it with bars, tool charge and a log in the Crimson palette. | task, combat, sandbox, page |
 | [T100-combat-view-components-on-createplayback.md](T100-combat-view-components-on-createplayback.md) | Combat view components on createPlayback | First half of the split T059: combat view components move to src/ui/combat on createPlayback; rafClock fix; test fights built via combatInput; clock tone. | task, combat, view, components, createplayback |
 | [T101-combat-screen-route-dev-only-sandbox-and.md](T101-combat-screen-route-dev-only-sandbox-and.md) | Combat screen route, dev-only sandbox and e2e | Second half of the split T059: the combat screen route in the real app, dev-only sandbox, result strip with Continue, and e2e through a real run fight. | task, combat, screen, route, only, sandbox |
+| [T109-tooltips-for-enemies-statuses-traits-and.md](T109-tooltips-for-enemies-statuses-traits-and.md) | Tooltips for enemies, statuses, traits and zones | Enemy, status, trait and context-zone tooltips on the T062 component, with keyboard-focusable noise segments on the context bar and a Playwright check in the combat screen. | tooltips, enemies, statuses, traits, zones, context-bar, accessibility |

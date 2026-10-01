@@ -6,7 +6,7 @@ summary: "A PreToolUse hook on Bash `git commit` runs the harness lint and block
 keywords: ["hook", "pretooluse", "git-commit", "lint", "gate", "bookkeeping"]
 type: task
 status: ready
-priority: p1
+priority: p0
 model: sonnet
 size: S
 updated: 2026-10-01
@@ -46,6 +46,7 @@ harness lint has errors, with the findings as the reason.
 
 - 2026-10-01: Source: RT004 P3. Full lint takes about 2 s today (`lint_s` 10, `hook_ms` 3000 warn); log the measured hook time.
 - 2026-10-01: Touches `.claude/settings.json`; do not run in parallel with another task editing it.
+- 2026-10-01: Raised to p0 by RT005 P3 (pre-existing lint red blocked T047); run next.
 
 ## Log
 

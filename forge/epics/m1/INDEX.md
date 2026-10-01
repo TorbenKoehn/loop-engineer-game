@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m1"
 summary: "Index of forge/epics/m1: 0 files, 10 subdirectories"
-keywords: ["agents-md", "boss", "breakpoints", "combat", "dsl", "map", "run-end", "shop"]
+keywords: ["accessibility", "boss", "combat", "content", "dsl", "map", "run-end", "sim"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,9 +19,9 @@ generated: true
 | [E003-context-window-mechanic/](E003-context-window-mechanic/INDEX.md) | Index of forge/epics/m1/E003-context-window-mechanic: 8 files, 0 subdirectories | context, compaction, window, baseline, modifiers, noise, zones, blockers |
 | [E004-run-structure-and-map/](E004-run-structure-and-map/INDEX.md) | Index of forge/epics/m1/E004-run-structure-and-map: 9 files, 0 subdirectories | run, reducer, economy, events, map, rewards, shop, actions |
 | [E005-vertical-slice-content/](E005-vertical-slice-content/INDEX.md) | Index of forge/epics/m1/E005-vertical-slice-content: 10 files, 0 subdirectories | content, dsl, slice, strings, types, validation, boss, builders |
-| [E006-ui-shell-and-combat-replay/](E006-ui-shell-and-combat-replay/INDEX.md) | Index of forge/epics/m1/E006-ui-shell-and-combat-replay: 12 files, 0 subdirectories | ui, combat, task, clock, combat-view, replay, sandbox, seeking |
+| [E006-ui-shell-and-combat-replay/](E006-ui-shell-and-combat-replay/INDEX.md) | Index of forge/epics/m1/E006-ui-shell-and-combat-replay: 13 files, 0 subdirectories | ui, combat, task, tooltips, zones, accessibility, clock, combat-view |
 | [E007-item-rules-enemy-traits-and-bosses/](E007-item-rules-enemy-traits-and-bosses/INDEX.md) | Index of forge/epics/m1/E007-item-rules-enemy-traits-and-bosses: 9 files, 0 subdirectories | sim, handlers, traits, boss, breakpoints, dsl, rules, skills |
 | [E008-run-end-meta-state-and-saves/](E008-run-end-meta-state-and-saves/INDEX.md) | Index of forge/epics/m1/E008-run-end-meta-state-and-saves: 8 files, 0 subdirectories | save, agents-md, autosave, meta, migrations, run-end, schema, checksum |
-| [E009-run-screens-and-build-panel/](E009-run-screens-and-build-panel/INDEX.md) | Index of forge/epics/m1/E009-run-screens-and-build-panel: 9 files, 0 subdirectories | ui, screens, build-panel, map, run-end, shop, agents-md, breakpoints |
+| [E009-run-screens-and-build-panel/](E009-run-screens-and-build-panel/INDEX.md) | Index of forge/epics/m1/E009-run-screens-and-build-panel: 12 files, 0 subdirectories | ui, screens, build-panel, firing-order, map, preview, previewFiring, run-end |
 | [E010-balance-sim-bots-and-m1-exit-gates/](E010-balance-sim-bots-and-m1-exit-gates/INDEX.md) | Index of forge/epics/m1/E010-balance-sim-bots-and-m1-exit-gates: 9 files, 0 subdirectories | balance, exit-criteria, cli, bots, golden-logs, playwright, win-rate, bug-reports |
-| [E011-juice-audio-settings-and-tutorial/](E011-juice-audio-settings-and-tutorial/INDEX.md) | Index of forge/epics/m1/E011-juice-audio-settings-and-tutorial: 8 files, 0 subdirectories | accessibility, audio, juice, ascii-art, reduced-motion, settings, tutorial, art |
+| [E011-juice-audio-settings-and-tutorial/](E011-juice-audio-settings-and-tutorial/INDEX.md) | Index of forge/epics/m1/E011-juice-audio-settings-and-tutorial: 13 files, 0 subdirectories | juice, reduced-motion, accessibility, audio, settings, tutorial, ascii-art, content |
