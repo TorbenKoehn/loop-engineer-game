@@ -69,7 +69,7 @@ export function Shell(props: { children: ComponentChildren }) {
       <TopBar />
       <Explorer />
       <main class="shell-editor">{props.children}</main>
-      <Terminal />
+      {run.value && <Terminal />}
       <StatusBar />
     </div>
   );

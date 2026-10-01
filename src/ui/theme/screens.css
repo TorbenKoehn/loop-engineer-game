@@ -1,0 +1,273 @@
+/*
+ * Title, harness select and system prompt screens (screens.md "Other screens") on the Crimson
+ * tokens. Selection never relies on colour alone: a glyph or a label marks it too. Motion is
+ * the blinking cursor and hover fades only, both off under prefers-reduced-motion.
+ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Title */
+
+.title {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  padding: 6vh 3vw;
+}
+
+.title__prompt,
+.title__tagline {
+  margin: 0;
+  color: var(--fg-muted);
+}
+
+.title__logo {
+  margin: 0;
+  font-size: clamp(7px, 1.15vw, 15px);
+  line-height: 1;
+  color: var(--brand-text);
+  text-shadow: 0 0 24px var(--brand-deep);
+}
+
+.title__menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.title__seed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg-muted);
+}
+
+.title__seed input {
+  width: 13ch;
+  padding: 6px 8px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  letter-spacing: 0.08em;
+}
+
+.title__seed input:focus {
+  border-color: var(--brand-text);
+}
+
+.title a {
+  color: var(--fg-muted);
+}
+
+/* Shared screen frame and tags */
+
+.screen {
+  display: grid;
+  gap: 20px;
+  max-width: 1080px;
+}
+
+.screen__head h2 {
+  margin: 0;
+  font-size: var(--size-heading);
+}
+
+.screen__head h2 span,
+.hcard__file > :first-child::before {
+  color: var(--brand-text);
+}
+
+.screen__hint {
+  margin: 4px 0 0;
+  color: var(--fg-muted);
+}
+
+/* Sticky, so Start stays visible when the cards scroll at 1024 x 640. */
+.screen__actions {
+  position: sticky;
+  bottom: -16px;
+  display: flex;
+  gap: 12px;
+  padding-block: 10px 16px;
+  background: var(--bg);
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.tag {
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: var(--size-meta);
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.tag--brand {
+  justify-self: start;
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--on-brand);
+  font-weight: 700;
+}
+
+/* Cards: harness config files and quoted prompts */
+
+.hcard,
+.pcard {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    border-color var(--fast),
+    background-color var(--fast),
+    box-shadow var(--fast);
+}
+
+.hcard {
+  flex: 1 1 320px;
+  max-width: 460px;
+}
+
+.pcard {
+  flex: 1 1 240px;
+  max-width: 340px;
+  text-align: start;
+}
+
+.hcard:hover,
+.pcard:hover,
+.pcard:focus-visible {
+  border-color: var(--brand-text);
+  background: var(--bg-raised);
+}
+
+.hcard:has(:checked),
+.pcard:focus-visible {
+  border-color: var(--brand);
+  box-shadow:
+    inset 3px 0 0 var(--brand),
+    0 0 24px -10px var(--brand);
+}
+
+.hcard:has(:focus-visible) {
+  outline: 2px solid var(--brand-text);
+  outline-offset: 2px;
+}
+
+.hcard__file {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--size-meta);
+  color: var(--fg-muted);
+}
+
+.hcard__file > :first-child::before {
+  content: "○ ";
+}
+
+.hcard:has(:checked) .hcard__file > :first-child::before {
+  content: "● ";
+}
+
+.hcard__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.hcard__name {
+  font-size: var(--size-heading);
+}
+
+.hcard:has(:checked) .hcard__name,
+.pcard__meter {
+  color: var(--brand-text);
+}
+
+.hcard__fantasy,
+.pcard__name {
+  color: var(--fg-muted);
+}
+
+.cfg {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px 12px;
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.cfg div {
+  display: contents;
+}
+
+.cfg dt {
+  color: var(--good);
+}
+
+.cfg dt::after {
+  content: ":";
+  color: var(--fg-muted);
+}
+
+.cfg dd {
+  margin: 0;
+}
+
+.hcard__trait {
+  padding-inline-start: 8px;
+  border-inline-start: 2px solid var(--brand);
+}
+
+.pcard__quote {
+  font-size: var(--size-heading);
+  font-weight: 700;
+}
+
+.pcard__name {
+  font-size: var(--size-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.pcard__weight {
+  display: flex;
+  gap: 10px;
+  color: var(--fg-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hcard,
+  .pcard {
+    transition: none;
+  }
+}

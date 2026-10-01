@@ -5,7 +5,7 @@ keywords: [ui, preact, signals, replay-player, screens, fx, test-hooks]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/ui/i18n.ts, src/ui/store/**, src/ui/combat/**, src/ui/app.tsx, src/ui/screens/combat.tsx, src/ui/sandbox/**, src/main.tsx]
+related_code: [src/ui/i18n.ts, src/ui/store/**, src/ui/combat/**, src/ui/app.tsx, src/ui/screens/**, src/ui/sandbox/**, src/main.tsx]
 related: [overview.md, run-state.md, event-log.md, ../game/ux/screens.md, ../game/ux/juice-audio.md, adr/adr-003-dom-ui.md]
 ---
 
@@ -57,8 +57,16 @@ export function dispatch(action: Action): void {
 `RestScreen`, `TreasureScreen`, `PhaseEnd`, `RunEnd`, `AgentsMd`, plus overlays
 (`Settings`, `Codex`, `History`, `Help`). The IDE shell (`Shell`: top bar, explorer,
 editor, terminal, status bar) wraps every screen. No router library; `mode` is the route.
-Screens are lazy-loaded except Title, Shell and Combat. Until a screen's task lands,
-`Placeholder` lists the mode's legal actions as buttons.
+Screens are lazy-loaded except Title, HarnessSelect, PromptPick, Shell and Combat. Until
+a screen's task lands, `Placeholder` lists the mode's legal actions as buttons.
+
+Before a run exists, `mode` is `title` or `harnessSelect` (the `choosingHarness` signal in
+`store/ui.ts`, set by New run, cleared by `startRun` or Esc); the terminal is hidden until
+a run starts. HarnessSelect is a native radio group (arrow keys choose, Enter starts) and
+preselects and tags IDE Companion on the first run (`harnessChoice`). PromptPick renders
+`pending.prompts` as buttons that dispatch `pickPrompt`. Screens take initial focus with
+`useInitialFocus` and move between cards with `arrowFocus` (`screens/focus.ts`); their
+styles live in `theme/screens.css`, imported by `shell.css`.
 
 `CombatScreen` (`src/ui/screens/combat.tsx`, mode `combatReview`) rebuilds the fight from
 `run.combat.input` with `loadFight`, plays it with `createPlayback` on `rafClock` and the

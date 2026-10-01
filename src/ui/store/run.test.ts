@@ -3,6 +3,7 @@ import type { Action } from '../../run/actions.ts';
 import { legalActions } from '../../run/apply.ts';
 import type { RunSetup, RunState } from '../../run/state.ts';
 import { actionLog, ctxWindow, dispatch, lastError, mode, run, startRun } from './run.ts';
+import { choosingHarness } from './ui.ts';
 
 const SETUP: RunSetup = {
   seed: 'K7Q2-M9XA',
@@ -16,6 +17,7 @@ describe('run store', () => {
     run.value = null;
     lastError.value = null;
     actionLog.value = [];
+    choosingHarness.value = false;
   });
 
   it('starts on the title and enters promptPick on a new run', () => {
@@ -24,6 +26,17 @@ describe('run store', () => {
     expect(mode.value).toBe('promptPick');
     expect(run.value?.setup.seed).toBe('K7Q2-M9XA');
     expect(ctxWindow.value).toBeGreaterThan(0);
+  });
+
+  it('New run opens harnessSelect before any run exists; starting the run leaves it', () => {
+    choosingHarness.value = true;
+    expect(mode.value).toBe('harnessSelect');
+    expect(run.value).toBeNull();
+    startRun({ ...SETUP, harness: 'ide_companion' });
+    expect(choosingHarness.value).toBe(false);
+    expect(mode.value).toBe('promptPick');
+    run.value = null;
+    expect(mode.value).toBe('title');
   });
 
   it('dispatch applies a legal action via apply and logs it', () => {

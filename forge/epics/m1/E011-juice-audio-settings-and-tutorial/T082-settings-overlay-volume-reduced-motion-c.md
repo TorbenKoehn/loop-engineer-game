@@ -44,6 +44,8 @@ The M1 settings subset lets players adjust sound and motion, persisted across se
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R057 minor): add the Settings entry on the Title screen (screens.md).
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

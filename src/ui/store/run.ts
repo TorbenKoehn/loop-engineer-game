@@ -6,14 +6,18 @@ import { apply } from '../../run/apply.ts';
 import { newRun } from '../../run/new-run.ts';
 import type { Mode, RunSetup, RunState } from '../../run/state.ts';
 import { meta } from './meta.ts';
+import { choosingHarness } from './ui.ts';
 
-export type UiMode = Mode | 'title';
+/** Run modes plus the two screens before a run exists. */
+export type UiMode = Mode | 'title' | 'harnessSelect';
 
 export const run = signal<RunState | null>(null);
 export const lastError = signal<ActionError | null>(null);
 /** Accepted actions since the run started (saves, E008). */
 export const actionLog = signal<readonly Action[]>([]);
-export const mode = computed<UiMode>(() => run.value?.mode ?? 'title');
+export const mode = computed<UiMode>(
+  () => run.value?.mode ?? (choosingHarness.value ? 'harnessSelect' : 'title'),
+);
 
 /** Context window W of the run's harness. TODO(T045): window and baseline from run selectors. */
 export const ctxWindow = computed(
@@ -22,6 +26,7 @@ export const ctxWindow = computed(
 
 export function startRun(setup: RunSetup): void {
   run.value = newRun(setup, meta.value);
+  choosingHarness.value = false;
   lastError.value = null;
   actionLog.value = [];
 }

@@ -1,4 +1,6 @@
 /* IDE shell layout (docs/game/ux/screens.md "Shell layout"). Layout only; styling is T056. */
+@import "./screens.css";
+
 .shell {
   height: 100vh;
   display: grid;

@@ -16,6 +16,8 @@ test('a run with a fixed seed shows the shell and the status bar from RunState',
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Loop Engineer');
   await page.getByLabel('Seed').fill('K7Q2-M9XA');
   await page.getByRole('button', { name: 'New run' }).click();
+  await page.getByTestId('harness-terminal_purist').click();
+  await page.getByRole('button', { name: 'Start run' }).click();
 
   await expect(page.getByRole('banner')).toContainText('phase-1/promptPick');
   await expect(page.getByRole('banner')).toContainText('seed K7Q2-M9XA');
@@ -29,7 +31,7 @@ test('a run with a fixed seed shows the shell and the status bar from RunState',
 
   // Actions go through dispatch -> apply: picking a prompt moves the run to the map.
   await page
-    .getByRole('button', { name: /^Pick / })
+    .getByTestId(/^prompt-/)
     .first()
     .click();
   await expect(page.getByRole('banner')).toContainText('phase-1/map');

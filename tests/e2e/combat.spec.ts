@@ -20,8 +20,10 @@ test('New run -> pick -> travel -> fight -> Continue, with controls and persiste
   await page.goto('/');
   await page.getByLabel('Seed').fill('K7Q2-M9XA');
   await page.getByRole('button', { name: 'New run' }).click();
+  await page.getByTestId('harness-terminal_purist').click();
+  await page.getByRole('button', { name: 'Start run' }).click();
   await page
-    .getByRole('button', { name: /^Pick / })
+    .getByTestId(/^prompt-/)
     .first()
     .click();
   await travel(page, 'p1-r1-c0');
