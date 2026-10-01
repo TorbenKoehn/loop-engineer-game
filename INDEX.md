@@ -17,7 +17,7 @@ generated: true
 |---|---|---|
 | [.claude/](.claude/INDEX.md) | Index of .claude: 4 files, 1 subdirectories | acceptance-criteria, checks, code-review, decomposition, delegation, epic, evidence, forge |
 | [docs/](docs/INDEX.md) | Index of docs: 0 files, 4 subdirectories | accessibility, agents, budgets, aa, achievements, action-log, actions, adr |
-| [forge/](forge/INDEX.md) | Index of forge: 2 files, 3 subdirectories | accessibility, achievements, agents-md, arch-test, architecture, art, ascension, ascii-art |
+| [forge/](forge/INDEX.md) | Index of forge: 2 files, 3 subdirectories | boss, accessibility, achievements, agents-md, arch-test, architecture, art, ascension |
 | [tools/](tools/INDEX.md) | Index of tools: 0 files, 1 subdirectories | budgets, forge, harness, hooks, index, lint |
 
 ## Files

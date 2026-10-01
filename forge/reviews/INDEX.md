@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
 summary: "Index of forge/reviews: 0 files, 4 subdirectories"
-keywords: ["review", "integer", "architecture", "batch", "biome", "builders", "calls", "combat"]
+keywords: ["review", "integer", "architecture", "batch", "biome", "boss", "builders", "calls"]
 type: index
 status: active
 updated: 2026-10-01
@@ -17,5 +17,5 @@ generated: true
 |---|---|---|
 | [E001/](E001/INDEX.md) | Index of forge/reviews/E001: 8 files, 0 subdirectories | review, biome, forkable, integer, seeded, test, vitest, architecture |
 | [E002/](E002/INDEX.md) | Index of forge/reviews/E002: 3 files, 0 subdirectories | review, combat, enemy, skeleton, tool, walking, helpers, integer |
-| [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 2 files, 0 subdirectories | review, builders, content, effect, english, from, generated, plain |
+| [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 3 files, 0 subdirectories | review, boss, builders, content, effect, elite, encounter, enemies |
 | [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 4 files, 0 subdirectories | review, epics, milestone, batch, calls, determinism, dirs, forge |

@@ -19,7 +19,7 @@ generated: true
 | [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 2/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
-| [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 2/8 |
+| [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 3/8 |
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 0/8 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
@@ -128,13 +128,12 @@ generated: true
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 | [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T012](epics/m1/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
-| [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
 
 ## Review (0/3)
 
@@ -144,7 +143,7 @@ _none_
 
 _none_
 
-## Done (15)
+## Done (16)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -154,6 +153,7 @@ _none_
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
 | [T018](epics/m1/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T017](epics/m1/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
+| [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
 | [T010](epics/m1/E005-vertical-slice-content/T010-generated-plain-english-text-from-templa.md) | Generated plain-English text from templates | E005 | p1 | opus | M |
 | [T009](epics/m1/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
 | [T008](epics/m0/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |

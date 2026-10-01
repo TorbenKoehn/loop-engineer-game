@@ -121,9 +121,14 @@ describe('generated text', () => {
       art: ['(dep)'],
     });
     expect(describeEnemy(hell)).toEqual({
-      traits: ['When resolved, splits into 2 transitive_dep at 50% Severity.'],
+      traits: ['When resolved, splits into 2 Transitive Dep at 50% Severity.'],
       intents: ['Hit for 3 and Throttle all your tools for 2000 ms.'],
     });
+    // Without a name key, the raw id stands in.
+    const { 'enemy.transitive_dep.name': _, ...unnamed } = en;
+    expect(describeEnemy(hell, unnamed as typeof en).traits).toEqual([
+      'When resolved, splits into 2 transitive_dep at 50% Severity.',
+    ]);
   });
 
   it('render throws on a missing key or param', () => {

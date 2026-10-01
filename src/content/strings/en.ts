@@ -2,6 +2,7 @@
 // dotted lower-case keys, named placeholders only. Kind templates (`effect.*`, `trigger.*`,
 // `cond.*`, `trait.*`, `verb.*`) are lower-case clauses; text.ts wraps them into sentences.
 // Trigger and cond templates wrap the effect clause `{then}`.
+import { enEnemies } from './en-enemies.ts';
 
 export const en = {
   // Sentence composition.
@@ -135,6 +136,8 @@ export const en = {
   'stat.slots.memory': 'memory slots {n}',
   'stat.reroll_cost': 'reroll cost {n}',
   'stat.heal_pct': 'healing {n}%',
+
+  ...enEnemies,
 } as const;
 
 export type StringKey = keyof typeof en;

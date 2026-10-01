@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E005"
-summary: "Index of forge/reviews/E005: 2 files, 0 subdirectories"
-keywords: ["review", "builders", "content", "effect", "english", "from", "generated", "plain"]
+summary: "Index of forge/reviews/E005: 3 files, 0 subdirectories"
+keywords: ["review", "boss", "builders", "content", "effect", "elite", "encounter", "enemies"]
 type: index
 status: active
 updated: 2026-10-01
@@ -17,3 +17,4 @@ generated: true
 |---|---|---|---|
 | [R009-T009.md](R009-T009.md) | Review of T009: Content types and effect DSL builders | Review of T009 (approved) | review, content, types, effect, builders |
 | [R013-T010.md](R013-T010.md) | Review of T010: Generated plain-English text from templates | Review of T010 (approved) | review, generated, plain, english, text, from |
+| [R018-T014.md](R018-T014.md) | Review of T014: Phase-1 enemies, elite, boss and encounter… | Review of T014 (approved) | review, phase, enemies, elite, boss, encounter |
