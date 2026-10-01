@@ -1,8 +1,9 @@
-// Unified check gate: tsc -> biome -> vitest -> harness:check, fail fast.
+// Unified check gate: tsc -> biome -> vitest -> build -> e2e -> harness:check, fail fast.
 // Run via `npm run check`. Cross-platform (Windows .cmd shims via shell: true).
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { totalLinesWarning } from './coverage-thresholds.ts';
+import { changedPaths, e2eSkipReason } from './skip.ts';
 
 interface Step {
   label: string;
@@ -26,10 +27,14 @@ function biomeSkip(): string | undefined {
   return undefined;
 }
 
+const e2eSkip = () => e2eSkipReason(changedPaths());
+
 const steps: Step[] = [
   { label: 'typecheck (tsc)', command: 'npm run typecheck' },
   { label: 'lint (biome)', command: 'npm run lint', skipIf: biomeSkip },
   { label: 'test + coverage (vitest)', command: 'npm run test:coverage' },
+  { label: 'build (vite)', command: 'npm run build', skipIf: e2eSkip },
+  { label: 'e2e (playwright)', command: 'npm run e2e', skipIf: e2eSkip },
   { label: 'harness (harness:check)', command: 'npm run harness:check' },
 ];
 

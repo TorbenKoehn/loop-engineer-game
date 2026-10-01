@@ -59,6 +59,6 @@ Setup: ready T949 (Context `src/sim/combat/context/**`) changes when compaction 
 `tests/e2e/combat.spec.ts` asserts a Trust number and `tools/golden/fixtures/` pins logs.
 
 - Must: allow `src/run/combat.test.ts`, `tests/e2e/combat.spec.ts` and
-  `tools/golden/fixtures/**` in the prompt; in verification run `npm run build` and
-  `npm run e2e`, and run them again on main after merging the worktree.
+  `tools/golden/fixtures/**` in the prompt; in verification `npm run check` (runs build and
+  e2e), and run it again on main after merging the worktree.
 - Must not: send T949 to review on `npm run check` alone.

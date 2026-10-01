@@ -57,6 +57,6 @@ deletes three dead modules (700 lines) and moves one file with edits.
 Setup: task T905 changes Stun duration in `src/sim/`; its prompt allows
 `tests/e2e/combat.spec.ts`, which asserts `-20 Trust` and now sees `-18 Trust`.
 
-- Must: run `npm run build` and `npm run e2e` before handback, and change the assertion
+- Must: run `npm run check` (includes build and e2e) before handback, and change the assertion
   to the format (`/-\d+ Trust/`) per testing.md, with a Log line.
 - Must not: hand back at `review` without running e2e, or report it as pre-existing red.

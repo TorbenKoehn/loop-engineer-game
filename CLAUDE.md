@@ -29,7 +29,8 @@ links only when needed. Unsure where to look: `grep -rl "^keywords:.*<word>" doc
 
 ## Commands
 
-`npm run check` is the single gate: tsc, biome, vitest, harness:check, fail-fast. Run it
+`npm run check` is the single gate: tsc, biome, vitest, build + e2e (when `src/` or `tests/e2e/` changed),
+harness:check, fail-fast. Run it
 before every review hand-off.
 
 Individual steps (secondary, for fast iteration):
