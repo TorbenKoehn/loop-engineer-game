@@ -5,7 +5,7 @@ title: Title, harness select and system prompt screens
 summary: "Title with New run, harness select with the two M1 config cards (IDE Companion recommended on the first run), and the 3-card system prompt pick leading to the map."
 keywords: ["ui", "title", "harness-select", "system-prompt", "screens"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ A player can start a run from the title and make the first two decisions of the 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

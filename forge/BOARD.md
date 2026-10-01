@@ -40,11 +40,10 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (49)
+## Backlog (46)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
 | [T029](epics/m1/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
 | [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
@@ -53,11 +52,9 @@ generated: true
 | [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
 | [T039](epics/m1/E007-item-rules-enemy-traits-and-bosses/T039-m1-item-behaviour-tests-over-real-conten.md) | M1 item behaviour tests over real content | E007 | p1 | opus | M |
 | [T045](epics/m1/E004-run-structure-and-map/T045-build-actions-and-loadout-selectors.md) | Build actions and loadout selectors | E004 | p1 | opus | M |
-| [T050](epics/m1/E008-run-end-meta-state-and-saves/T050-run-and-meta-save-schema-with-storage-ad.md) | Run and meta save schema with storage adapter | E008 | p1 | opus | M |
 | [T057](epics/m1/E006-ui-shell-and-combat-replay/T057-debug-test-hooks-and-url-flags.md) | Debug test hooks and URL flags | E006 | p1 | sonnet | S |
 | [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
-| [T063](epics/m1/E009-run-screens-and-build-panel/T063-title-harness-select-and-system-prompt-s.md) | Title, harness select and system prompt screens | E009 | p1 | opus | M |
 | [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel: loadout, stash, policy, breakpoints | E009 | p1 | opus | M |
 | [T071](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
@@ -103,9 +100,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
+| [T050](epics/m1/E008-run-end-meta-state-and-saves/T050-run-and-meta-save-schema-with-storage-ad.md) | Run and meta save schema with storage adapter | E008 | p1 | opus | M |
+| [T063](epics/m1/E009-run-screens-and-build-panel/T063-title-harness-select-and-system-prompt-s.md) | Title, harness select and system prompt screens | E009 | p1 | opus | M |
 
 ## Review (0/3)
 

@@ -5,7 +5,7 @@ title: Run and meta save schema with storage adapter
 summary: "RunSaveV1 and MetaSaveV1 with canonical JSON and SHA-256 checksum, a storage adapter over localStorage with memory fallback, key rotation to backups and run-end ordering."
 keywords: ["save", "schema", "storage", "checksum", "localstorage"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -49,3 +49,4 @@ Persist runs and meta progress safely: tampered or broken data is detected, and 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

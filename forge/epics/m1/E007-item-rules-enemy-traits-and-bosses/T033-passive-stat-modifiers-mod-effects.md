@@ -5,7 +5,7 @@ title: Passive stat modifiers (mod effects)
 summary: "Passive mod effects for the combat ModStats (rate, dmgPct, dmgFlat, output, window, pipeMs, focusPct, noiseBlock, duration and damage-taken mods) with filters and why ids."
 keywords: ["modifiers", "mod-stats", "passives", "damage-formula", "sim"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -51,3 +51,4 @@ Always-on item effects change the sim numbers through one mechanism, and each ap
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
