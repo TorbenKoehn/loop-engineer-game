@@ -5,7 +5,7 @@ title: Regroup crowded src folders below dir_files warn_at
 summary: "Mechanical git mv of files out of eight crowded src folders into topic subfolders or siblings, fixing only import paths and doc references, so no dir_files or dir_subdirs warning remains."
 keywords: ["dir-files", "restructure", "git-mv", "folders", "imports", "src-run", "sim-combat"]
 type: task
-status: ready
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -58,3 +58,4 @@ paths and path references change.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus) - runs alone

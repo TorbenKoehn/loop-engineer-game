@@ -73,20 +73,21 @@ generated: true
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 | [T108](epics/m0/E024-harness-upkeep-2/T108-split-run-apply-and-legalactions-under-f.md) | Split run apply and legalActions under fn_lines | E024 | p2 | sonnet | S |
 
-## Ready (6)
+## Ready (5)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T104](epics/m0/E024-harness-upkeep-2/T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | E024 | p1 | opus | M |
-| [T105](epics/m0/E024-harness-upkeep-2/T105-regroup-crowded-src-folders-below-dir-fi.md) | Regroup crowded src folders below dir_files warn_at | E024 | p1 | opus | M |
 | [T107](epics/m0/E024-harness-upkeep-2/T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | E024 | p1 | sonnet | S |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (1/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T105](epics/m0/E024-harness-upkeep-2/T105-regroup-crowded-src-folders-below-dir-fi.md) | Regroup crowded src folders below dir_files warn_at | E024 | p1 | opus | M |
 
 ## Review (0/3)
 
