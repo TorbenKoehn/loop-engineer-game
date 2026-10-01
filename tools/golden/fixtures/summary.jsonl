@@ -1,5 +1,5 @@
-{"events":19,"inputHash":"07859aafcce271b44a15311b0b2de70dfb224a7fe155b93205a3884218c1eeb2","logHash":"7f3af049e070e3704e341485ef4819e6452819d2a48548744d5c00cfd9ba833c","seed":"golden-1"}
-{"events":22,"inputHash":"f116c50cd65bdea998c3149138d3e397c836d5320c346a5ff87fcd5f99c40edb","logHash":"4d257a5b28ea3b62b9d1b1fb7eaec4d7b7f82cc7660cfb28944b650211db3f42","seed":"golden-2"}
-{"events":12,"inputHash":"19f1441ad53bf8803e8919a3da690c09a7380454d869629deed498956174cc9f","logHash":"70c6b2d80d27d48b68437f908e5a94913fd676709999cba2bdec0e205cb3b4c1","seed":"golden-3"}
-{"events":19,"inputHash":"1167d0109a4cb586b08d19d612622e53aba5724d4b4ab00ecb9f45efc2bdda8d","logHash":"8ed271c3f2a247bf54836514ea672d5180e45d72d0dd8b53e97bf13814572190","seed":"K7Q2-M9XA"}
-{"events":19,"inputHash":"a5a6f0263bcf4e52614d1e9bf8df52870dce7d173bb98f4a9d1f430f9a40b1bd","logHash":"7ec07063d24583c97066e5db8e8d52b247b970c2b63f91430fce5a8ddec20c6f","seed":"daily-2026-10-01"}
+{"events":63,"fight":"purist-typos","inputHash":"abd271dcfbf037bf23299874604ea59e5fa0c399f971f92ad4dadf22121b5356","logHash":"3d523aacd427db8546b227a3301776999a92dacd666b68d6c93cc0d2bb1ba4ee","seed":"golden-1/combat/p1-r1-c2"}
+{"events":79,"fight":"companion-rate-limit","inputHash":"a763b855687c7397843886f4c473c4835cf904889f3799df778281866bd11162","logHash":"f4afac83034ca3c09524cdd3dcb053569e8b82b95bd37db5f041b8cd828c75f0","seed":"golden-2/combat/p1-r1-c1"}
+{"events":158,"fight":"purist-noise","inputHash":"d2fbe079c1335d2899b68c15790d567db69bde08f4edc1784e2a1b9fff95aace","logHash":"b9b6db760525fce7f919d18fd9033d3ccde6bc8fa3753e1d83e9a7c04630b57a","seed":"golden-3/combat/p1-r1-c1"}
+{"events":58,"fight":"purist-low-trust","inputHash":"593fb665a183c2ffbb3d3ca887daff34c06efab537d07ef5c6f20e1d1570bf2d","logHash":"80e7275c7333c2a81e1baba33443d263244437812a2ae99f6b18f874a4c77d69","seed":"golden-4/combat/p1-r1-c2"}
+{"events":220,"fight":"companion-yak-shave","inputHash":"60dacdcfc63fe368d56a9e3f35cbdc198153c85a755aa07b5091c55af304c405","logHash":"c9a7275ae709d10695c79562ae2848f041d57cef043e3032a429fb3b8584d9ab","seed":"golden-5/combat/p1-r1-c0"}

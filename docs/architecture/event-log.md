@@ -109,8 +109,9 @@ re-deriving rules. Adding a kind or a field is a **log format change**: bump
   absent fields omitted, `d` keys sorted alphabetically, no whitespace.
 - **Hash**: SHA-256 of the UTF-8 JSONL, hex. Node tests use `node:crypto`; the browser
   uses `crypto.subtle` for desync reports (outside `src/sim`).
-- Golden files store `{ seed, inputHash, logHash, events: n }` per fight, and the full
-  JSONL for 5 short reference fights to make diffs readable.
+- Golden files store `{ fight, seed, inputHash, logHash, events: n }` per fight
+  (`inputHash`: SHA-256 of the canonical JSON of the `CombatInput`), and the full JSONL for
+  5 short reference fights to make diffs readable ([testing](testing.md#golden-logs)).
 
 ## Size
 

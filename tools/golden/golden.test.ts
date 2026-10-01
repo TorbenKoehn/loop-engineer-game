@@ -1,52 +1,88 @@
-// Golden logs: fixed inputs -> stub fight logs, pinned as hashes (fixtures/summary.jsonl) plus
-// full JSONL for reference seeds. `npm test` only compares, never writes; a mismatch fails
-// with a line diff. Intended change: `npm run golden:update` (GOLDEN_UPDATE=1), review the
-// fixtures diff, state why in the change. Format change: bump LOG_VERSION in events.ts.
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+// Golden logs: 5 reference fights built from content via run state (reference.ts) -> full
+// canonical JSONL per fight (fixtures/<name>.jsonl) plus input and log SHA-256 hashes
+// (fixtures/summary.jsonl). `npm test` only compares, never writes; a mismatch fails with a
+// line diff. Intended change: `npm run golden:update` (GOLDEN_UPDATE=1), review the fixtures
+// diff, state why in the change. Format change: bump LOG_VERSION in events.ts.
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, it } from 'vitest';
-import { serializeLog, stableStringify } from '../../src/sim/events.ts';
-import { type StubInput, stubFight } from '../../src/sim/golden/stub-fight.ts';
+import { type CombatEvent, serializeLog, stableStringify } from '../../src/sim/events.ts';
+import { type CombatResult, resolveCombat } from '../../src/sim/index.ts';
 import { checkGolden, isUpdateMode, lineDiff, sha256 } from './golden.ts';
+import { REFERENCES, type Reference, referenceInput } from './reference.ts';
 
 const FIXTURES = fileURLToPath(new URL('./fixtures/', import.meta.url));
-const INPUTS: readonly StubInput[] = [
-  { seed: 'golden-1', shots: 12 },
-  { seed: 'golden-2', shots: 12 },
-  { seed: 'golden-3', shots: 3 },
-  { seed: 'K7Q2-M9XA', shots: 12 },
-  { seed: 'daily-2026-10-01', shots: 12 },
-];
-const REFERENCE = { seed: 'golden-1', shots: 12 };
+const SUMMARY = 'summary.jsonl';
+const fixture = (ref: Reference): string => `${ref.name}.jsonl`;
 
-function summaryLine(input: StubInput): string {
-  const events = stubFight(input);
+const fights = new Map<string, CombatResult>(
+  REFERENCES.map((ref) => [ref.name, resolveCombat(referenceInput(ref))]),
+);
+const resultOf = (ref: Reference): CombatResult => fights.get(ref.name) as CombatResult;
+
+/** `{ fight, seed, inputHash, logHash, events }` (event-log.md "Canonical serialisation"). */
+function summaryLine(ref: Reference): string {
+  const input = referenceInput(ref);
+  const { events } = resultOf(ref);
   const [inputHash, logHash] = [sha256(stableStringify(input)), sha256(serializeLog(events))];
-  return stableStringify({ seed: input.seed, inputHash, logHash, events: events.length });
+  const line = { fight: ref.name, seed: input.seed, inputHash, logHash, events: events.length };
+  return stableStringify(line);
 }
 
-describe('golden logs', () => {
-  it('full log of the reference seed matches its golden JSONL', () => {
-    checkGolden(join(FIXTURES, `${REFERENCE.seed}.jsonl`), serializeLog(stubFight(REFERENCE)));
+const all = (): CombatEvent[] => [...fights.values()].flatMap((r) => r.events);
+const has = (pred: (e: CombatEvent) => boolean): boolean => all().some(pred);
+
+describe('golden logs: reference fights', () => {
+  it.each(REFERENCES)('$name: full log matches its golden JSONL', (ref) => {
+    checkGolden(join(FIXTURES, fixture(ref)), serializeLog(resultOf(ref).events));
   });
 
-  it('input and log hashes of every fixed seed match the golden summary', () => {
-    checkGolden(join(FIXTURES, 'summary.jsonl'), `${INPUTS.map(summaryLine).join('\n')}\n`);
+  it('input and log hashes of every reference fight match the golden summary', () => {
+    checkGolden(join(FIXTURES, SUMMARY), `${REFERENCES.map(summaryLine).join('\n')}\n`);
   });
 
-  it('the same input produces the same bytes twice', () => {
-    for (const input of INPUTS)
-      expect(serializeLog(stubFight(input))).toBe(serializeLog(stubFight(input)));
+  it('fixtures hold exactly the summary and one JSONL per reference fight', () => {
+    const expected = [SUMMARY, ...REFERENCES.map(fixture)].sort();
+    expect(readdirSync(FIXTURES).sort()).toEqual(expected);
   });
 
-  it('stub logs have strictly increasing seq and non-decreasing t on the 50 ms grid', () => {
-    for (const input of INPUTS) {
-      const log = stubFight(input);
-      expect(log.map((e) => e.seq)).toEqual(log.map((_, i) => i));
-      expect(log.every((e, i) => e.t % 50 === 0 && e.t >= (log[i - 1]?.t ?? 0))).toBe(true);
+  it('the same reference input produces the same bytes twice', () => {
+    for (const ref of REFERENCES) {
+      const again = resolveCombat(referenceInput(ref));
+      expect(serializeLog(again.events)).toBe(serializeLog(resultOf(ref).events));
     }
+  });
+
+  it('a changed reference log fails with a readable line diff', () => {
+    if (isUpdateMode()) return; // fixtures are being rewritten in this run
+    const ref = REFERENCES[0] as Reference;
+    const lines = serializeLog(resultOf(ref).events).split('\n');
+    const ix = lines.findIndex((l) => l.includes('"kind":"damage"'));
+    const changed = lines.map((l, i) => (i === ix ? l.replace(/"v":(\d+)/, '"v":999') : l));
+    const path = join(FIXTURES, fixture(ref));
+    const want = new RegExp(`@@ line ${ix + 1}\\n- .*"kind":"damage".*\\n\\+ .*"v":999`);
+    expect(() => checkGolden(path, changed.join('\n'), false)).toThrow(want);
+  });
+});
+
+describe('golden logs: reference coverage', () => {
+  const kinds = new Set(all().map((e) => e.kind));
+  const outcomes = REFERENCES.map((ref) => resultOf(ref).reason);
+
+  it('covers both harnesses, a win and a Trust loss', () => {
+    expect(new Set(REFERENCES.map((r) => r.harness)).size).toBe(2);
+    expect(outcomes).toEqual(expect.arrayContaining(['resolved', 'trust']));
+  });
+
+  it('covers pipes, statuses, Guardrails, noise, zones, both compaction kinds and overtime', () => {
+    const want = ['pipe', 'statusOn', 'statusOff', 'guard', 'zoneChanged', 'deadline'] as const;
+    expect([...kinds]).toEqual(expect.arrayContaining([...want]));
+    expect(has((e) => e.kind === 'tokens' && e.d.kind === 'noise')).toBe(true);
+    expect(has((e) => e.kind === 'compaction' && e.d.kind === 'auto')).toBe(true);
+    expect(has((e) => e.kind === 'compaction' && e.d.kind === 'planned')).toBe(true);
+    expect(has((e) => e.kind === 'spawn' && e.d.reason === 'intent')).toBe(true);
   });
 });
 

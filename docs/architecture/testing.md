@@ -29,7 +29,7 @@ data and text rather than pixels where possible.
 |---|---|---|---|
 | Unit | Vitest (node env) | Every helper, effect kind, trait, status rule, zone threshold, map rule, shop rule, reducer action | `src/**/*.test.ts` |
 | Property | fast-check | Sim and run invariants (below) | `src/**/*.prop.test.ts` |
-| Golden logs | Vitest | Fixed seeds -> combat log hashes and run summaries | `src/sim/golden/` (helpers `tools/golden/`) |
+| Golden logs | Vitest | Fixed seeds -> combat log hashes and run summaries | `tools/golden/` (fights built via `src/run`) |
 | Architecture | Vitest | Import rules ([overview](overview.md)); the determinism ban on globals is a Biome override, tested in `tools/biome/sim-ban.test.ts` | `tests/arch.test.ts` |
 | Content | Vitest | `validate.ts` rules ([content model](content-model.md)) | `src/content/*.test.ts` |
 | UI unit | Vitest + happy-dom | View fold, formatters, i18n, components with logic | `src/ui/**/*.test.tsx` |
@@ -53,17 +53,20 @@ Numbers live in `harness.config.json` ([budgets table](../harness/budgets-table.
 7. `replay(seed, actions)` deep-equals the incremental state.
 8. All stored numbers are safe integers.
 
-Arbitraries generate random loadouts from real content, random encounters and random
-policies; shrinking is kept on to get minimal failing loadouts.
+Arbitraries generate random loadouts, item rules, encounters and policies; shrinking is
+kept on to get minimal failing loadouts. Sim properties (`src/sim/resolve.prop.test.ts`,
+invariants 2, 3, 4, 5, 8) build their defs with the sim builders, because `src/sim` tests
+may not import content data; real content is pinned by the golden reference fights.
 
 ## Golden logs
 
 - M1: 20 seeds (both harnesses, every slice encounter at least once). M2: 30 seeds across
   phases 1–3 and Endless loop 2.
-- Stored: `tools/golden/fixtures/` with per-fight `{ nodeId, inputHash, logHash,
-  events }`, plus full JSONL for short reference fights.
-- M1 stores 1 full reference log plus a hash summary of 5 seeds until the real combat sim
-  exists; T024 adds the full 5 reference fights.
+- Stored: `tools/golden/fixtures/` with `summary.jsonl` (per fight `{ fight, seed,
+  inputHash, logHash, events }`) plus the full JSONL of each short reference fight.
+- 5 reference fights (`tools/golden/reference.ts`): a new run from content, a picked
+  prompt, then `combatInput()` on a map node; together they cover both harnesses, win and
+  Trust loss, pipes, statuses, noise, both compaction kinds, spawns and overtime.
 - Goldens are updated only via `npm run golden:update` (sets `GOLDEN_UPDATE=1`), never
   `vitest -u`. A missing golden fails the test. The change description says why.
 - Node-only golden helpers (file IO, update mode) live in `tools/golden/`.
