@@ -5,7 +5,7 @@ title: Balance CLI batch runs and report
 summary: "tools/balance/cli.ts running batches by harness, bot, phase and seed range, writing deterministic JSON and Markdown reports with win rates, pick rates and fight lengths."
 keywords: ["balance", "cli", "report", "win-rate", "statistics"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -49,3 +49,4 @@ One command produces the numbers the M1 exit criteria are judged by.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

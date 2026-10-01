@@ -40,7 +40,7 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (32)
+## Backlog (31)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -51,7 +51,6 @@ generated: true
 | [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel: loadout, stash, policy, breakpoints | E009 | p1 | opus | M |
-| [T072](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
 | [T073](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T073-balance-targets-file-and-ci-gate.md) | Balance targets file and CI gate | E010 | p1 | sonnet | S |
 | [T075](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T075-run-level-golden-logs-on-20-seeds.md) | Run-level golden logs on 20 seeds | E010 | p1 | opus | M |
 | [T077](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T077-m1-balance-tuning-to-exit-targets.md) | M1 balance tuning to exit targets | E010 | p1 | opus | M |
@@ -85,11 +84,12 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
+| [T072](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
 | [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 
 ## Review (0/3)
