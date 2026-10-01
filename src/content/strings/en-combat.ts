@@ -1,0 +1,28 @@
+// Combat view and dev sandbox chrome (docs/game/ux/screens.md "Combat screen"). Spread into
+// `en`; keys `ui.<area>.<name>`. Kept apart from en-ui.ts so screens can land in parallel.
+
+export const enCombat = {
+  'ui.unit.seconds': '{n} s',
+  'ui.combat.region': 'Fight',
+  'ui.combat.playback': 'Playback',
+  'ui.combat.pause': 'Pause',
+  'ui.combat.skip': 'Skip',
+  'ui.combat.deadline': 'Deadline {time}',
+  'ui.combat.agent': 'agent',
+  'ui.combat.front': 'front',
+  'ui.combat.resolved': 'resolved',
+  'ui.combat.guardrails': 'Guardrails',
+  'ui.combat.severity': 'Severity',
+  'ui.combat.version': 'v{n}',
+  'ui.combat.output': 'output +{n}k',
+  'ui.combat.enemy_nth': '{name} #{n}',
+  'ui.combat.result.resolved': 'Resolved in {time}',
+  'ui.combat.result.trust': 'Trust lost after {time}',
+  'ui.combat.result.timeout': 'Timed out after {time}',
+  'ui.combat.trust_delta': '{delta} Trust',
+  'ui.combat.compactions.one': '{n} compaction',
+  'ui.combat.compactions.other': '{n} compactions',
+  'ui.sandbox.harness': 'Harness',
+  'ui.sandbox.encounter': 'Encounter',
+  'ui.sandbox.run': 'Run fight',
+} as const;

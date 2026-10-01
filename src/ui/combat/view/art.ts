@@ -1,7 +1,7 @@
-// Sandbox-only glyphs and placeholder agent portraits (T098). Real portraits are content
+// Glyphs and placeholder agent portraits for the combat screen. Real portraits are content
 // data (art-direction.md "ASCII art") and land with E011; `@` marks the blinking cursor eye.
-import type { Intent, Verb } from '../../../content/types/index.ts';
-import { enemyById } from '../adapter.ts';
+import { content } from '../../../content/index.ts';
+import type { EnemyDef, Intent, ToolDef, Verb } from '../../../content/types/index.ts';
 
 const PORTRAITS: Readonly<Record<string, readonly string[]>> = {
   terminal_purist: ['  .--------.', ' | >_ @    |', ' |   __    |', " '--------'"],
@@ -26,8 +26,11 @@ const VERB_ICON: Readonly<Record<Verb['verb'], string>> = {
   custom: '?',
 };
 
+const enemyDef = (id: string): EnemyDef | undefined => content.enemies.find((e) => e.id === id);
+
 function findIntent(enemy: string, intent: string): Intent | undefined {
-  const def = enemyById(enemy);
+  const def = enemyDef(enemy);
+  if (!def) return undefined;
   const all = [...(def.opening ?? []), ...def.cycle, ...(def.stages ?? []).flatMap((s) => s.cycle)];
   return all.find((i) => i.id === intent);
 }
@@ -40,4 +43,17 @@ export function intentBadge(enemy: string, intent: string): string {
   return 'n' in verb ? `${icon} ${verb.n}` : icon;
 }
 
-export const enemyArt = (enemy: string): string => enemyById(enemy).art.join('\n');
+export const enemyArt = (enemy: string): string => enemyDef(enemy)?.art.join('\n') ?? '';
+
+const EFFECT_ICON: Readonly<Record<string, string>> = { dmg: '⚔', guard: '⛨', heal: '♥' };
+
+/** Icon and value of the tool's main effect at `version` from content, e.g. `⚔ 9`. */
+export function nextValue(def: ToolDef, version: number): string {
+  for (const e of def.effects) {
+    const icon = EFFECT_ICON[e.do];
+    if (!icon || !('v' in e)) continue;
+    const v = typeof e.v === 'number' ? e.v : e.v[version - 1];
+    return `${icon} ${v}`;
+  }
+  return '·';
+}

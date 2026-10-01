@@ -18,12 +18,17 @@ export const rafClock: Clock = {
   now: () => performance.now(),
   onFrame(cb) {
     let id = 0;
+    let live = true;
     const loop = (now: number): void => {
       cb(now);
-      id = requestAnimationFrame(loop);
+      // `cb` may stop the loop itself (a listener disposing the playback): no new frame then.
+      if (live) id = requestAnimationFrame(loop);
     };
     id = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(id);
+    return () => {
+      live = false;
+      cancelAnimationFrame(id);
+    };
   },
 };
 

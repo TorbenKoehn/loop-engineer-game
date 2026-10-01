@@ -1,11 +1,11 @@
 import fc from 'fast-check';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CombatEvent } from '../../sim/events.ts';
 import { type CombatInput, resolveCombat } from '../../sim/index.ts';
-import { buildInput } from '../sandbox/adapter.ts';
 import { buildCheckpoints, CHECKPOINT_EVERY, viewAt } from './checkpoints.ts';
 import { advanceTo, type CombatView, foldAll, foldEvent, initialView } from './fold.ts';
-import { createPlayback, HIT_STOP_MS, MAX_FRAME_MS } from './playback.ts';
+import { createPlayback, HIT_STOP_MS, MAX_FRAME_MS, rafClock } from './playback.ts';
+import { fightInput as buildInput } from './testing/fights.ts';
 import { manualClock } from './testing/manual-clock.ts';
 
 const SETUP = { harness: 'terminal_purist', encounter: 'p1e1', seed: 'playback-test' };
@@ -153,6 +153,52 @@ describe('seeking', () => {
       }),
       { numRuns: 30 },
     );
+  });
+});
+
+describe('rafClock', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  /** Stubbed requestAnimationFrame: frames run only when the test calls `frame()`. */
+  function stubRaf() {
+    const queue = new Map<number, (now: number) => void>();
+    let next = 0;
+    vi.stubGlobal('requestAnimationFrame', (cb: (now: number) => void) => {
+      queue.set(++next, cb);
+      return next;
+    });
+    vi.stubGlobal('cancelAnimationFrame', (id: number) => queue.delete(id));
+    const frame = (now: number): void => {
+      const due = [...queue.values()];
+      queue.clear();
+      for (const cb of due) cb(now);
+    };
+    return { frame, pending: () => queue.size };
+  }
+
+  it('runs once per frame until stopped from outside', () => {
+    const raf = stubRaf();
+    const seen: number[] = [];
+    const stop = rafClock.onFrame((now) => seen.push(now));
+    raf.frame(16);
+    raf.frame(32);
+    stop();
+    raf.frame(48);
+    expect(seen).toEqual([16, 32]);
+    expect(raf.pending()).toBe(0);
+  });
+
+  it('stop() inside a frame callback ends the loop (R045 F1)', () => {
+    const raf = stubRaf();
+    let calls = 0;
+    const stop = rafClock.onFrame(() => {
+      calls++;
+      stop();
+    });
+    raf.frame(16);
+    raf.frame(32);
+    expect(calls).toBe(1);
+    expect(raf.pending()).toBe(0);
   });
 });
 

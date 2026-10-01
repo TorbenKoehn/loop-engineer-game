@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { StringKey } from '../content/strings/en.ts';
-import { formatClock, t } from './i18n.ts';
+import { fmtSeconds, formatClock, t, tPlural } from './i18n.ts';
 
 describe('t()', () => {
   afterEach(() => vi.restoreAllMocks());
@@ -34,5 +34,19 @@ describe('formatClock', () => {
     expect(formatClock(0)).toBe('00:00.000');
     expect(formatClock(61_005)).toBe('01:01.005');
     expect(formatClock(-5)).toBe('00:00.000');
+  });
+});
+
+describe('tPlural and fmtSeconds', () => {
+  it('picks the .one or .other form by count', () => {
+    expect(tPlural('ui.combat.compactions', 1)).toBe('1 compaction');
+    expect(tPlural('ui.combat.compactions', 0)).toBe('0 compactions');
+    expect(tPlural('ui.combat.compactions', 2)).toBe('2 compactions');
+  });
+
+  it('formats sim ms as seconds with one decimal', () => {
+    expect(fmtSeconds(27_400)).toBe('27.4 s');
+    expect(fmtSeconds(3000)).toBe('3.0 s');
+    expect(fmtSeconds(-5)).toBe('0.0 s');
   });
 });

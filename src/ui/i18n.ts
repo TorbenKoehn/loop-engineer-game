@@ -25,6 +25,20 @@ export function t(key: StringKey, params: Params = {}): string {
 
 export const fmtNumber = (n: number): string => numbers.format(n);
 
+const plurals = new Intl.PluralRules('en');
+
+/** The `<base>.one` or `<base>.other` string for count `n` (localisation.md rule 4). */
+export function tPlural(base: string, n: number, params: Params = {}): string {
+  const form = plurals.select(n) === 'one' ? 'one' : 'other';
+  return t(`${base}.${form}` as StringKey, { ...params, n });
+}
+
+const tenths = new Intl.NumberFormat('en', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+/** Integer sim ms as seconds with one decimal, e.g. 27400 -> `27.4 s`. */
+export const fmtSeconds = (ms: number): string =>
+  t('ui.unit.seconds', { n: tenths.format(Math.max(0, ms) / 1000) });
+
 const pad = (n: number, width = 2): string => String(n).padStart(width, '0');
 
 /** Integer sim ms as `mm:ss.mmm`, e.g. 12350 -> `00:12.350`. */

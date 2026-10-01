@@ -1,16 +1,17 @@
-// Small shared pieces of the sandbox view: bars, status chips and damage pops.
+// Small shared pieces of the combat screen: bars, status chips and damage pops.
 import type { Ref } from '../../../sim/events.ts';
-import type { Pop, StatusChip } from '../../combat/fold.ts';
+import { fmtSeconds } from '../../i18n.ts';
+import type { Pop, StatusChip } from '../fold.ts';
 import { statusName } from '../names.ts';
-import { formatSeconds } from '../timeline.ts';
+import type { Speed } from '../playback.ts';
 
 /** Sim-time ms a pop or flash stays visible at 1x; scaled by speed so it lasts the same real time. */
 export const POP_MS = 900;
 export const FLASH_MS = 220;
 
-/** True while `at` lies within `ms` real time (scaled by speed) before `time`. */
-export const isRecent = (at: number | undefined, time: number, ms: number, speed: number) =>
-  at !== undefined && time >= at && time - at < ms * speed;
+/** True while `at` lies within `ms` real time (scaled by speed) before `time`; never at skip. */
+export const isRecent = (at: number | undefined, time: number, ms: number, speed: Speed) =>
+  speed !== 'skip' && at !== undefined && time >= at && time - at < ms * speed;
 
 export type BarTone = 'trust' | 'guard' | 'sev' | 'charge' | 'intent' | 'clock';
 
@@ -30,7 +31,7 @@ export function Chips(props: { statuses: readonly StatusChip[]; time: number }) 
     <ul class="chips">
       {props.statuses.map((s) => (
         <li key={s.status} class={`chip chip--${s.status}`}>
-          {statusName(s.status)} {formatSeconds(s.until - props.time)}
+          {statusName(s.status)} {fmtSeconds(s.until - props.time)}
         </li>
       ))}
     </ul>
@@ -44,7 +45,7 @@ function popText(p: Pop): string {
 }
 
 /** Floating numbers over one unit; each pop animates once on mount (keyed by seq). */
-export function Pops(props: { pops: readonly Pop[]; unit: Ref; time: number; speed: number }) {
+export function Pops(props: { pops: readonly Pop[]; unit: Ref; time: number; speed: Speed }) {
   const mine = props.pops.filter(
     (p) => p.dst === props.unit && isRecent(p.t, props.time, POP_MS, props.speed),
   );

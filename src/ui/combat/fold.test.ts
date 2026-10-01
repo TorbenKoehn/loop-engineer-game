@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { resolveCombat } from '../../sim/index.ts';
-import { buildInput, sandboxEncounters, sandboxHarnesses } from '../sandbox/adapter.ts';
 import { advanceTo, foldAll, foldEvent, initialView, MAX_POPS } from './fold.ts';
+import { fightInput as buildInput, harnessIds, phase1EncounterIds } from './testing/fights.ts';
 
 const SEED = { harness: 'terminal_purist', encounter: 'p1e1', seed: 'fold-test' };
 
@@ -59,13 +59,11 @@ describe('sandbox view fold', () => {
   });
 
   it('matches every harness x Phase-1 encounter', () => {
-    for (const h of sandboxHarnesses) {
-      for (const enc of sandboxEncounters) {
-        const { result, start } = fightOf(
-          buildInput({ ...SEED, harness: h.id, encounter: enc.id }),
-        );
+    for (const harness of harnessIds) {
+      for (const encounter of phase1EncounterIds) {
+        const { result, start } = fightOf(buildInput({ ...SEED, harness, encounter }));
         const view = foldAll(start, result.events);
-        expect(view.agent.trust, `${h.id} ${enc.id}`).toBe(result.agentAfter.trust);
+        expect(view.agent.trust, `${harness} ${encounter}`).toBe(result.agentAfter.trust);
         expect(view.end?.outcome).toBe(result.outcome);
       }
     }

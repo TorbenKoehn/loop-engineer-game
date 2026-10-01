@@ -1,6 +1,6 @@
-// Time helpers for the sandbox replay (T098): tool charge read from the event log, intent
-// countdowns and clock formatting. The log has no per-tick charge events, so a tool's charge
-// is the share of the interval between two of its `toolFired` events that has elapsed.
+// Time helpers for the combat screen: tool charge read from the event log, intent countdowns
+// and the Deadline clock tone. The log has no per-tick charge events, so a tool's charge is
+// the share of the interval between two of its `toolFired` events that has elapsed.
 import type { CombatEvent } from '../../sim/events.ts';
 
 /** `toolFired` times per tool slot, ascending. */
@@ -47,17 +47,13 @@ export function windupLeft(intent: { windupMs: number; setAt: number }, t: numbe
   return Math.max(0, intent.windupMs - (t - intent.setAt));
 }
 
-const pad = (n: number, width: number): string => String(n).padStart(width, '0');
+/** The clock turns amber this long before the Deadline (screens.md "Clock"). */
+export const DEADLINE_WARN_MS = 10_000;
 
-/** `mm:ss.mmm` (docs/game/ux/screens.md "Clock"). */
-export function formatClock(ms: number): string {
-  const total = Math.max(0, Math.floor(ms));
-  const minutes = Math.floor(total / 60_000);
-  const seconds = Math.floor((total % 60_000) / 1000);
-  return `${pad(minutes, 2)}:${pad(seconds, 2)}.${pad(total % 1000, 3)}`;
-}
+export type ClockTone = 'ok' | 'warn' | 'over';
 
-/** Seconds with one decimal, e.g. `3.5 s`. */
-export function formatSeconds(ms: number): string {
-  return `${(Math.max(0, ms) / 1000).toFixed(1)} s`;
+/** `warn` from 10 s before the Deadline, `over` once it has passed. */
+export function clockTone(t: number, deadlineMs: number): ClockTone {
+  if (t > deadlineMs) return 'over';
+  return t >= deadlineMs - DEADLINE_WARN_MS ? 'warn' : 'ok';
 }

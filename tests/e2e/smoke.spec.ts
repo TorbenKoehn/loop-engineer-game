@@ -15,7 +15,7 @@ test('combat sandbox loads, resolves a fight and logs no console errors', async 
   await expect(page.getByRole('heading', { level: 1 })).toContainText(/loop engineer/i);
 
   // The sandbox auto-runs a fight; skip to its end and read the result strip.
-  await page.getByRole('button', { name: /skip/ }).click();
+  await page.getByRole('button', { name: /skip/i }).click();
   await expect(page.getByTestId('result')).toContainText(/Resolved|Trust lost|Timed out/);
   await expect(page.getByRole('group', { name: 'Playback' })).toBeVisible();
 
