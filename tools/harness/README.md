@@ -110,6 +110,7 @@ Wired in `.claude/settings.json` using the exec form (`command: "node"` plus `ar
 |---|---|---|
 | SessionStart `startup,resume,clear,compact` | `hooks/session-start.ts` | stdout becomes context: `docs/harness/orchestrator.md` plus a one-line board summary |
 | PostToolUse `Write,Edit,MultiEdit` | `hooks/post-edit.ts` | refresh table, board, indexes after `.md` or config edits; never fails; backslash paths normalised |
+| PreToolUse `Bash` | `hooks/pre-commit.ts` | only for `git commit` commands (also after `&&`, `;`, `\|`): lint, exit 2 with findings on errors or a lint crash; other commands exit 0 without linting |
 | Stop | `hooks/stop.ts` | refresh and lint; exit 2 with summary on errors or a lint crash, unless `stop_hook_active` |
 | SubagentStop `implementer,doc-gardener` | `hooks/stop.ts` | same gate, writer agents only |
 
@@ -122,7 +123,7 @@ cli.ts                       entry for all commands
 core/    types config glob frontmatter scan forge git date structure lint
 gen/     index board scaffold table          (generated files and scaffolding)
 budgets/ index util overrides meta dirs      (check registry; docs/ code/ forge/ subfolders; forge/diff.ts: harness:diff)
-hooks/   post-edit stop session-start io
+hooks/   post-edit pre-commit stop session-start io
 test/    *.test.ts testutil
 ```
 

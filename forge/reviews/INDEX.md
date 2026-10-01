@@ -26,4 +26,4 @@ generated: true
 | [E009/](E009/INDEX.md) | Index of forge/reviews/E009: 7 files, 0 subdirectories | review, screen, package, registry, screens, shop, agents, cycle |
 | [E010/](E010/INDEX.md) | Index of forge/reviews/E010: 2 files, 0 subdirectories | review, balance, batch, bots, greedy, random, report, runs |
 | [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 6 files, 0 subdirectories | review, determinism, epics, harness, milestone, batch, biome, calls |
-| [E024/](E024/INDEX.md) | Index of forge/reviews/E024: 4 files, 0 subdirectories | review, build, check, runs, below, boxes, crowded, files |
+| [E024/](E024/INDEX.md) | Index of forge/reviews/E024: 5 files, 0 subdirectories | review, runs, build, check, lint, below, boxes, commit |

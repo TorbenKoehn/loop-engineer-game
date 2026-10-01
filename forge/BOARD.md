@@ -38,7 +38,7 @@ generated: true
 | [E021](epics/m3/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
-| [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 3/9 |
+| [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 4/9 |
 
 ## Backlog (35)
 
@@ -91,11 +91,10 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T107](epics/m0/E024-harness-upkeep-2/T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | E024 | p0 | sonnet | S |
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel tree: loadout, stash, equip and chips | E009 | p1 | opus | M |
 | [T119](epics/m0/E024-harness-upkeep-2/T119-check-stays-green-under-parallel-load.md) | Check stays green under parallel load | E024 | p1 | sonnet | S |
 
@@ -107,12 +106,13 @@ _none_
 
 _none_
 
-## Done (74)
+## Done (75)
 
-_Showing the last 20 of 74 done tasks._
+_Showing the last 20 of 75 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T107](epics/m0/E024-harness-upkeep-2/T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | E024 | p0 | sonnet | S |
 | [T105](epics/m0/E024-harness-upkeep-2/T105-regroup-crowded-src-folders-below-dir-fi.md) | Regroup crowded src folders below dir_files warn_at | E024 | p1 | opus | M |
 | [T103](epics/m0/E024-harness-upkeep-2/T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | E024 | p0 | sonnet | S |
 | [T102](epics/m0/E024-harness-upkeep-2/T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | E024 | p0 | sonnet | S |
@@ -132,6 +132,5 @@ _Showing the last 20 of 74 done tasks._
 | [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 | [T066](epics/m1/E009-run-screens-and-build-panel/T066-package-registry-shop-screen.md) | Package Registry shop screen | E009 | p2 | sonnet | S |
 | [T065](epics/m1/E009-run-screens-and-build-panel/T065-reward-and-discard-screens.md) | Reward and discard screens | E009 | p2 | sonnet | S |
-| [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 
 ## Cancelled (1)
