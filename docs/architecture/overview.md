@@ -90,7 +90,7 @@ src/
   render-fx/  fx.ts overlay.ts shake.ts
   audio/      sfx.ts music.ts mixer.ts
   debug/      hooks.ts
-tests/        e2e/ golden/ arch.test.ts
+tests/        e2e/ arch.test.ts   (combat goldens: src/sim/golden/fixtures)
 tools/balance/ cli.ts bots/ report.ts
 ```
 

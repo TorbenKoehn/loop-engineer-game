@@ -5,6 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
+related_code: [src/sim/events.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -62,7 +63,7 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 `why` lists modifier ids in application order (`zone:focused`, `skill:unix_philosophy`,
 `prime:read_file`), so the UI can render "14 dmg (Focused +20%, piped +30%)" without
 re-deriving rules. Adding a kind or a field is a **log format change**: bump
-`LOG_VERSION` and update golden files in the same change.
+`LOG_VERSION` and update golden files (`npm run golden:update`, fixtures in `src/sim/golden/fixtures/`) in the same change.
 
 ## Ordering
 

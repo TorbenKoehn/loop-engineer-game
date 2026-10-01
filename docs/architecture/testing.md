@@ -29,7 +29,7 @@ data and text rather than pixels where possible.
 |---|---|---|---|
 | Unit | Vitest (node env) | Every helper, effect kind, trait, status rule, zone threshold, map rule, shop rule, reducer action | `src/**/*.test.ts` |
 | Property | fast-check | Sim and run invariants (below) | `src/**/*.prop.test.ts` |
-| Golden logs | Vitest | Fixed seeds -> combat log hashes and run summaries | `tests/golden/` |
+| Golden logs | Vitest | Fixed seeds -> combat log hashes and run summaries | `src/sim/golden/` (helpers `tools/golden/`) |
 | Architecture | Vitest | Import rules and banned globals ([overview](overview.md)) | `tests/arch.test.ts` |
 | Content | Vitest | `validate.ts` rules ([content model](content-model.md)) | `src/content/*.test.ts` |
 | UI unit | Vitest + happy-dom | View fold, formatters, i18n, components with logic | `src/ui/**/*.test.tsx` |
@@ -60,10 +60,13 @@ policies; shrinking is kept on to get minimal failing loadouts.
 
 - M1: 20 seeds (both harnesses, every slice encounter at least once). M2: 30 seeds across
   phases 1–3 and Endless loop 2.
-- Stored: `tests/golden/<seed>.json` with per-fight `{ nodeId, inputHash, logHash,
-  events }`, plus full JSONL for 5 short reference fights.
-- An intended balance or rules change updates goldens in the same change (Vitest `-u`
-  on `tests/golden`), and the change description says why.
+- Stored: `src/sim/golden/fixtures/` with per-fight `{ nodeId, inputHash, logHash,
+  events }`, plus full JSONL for short reference fights.
+- M1 stores 1 full reference log plus a hash summary of 5 seeds until the real combat sim
+  exists; T024 adds the full 5 reference fights.
+- Goldens are updated only via `npm run golden:update` (sets `GOLDEN_UPDATE=1`), never
+  `vitest -u`. A missing golden fails the test. The change description says why.
+- Node-only golden helpers (file IO, update mode) live in `tools/golden/`.
 
 ## Balance sim (`tools/balance`)
 

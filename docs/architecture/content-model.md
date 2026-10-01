@@ -5,6 +5,7 @@ keywords: [content, dsl, effects, triggers, types, validation, data-driven]
 type: doc
 status: active
 updated: 2026-10-01
+related_code: [src/content/types/**, src/content/dsl/**]
 related: [sim-core.md, run-state.md, ../game/content/tools.md, ../game/content/skills.md, ../game/ux/localisation.md, adr/adr-004-content-typed-ts.md]
 ---
 
@@ -47,8 +48,16 @@ export interface Intent { id: IntentId; windupMs: number; verbs: readonly Verb[]
 export interface EncounterDef { id: EncounterId; phase: 1 | 2 | 3; pool: 'easy' | 'hard' | 'elite' | 'boss'; enemies: readonly EnemyId[]; deadlineMs?: number }
 ```
 
-Ids are string-literal unions generated from the data (`typeof tools[number]['id']`), so
-every reference is checked by the compiler.
+Ids are plain string aliases (`ToolId`, `SkillId`, `MemoryId`, `LessonId`, `EnemyId`,
+`IntentId`, `EncounterId`, `HarnessId`, `PromptId`, `EventId`, `HandlerId`, `UnlockId`),
+not literal unions. Cross-references are validated at test time by `src/content`
+validation, not by the compiler.
+
+Further types in `src/content/types`: `Value` (`V3 | number`), `Zone`, `Status`, `Family`,
+`Filter`, `Selector`, `Verb`/`VerbSel`, `Trait`, `Stage`, `FightModifier`, `ToolPick`,
+`Outcome`, `EventDef`/`EventChoice`, `HarnessDef`, `HarnessTrait`, `SystemPromptDef`,
+`ModelStats`, `Slots`, `Accuracy`, `Milestone`, `UnlockRef` (`'base'` or `{ node }`), and the
+runtime lists `TRIGGER_KINDS`, `COND_KINDS`, `EFFECT_KINDS`, `TRAIT_KINDS`, `VERB_KINDS`.
 
 ## The DSL: rules = trigger -> condition -> effect
 
@@ -74,6 +83,10 @@ export type Effect =
 export interface Rule { when: Trigger; if?: readonly Cond[]; then: readonly Effect[] }
 ```
 
+Rules are written with the `rule(when, then, conds?)` and `passive(...effects)` builders
+from `src/content/dsl/rule.ts`, never as `{ when, then }` object literals (Biome
+`noThenProperty`: thenables are a hazard).
+
 `ModStat` covers the passive numbers: `rate`, `dmgPct`, `dmgFlat`, `output`, `window`,
 `pipeMs`, `focusPct`, `noiseBlock`, `throttleDurPct`, `stunDurPct`, `dmgTakenPct`,
 `credits`, `slots.tool`, `slots.memory`, `rerollCost`, `healPct`.
@@ -83,8 +96,8 @@ Example (Grep First):
 ```ts
 export const grepFirst = defineSkill({
   id: 'grep_first', rarity: 'uncommon', weight: 3, unlock: base,
-  rules: [{ when: { on: 'toolFired', tag: 'Search' },
-            then: [{ do: 'prime', filter: { tag: 'Edit' }, pct: 50 }] }],
+  rules: [rule({ on: 'toolFired', tag: 'Search' },
+               [{ do: 'prime', filter: { tag: 'Edit' }, pct: 50 }])],
 });
 ```
 
