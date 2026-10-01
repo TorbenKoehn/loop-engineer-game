@@ -112,7 +112,8 @@ like any effect; each has a unit test; content may only reference handler ids th
 ## Generated text
 
 Each effect, trigger, condition and trait kind has one string template
-(`effect.dmg.front = "Deal {n} damage to the front enemy."`). Tooltips and plain-English
+(`effect.dmg = "deal {n} damage to {target}"`; the target is a `{target}` placeholder,
+not a per-target key). Tooltips and plain-English
 lines are composed from templates and current values, so text cannot drift from data.
 Flavour lines and names are separate keys.
 

@@ -5,6 +5,7 @@ keywords: [localisation, i18n, strings, plurals, pseudo-locale, text]
 type: gdd
 status: active
 updated: 2026-10-01
+related_code: [src/content/strings/en.ts, src/content/text.ts]
 related: [accessibility.md, screens.md, ../../architecture/content-model.md, ../../architecture/ui.md]
 ---
 
@@ -27,8 +28,8 @@ font fallback, no code changes.
 5. **Numbers, times and percentages** go through `Intl.NumberFormat` helpers; the sim's
    integer ms are formatted by `formatClock(ms)` (`00:12.350`).
 6. **Generated effect text**: tooltips and plain-English lines are built from the effect
-   DSL using one template per effect kind (`effect.dmg.front = "Deal {n} damage to the
-   front enemy."`). Translators translate templates, not every item.
+   DSL using one template per effect kind, with the target as a placeholder (`effect.dmg = "deal {n} damage to
+   {target}"`, not one key per target). Translators translate templates, not every item.
 7. **Sim never produces text.** The event log carries ids and numbers; the UI renders text.
 8. **Jokes** carry a translator note (`// joke: parody of a famous Q&A site`) so they can
    be adapted rather than translated.
