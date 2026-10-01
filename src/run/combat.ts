@@ -52,10 +52,11 @@ export function combatInput(state: RunState, node: MapNode): CombatInput {
   const { setup, agent } = state;
   const encounter = byId(content.encounters, node.encounter);
   const enemies = encounter.enemies.map(enemy);
+  const harness = byId(content.harnesses, setup.harness);
   return {
     seed: forkSeed(setup.seed, `combat/${node.id}`),
     agent: {
-      model: byId(content.harnesses, setup.harness).model,
+      model: harness.model,
       trust: agent.trust,
       maxTrust: agent.maxTrust,
       tools: agent.tools.map((t) => ({ def: byId(content.tools, t.id), version: t.version })),
@@ -65,6 +66,7 @@ export function combatInput(state: RunState, node: MapNode): CombatInput {
     memories: agent.memories.map((id) => byId(content.memories, id)),
     lessons: setup.lessons.map((id) => byId(content.lessons, id)),
     prompt: byId(content.prompts, setup.prompt),
+    trait: harness.trait,
     policy: agent.policy,
     encounter: {
       enemies,

@@ -6,6 +6,7 @@ import { zoneMods } from './context/ctx.ts';
 import { outputTokens } from './context/tokens.ts';
 import { updateZone } from './context/zone.ts';
 import { applyEffects } from './effects.ts';
+import { echoes } from './mods/custom.ts';
 import { activeSum, damageMods } from './mods/mods.ts';
 import { pipe } from './order/pipes.ts';
 import { consumePrimes } from './order/primes.ts';
@@ -18,12 +19,17 @@ export function fireTools(sim: Sim): void {
     if (tool.progress < need) continue;
     const overflow = tool.progress - need;
     tool.progress = 0;
-    const d = { def: tool.def.id, version: tool.version };
+    const echo = echoes(sim); // step_by_step: the first activation resolves twice
+    const d = { def: tool.def.id, version: tool.version, ...(echo > 0 && { echo }) };
     emit(sim, { kind: 'toolFired', src: toolRef(tool), v: overflow, d });
     // Zone before the activation: Focused / Cold scale every amount, never tokens.
     const items = damageMods(sim, tool);
-    applyEffects(sim, tool, [...zoneMods(sim.agent.ctx), ...items, ...consumePrimes(sim, tool)]);
-    const added = outputTokens(sim, tool, activeSum(sim, 'output', tool));
+    const mods = [...zoneMods(sim.agent.ctx), ...items, ...consumePrimes(sim, tool)];
+    let added = 0;
+    for (let copy = 0; copy <= echo; copy++) {
+      applyEffects(sim, tool, mods); // each copy: same mods, its own effects and output
+      added += outputTokens(sim, tool, activeSum(sim, 'output', tool));
+    }
     fireRules(sim, { on: 'toolFired', slot: tool.slot }); // "when X fires": before compaction
     const compacted = compactIfDue(sim, added > 0); // compaction? (auto or planned)
     fireRules(sim); // compaction rules

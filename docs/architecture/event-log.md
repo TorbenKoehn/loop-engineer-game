@@ -39,7 +39,7 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 | `fightStart` | sys | deadlineMs | `{ W, B, S, N, zone, trust, maxTrust, policyOff? }` |
 | `spawn` | e/sys -> e | sev | `{ def, index, reason: 'start'\|'split'\|'clone'\|'intent'\|'stage'\|'event' }` |
 | `intentSet` | e | windupMs | `{ intent, ix }` |
-| `toolFired` | t | progress overflow (0) | `{ def, version, echo? }` |
+| `toolFired` | t | progress overflow (0) | `{ def, version, echo? }` (`echo`: extra resolves of this activation, e.g. 1 from `step_by_step`) |
 | `pipe` | t -> t | ms | `{ chain }` (chain step, 1-based within 1000 ms) |
 | `charge` | t -> t | ms added (`ms x 100` progress, capped at full) | `{ cause }` (the source tool def id; non-pipe charge effects) |
 | `damage` | t/e/s/sys -> a/e | final amount | `{ base, flat, pct, armor, guard, sev, zone, why: string[] }` (ids of modifiers) |

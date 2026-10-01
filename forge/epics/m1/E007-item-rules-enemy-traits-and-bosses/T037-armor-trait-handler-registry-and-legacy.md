@@ -46,6 +46,8 @@ The phase-1 boss tests sustained Edit damage and context control under add noise
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R064 F1): register the existing custom hooks `double_first_resolve`, `context_noise_cut`, `throttle_shorter` (src/sim/combat/mods/custom.ts) in the handler registry so validation accepts real content; update content-model.md handler description.
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

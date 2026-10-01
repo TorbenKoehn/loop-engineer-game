@@ -1,10 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { content } from '../content/index.ts';
+import type { Family } from '../content/types/basics.ts';
 import type { EnemyDef } from '../content/types/enemy.ts';
 import type { FightModifier } from '../content/types/event.ts';
+import { createSim } from '../sim/combat/state.ts';
 import type { CombatEvent, Ref } from '../sim/events.ts';
-import { resolveCombat } from '../sim/index.ts';
+import { type CombatInput, resolveCombat } from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
+import { hitIntent, intent, makeEnemy } from '../sim/testing/builders.ts';
 import type { Action } from './actions.ts';
 import { apply, legalActions } from './apply.ts';
 import { combatInput } from './combat.ts';
@@ -273,5 +276,142 @@ describe('continue', () => {
 
   it('is rejected outside combatReview', () => {
     expect(apply(onMap(), { t: 'continue' })).toEqual({ ok: false, error: 'wrongMode' });
+  });
+});
+
+// T034: harness traits, system prompts and AGENTS.md lessons from real content, wired by the run.
+describe('traits, prompts and lessons in combat', () => {
+  const FOE = makeEnemy({ id: 'foe', sev: 5000, cycle: [hitIntent(1, 60_000)] });
+  /** The first fight's input for this loadout, against `enemies` (a passive dummy by default). */
+  function loadout(harness: string, prompt: string, lessons: string[] = [], enemies = [FOE]) {
+    const s = onMap('K7Q2-M9XA', harness, prompt);
+    const run = { ...s, setup: { ...s.setup, lessons } };
+    const input = combatInput(run, node(run, firstNode(run)));
+    return { ...input, encounter: { ...input.encounter, enemies, spawnDefs: [] } };
+  }
+  const noTools = (input: CombatInput): CombatInput => ({
+    ...input,
+    agent: { ...input.agent, tools: [] },
+  });
+  const log = (input: CombatInput) => resolveCombat(input).events;
+  const of = (events: readonly CombatEvent[], kind: CombatEvent['kind'], src?: string) =>
+    events.filter((e) => e.kind === kind && (!src || e.src === src));
+  /** d.pct and why of the first damage by `src`. */
+  const firstHit = (input: CombatInput, src = 't0') => {
+    const hit = of(log(input), 'damage', src)[0];
+    return hit?.kind === 'damage' ? { v: hit.v, pct: hit.d.pct, why: hit.d.why } : undefined;
+  };
+  const rates = (input: CombatInput) => createSim(input, false).agent.tools.map((t) => t.rate);
+
+  it('Muscle Memory: grep (weight 3) charges at rate +10, sed (weight 4) does not', () => {
+    const input = loadout('terminal_purist', 'senior');
+    expect(input.trait?.id).toBe('muscle_memory');
+    expect(input.agent.tools.map((t) => t.def.id)).toEqual(['grep', 'cat', 'sed']);
+    expect(rates(input)).toEqual([120, 120, 110]); // speed 110
+    expect(rates(loadout('ide_companion', 'senior'))).toEqual([100, 100, 100]);
+  });
+
+  it('Undo Stack: once per fight, 15 Guardrails when a hit leaves Trust below 30% of max', () => {
+    const hitter = makeEnemy({ id: 'hitter', sev: 5000, cycle: [hitIntent(14, 1000)] });
+    const base = noTools(loadout('ide_companion', 'concise', [], [hitter]));
+    const input = { ...base, agent: { ...base.agent, trust: 100, maxTrust: 100 } };
+    expect(input.trait?.id).toBe('undo_stack');
+    const events = log(input);
+    const guards = of(events, 'guard', 'a');
+    expect(guards.map((g) => g.v)).toEqual([15]);
+    const hits = of(events, 'damage', 'e1');
+    const trigger = hits.find((h) => h.t === guards[0]?.t);
+    expect(trigger?.kind === 'damage' && trigger.d.sev).toBe(16); // 100 - 6 x 14; 30 did not
+    expect(hits.length).toBeGreaterThan(7); // the fight went on without a second grant
+  });
+
+  it('senior: tool damage +10% and window -10', () => {
+    const senior = loadout('terminal_purist', 'senior');
+    const concise = loadout('terminal_purist', 'concise');
+    expect(createSim(senior, false).agent.ctx.W).toBe(50);
+    expect(firstHit(senior)).toMatchObject({ pct: 30, why: ['zone:focused', 'prompt:senior'] });
+    expect(firstHit(concise)).toMatchObject({ pct: 20, why: ['zone:focused'] });
+  });
+
+  it('concise: every tool output -1, min 0', () => {
+    const events = log(loadout('terminal_purist', 'concise'));
+    const outputs = (src: string) => of(events, 'tokens', src).map((e) => e.v);
+    expect(of(events, 'toolFired', 't0').length).toBeGreaterThan(0);
+    expect(outputs('t0')).toEqual([]); // grep 1 -> 0
+    expect(new Set([...outputs('t1'), ...outputs('t2')])).toEqual(new Set([1])); // cat, sed 2
+  });
+
+  it('step_by_step: rate -5; the first activation resolves twice with its output', () => {
+    const input = loadout('terminal_purist', 'step_by_step');
+    expect(rates(input)).toEqual([115, 115, 105]);
+    const events = log(input);
+    const [first, ...rest] = of(events, 'toolFired');
+    expect(first).toMatchObject({ src: 't1', d: { def: 'cat', echo: 1 } }); // cat charges first
+    const at = (kind: CombatEvent['kind']) =>
+      of(events, kind, first?.src).filter((e) => e.t === first?.t);
+    expect(at('damage').map((e) => e.v)).toEqual([5, 5]); // cat 4, Focused +20%
+    expect(at('tokens').map((e) => e.v)).toEqual([2, 2]);
+    expect(rest.every((e) => e.kind === 'toolFired' && e.d.echo === undefined)).toBe(true);
+  });
+
+  const FAMILIES = ['Bugs', 'Context', 'Infra', 'Process', 'Sandbox'] as const;
+  const foe = (family: Family, cycle = [hitIntent(10, 1000)]) =>
+    makeEnemy({ id: 'foe', family, sev: 5000, cycle });
+
+  it.each(FAMILIES)('%s offense lesson: +15% tool damage vs that family only', (family) => {
+    const id = `${family.toLowerCase()}_off`;
+    const other = family === 'Bugs' ? 'Infra' : 'Bugs';
+    const pct = (lessons: string[], f: Family) =>
+      firstHit(loadout('terminal_purist', 'concise', lessons, [foe(f)]))?.pct;
+    expect(pct([id], family)).toBe((pct([], family) ?? 0) + 15);
+    expect(pct([id], other)).toBe(pct([], other));
+  });
+
+  it.each(['bugs', 'process', 'sandbox'])('%s_def: -20% damage taken from it, min 1', (key) => {
+    const family = FAMILIES.find((f) => f.toLowerCase() === key) as Family;
+    const taken = (lessons: string[], f: Family, n: number) => {
+      const input = loadout('ide_companion', 'concise', lessons, [foe(f, [hitIntent(n, 1000)])]);
+      return of(log(noTools(input)), 'damage', 'e1')[0]?.v;
+    };
+    expect(taken([`${key}_def`], family, 10)).toBe(8);
+    expect(taken([`${key}_def`], family, 1)).toBe(1);
+    expect(taken([`${key}_def`], 'Infra', 10)).toBe(10);
+  });
+
+  it('context_def: noise from Context enemies -25% (floor), other families unchanged', () => {
+    const noisy = [intent('spam', 1000, { verb: 'noise', n: 7 })];
+    const noise = (f: Family) => {
+      const input = loadout('ide_companion', 'concise', ['context_def'], [foe(f, noisy)]);
+      return of(log(input), 'tokens', 'e1')[0]?.v;
+    };
+    expect(noise('Context')).toBe(5);
+    expect(noise('Bugs')).toBe(7);
+  });
+
+  it('infra_def: enemy Throttles on you last 1000 ms less (min 50)', () => {
+    const applied = (ms: number) => {
+      const rl = [intent('rl', 1000, { verb: 'throttle', sel: 'leftmost', ms })];
+      const input = loadout('ide_companion', 'concise', ['infra_def'], [foe('Infra', rl)]);
+      return of(log(input), 'statusOn', 'e1')[0]?.v;
+    };
+    expect(applied(3000)).toBe(2000);
+    expect(applied(800)).toBe(50);
+  });
+
+  it('Deadline damage is unaffected by Process lessons', () => {
+    const deadline = (lessons: string[]) => {
+      const idle = foe('Process', [hitIntent(1, 60_000)]);
+      const input = noTools(loadout('ide_companion', 'concise', lessons, [idle]));
+      const events = log({ ...input, encounter: { ...input.encounter, deadlineMs: 1000 } });
+      return of(events, 'damage', 'sys').map((e) => [e.dst, e.v]);
+    };
+    const plain = deadline([]);
+    expect(plain.slice(0, 4)).toEqual([
+      ['e1', 1],
+      ['a', 1],
+      ['e1', 2],
+      ['a', 2],
+    ]);
+    expect(deadline(['process_off', 'process_def'])).toEqual(plain);
   });
 });

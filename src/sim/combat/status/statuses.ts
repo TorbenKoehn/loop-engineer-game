@@ -3,6 +3,7 @@
 import type { Status } from '../../../content/types/index.ts';
 import type { Ref } from '../../events.ts';
 import { mulDiv } from '../../int.ts';
+import { type Cut, throttleCut } from '../mods/custom.ts';
 import { activeSum } from '../mods/mods.ts';
 import {
   type AgentRt,
@@ -27,6 +28,7 @@ export const STATUS_CAP_MS: Readonly<Record<Status, number>> = {
 };
 /** Shortest duration after a duration modifier. */
 export const MIN_STATUS_MS = 50;
+const NO_CUT: Cut = { ms: 0, min: 0 };
 
 export interface StatusApp {
   readonly status: Status;
@@ -59,16 +61,19 @@ function durationCut(sim: Sim, h: Holder, status: Status): number {
 }
 
 /**
- * Applies a status and emits `statusOn` (v: applied ms, remaining after stacking).
- * Haste and Slow add up; Throttle and Stun keep the longer remaining; both capped.
- * Haste, Slow and Throttle on the agent go to every tool individually.
+ * Applies a status and emits `statusOn` (v: applied ms, remaining after stacking). Enemy
+ * Throttle on a tool: throttle_shorter cut first, then % mods. Haste and Slow add up; Throttle
+ * and Stun keep the longer remaining; both capped. Agent Haste/Slow/Throttle go to each tool.
  */
 export function applyStatus(sim: Sim, src: Ref, h: Holder, app: StatusApp): void {
   if (isAgentHolder(h) && app.status !== 'stun') {
     for (const tool of h.tools) applyStatus(sim, src, tool, app);
     return;
   }
-  const ms = modDuration(app.ms, (app.mod ?? 0) + durationCut(sim, h, app.status));
+  const cut =
+    isTool(h) && app.status === 'throttle' && src.startsWith('e') ? throttleCut(sim) : NO_CUT;
+  const mod = (app.mod ?? 0) + durationCut(sim, h, app.status);
+  const ms = Math.max(cut.min, modDuration(app.ms - cut.ms, mod));
   const cap = STATUS_CAP_MS[app.status];
   const adds = app.status === 'haste' || app.status === 'slow';
   let entry = h.statuses.find((s) => s.status === app.status);

@@ -135,7 +135,8 @@ export type Action =
   | { t: 'skipLesson' } | { t: 'abandon' };
 ```
 
-`travel` to a fight node builds the `CombatInput`, calls `resolveCombat(input)`, applies
+`travel` to a fight node builds the `CombatInput` (harness model and trait, prompt, items,
+lessons, encounter), calls `resolveCombat(input)`, applies
 the outcome (Trust, once-per-run flags, stats folded from the log) and switches to
 `combatReview`. The log is not stored; the UI recomputes it from `input` for playback.
 

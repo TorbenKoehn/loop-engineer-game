@@ -67,6 +67,7 @@ being in the starting line (e.g. Side Quest). The sim resolves spawn ids against
 | `Sim` | `t`, `seq`, `rng`, `agent`, `enemies` (array, index 0 = front), `summons`, `events`, `deadline`, `rules`, `mods` |
 | `RulesRt` | `list` (item rules in slot order: trait, prompt, skills, memories, lessons; `hits`, `lastT` each), `pending` triggers, `usedOncePerRun` |
 | `ModRt` | passive `mod` effects collected once at fight start from `rules.list`: why id `<kind>:<def id>`, `stat`, `v`, `filter`, owning rule (conds). Fight-start stats (`window`, `noiseBlock`, `focusPct`, `rate`) check only the filter; the others check the rule's conds where they apply (damage mods once per activation, which counts for `oncePerFight`) |
+| Custom hooks | passive `custom` effects, asked at fixed points (`mods/custom.ts`): `double_first_resolve` in tool firing (the first activation each fight resolves its effects and output twice with the same mods, `toolFired.d.echo` 1; the rule's `lastT` marks it used), `context_noise_cut` in noise injection, `throttle_shorter` in status application. Other handler ids are inert until their task |
 
 All entity state is plain data (no classes with hidden state), so a snapshot is
 `structuredClone`-able and comparable in tests.
