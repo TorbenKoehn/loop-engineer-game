@@ -21,11 +21,11 @@ export const nextVersion = (owned: Version | null): Version =>
   owned === null ? 1 : (Math.min(3, owned + 1) as Version);
 
 /** Generated plain-English lines of a tool at `version`, or of a skill's rules. */
-export function itemLines(kind: 'tool' | 'skill', id: string, version: Version = 1): string[] {
+export function itemLines(kind: OwnedItem['kind'], id: string, version: Version = 1): string[] {
   if (kind === 'tool') {
     const def = content.tools.find((d) => d.id === id);
     return def ? [describeTool(def, version)] : [];
   }
-  const def = content.skills.find((d) => d.id === id);
+  const def = (kind === 'skill' ? content.skills : content.memories).find((d) => d.id === id);
   return def ? def.rules.map((r) => describeRule(r)) : [];
 }

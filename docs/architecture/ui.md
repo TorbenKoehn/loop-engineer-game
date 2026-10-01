@@ -90,6 +90,15 @@ reads `v1 → v2`, via `nextVersion` in `screens/item-text.ts`); lines come from
 payout (already paid by `enterReward`). Discard lists every ref from `discardRefs` as a
 button dispatching `discardItem`.
 
+`StandupScreen`, `RestScreen` and `FreeTierScreen` (`screens/nodes/standup.tsx`, `rest.tsx`,
+`free-tier.tsx`, lazy; styles in `theme/nodes.css`) render modes `event`, `rest` and
+`treasure`. The Standup is a `#standup` message (speaker `event.<id>.speaker`, setup split on
+newlines, at most 3) with one reply button per `eventChoices` entry: outcome lines from
+`screens/nodes/outcome-text.ts`, cost tag, and a disabled reply's reason (`blockText`). Exact
+amounts the UI cannot read from data (heal amount, upgradable tools, the Free Tier memory and
+whether it equips, stashes or needs room) come from `preview(action)` in `store/run.ts`, which
+runs `apply` without dispatching, so no rule is copied into the UI.
+
 ## Combat replay player
 
 ```ts

@@ -8,7 +8,7 @@ import { Placeholder } from './screens/placeholder.tsx';
 import { PromptPick } from './screens/prompt-pick.tsx';
 import { Title } from './screens/title.tsx';
 import { Shell } from './shell/shell.tsx';
-import { mode } from './store/run.ts';
+import { mode, type UiMode } from './store/run.ts';
 
 /** A lazy-loaded screen (ui.md "Screens"): renders nothing until its chunk arrives. */
 function lazyScreen(load: () => Promise<FunctionComponent>): FunctionComponent {
@@ -32,6 +32,19 @@ const DiscardScreen = lazyScreen(() =>
   import('./screens/discard.tsx').then((m) => m.DiscardScreen),
 );
 const ShopScreen = lazyScreen(() => import('./screens/shop.tsx').then((m) => m.ShopScreen));
+const StandupScreen = lazyScreen(() =>
+  import('./screens/nodes/standup.tsx').then((m) => m.StandupScreen),
+);
+const RestScreen = lazyScreen(() => import('./screens/nodes/rest.tsx').then((m) => m.RestScreen));
+const FreeTierScreen = lazyScreen(() =>
+  import('./screens/nodes/free-tier.tsx').then((m) => m.FreeTierScreen),
+);
+
+const NODE_SCREENS: Partial<Record<UiMode, FunctionComponent>> = {
+  event: StandupScreen,
+  rest: RestScreen,
+  treasure: FreeTierScreen,
+};
 
 /** The screen for the current `mode`; `mode` is the route (ui.md "Screens"). */
 export function Screen() {
@@ -44,7 +57,8 @@ export function Screen() {
   if (m === 'reward') return <RewardScreen />;
   if (m === 'discard') return <DiscardScreen />;
   if (m === 'shop') return <ShopScreen />;
-  return <Placeholder mode={m} />;
+  const Node = NODE_SCREENS[m];
+  return Node ? <Node /> : <Placeholder mode={m} />;
 }
 
 export function App() {

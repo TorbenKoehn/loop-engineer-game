@@ -15,11 +15,11 @@ const STEP: Readonly<Record<string, number>> = {
   ArrowUp: -1,
 };
 
-/** Container keydown: arrow keys move focus between its buttons, wrapping around. */
+/** Container keydown: arrow keys move focus between its enabled buttons, wrapping. */
 export function arrowFocus(e: KeyboardEvent): void {
   const step = STEP[e.key];
   if (!step || !(e.currentTarget instanceof HTMLElement)) return;
-  const items = [...e.currentTarget.querySelectorAll<HTMLElement>('button')];
+  const items = [...e.currentTarget.querySelectorAll<HTMLElement>('button:enabled')];
   const at = items.indexOf(document.activeElement as HTMLElement);
   items[(at + step + items.length) % items.length]?.focus();
   e.preventDefault();

@@ -1,0 +1,130 @@
+/*
+ * Standup, Idle Cycle and Free Tier screens (screens.md "Other screens") on the Crimson tokens.
+ * A blocked reply states its reason with a glyph and text, so colour is never the only cue.
+ * The sleep bar fills once; under prefers-reduced-motion it is drawn full.
+ */
+
+.msg {
+  display: grid;
+  gap: 2px;
+  max-width: 720px;
+  padding: 12px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brand);
+  border-radius: var(--radius);
+}
+
+.msg__who {
+  margin: 0;
+  color: var(--brand-text);
+  font-weight: 700;
+}
+
+.msg__line {
+  margin: 0;
+}
+
+.replies {
+  display: grid;
+  gap: 10px;
+  max-width: 720px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.reply,
+.pick {
+  display: grid;
+  gap: 4px;
+  padding: 10px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: start;
+  cursor: pointer;
+}
+
+.reply:hover:not(:disabled),
+.reply:focus-visible {
+  border-color: var(--brand-text);
+  background: var(--bg-raised);
+}
+
+.reply:disabled,
+.pick:disabled {
+  color: var(--fg-muted);
+  cursor: not-allowed;
+}
+
+.reply__label {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-weight: 700;
+}
+
+.reply__out {
+  padding-left: 16px;
+  color: var(--good);
+}
+
+.reply:disabled .reply__out {
+  color: var(--fg-muted);
+}
+
+.reply__why {
+  padding-left: 16px;
+  color: var(--warn);
+}
+
+.sleep {
+  height: 8px;
+  max-width: 480px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.sleep__bar {
+  display: block;
+  height: 100%;
+  background: var(--good);
+  transform-origin: left;
+  animation: sleep-fill 1.2s ease-out both;
+}
+
+@keyframes sleep-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.picker {
+  display: grid;
+  flex: 1 1 320px;
+  align-content: start;
+  gap: 8px;
+  max-width: 480px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.unbox {
+  max-width: 420px;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sleep__bar {
+    animation: none;
+  }
+}

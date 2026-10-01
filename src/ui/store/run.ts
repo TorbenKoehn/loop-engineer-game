@@ -42,3 +42,9 @@ export function dispatch(action: Action): void {
   run.value = res.state;
   actionLog.value = [...actionLog.value, action];
 }
+
+/** The state `action` would lead to, or null if rejected: previews use the reducer itself. */
+export function preview(action: Action): RunState | null {
+  const res = run.value ? apply(run.value, action) : null;
+  return res?.ok ? res.state : null;
+}

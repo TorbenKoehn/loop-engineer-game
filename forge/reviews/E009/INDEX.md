@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E009"
-summary: "Index of forge/reviews/E009: 5 files, 0 subdirectories"
-keywords: ["review", "screen", "package", "registry", "shop", "discard", "harness", "nodes"]
+summary: "Index of forge/reviews/E009: 6 files, 0 subdirectories"
+keywords: ["review", "screen", "package", "registry", "shop", "cycle", "discard", "free"]
 type: index
 status: active
 updated: 2026-10-01
@@ -20,3 +20,4 @@ generated: true
 | [R069-T065.md](R069-T065.md) | Review of T065: Reward and discard screens | Review of T065 (approved) | review, reward, discard, screens |
 | [R070-T066.md](R070-T066.md) | Review of T066: Package Registry shop screen | Review of T066 (changes-requested) | review, package, registry, shop, screen |
 | [R071-T066.md](R071-T066.md) | Review of T066: Package Registry shop screen | Review of T066 (approved) | review, package, registry, shop, screen |
+| [R075-T067.md](R075-T067.md) | Review of T067: Standup, Idle Cycle and Free Tier screens | Review of T067 (approved) | review, standup, idle, cycle, free, tier |

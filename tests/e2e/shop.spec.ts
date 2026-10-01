@@ -1,26 +1,13 @@
 // T066: the Package Registry on the production build. Seed K7Q2-M9XA, Terminal Purist:
-// p1-r1-c3 -> r2-c4 -> r3-c4 -> r4-c4 -> the registry p1-r5-c4.
+// Tasks p1-r1-c3 and r2-c4, Standup r3-c4 (first reply), Free Tier r4-c4, registry p1-r5-c4.
 import { expect, type Page, test } from '@playwright/test';
 
-const PATH = ['p1-r1-c3', 'p1-r2-c4', 'p1-r3-c4', 'p1-r4-c4', 'p1-r5-c4'];
-
-/** Plays whatever the node opened until the map or the registry shows. */
-async function resolve(page: Page): Promise<void> {
-  const map = page.getByRole('heading', { name: 'Route to the release' });
-  const shop = page.getByRole('heading', { name: 'Package Registry' });
-  const fight = page.getByRole('region', { name: 'Fight' });
-  const reward = page.getByRole('button', { name: 'Skip (+6 Credits)' });
-  const stub = page.locator('.placeholder button');
-  for (let i = 0; i < 6; i++) {
-    const seen = page.locator('h2, .placeholder, [aria-label="Fight"]').first();
-    await seen.waitFor();
-    if ((await map.count()) || (await shop.count())) return;
-    if (await fight.count()) {
-      await fight.getByRole('button', { name: 'Skip' }).click();
-      await page.getByTestId('result').getByRole('button', { name: 'Continue' }).click();
-    } else if (await reward.count()) await reward.click();
-    else if (await stub.count()) await stub.first().click();
-  }
+/** A Task node: skip the fight playback, continue, skip the reward. */
+async function task(page: Page, node: string): Promise<void> {
+  await page.getByTestId(`node-${node}`).click();
+  await page.getByRole('region', { name: 'Fight' }).getByRole('button', { name: 'Skip' }).click();
+  await page.getByTestId('result').getByRole('button', { name: 'Continue' }).click();
+  await page.getByRole('button', { name: 'Skip (+6 Credits)' }).click();
 }
 
 async function toShop(page: Page): Promise<void> {
@@ -33,10 +20,13 @@ async function toShop(page: Page): Promise<void> {
     .getByTestId(/^prompt-/)
     .first()
     .click();
-  for (const id of PATH) {
-    await page.getByTestId(`node-${id}`).click();
-    await resolve(page);
-  }
+  await task(page, 'p1-r1-c3');
+  await task(page, 'p1-r2-c4');
+  await page.getByTestId('node-p1-r3-c4').click();
+  await page.getByTestId('standup-reply-0').click();
+  await page.getByTestId('node-p1-r4-c4').click();
+  await page.getByTestId('free-tier-take').click();
+  await page.getByTestId('node-p1-r5-c4').click();
   await expect(page.getByRole('heading', { name: 'Package Registry' })).toBeVisible();
 }
 
