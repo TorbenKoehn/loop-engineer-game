@@ -5,7 +5,7 @@ keywords: [sim, determinism, tick, rng, integer-math, combat, api]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/rng.ts, src/sim/int.ts]
+related_code: [src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts]
 related: [event-log.md, overview.md, content-model.md, ../game/systems/combat.md, ../game/systems/context.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -34,7 +34,7 @@ export interface CombatInput {
   lessons: readonly LessonDef[];
   prompt: SystemPromptDef;
   policy: 70 | 80 | 90 | 0;      // 0 = never
-  encounter: EncounterSetup;     // enemy defs (front to back), deadlineMs, phase, loop
+  encounter: EncounterSetup;     // enemies (front to back), spawnDefs?, deadlineMs, phase, loop
   modifiers: readonly FightModifier[]; // next-fight event modifiers, lint rules
 }
 export interface CombatResult {
@@ -49,6 +49,10 @@ export function resolveCombat(input: CombatInput, opts?: { log?: boolean }): Com
 ```
 
 `resolveCombat` is a pure function: same input, same result, byte for byte.
+
+`EncounterSetup.spawnDefs?: readonly EnemyDef[]` lists defs that intents may spawn without
+being in the starting line (e.g. Side Quest). The sim resolves spawn ids against
+`enemies` plus `spawnDefs`.
 
 ## Entities
 

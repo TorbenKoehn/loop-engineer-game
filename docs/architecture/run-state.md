@@ -5,6 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -109,6 +110,18 @@ export type Action =
 false})`, applies the outcome (Trust, once-per-run flags, stats) and switches to
 `combatReview`. The UI recomputes the log with `{log: true}` for playback.
 
+## Replay
+
+```ts
+export function replay(setup: SetupSnapshot, actions: readonly Action[]): ApplyResult;
+```
+
+`replay` takes the `SetupSnapshot` (`RunState.setup`, which holds the seed), not a bare
+seed, and folds `actions` from `initialState(setup)`, stopping at the first rejected
+action. Why: per [ADR-005](adr/adr-005-save-action-log.md) a save is setup plus accepted
+actions; the snapshot already copied the meta unlocks and lessons, so a replay never
+depends on later meta changes.
+
 ## RNG fork paths
 
 | Path | Used for |
@@ -136,4 +149,4 @@ runState)`, `buyUnlock(meta, id)`). Settings live here but are never read by the
 2. Baseline of the equipped loadout ≤ 80% of the window after every build action.
 3. `apply` never throws for any action from `legalActions`; every legal sequence ends in
    `runEnd` within 2000 actions.
-4. `replay(seed, actions)` equals the incrementally built state (deep equal).
+4. `replay(setup, actions)` equals the incrementally built state (deep equal).

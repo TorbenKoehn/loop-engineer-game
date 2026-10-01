@@ -5,7 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/events.ts]
+related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -41,7 +41,7 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 | `intentSet` | e | windupMs | `{ intent, ix }` |
 | `toolFired` | t | progress overflow (0) | `{ def, version, echo? }` |
 | `pipe` | t -> t | ms | `{ chain }` (chain step, 1-based within 1000 ms) |
-| `charge` | t -> t | ms | `{ cause }` (non-pipe charge effects) |
+| `charge` | t -> t | ms added (`ms x 100` progress, capped at full) | `{ cause }` (the source tool def id; non-pipe charge effects) |
 | `damage` | t/e/s/sys -> a/e | final amount | `{ base, flat, pct, armor, guard, sev, zone, why: string[] }` (ids of modifiers) |
 | `guard` | t/e -> a/e | amount | `{ total }` |
 | `heal` | t/e -> a/e | amount | `{ total }` |
@@ -59,6 +59,14 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 | `roll` | any | result | `{ lo, hi, purpose }` |
 | `deadline` | sys | k (damage this second) | `{}` |
 | `fightEnd` | sys | endT | `{ outcome, reason, trust }` |
+
+Conventions:
+
+- **Dropped spawn**: a `spawn` intent blocked by its limits emits `spawn` with `src` the
+  spawner, **no `dst`**, `v: 0` and `d.index: -1` (`reason: 'intent'`). No enemy is added.
+- **`statusOff` on expiry**: `src: 'sys'`, `v: 0`.
+- **`statusOff` via `clearStatus`**: `src` is the clearing tool, `v` is the ms that were
+  left on the status (cut short).
 
 `why` lists modifier ids in application order (`zone:focused`, `skill:unix_philosophy`,
 `prime:read_file`), so the UI can render "14 dmg (Focused +20%, piped +30%)" without
