@@ -1,6 +1,8 @@
 // The serialisable run state (docs/architecture/run-state.md#runstate-shape).
 // Plain JSON data only: no Map, Set, Date, class instances or undefined values.
 // Fights, rewards, events and run end add their fields with their tasks (E004, E008).
+
+import type { FightModifier } from '../content/types/event.ts';
 import type {
   EncounterId,
   HarnessId,
@@ -11,6 +13,7 @@ import type {
   ToolId,
 } from '../content/types/ids.ts';
 import type { UnlockId } from '../content/types/refs.ts';
+import type { CombatInput, CombatResult } from '../sim/index.ts';
 
 export type LintId = string;
 /** `p<phase>-r<row>-c<col>`, or `p<phase>-boss`. */
@@ -118,6 +121,15 @@ export interface RunStats {
   nodesVisited: number;
 }
 
+/** The resolved fight without its log; the UI recomputes the log from `input`. */
+export type CombatSummary = Pick<CombatResult, 'outcome' | 'reason' | 'endT' | 'stats'>;
+
+export interface CombatRecord {
+  nodeId: NodeId;
+  input: CombatInput;
+  outcome: CombatSummary;
+}
+
 export interface RunState {
   /** State schema version. */
   v: 1;
@@ -128,5 +140,9 @@ export interface RunState {
   map: MapState;
   agent: AgentState;
   pending: Pending | null;
+  /** Next-fight modifiers from events (T047). */
+  nextFight: FightModifier[];
+  /** The last fight; set by travel to a fight node. */
+  combat: CombatRecord | null;
   stats: RunStats;
 }

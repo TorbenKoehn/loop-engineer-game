@@ -3,7 +3,10 @@
 import type { PromptId } from '../content/types/ids.ts';
 import type { NodeId, RunState } from './state.ts';
 
-export type Action = { t: 'pickPrompt'; prompt: PromptId } | { t: 'travel'; node: NodeId };
+export type Action =
+  | { t: 'pickPrompt'; prompt: PromptId }
+  | { t: 'travel'; node: NodeId }
+  | { t: 'continue' };
 
 /** Why apply rejected an action; the state is unchanged. */
 export type ActionError = 'unknownAction' | 'wrongMode' | 'notOffered' | 'notReachable';

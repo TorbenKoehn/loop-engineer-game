@@ -55,6 +55,8 @@ export function initialState(setup: SetupSnapshot): RunState {
       oncePerRun: [],
     },
     pending: { kind: 'promptOffer', prompts: promptOffer(snap.unlocked) },
+    nextFight: [],
+    combat: null,
     stats: { nodesVisited: 0 },
   };
 }

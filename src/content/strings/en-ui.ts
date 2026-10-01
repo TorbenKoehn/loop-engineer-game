@@ -16,6 +16,7 @@ export const enUi = {
   'ui.status.phase': 'P{phase}',
   'ui.status.speed': '{speed}x',
   'ui.screen.todo': 'No screen for {mode} yet.',
+  'ui.action.continue': 'Continue',
   'ui.action.pick_prompt': 'Pick {name}',
   'ui.action.travel': 'Go to {node}',
 } as const;

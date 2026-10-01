@@ -47,6 +47,8 @@ A fight is readable at a glance: who fires next, what each enemy will do and whe
 
 ## Notes
 
+- Orchestrator 2026-10-01: when replacing the sandbox, (1) use `combatInput` from src/run/combat.ts (T042) and delete src/ui/sandbox/adapter.ts, (2) remove the `src/ui/sandbox/**` exemption from the JSX-text lint test (R039 F2), (3) keep the `?sandbox` dev route only in dev builds.
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

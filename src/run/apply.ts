@@ -1,6 +1,7 @@
 // The pure run reducer: validate, then return a new state; never mutate the input.
 // See docs/architecture/run-state.md#reducer and #modes.
 import type { Action, ActionError, ApplyResult } from './actions.ts';
+import { afterCombat, fight } from './combat.ts';
 import { reachable } from './map/graph.ts';
 import type { NodeId, RunState } from './state.ts';
 
@@ -19,15 +20,19 @@ function pickPrompt(state: RunState, prompt: string): ApplyResult {
 
 function travel(state: RunState, node: NodeId): ApplyResult {
   if (state.mode !== 'map') return fail('wrongMode');
-  if (!reachable(state.map).includes(node)) return fail('notReachable');
-  return {
-    ok: true,
-    state: {
-      ...state,
-      map: { ...state.map, visited: [...state.map.visited, node], current: node },
-      stats: { ...state.stats, nodesVisited: state.stats.nodesVisited + 1 },
-    },
+  const target = state.map.nodes.find((n) => n.id === node);
+  if (!target || !reachable(state.map).includes(node)) return fail('notReachable');
+  const moved: RunState = {
+    ...state,
+    map: { ...state.map, visited: [...state.map.visited, node], current: node },
+    stats: { ...state.stats, nodesVisited: state.stats.nodesVisited + 1 },
   };
+  return { ok: true, state: target.encounter === null ? moved : fight(moved, target) };
+}
+
+function continueRun(state: RunState): ApplyResult {
+  if (state.mode !== 'combatReview') return fail('wrongMode');
+  return { ok: true, state: { ...state, mode: afterCombat(state) } };
 }
 
 export function apply(state: RunState, action: Action): ApplyResult {
@@ -36,6 +41,8 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return pickPrompt(state, action.prompt);
     case 'travel':
       return travel(state, action.node);
+    case 'continue':
+      return continueRun(state);
     default:
       // Unreachable for typed callers; guards actions decoded from saves.
       return fail('unknownAction');
@@ -51,6 +58,8 @@ export function legalActions(state: RunState): readonly Action[] {
         : [];
     case 'map':
       return reachable(state.map).map((node) => ({ t: 'travel', node }));
+    case 'combatReview':
+      return [{ t: 'continue' }];
     default:
       return [];
   }

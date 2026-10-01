@@ -7,6 +7,7 @@ import { dispatch, run, type UiMode } from '../store/run.ts';
 
 function label(a: Action): string {
   if (a.t === 'travel') return t('ui.action.travel', { node: a.node });
+  if (a.t === 'continue') return t('ui.action.continue');
   return t('ui.action.pick_prompt', { name: t(`prompt.${a.prompt}.name` as StringKey) });
 }
 
