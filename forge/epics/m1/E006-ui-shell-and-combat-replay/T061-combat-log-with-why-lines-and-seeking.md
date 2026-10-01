@@ -51,3 +51,4 @@ The log is the show: every number in the fight can be traced to its cause, which
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (opus)
+- 2026-10-01: maxTurns hit (90), resumed
