@@ -5,7 +5,7 @@ title: "Combat walking skeleton: one tool vs one enemy"
 summary: "resolveCombat(input) with the 50 ms tick loop, charge and fire, single-target damage, a hit intent, win and loss, the core events, and sim test builders."
 keywords: ["sim", "combat", "tick", "walking-skeleton", "resolve-combat", "events"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -53,3 +53,4 @@ Prove the whole sim path end to end with the thinnest slice: a CombatInput goes 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

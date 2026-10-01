@@ -5,7 +5,7 @@ title: Architecture import-rule test
 summary: "tests/arch.test.ts parses every import under src/ and fails on forbidden module directions or banned nondeterministic globals in src/sim and src/run."
 keywords: ["architecture", "imports", "layering", "arch-test", "determinism", "boundaries"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: sonnet
 size: S
@@ -50,3 +50,4 @@ Enforce the module dependency rules of the architecture overview with a test, so
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

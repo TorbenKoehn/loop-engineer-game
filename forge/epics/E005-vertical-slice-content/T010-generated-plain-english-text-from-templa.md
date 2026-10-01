@@ -5,7 +5,7 @@ title: Generated plain-English text from templates
 summary: "String table src/content/strings/en.ts with one template per effect, trigger, condition, trait and status kind, plus pure describe functions composing item lines from data."
 keywords: ["strings", "localisation", "templates", "tooltips", "plain-english", "text"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -49,3 +49,4 @@ Every tooltip and plain-English line is generated from content data so text cann
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
