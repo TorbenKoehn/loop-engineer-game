@@ -1,5 +1,6 @@
 // Pure checkers for the architecture rules (docs/architecture/overview.md, ADR-006).
 // Operate on in-memory sources so negative fixtures need no files.
+// The determinism ban (globals in src/sim and src/run) lives in biome.jsonc only.
 
 export type Module =
   | 'sim'
@@ -33,20 +34,6 @@ const BARE_OK: Partial<Record<Module, RegExp>> = {
   audio: /^zzfx$/,
   'tools/balance': /^node:/,
 };
-const PURE: readonly Module[] = ['sim', 'run'];
-/** Free reference to a global: not a property access (`x.window`) nor an object key (`window:`). */
-function freeRef(names: string): RegExp {
-  return new RegExp(`(?<![\\w$.])(?:${names})\\b(?!\\s*\\??:)`);
-}
-const BANNED_GLOBALS: readonly [string, RegExp][] = [
-  ['Math.random', /\bMath\s*\.\s*random\b/],
-  ['Date', freeRef('Date')],
-  ['performance', freeRef('performance')],
-  ['timers', freeRef('setTimeout|setInterval|setImmediate|requestAnimationFrame')],
-  ['window', freeRef('window')],
-  ['document', freeRef('document')],
-  ['crypto', freeRef('crypto')],
-];
 const IMPORT_RE =
   /\b(?:import|export)\s[^'"`;]*?\bfrom\s*['"]([^'"]+)['"]|\bimport\s*['"]([^'"]+)['"]|\bimport\(\s*['"]([^'"]+)['"]\s*\)/g;
 
@@ -108,14 +95,4 @@ export function checkImports(path: string, src: string): string[] {
     }
   }
   return out;
-}
-
-/** Banned nondeterministic globals in src/sim and src/run (non-test files). */
-export function checkGlobals(path: string, src: string): string[] {
-  const mod = moduleOf(path);
-  if (!mod || !PURE.includes(mod) || isTestFile(path)) return [];
-  const code = stripComments(src);
-  return BANNED_GLOBALS.filter(([, re]) => re.test(code)).map(
-    ([name]) => `${path}: banned global '${name}' in src/${mod}`,
-  );
 }

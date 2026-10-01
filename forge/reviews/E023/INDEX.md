@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E023"
-summary: "Index of forge/reviews/E023: 4 files, 0 subdirectories"
-keywords: ["review", "epics", "milestone", "batch", "calls", "determinism", "dirs", "forge"]
+summary: "Index of forge/reviews/E023: 5 files, 0 subdirectories"
+keywords: ["review", "determinism", "epics", "milestone", "batch", "biome", "calls", "covers"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R011-T094.md](R011-T094.md) | Review of T094: Batch git calls in harness lint | Review of T094 (approved) | review, batch, calls, harness, lint, stays |
 | [R016-T086.md](R016-T086.md) | Review of T086: Scaffolder places epics in milestone dirs | Review of T086 (approved) | review, scaffolder, places, epics, milestone, dirs |
 | [R017-T087.md](R017-T087.md) | Review of T087: Migrate forge epics into milestone dirs | Review of T087 (approved) | review, migrate, forge, epics, into, milestone |
+| [R026-T096.md](R026-T096.md) | Review of T096: One determinism ban: Biome covers src/sim a… | Review of T096 (approved) | review, determinism, biome, covers |

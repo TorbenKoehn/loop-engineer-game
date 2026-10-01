@@ -36,7 +36,7 @@ function lint(dir: string, code: string): number | null {
   }
 }
 
-describe('src/sim determinism ban', () => {
+describe.each(['src/sim', 'src/run'])('%s determinism ban', (dir) => {
   it.each([
     ['Math.random()', 'export const x = Math.random();\n'],
     ['aliased Math', 'const r = Math;\nexport const x = r.random();\n'],
@@ -49,18 +49,26 @@ describe('src/sim determinism ban', () => {
     ['new Date()', 'export const x = new Date();\n'],
     ['performance.now()', 'export const x = performance.now();\n'],
     ['setTimeout', 'export const x = setTimeout;\n'],
-  ])('fails lint in src/sim: %s', (_name, code) => {
-    expect(lint('src/sim', code)).not.toBe(0);
+    ['setImmediate', 'export const x = setImmediate;\n'],
+    ['bare window', 'export const x = window;\n'],
+    ['document', 'export const x = document;\n'],
+    ['crypto', 'export const x = crypto;\n'],
+  ])('fails lint: %s', (_name, code) => {
+    expect(lint(dir, code)).not.toBe(0);
   });
 
   it.each([
     ['Math.floor(2.5)', 'export const x = Math.floor(2.5);\n'],
     ['Math.imul(3, 4)', 'export const x = Math.imul(3, 4);\n'],
-  ])('allows %s in src/sim', (_name, code) => {
-    expect(lint('src/sim', code)).toBe(0);
+    ['model.window', 'const model = { window: 1 };\nexport const x = model.window;\n'],
+    ['{ window: 1 }', 'export const x = { window: 1 };\n'],
+  ])('allows %s', (_name, code) => {
+    expect(lint(dir, code)).toBe(0);
   });
+});
 
-  it('allows the same code outside src/sim', () => {
+describe('outside the determinism ban', () => {
+  it('allows the same code in src/ui', () => {
     expect(lint('src/ui', 'export const x = Math.random();\n')).toBe(0);
   });
 });

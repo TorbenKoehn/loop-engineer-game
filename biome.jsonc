@@ -57,10 +57,11 @@
   },
   "overrides": [
     {
-      // Determinism: src/sim must not touch time, DOM or ambient randomness.
+      // Determinism: src/sim and src/run must not touch time, DOM or ambient randomness.
+      // This is the only determinism ban (no regex copy in tests/architecture).
       // Math.random, Date.now, new Date and performance.now come from the GritQL plugin;
       // the rest are restricted globals. Proven by tools/biome/sim-ban.test.ts.
-      "includes": ["src/sim/**"],
+      "includes": ["src/sim/**", "src/run/**"],
       "plugins": ["./tools/biome/sim-determinism.grit"],
       "linter": {
         "rules": {
@@ -69,11 +70,12 @@
               "level": "error",
               "options": {
                 "deniedGlobals": {
-                  "window": "No DOM in src/sim",
-                  "document": "No DOM in src/sim",
-                  "setTimeout": "No timers in src/sim",
-                  "setInterval": "No timers in src/sim",
-                  "requestAnimationFrame": "No timers in src/sim",
+                  "window": "No DOM in src/sim or src/run",
+                  "document": "No DOM in src/sim or src/run",
+                  "setTimeout": "No timers in src/sim or src/run",
+                  "setInterval": "No timers in src/sim or src/run",
+                  "setImmediate": "No timers in src/sim or src/run",
+                  "requestAnimationFrame": "No timers in src/sim or src/run",
                   "Date": "Nondeterministic: use the tick counter",
                   "globalThis": "Ambient global: reaches Math.random and timers",
                   "self": "Ambient global: reaches Math.random and timers",

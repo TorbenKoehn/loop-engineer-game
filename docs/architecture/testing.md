@@ -30,7 +30,7 @@ data and text rather than pixels where possible.
 | Unit | Vitest (node env) | Every helper, effect kind, trait, status rule, zone threshold, map rule, shop rule, reducer action | `src/**/*.test.ts` |
 | Property | fast-check | Sim and run invariants (below) | `src/**/*.prop.test.ts` |
 | Golden logs | Vitest | Fixed seeds -> combat log hashes and run summaries | `src/sim/golden/` (helpers `tools/golden/`) |
-| Architecture | Vitest | Import rules and banned globals ([overview](overview.md)) | `tests/arch.test.ts` |
+| Architecture | Vitest | Import rules ([overview](overview.md)); the determinism ban on globals is a Biome override, tested in `tools/biome/sim-ban.test.ts` | `tests/arch.test.ts` |
 | Content | Vitest | `validate.ts` rules ([content model](content-model.md)) | `src/content/*.test.ts` |
 | UI unit | Vitest + happy-dom | View fold, formatters, i18n, components with logic | `src/ui/**/*.test.tsx` |
 | Balance | `tools/balance` CLI | Win rates, pick rates, fight lengths | CI job + reports |

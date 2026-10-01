@@ -5,7 +5,7 @@ title: "One determinism ban: Biome covers src/sim and src/run"
 summary: "The Biome determinism ban applies to src/run as well as src/sim and the duplicate regex ban (BANNED_GLOBALS in tests/architecture/checker.ts) is deleted; model.window and { window: 1 } stay legal."
 keywords: ["determinism", "biome", "gritql", "src-run", "banned-globals", "architecture-test"]
 type: task
-status: in-progress
+status: done
 priority: p2
 model: sonnet
 size: S
@@ -32,17 +32,17 @@ one place and editors flag it.
 
 ## Acceptance Criteria
 
-- [ ] `npx vitest run tools/biome` passes with each of `Math.random()`, `Date.now()`, `new Date()`, `performance.now()`, bare `window`, `document`, `crypto`, `setTimeout` and `setImmediate` failing lint when linted as `src/sim/x.ts` and as `src/run/x.ts` in the sandbox
-- [ ] The same run shows `model.window`, `{ window: 1 }` and `Math.floor(2.5)` lint clean in `src/sim` and `src/run`, and `Math.random()` clean in `src/ui`
-- [ ] `BANNED_GLOBALS`, `freeRef` and `checkGlobals` no longer exist in `tests/architecture/checker.ts`; `rg "checkGlobals|BANNED_GLOBALS" tests tools src` finds nothing
-- [ ] `npx vitest run tests/arch.test.ts` passes with the global-ban cases removed and the import-rule cases unchanged
-- [ ] `npm run check` exits 0
+- [x] `npx vitest run tools/biome` passes with each of `Math.random()`, `Date.now()`, `new Date()`, `performance.now()`, bare `window`, `document`, `crypto`, `setTimeout` and `setImmediate` failing lint when linted as `src/sim/x.ts` and as `src/run/x.ts` in the sandbox
+- [x] The same run shows `model.window`, `{ window: 1 }` and `Math.floor(2.5)` lint clean in `src/sim` and `src/run`, and `Math.random()` clean in `src/ui`
+- [x] `BANNED_GLOBALS`, `freeRef` and `checkGlobals` no longer exist in `tests/architecture/checker.ts`; `rg "checkGlobals|BANNED_GLOBALS" tests tools src` finds nothing
+- [x] `npx vitest run tests/arch.test.ts` passes with the global-ban cases removed and the import-rule cases unchanged
+- [x] `npm run check` exits 0
 
 ## Subtasks
 
-- [ ] Biome override `includes` gains `src/run/**`; add `setImmediate` to deniedGlobals
-- [ ] Extend sim-ban.test.ts with src/run cases and the legal `window` property and key cases
-- [ ] Delete the regex ban and its tests in checker.ts and arch.test.ts; fix the comment in biome.jsonc
+- [x] Biome override `includes` gains `src/run/**`; add `setImmediate` to deniedGlobals
+- [x] Extend sim-ban.test.ts with src/run cases and the legal `window` property and key cases
+- [x] Delete the regex ban and its tests in checker.ts and arch.test.ts; fix the comment in biome.jsonc
 
 ## Notes
 
@@ -53,3 +53,9 @@ one place and editors flag it.
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: AC1+AC2 verified: npx vitest run tools/biome (src/sim and src/run: 15 deny cases, 4 allow cases incl. model.window, { window: 1 }, Math.floor; src/ui Math.random clean)
+- 2026-10-01: AC3 verified: rg "checkGlobals|BANNED_GLOBALS" tests tools src finds nothing; freeRef removed
+- 2026-10-01: AC4 verified: npx vitest run tests/arch.test.ts passed (import cases unchanged)
+- 2026-10-01: AC5 verified: npm run check exit 0
+- 2026-10-01: review requested
+- 2026-10-01: done (R026)

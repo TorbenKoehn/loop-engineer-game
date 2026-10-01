@@ -20,7 +20,7 @@ generated: true
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 6/8 |
-| [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 0/8 |
+| [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 0/9 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 0/8 |
@@ -37,7 +37,7 @@ generated: true
 | [E020](epics/m3/E020-m3-onboarding-and-accessibility-complete/EPIC.md) | M3 Onboarding and accessibility complete | backlog | p3 | 0/0 |
 | [E021](epics/m3/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
-| [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 4/12 |
+| [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
 ## Backlog (69)
 
@@ -123,28 +123,28 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T098](epics/m1/E006-ui-shell-and-combat-replay/T098-dev-combat-sandbox-page.md) | Dev combat sandbox page | E006 | p0 | opus | M |
 | [T015](epics/m1/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
 
-## Review (1/3)
+## Review (0/3)
 
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
+_none_
 
 ## Blocked (0)
 
 _none_
 
-## Done (21)
+## Done (22)
 
-_Showing the last 20 of 21 done tasks._
+_Showing the last 20 of 22 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
 | [T094](epics/m0/E023-harness-upkeep/T094-batch-git-calls-so-harness-lint-stays-un.md) | Batch git calls so harness lint stays under lint_s | E023 | p0 | sonnet | S |
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
@@ -164,6 +164,5 @@ _Showing the last 20 of 21 done tasks._
 | [T006](epics/m0/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
 | [T004](epics/m0/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T003](epics/m0/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
-| [T002](epics/m0/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
 
 ## Cancelled (0)

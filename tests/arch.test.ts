@@ -1,8 +1,8 @@
-// Architecture gate: module dependency table, ADR-006 import style and banned globals.
+// Architecture gate: module dependency table, and ADR-006 import style.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { ALLOWED, checkGlobals, checkImports } from './architecture/checker.ts';
+import { ALLOWED, checkImports } from './architecture/checker.ts';
 
 const root = join(import.meta.dirname, '..');
 
@@ -21,10 +21,6 @@ const read = (f: string): string => readFileSync(join(root, f), 'utf8');
 describe('architecture', () => {
   it('current tree has no import violations', () => {
     expect(files.flatMap((f) => checkImports(f, read(f)))).toEqual([]);
-  });
-
-  it('current tree has no banned globals in sim and run', () => {
-    expect(files.flatMap((f) => checkGlobals(f, read(f)))).toEqual([]);
   });
 
   it('rejects forbidden import direction', () => {
@@ -49,27 +45,6 @@ describe('architecture', () => {
     expect(checkImports('src/run/a.ts', "import x from './state';")).toHaveLength(1);
     expect(checkImports('src/run/a.ts', "import x from '@/sim/rng.ts';")).toHaveLength(1);
     expect(checkImports('src/sim/a.ts', "import x from 'node:fs';")).toHaveLength(1);
-  });
-
-  it.each([
-    'Math.random()',
-    'Date.now()',
-    'new Date()',
-    'performance.now()',
-    'setTimeout(f, 1)',
-    'setInterval(f, 1)',
-    'window.innerWidth',
-    'document.body',
-    'crypto.randomUUID()',
-  ])('bans nondeterministic globals in sim and run: %s', (code) => {
-    for (const path of ['src/sim/a.ts', 'src/run/a.ts'])
-      expect(checkGlobals(path, `export const x = ${code};\n`)).toHaveLength(1);
-    expect(checkGlobals('src/ui/a.ts', `export const x = ${code};\n`)).toEqual([]);
-  });
-
-  it('ignores banned words in comments', () => {
-    const src = '// no Date here\n/* Math.random */\nexport const x = 1;\n';
-    expect(checkGlobals('src/sim/a.ts', src)).toEqual([]);
   });
 
   it('allowed-direction table has one row per overview module', () => {
