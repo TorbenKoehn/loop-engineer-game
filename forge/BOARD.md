@@ -40,12 +40,11 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (45)
+## Backlog (42)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
-| [T029](epics/m1/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
 | [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
 | [T035](epics/m1/E007-item-rules-enemy-traits-and-bosses/T035-tag-breakpoints-posix-refactor-indexed-t.md) | Tag breakpoints POSIX, Refactor, Indexed, TDD | E007 | p1 | opus | S |
 | [T036](epics/m1/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
@@ -55,7 +54,6 @@ generated: true
 | [T057](epics/m1/E006-ui-shell-and-combat-replay/T057-debug-test-hooks-and-url-flags.md) | Debug test hooks and URL flags | E006 | p1 | sonnet | S |
 | [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
-| [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel: loadout, stash, policy, breakpoints | E009 | p1 | opus | M |
 | [T071](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
 | [T072](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
@@ -67,7 +65,6 @@ generated: true
 | [T030](epics/m1/E003-context-window-mechanic/T030-context-scaled-effects-and-window-modifi.md) | Context-scaled effects and window modifiers | E003 | p2 | opus | S |
 | [T031](epics/m1/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
-| [T046](epics/m1/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
 | [T047](epics/m1/E004-run-structure-and-map/T047-standup-events-and-next-fight-modifiers.md) | Standup events and next-fight modifiers | E004 | p2 | opus | M |
 | [T052](epics/m1/E008-run-end-meta-state-and-saves/T052-save-migration-framework-and-frozen-fixt.md) | Save migration framework and frozen fixtures | E008 | p2 | sonnet | S |
 | [T053](epics/m1/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
@@ -99,10 +96,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (4/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T029](epics/m1/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
+| [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
+| [T046](epics/m1/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
 | [T051](epics/m1/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
 
 ## Review (0/3)

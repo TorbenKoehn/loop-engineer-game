@@ -5,7 +5,7 @@ title: Idle Cycle, Free Tier and elite memory nodes
 summary: "Idle Cycle rest (heal 30% rounded up or +1 tool version), Free Tier random memory, the elite memory reward, and discard when memory slots and stash are full."
 keywords: ["rest", "idle-cycle", "free-tier", "memories", "nodes"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: sonnet
 size: S
@@ -48,3 +48,4 @@ The non-combat recovery nodes work, so the map offers real routing choices.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

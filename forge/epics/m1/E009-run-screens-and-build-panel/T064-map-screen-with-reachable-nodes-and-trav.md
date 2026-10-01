@@ -5,7 +5,7 @@ title: Map screen with reachable nodes and travel
 summary: "Vertical bottom-to-top map DAG with ASCII node icons and aria labels, current and reachable nodes, encounter preview on hover or focus, travel dispatch and breadcrumb."
 keywords: ["ui", "map", "navigation", "nodes", "screens"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -49,3 +49,4 @@ The player sees the whole phase and picks a route with full information about up
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

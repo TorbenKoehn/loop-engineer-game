@@ -5,7 +5,7 @@ title: Planned compaction policy and compact effect
 summary: "Compaction policy 70/80/90/never with 3000 ms lockout, Stun 1000 ms keeping buffs, the disabled-policy rule, and the compact effect that ignores policy and lockout."
 keywords: ["context", "compaction", "policy", "lockout", "planned"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ Give the player the central build decision of the slice: compact early and lose 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
