@@ -10,8 +10,14 @@ const at = (events: readonly CombatEvent[], kind: CombatEvent['kind']) =>
 const grepVsTypo = () => fight({ tools: [makeTool({ id: 'grep' })], enemies: [makeEnemy()] });
 const unbeatable = () =>
   fight({ trust: 30, enemies: [makeEnemy({ sev: 100_000, cycle: [hitIntent(10, 1000)] })] });
-/** Nothing can end it but the hard cap: no tools, a passive enemy. */
-const stalled = () => fight({ tools: [], enemies: [makeEnemy({ cycle: [] })], deadlineMs: 1000 });
+/** Nothing can end it but the hard cap: no tools, a passive enemy, both outlast Deadline damage. */
+const stalled = () =>
+  fight({
+    tools: [],
+    trust: 1000,
+    enemies: [makeEnemy({ sev: 1000, cycle: [] })],
+    deadlineMs: 1000,
+  });
 
 describe('resolveCombat walking skeleton', () => {
   it('one grep kills one Typo', () => {

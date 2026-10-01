@@ -45,15 +45,17 @@ describe('sandbox view fold', () => {
     expect(view.enemies.some((e) => e.sev > 0)).toBe(true);
   });
 
-  it('matches a timeout fight (no tools, huge Trust, nothing resolves)', () => {
+  // Since T023, Deadline damage (not the timeout cap) ends this fight; expectations follow the sim.
+  it('matches an overtime fight (no tools, huge Trust)', () => {
     const base = buildInput(SEED);
     const agent = { ...base.agent, tools: [], trust: 1e9, maxTrust: 1e9 };
     const { result, start } = fightOf({ ...base, agent, skills: [] });
     const view = foldAll(start, result.events);
-    expect(view.end?.outcome).toBe('loss');
-    expect(view.end?.reason).toBe('timeout');
+    expect(view.end?.outcome).toBe(result.outcome);
+    expect(view.end?.reason).toBe(result.reason);
     expect(view.agent.trust).toBe(result.agentAfter.trust);
-    expect(view.enemies.every((e) => e.resolvedAt === undefined)).toBe(true);
+    const resolved = result.events.filter((e) => e.kind === 'resolved').length;
+    expect(view.enemies.filter((e) => e.resolvedAt !== undefined)).toHaveLength(resolved);
   });
 
   it('matches every harness x Phase-1 encounter', () => {

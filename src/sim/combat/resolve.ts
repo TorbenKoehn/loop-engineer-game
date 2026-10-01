@@ -1,25 +1,15 @@
 // resolveCombat: input -> fixed 50 ms ticks in the combat tick order -> result and event log.
 // Rules: docs/game/systems/combat.md "Tick order"; API: docs/architecture/sim-core.md.
 import type { ModelStats } from '../../content/types/index.ts';
+import { deadlineDamage } from './deadline.ts';
+import { checkEnd, type End, resolveDead, WIN } from './end.ts';
 import { enemiesAct } from './enemy/act.ts';
 import { announceIntent } from './enemy/cycle.ts';
 import { fireTools } from './fire.ts';
 import { createSim, emit, enemyRef, type Sim, TICK_MS } from './state.ts';
 import { chargeAll } from './status/charge.ts';
 import { tickStatuses } from './status/statuses.ts';
-import type { CombatInput, CombatOptions, CombatResult, EndReason, Outcome } from './types.ts';
-
-/** Hard cap after the Deadline: the fight is lost by timeout. */
-export const OVERTIME_CAP_MS = 30_000;
-
-interface End {
-  readonly outcome: Outcome;
-  readonly reason: EndReason;
-}
-
-const WIN: End = { outcome: 'win', reason: 'resolved' };
-const LOSS_TRUST: End = { outcome: 'loss', reason: 'trust' };
-const TIMEOUT: End = { outcome: 'loss', reason: 'timeout' };
+import type { CombatInput, CombatOptions, CombatResult } from './types.ts';
 
 export function resolveCombat(input: CombatInput, opts: CombatOptions = {}): CombatResult {
   const sim = createSim(input, opts.log !== false);
@@ -60,7 +50,7 @@ function runTicks(sim: Sim): End {
   }
 }
 
-/** One tick. Steps 2 (traits) and 7 (Deadline) are not part of the skeleton. */
+/** One tick. Step 2 (timed traits) arrives with E007. */
 function tick(sim: Sim): End | undefined {
   sim.t += TICK_MS; // 1
   tickStatuses(sim);
@@ -71,22 +61,6 @@ function tick(sim: Sim): End | undefined {
     return WIN;
   }
   enemiesAct(sim); // 6
-  resolveDead(sim); // 8
-  if (sim.enemies.length === 0) return WIN;
-  if (sim.agent.trust <= 0) return LOSS_TRUST;
-  return overtime(sim);
-}
-
-/** Death checks: resolves enemies at Severity <= 0, front to back. */
-function resolveDead(sim: Sim): void {
-  for (const enemy of sim.enemies) {
-    if (enemy.sev <= 0)
-      emit(sim, { kind: 'resolved', src: enemyRef(enemy), d: { by: enemy.killedBy } });
-  }
-  sim.enemies = sim.enemies.filter((e) => e.sev > 0);
-}
-
-// TODO(T023): Deadline overtime damage; until then only the hard cap ends a stalled fight.
-function overtime(sim: Sim): End | undefined {
-  return sim.t >= sim.deadlineMs + OVERTIME_CAP_MS ? TIMEOUT : undefined;
+  deadlineDamage(sim); // 7
+  return checkEnd(sim); // 8, then the timeout cap
 }

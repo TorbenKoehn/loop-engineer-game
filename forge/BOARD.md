@@ -16,7 +16,7 @@ generated: true
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
 | [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 8/8 |
-| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 6/8 |
+| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 7/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 1/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
@@ -115,11 +115,10 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T041](epics/m1/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
 | [T055](epics/m1/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
 
@@ -131,9 +130,9 @@ _none_
 
 _none_
 
-## Done (30)
+## Done (31)
 
-_Showing the last 20 of 30 done tasks._
+_Showing the last 20 of 31 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -145,6 +144,7 @@ _Showing the last 20 of 30 done tasks._
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
 | [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
+| [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
 | [T021](epics/m1/E002-combat-simulation-core/T021-enemy-intent-cycles-action-verbs-and-pha.md) | Enemy intent cycles, action verbs and phase scaling | E002 | p0 | opus | M |
 | [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
@@ -156,6 +156,5 @@ _Showing the last 20 of 30 done tasks._
 | [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
 | [T013](epics/m1/E005-vertical-slice-content/T013-m1-skills-and-memories-data.md) | M1 skills and memories data | E005 | p1 | sonnet | S |
 | [T012](epics/m1/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
-| [T011](epics/m1/E005-vertical-slice-content/T011-harness-and-system-prompt-data-for-m1.md) | Harness and system prompt data for M1 | E005 | p1 | sonnet | S |
 
 ## Cancelled (0)

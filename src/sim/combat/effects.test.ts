@@ -22,14 +22,15 @@ describe('guard effect', () => {
       target: 'self',
       effects: [{ do: 'guard', v: [6, 9, 13] }],
     });
-    const result = resolveCombat(fight({ tools: [lint], version: 2, deadlineMs: 1000 }));
+    const result = resolveCombat(fight({ tools: [lint], version: 2 }));
     const guards = ofKind(result.events, 'guard');
     expect(guards[0]).toMatchObject({ t: 3000, src: 't0', dst: 'a', v: 9, d: { total: 9 } });
     expect(guards[1]).toMatchObject({ t: 6000, v: 9, d: { total: 16 } });
     // Typo's Nitpick (hit 2) at 3000 ms lands on the fresh Guardrails, not on Trust.
     const hits = ofKind(result.events, 'damage');
     expect(hits[0]).toMatchObject({ t: 3000, dst: 'a', v: 0, d: { guard: 2, sev: 40 } });
-    expect(result.stats.damageTaken).toBe(0);
+    // Only Deadline damage (1 + ... + 8, until it resolves the Typo) bypasses Guardrails.
+    expect(result.stats.damageTaken).toBe(36);
   });
 
   it('applies % mods and caps at max Trust or max Severity', () => {
@@ -75,7 +76,7 @@ describe('heal effect', () => {
   it('enemy hits drain Guardrails before Trust over a fight', () => {
     const lint = makeTool({ cooldownMs: 1000, target: 'self', effects: [{ do: 'guard', v: 6 }] });
     const enemies = [makeEnemy({ cycle: [hitIntent(20, 3000)] })];
-    const result = resolveCombat(fight({ tools: [lint], enemies, deadlineMs: 1000 }));
+    const result = resolveCombat(fight({ tools: [lint], enemies }));
     // Guardrails 18 at 3000 ms absorb 18 of 20.
     const [first] = ofKind(result.events, 'damage');
     expect(first).toMatchObject({ t: 3000, v: 2, d: { guard: 18, sev: 38 } });

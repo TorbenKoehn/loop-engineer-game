@@ -24,6 +24,7 @@ export interface Amount {
   readonly amount: number;
   /** Mod ids in application order: flat adds first, then % mods. */
   readonly why: readonly string[];
+  readonly bypass?: boolean; // Deadline damage: skips Guardrails and armor (E007).
 }
 
 /** `max(1, floor(((base + flat) * (100 + pct) + 50) / 100))`; also for guard and heal. */
@@ -43,7 +44,7 @@ export function computeAmount(base: number, mods: readonly Mod[] = []): Amount {
 
 /** Lands an amount on a unit and emits `damage`; returns the Trust or Severity lost. */
 export function dealDamage(sim: Sim, src: Ref, unit: Unit, a: Amount): number {
-  const guard = Math.min(unit.guard, a.amount);
+  const guard = a.bypass ? 0 : Math.min(unit.guard, a.amount);
   const dealt = Math.min(hpOf(unit), a.amount - guard);
   unit.guard -= guard;
   setHp(unit, hpOf(unit) - dealt);
