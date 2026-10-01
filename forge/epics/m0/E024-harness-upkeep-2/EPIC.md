@@ -1,10 +1,10 @@
 ---
 id: E024
 title: Harness upkeep 2
-summary: "Retro follow-ups from RT003 on: code folders under their dir_files budget, and companion docs flagged by tooling instead of piling up as review follow-ups."
-keywords: ["epic", "harness", "upkeep", "dir-files", "doc-drift", "retro"]
+summary: "Retro follow-ups from RT003 and RT004: e2e in the check gate, forge bookkeeping lint, a commit gate, a fairer harness:diff with companion docs, and code folders below dir_files warn_at."
+keywords: ["epic", "harness", "upkeep", "dir-files", "e2e", "harness-diff", "retro"]
 type: epic
-status: backlog
+status: ready
 priority: p1
 milestone: m0
 updated: 2026-10-01
@@ -15,27 +15,31 @@ related: ["../../../retros/RT003-third-retro-e003-e004-e006-run-and-ui-ba.md", "
 
 ## Goal
 
-Continues E023 (full at `tasks_per_epic`) with retro follow-ups. After this epic,
-feature tasks no longer hit `dir_files` errors in `src/run` and `src/sim/combat`, and a
-staged diff names the docs whose `related_code` it touches, so doc drift is caught
-before review. Sources: RT003 proposals P1 and P2.
+Continues E023 (full at `tasks_per_epic`) with retro follow-ups. After this epic
+`npm run check` runs build and e2e, lint catches status, AC and Log mismatches before the
+commit, `harness:diff` reports CSS separately, skips generated files and names companion
+docs, and feature tasks no longer hit `dir_files` warnings in crowded `src/` folders.
+Sources: RT003 P1, P2; RT004 P1-P4.
 
 ## Scope
 
-- Regroup `src/run` and `src/sim/combat` into topic subfolders, without behaviour change.
-- `harness:diff` (T095) lists companion docs for the staged diff.
-- Later retro proposals (RT004 on) while this epic has room.
+- T102 check runs build and e2e (RT004 P1), T103 forge lint (RT004 P2), T107 commit gate (RT004 P3).
+- T104 CSS and generated files in `harness:diff` (RT004 P4), T106 companion docs (RT003 P2).
+- T105 regroup eight crowded `src/` folders (RT003 P1, widened); T108 split `apply`/`legalActions`.
+- The `tools/harness/gen/index.ts` length warnings are covered by T088 (E023), not here.
 
 ## Out of Scope
 
-- Changing budget values in `harness.config.json`.
-- Feature work in `src/`, other than the folder moves above.
+- Changing budget values in `harness.config.json` (a new `task_css_lines` entry is in scope).
+- Feature work in `src/`, other than the folder moves and the T108 refactor.
 
 ## Definition of Done
 
-- [ ] `npm run harness:lint` shows no `dir_files` warning for `src/run` or `src/sim/combat`
-- [ ] `npm run harness:diff` prints the companion docs of a staged diff (vitest case)
-- [ ] `npm run check` exits 0
+- [ ] `npm run harness:lint` shows no `dir_files` warning for the eight folders named in T105
+- [ ] `npm run harness:diff` prints `css=` and `companion:` lines (vitest cases)
+- [ ] `npm run check` runs build and e2e and exits 0
+- [ ] `git commit` through the Bash tool is blocked while harness lint has errors
 
-Proposals from RT003 (P1, P2) and RT004 (P1-P4, incl. the e2e gate and the done-task
-AC lint the orchestrator raised) are listed in each retro's Actions.
+## Order
+
+T102 and T103 first (p0), then T104, then T105 alone, then T108. T106 after T104; T107 any time.

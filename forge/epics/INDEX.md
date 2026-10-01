@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics"
 summary: "Index of forge/epics: 0 files, 4 subdirectories"
-keywords: ["agents-md", "boss", "accessibility", "achievements", "arch-test", "art", "ascension", "ascii-art"]
+keywords: ["agents-md", "boss", "acceptance-criteria", "accessibility", "achievements", "apply", "arch-test", "art"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,7 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [m0/](m0/INDEX.md) | Index of forge/epics/m0: 0 files, 3 subdirectories | biome, determinism, harness, arch-test, budgets, code-budgets, dir-files, doc-drift |
+| [m0/](m0/INDEX.md) | Index of forge/epics/m0: 0 files, 3 subdirectories | biome, determinism, acceptance-criteria, apply, arch-test, bookkeeping, budgets, code-budgets |
 | [m1/](m1/INDEX.md) | Index of forge/epics/m1: 0 files, 10 subdirectories | agents-md, boss, breakpoints, combat, dsl, map, run-end, shop |
 | [m2/](m2/INDEX.md) | Index of forge/epics/m2: 0 files, 7 subdirectories | m2, content, achievements, agents-md, ascension, balance, boss, bots |
 | [m3/](m3/INDEX.md) | Index of forge/epics/m3: 0 files, 4 subdirectories | m3, accessibility, art, ascii-art, audio, copy-edit, juice, logo |

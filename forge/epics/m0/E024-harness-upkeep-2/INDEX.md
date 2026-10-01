@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m0/E024-harness-upkeep-2"
-summary: "Index of forge/epics/m0/E024-harness-upkeep-2: 1 files, 0 subdirectories"
-keywords: ["dir-files", "doc-drift", "epic", "harness", "retro", "upkeep"]
+summary: "Index of forge/epics/m0/E024-harness-upkeep-2: 8 files, 0 subdirectories"
+keywords: ["harness-diff", "bookkeeping", "dir-files", "e2e", "gate", "lint", "acceptance-criteria", "apply"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,4 +15,11 @@ generated: true
 
 | File | Title | Summary | Keywords |
 |---|---|---|---|
-| [EPIC.md](EPIC.md) | Harness upkeep 2 | Retro follow-ups from RT003 on: code folders under their dir_files budget, and companion docs flagged by tooling instead of piling up as review follow-ups. | epic, harness, upkeep, dir-files, doc-drift, retro |
+| [EPIC.md](EPIC.md) | Harness upkeep 2 | Retro follow-ups from RT003 and RT004: e2e in the check gate, forge bookkeeping lint, a commit gate, a fairer harness:diff with companion docs, and code folders below dir_files warn_at. | epic, harness, upkeep, dir-files, e2e, harness-diff, retro |
+| [T102-npm-run-check-runs-build-and-e2e.md](T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | npm run check runs vite build and the Playwright suite after vitest when the working tree changes src/ or tests/e2e/, else prints a skip reason; a failing spec fails check. | check, e2e, playwright, build, gate, verification |
+| [T103-forge-lint-ties-status-ac-boxes-and-log.md](T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | Three forge integrity errors: a done task with an unchecked AC, a checked AC in review or done without an `AC<n> verified` Log line, and a `done (R###)` Log line on a task not done. | forge, lint, integrity, acceptance-criteria, log, status, bookkeeping |
+| [T104-harness-diff-counts-css-and-skips-genera.md](T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | harness:diff prints production, css and total; stylesheets leave production under a new task_css_lines cap of 300; golden fixtures, *.gen.ts and generated indexes leave both numbers. | harness-diff, css, task_css_lines, generated, goldens, diff-budget |
+| [T105-regroup-crowded-src-folders-below-dir-fi.md](T105-regroup-crowded-src-folders-below-dir-fi.md) | Regroup crowded src folders below dir_files warn_at | Mechanical git mv of files out of eight crowded src folders into topic subfolders or siblings, fixing only import paths and doc references, so no dir_files or dir_subdirs warning remains. | dir-files, restructure, git-mv, folders, imports, src-run, sim-combat |
+| [T106-harness-diff-lists-companion-docs.md](T106-harness-diff-lists-companion-docs.md) | harness:diff lists companion docs | harness:diff prints `companion: <doc>` for each unstaged doc whose related_code names a staged file, still exiting 0; forge-review step 3 reads the line. | harness-diff, companion-docs, related-code, doc-drift, review |
+| [T107-commit-gate-runs-harness-lint.md](T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | A PreToolUse hook on Bash `git commit` runs the harness lint and blocks the commit on any error; a clean tree commits. | hook, pretooluse, git-commit, lint, gate, bookkeeping |
+| [T108-split-run-apply-and-legalactions-under-f.md](T108-split-run-apply-and-legalactions-under-f.md) | Split run apply and legalActions under fn_lines | apply() and legalActions() in the run reducer drop below the fn_lines warn_at of 30 via handler tables, with unchanged behaviour, tests and goldens. | apply, legalActions, fn-lines, run-reducer, refactor, dispatch |
