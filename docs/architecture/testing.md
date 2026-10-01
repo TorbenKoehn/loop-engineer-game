@@ -113,6 +113,18 @@ rates, fight-length median/p90 per encounter type, Trust lost per fight, credits
 curve, compactions per fight. CI fails when a milestone target is violated; targets live
 in `tools/balance/targets.json`, copied from the GDD.
 
+CLI (`npm run balance -- <args>`, T072): `--runs` counts per harness; every harness plays
+seeds `seed-from .. seed-from + runs - 1`. `--harness all|<id>`, `--bot random|greedy`,
+`--phase 1` (M1 runs end at the Phase-1 boss). Without `--out`/`--md` the Markdown goes to
+stdout. `batch.ts` records each run from the states the bot sees; `report.ts` folds the
+records into key-sorted JSON (byte-identical for the same arguments; runtime goes to stderr
+only); `markdown.ts` renders it. Definitions: fight classes normal (easy and hard pools),
+elite, boss; length is the fight's `endT`; median/p90 are nearest-rank; win rates carry a
+95% Wilson interval; pick rate is picks per offer (reward cards, shop offers once per
+visit); win-when-picked counts runs that picked the item; winning-loadout share counts the
+equipped tools at run end, starting tools included; the credits curve is the mean credits
+on the map after n nodes. Archetype win rates are not reported yet.
+
 Speed: ≥ 200 full runs per second per core (logs off). 1000 runs per harness in CI.
 
 ## Playwright

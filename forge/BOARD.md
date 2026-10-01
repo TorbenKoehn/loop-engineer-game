@@ -24,7 +24,7 @@ generated: true
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 5/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 5/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 4/8 |
-| [E010](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 1/8 |
+| [E010](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 2/8 |
 | [E011](epics/m1/E011-juice-audio-settings-and-tutorial/EPIC.md) | Juice, audio, settings and tutorial | backlog | p1 | 0/7 |
 | [E012](epics/m2/E012-m2-phases-2-and-3-and-the-full-run/EPIC.md) | M2 Phases 2 and 3 and the full run | backlog | p2 | 0/0 |
 | [E013](epics/m2/E013-m2-swarm-orchestrator-and-yolo-mode/EPIC.md) | M2 Swarm Orchestrator and YOLO Mode | backlog | p2 | 0/0 |
@@ -38,9 +38,9 @@ generated: true
 | [E021](epics/m3/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
-| [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
+| [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 0/7 |
 
-## Backlog (31)
+## Backlog (33)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -56,6 +56,7 @@ generated: true
 | [T077](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T077-m1-balance-tuning-to-exit-targets.md) | M1 balance tuning to exit targets | E010 | p1 | opus | M |
 | [T078](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T078-playwright-full-run-smoke-and-save-round.md) | Playwright full-run smoke and save round trip | E010 | p1 | opus | M |
 | [T084](epics/m1/E011-juice-audio-settings-and-tutorial/T084-tutorial-first-run-and-scripted-fight-pa.md) | Tutorial first run and scripted fight pauses | E011 | p1 | opus | M |
+| [T106](epics/m0/E024-harness-upkeep-2/T106-harness-diff-lists-companion-docs.md) | harness:diff lists companion docs | E024 | p1 | sonnet | S |
 | [T030](epics/m1/E003-context-window-mechanic/T030-context-scaled-effects-and-window-modifi.md) | Context-scaled effects and window modifiers | E003 | p2 | opus | S |
 | [T031](epics/m1/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
@@ -75,20 +76,25 @@ generated: true
 | [T090](epics/m0/E023-harness-upkeep/T090-split-tsconfig-into-app-and-tools-projec.md) | Split tsconfig into app and tools projects | E023 | p2 | opus | M |
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
+| [T108](epics/m0/E024-harness-upkeep-2/T108-split-run-apply-and-legalactions-under-f.md) | Split run apply and legalActions under fn_lines | E024 | p2 | sonnet | S |
 
-## Ready (3)
+## Ready (8)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T102](epics/m0/E024-harness-upkeep-2/T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | E024 | p0 | sonnet | S |
+| [T103](epics/m0/E024-harness-upkeep-2/T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | E024 | p0 | sonnet | S |
+| [T104](epics/m0/E024-harness-upkeep-2/T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | E024 | p1 | opus | M |
+| [T105](epics/m0/E024-harness-upkeep-2/T105-regroup-crowded-src-folders-below-dir-fi.md) | Regroup crowded src folders below dir_files warn_at | E024 | p1 | opus | M |
+| [T107](epics/m0/E024-harness-upkeep-2/T107-commit-gate-runs-harness-lint.md) | Commit gate runs harness lint | E024 | p1 | sonnet | S |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T072](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
 | [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 
 ## Review (0/3)
@@ -99,9 +105,9 @@ _none_
 
 _none_
 
-## Done (64)
+## Done (65)
 
-_Showing the last 20 of 64 done tasks._
+_Showing the last 20 of 65 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -115,6 +121,7 @@ _Showing the last 20 of 64 done tasks._
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T072](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T072-balance-cli-batch-runs-and-report.md) | Balance CLI batch runs and report | E010 | p1 | opus | M |
 | [T071](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
 | [T066](epics/m1/E009-run-screens-and-build-panel/T066-package-registry-shop-screen.md) | Package Registry shop screen | E009 | p2 | sonnet | S |
 | [T065](epics/m1/E009-run-screens-and-build-panel/T065-reward-and-discard-screens.md) | Reward and discard screens | E009 | p2 | sonnet | S |
@@ -124,6 +131,5 @@ _Showing the last 20 of 64 done tasks._
 | [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
 | [T055](epics/m1/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
 | [T052](epics/m1/E008-run-end-meta-state-and-saves/T052-save-migration-framework-and-frozen-fixt.md) | Save migration framework and frozen fixtures | E008 | p2 | sonnet | S |
-| [T051](epics/m1/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
 
 ## Cancelled (1)

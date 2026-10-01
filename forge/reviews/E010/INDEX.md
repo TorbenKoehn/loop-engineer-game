@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E010"
-summary: "Index of forge/reviews/E010: 1 files, 0 subdirectories"
-keywords: ["bots", "greedy", "random", "review"]
+summary: "Index of forge/reviews/E010: 2 files, 0 subdirectories"
+keywords: ["review", "balance", "batch", "bots", "greedy", "random", "report", "runs"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,3 +16,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [R072-T071.md](R072-T071.md) | Review of T071: Random and greedy bots | Review of T071 (approved) | review, random, greedy, bots |
+| [R074-T072.md](R074-T072.md) | Review of T072: Balance CLI batch runs and report | Review of T072 (approved) | review, balance, batch, runs, report |

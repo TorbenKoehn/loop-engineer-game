@@ -21,6 +21,7 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "golden:update": "node tools/golden/update.ts",
+    "balance": "node tools/balance/cli.ts",
     "content:index": "node tools/content/index.ts"
   },
   "devDependencies": {
