@@ -16,7 +16,7 @@ generated: true
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
 | [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 7/8 |
-| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 4/8 |
+| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 5/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 7/8 |
@@ -121,11 +121,10 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T021](epics/m1/E002-combat-simulation-core/T021-enemy-intent-cycles-action-verbs-and-pha.md) | Enemy intent cycles, action verbs and phase scaling | E002 | p0 | opus | M |
 | [T098](epics/m1/E006-ui-shell-and-combat-replay/T098-dev-combat-sandbox-page.md) | Dev combat sandbox page | E006 | p0 | opus | M |
 | [T016](epics/m1/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
 
@@ -137,9 +136,9 @@ _none_
 
 _none_
 
-## Done (23)
+## Done (24)
 
-_Showing the last 20 of 23 done tasks._
+_Showing the last 20 of 24 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -148,6 +147,7 @@ _Showing the last 20 of 23 done tasks._
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T021](epics/m1/E002-combat-simulation-core/T021-enemy-intent-cycles-action-verbs-and-pha.md) | Enemy intent cycles, action verbs and phase scaling | E002 | p0 | opus | M |
 | [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
 | [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T018](epics/m1/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
@@ -162,6 +162,5 @@ _Showing the last 20 of 23 done tasks._
 | [T008](epics/m0/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
 | [T007](epics/m0/E001-game-foundation/T007-architecture-import-rule-test.md) | Architecture import-rule test | E001 | p0 | sonnet | S |
 | [T006](epics/m0/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
-| [T004](epics/m0/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 
 ## Cancelled (0)

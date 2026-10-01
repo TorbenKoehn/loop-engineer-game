@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E002"
-summary: "Index of forge/reviews/E002: 5 files, 0 subdirectories"
-keywords: ["review", "combat", "enemy", "formula", "skeleton", "tool", "walking", "charge"]
+summary: "Index of forge/reviews/E002: 6 files, 0 subdirectories"
+keywords: ["review", "enemy", "combat", "formula", "skeleton", "tool", "walking", "action"]
 type: index
 status: active
 updated: 2026-10-01
@@ -20,3 +20,4 @@ generated: true
 | [R015-T018.md](R015-T018.md) | Review of T018: Combat skeleton, one tool vs one enemy | Review of T018 (approved) | review, combat, walking, skeleton, tool, enemy |
 | [R019-T019.md](R019-T019.md) | Review of T019: Targeting, damage formula and Guardrails | Review of T019 (approved) | review, targeting, damage, formula, guardrails |
 | [R025-T020.md](R025-T020.md) | Review of T020: Statuses and charge-rate formula | Review of T020 (approved) | review, statuses, charge, rate, formula |
+| [R028-T021.md](R028-T021.md) | Review of T021: Enemy intent cycles, action verbs and phase… | Review of T021 (approved) | review, enemy, intent, cycles, action, verbs |

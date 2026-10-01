@@ -1,7 +1,8 @@
 // resolveCombat: input -> fixed 50 ms ticks in the combat tick order -> result and event log.
 // Rules: docs/game/systems/combat.md "Tick order"; API: docs/architecture/sim-core.md.
 import type { ModelStats } from '../../content/types/index.ts';
-import { announceIntent, enemiesAct } from './enemies.ts';
+import { enemiesAct } from './enemy/act.ts';
+import { announceIntent } from './enemy/cycle.ts';
 import { fireTools } from './fire.ts';
 import { createSim, emit, enemyRef, type Sim, TICK_MS } from './state.ts';
 import { chargeAll } from './status/charge.ts';

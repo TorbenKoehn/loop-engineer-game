@@ -31,6 +31,8 @@ export interface AgentSetup {
 export interface EncounterSetup {
   /** Front to back. */
   readonly enemies: readonly EnemyDef[];
+  /** Defs that intents may spawn without being in the starting line, e.g. Side Quest. */
+  readonly spawnDefs?: readonly EnemyDef[];
   readonly deadlineMs: number;
   readonly phase: 1 | 2 | 3;
   readonly loop: number;

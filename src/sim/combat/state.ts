@@ -3,6 +3,7 @@
 import type { EnemyDef, Status, ToolDef, Value } from '../../content/types/index.ts';
 import type { CombatEvent, Ref } from '../events.ts';
 import { createRng, type Rng } from '../rng.ts';
+import { type Phase, scaleSev } from './enemy/phase.ts';
 import type { CombatInput, Version } from './types.ts';
 
 export const TICK_MS = 50;
@@ -38,6 +39,8 @@ export interface EnemyRt {
   statuses: StatusRt[];
   /** Ref of the source that dealt the final hit. */
   killedBy: Ref;
+  /** Successful spawns per intent id this fight (spawn `perFight` cap). */
+  readonly spawned: Record<string, number>;
 }
 
 export interface AgentRt {
@@ -60,6 +63,12 @@ export interface Sim {
   readonly events: CombatEvent[];
   readonly rng: Rng;
   readonly deadlineMs: number;
+  /** Encounter phase; scales enemies from earlier home phases. */
+  readonly phase: Phase;
+  /** Enemy defs that may enter the fight: the starting line, then spawnable defs. */
+  readonly defs: readonly EnemyDef[];
+  /** uid of the next enemy to enter the fight. */
+  nextUid: number;
   readonly agent: AgentRt;
   /** Index 0 = front. */
   enemies: EnemyRt[];
@@ -74,6 +83,9 @@ export function createSim(input: CombatInput, log: boolean): Sim {
     events: [],
     rng: createRng(input.seed),
     deadlineMs: encounter.deadlineMs,
+    phase: encounter.phase,
+    defs: [...encounter.enemies, ...(encounter.spawnDefs ?? [])],
+    nextUid: encounter.enemies.length + 1,
     agent: {
       trust: agent.trust,
       maxTrust: agent.maxTrust,
@@ -83,22 +95,26 @@ export function createSim(input: CombatInput, log: boolean): Sim {
       tools: agent.tools.map((s, slot) => ({ ...s, slot, progress: 0, statuses: [], dealt: 0 })),
       taken: 0,
     },
-    enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1)),
+    enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1, encounter.phase)),
   };
 }
 
-/** A fresh enemy at full Severity on its first intent. */
-export const createEnemy = (def: EnemyDef, uid: number): EnemyRt => ({
-  uid,
-  def,
-  sev: def.sev,
-  maxSev: def.sev,
-  guard: 0,
-  intentIx: 0,
-  progress: 0,
-  statuses: [],
-  killedBy: 'sys',
-});
+/** A fresh enemy at full, phase-scaled Severity on its first intent. */
+export function createEnemy(def: EnemyDef, uid: number, phase: Phase): EnemyRt {
+  const sev = scaleSev(def, phase);
+  return {
+    uid,
+    def,
+    sev,
+    maxSev: sev,
+    guard: 0,
+    intentIx: 0,
+    progress: 0,
+    statuses: [],
+    killedBy: 'sys',
+    spawned: {},
+  };
+}
 
 type Unstamped<E> = E extends CombatEvent ? Omit<E, 'seq' | 't'> : never;
 export type NewEvent = Unstamped<CombatEvent>;
