@@ -5,7 +5,7 @@ title: Playwright smoke test setup
 summary: "Set up @playwright/test with Chromium and a smoke test that loads the app and asserts visible text and roles, plus an e2e script."
 keywords: ["playwright", "e2e", "smoke", "testing", "chromium"]
 type: task
-status: ready
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -45,3 +45,4 @@ Add Playwright with a single smoke test against the Vite app. It asserts text an
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

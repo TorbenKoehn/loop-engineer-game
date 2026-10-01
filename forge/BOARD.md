@@ -39,14 +39,13 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
-## Backlog (65)
+## Backlog (64)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T025](epics/m1/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
 | [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
-| [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
 | [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
 | [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
@@ -109,21 +108,23 @@ generated: true
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 
-## Ready (7)
+## Ready (5)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T005](epics/m0/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
-| [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
 | [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p1 | opus | M |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
+| [T005](epics/m0/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
+| [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
 
 ## Review (0/3)
 

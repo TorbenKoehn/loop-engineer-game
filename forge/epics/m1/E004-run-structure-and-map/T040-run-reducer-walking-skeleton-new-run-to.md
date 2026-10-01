@@ -5,7 +5,7 @@ title: "Run reducer walking skeleton: new run to map"
 summary: "RunState, the Action union, newRun, apply with typed errors, legalActions and replay for the setup, promptPick and map modes, with a stub map."
 keywords: ["run", "reducer", "actions", "run-state", "replay", "walking-skeleton"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -51,3 +51,4 @@ Establish the one dispatch path every consumer shares: a run is a fold of serial
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

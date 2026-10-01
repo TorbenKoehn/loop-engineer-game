@@ -5,7 +5,7 @@ title: Pipes and one-shot primes
 summary: "Pipe charge transfer to the right neighbour with same-step firing and chain steps, the was-piped flag, and prime effects consumed on the next matching activation."
 keywords: ["sim", "pipes", "primes", "tool-order", "chain"]
 type: task
-status: ready
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Tool order matters: pipes push charge right and primes buff the next matching ac
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
