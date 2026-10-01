@@ -87,6 +87,26 @@ Bots (pure functions `(state, legal) -> Action`, seeded by the run seed):
 | `greedy` | Scores options with a fixed heuristic (damage per weight, upgrades first, heal below 50%), interest-aware; the reference bot for win-rate targets |
 | `expert` | Greedy + 1-fight lookahead: simulates the next encounter with each candidate loadout change (≤ 8 candidates) |
 
+Bots live in `tools/balance/bots/`; randomness comes only from `botRng`, a fork of the run
+seed labelled with the decision point (mode, position, agent, pending), so a seed fixes
+the run. The driver `playRun({ seed, harness }, bot)` (`tools/balance/run.ts`) plays one
+run on a fresh profile with `legalActions` and `apply` until `runEnd`; an illegal action,
+an empty legal list or more than 2000 actions throws. It returns the end state and the
+accepted actions, which `replay` rebuilds. Everything runs on plain `node` (ADR-006).
+
+Greedy heuristic (fixed; ties break by legal order; B = baseline from
+[context](../game/systems/context.md#quantities)):
+
+| Mode | Choice |
+|---|---|
+| Prompt pick | Lightest system prompt (most context room) |
+| Map | Task, Free Tier > Registry > Idle Cycle, Standup > Critical Bug; below 50% Trust Idle Cycle first and Task, Critical Bug last; never abandons |
+| Reward | Score: owned tool below v3 (upgrade) 100 > new tool that equips with B ≤ 60% of W 50 + damage per second per weight > skill or memory that equips 40 + rarity; 0 (stash only) skips |
+| Shop | Reward score − 15 per credit of interest the price costs; best positive buy, else leave; no rerolls or sells |
+| Rest | Heal below 50% Trust, else upgrade the tool with the largest damage-per-weight gain |
+| Event | Sum of outcome scores (Trust counts double below 50%) − half the credit cost |
+| Discard | Drop the lowest-scored of the gained item and the equipped items of its kind |
+
 Report: win rate per harness and prompt (with 95% interval), phase reached histogram,
 pick rate and win-when-picked per item, winning-loadout share per tool, archetype win
 rates, fight-length median/p90 per encounter type, Trust lost per fight, credits

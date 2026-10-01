@@ -1,6 +1,6 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 0 files, 10 subdirectories"
+summary: "Index of forge/reviews: 0 files, 11 subdirectories"
 keywords: ["review", "harness", "biome", "combat", "enemy", "screen", "action", "agents"]
 type: index
 status: active
@@ -24,4 +24,5 @@ generated: true
 | [E007/](E007/INDEX.md) | Index of forge/reviews/E007: 4 files, 0 subdirectories | review, traits, conditions, effects, enemy, engine, grow, harness |
 | [E008/](E008/INDEX.md) | Index of forge/reviews/E008: 5 files, 0 subdirectories | review, save, meta, agents, codec, export, fixtures, framework |
 | [E009/](E009/INDEX.md) | Index of forge/reviews/E009: 5 files, 0 subdirectories | review, screen, package, registry, shop, discard, harness, nodes |
+| [E010/](E010/INDEX.md) | Index of forge/reviews/E010: 1 files, 0 subdirectories | bots, greedy, random, review |
 | [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 6 files, 0 subdirectories | review, determinism, epics, harness, milestone, batch, biome, calls |

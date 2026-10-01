@@ -45,7 +45,7 @@ Meet M1 exit criteria 1, 2 and 5 with evidence from the balance CLI, keeping the
 
 ## Notes
 
-- Orchestrator 2026-10-01: after T033 (passive mods live) only ~1 in 30 seeds wins the Phase-1 boss with default picks - M1 target is 35-65% bot win rate (vertical-slice.md). Expect significant tuning.
+- Orchestrator 2026-10-01: T071 measured greedy-bot win rates of ~80% (Terminal Purist) and ~90% (IDE Companion) on 100 seeds each - far above the 35-65% M1 target; random bot ~0%. The earlier "1 in 30" note was a naive default-pick walk.
 
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
