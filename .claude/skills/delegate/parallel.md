@@ -1,7 +1,10 @@
 # Parallel writers with worktrees
 
 Use only when two or three `ready` tasks have disjoint Context paths and no
-`depends_on` between them. Otherwise run them one after another.
+`depends_on` between them. Otherwise run them one after another. At most one of them
+may touch shared root config (`package.json` and lockfile, `biome.jsonc`,
+`vite.config.ts`, `tsconfig.json`, `harness.config.json`): patches on these conflict
+(RT001). A task that adds a dependency runs alone.
 
 ## Start
 

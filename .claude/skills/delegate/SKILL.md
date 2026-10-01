@@ -46,7 +46,9 @@ Reviewer and planner prompts use the short forms in the same file.
 
 Agent tool: `subagent_type` = agent name, `description` = `T###: <title>`, the prompt,
 optional `model`. Sequential work runs in the foreground; parallel writers are spawned
-together in one message with `isolation: worktree`.
+together in one message with `isolation: worktree`. Agents load at session start: one
+added or changed in this session is not spawnable by name until a restart, so use
+`general-purpose` told to read and follow `.claude/agents/<name>.md` first.
 
 ## 5. Verify the result
 

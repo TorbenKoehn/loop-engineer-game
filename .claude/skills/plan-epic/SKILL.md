@@ -33,6 +33,10 @@ Critical rules:
    - S: one concern, within `route_sonnet_max_diff_lines` and `route_sonnet_max_files`.
    - M: within `task_diff_lines` and `task_files_changed`.
    - Bigger, or more than `acceptance_criteria_max` AC: split again.
+   - Size by production lines (budgets.md#measuring-task-diffs); aim M at ~300. Split
+     these: a type module plus its consumers (T009), one template per kind of a union
+     (T010), API types plus the loop using them (T018), adopting a tool or rule plus
+     fixing every existing finding (T002).
 5. **Create each task:**
    `npm run harness:new -- task --epic E### --title "<outcome>" --size S --model sonnet --priority p2`.
    Then fill:

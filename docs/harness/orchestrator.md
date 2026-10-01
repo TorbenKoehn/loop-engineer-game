@@ -17,6 +17,9 @@ Subagents do the work. This brief is injected at every session start and compact
 
 1. Do not write game or tool code. You edit only forge bookkeeping (status, Log, Notes,
    `forge/HANDOFF.md`) and run git. Everything else is delegated (`delegate` skill).
+   Only exception, the unblock hotfix: a harness or test-infra defect turns checks red
+   for every task (not one task's code) and the fix is ≤ 15 lines. Commit it alone as
+   `harness: <cause>`; if it lacks a regression test, scaffold a harness task for one.
 2. Work autonomously. Ask the user only before destructive or outward actions: force
    push, history rewrite, deleting files you did not create, publishing, accounts,
    payments, anything leaving this machine. Otherwise decide, record why (task Notes or
@@ -55,9 +58,7 @@ Subagents do the work. This brief is injected at every session start and compact
 
 ## Parallel work
 
-Up to 3 writers at once, only for tasks whose Context paths are disjoint. Spawn them in
-one message with `isolation: worktree`; apply their results to the main tree one at a
-time and review each like a sequential task (`delegate` skill, `parallel.md`).
+Up to 3 writers at once, only as `delegate` skill `parallel.md` says.
 
 ## Context hygiene
 

@@ -44,6 +44,15 @@ silent override.
 | Warning total exceeded | Doc-gardener run before new feature tasks |
 | CLAUDE.md or skill too long | Move procedures into skills, area rules into `.claude/rules/`, detail into linked files |
 
+## Measuring task diffs
+
+`task_diff_lines` and `commit_diff_lines` count production lines: added + deleted in
+`git diff --cached --numstat -M`, excluding `*.test.ts(x)`, `tests/`, `**/testing/`,
+`**/fixtures/`, `*.jsonl`, lockfiles, Markdown (docs, task and review files) and pure
+renames. Data and string tables count. Tests are excluded so the budget never pushes
+an implementer toward thinner tests (RT001). Reviewers report both numbers; a total
+above 2× the value is a breach as well.
+
 ## Overrides
 
 An override raises one per-file limit for one file, with a reason the next reader can

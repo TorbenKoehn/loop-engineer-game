@@ -31,7 +31,8 @@ Critical rules:
    state (sim code must stay seeded and render-free); tests actually asserting the AC;
    scope creep beyond Out of scope; weakened tests, AC or lint; generated files edited;
    budget breaches and unjustified overrides; docs not updated for changed behaviour;
-   untracked TODOs.
+   untracked TODOs. Diff size is production lines, not the raw total
+   (`docs/harness/budgets.md#measuring-task-diffs`); state both in the Summary.
 6. **Rate each finding** (table below). When unsure between two levels, pick the lower.
 7. **Write the review file**:
    `npm run harness:new -- review --task T### --verdict <approved|changes-requested>`,

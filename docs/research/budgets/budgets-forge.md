@@ -38,7 +38,7 @@ collapses on large diffs, for agents as for humans.
 
 | ID | Value | Sev | Measure | On breach | Rationale |
 |---|---|---|---|---|---|
-| `task_diff_lines` | 400 (warn 200) | error | `git diff --numstat base..HEAD`, added + deleted lines, excluding lockfiles, generated INDEX/BOARD and snapshots | Decompose: land the first slice, create follow-up tasks | SmartBear/Cisco (2,500 reviews, 3.2M LOC): review 200–400 LOC at a time, because defect detection drops sharply above 400 ([SmartBear][sb]). Google: about 100 lines is reasonable, 1000 is too large ([Google small CLs][g-cl]). LinearB: idle time doubles from ≤100 to 200 lines ([LinearB][lb]). |
+| `task_diff_lines` | 400 (warn 200) | error | Production lines: added + deleted, excluding tests, fixtures, Markdown, lockfiles, renames (RT001; harness budgets.md) | Decompose: land the first slice, create follow-up tasks | SmartBear/Cisco (2,500 reviews, 3.2M LOC): review 200–400 LOC at a time, because defect detection drops sharply above 400 ([SmartBear][sb]). Google: about 100 lines is reasonable, 1000 is too large ([Google small CLs][g-cl]). LinearB: idle time doubles from ≤100 to 200 lines ([LinearB][lb]). |
 | `task_files_changed` | 15 | warn | Files in the diff | Split by layer | "A 200-line change … spread across 50 files would usually be too large" ([Google][g-cl]). |
 | `commit_diff_lines` | 400 | warn | Per commit, same exclusions | Commit in smaller steps | Small commits make rewinds and bisection cheap. |
 | `commit_subject_chars` | 72 | error | First line of the commit message (commit-msg hook) | Rephrase | Git convention: 50 ideal, 72 hard limit ([Beams][beams]). |

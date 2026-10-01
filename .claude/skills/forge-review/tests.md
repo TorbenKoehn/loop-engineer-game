@@ -29,3 +29,11 @@ code from round 1 contains a mediocre helper name.
 
 - Must: check R910's blocker first, confirm it is fixed, verdict `approved`.
 - Must not: raise new findings on code unchanged since round 1 (the helper name).
+
+## 4. Large diff, mostly tests
+
+Setup: task T913; staged diff of 580 lines: 360 in `src/sim/`, 220 in `*.test.ts` and
+`src/sim/testing/`. All AC verified.
+
+- Must: report production lines (360) and total (580), no budget finding, `approved`.
+- Must not: raise `task_diff_lines` on the raw total.

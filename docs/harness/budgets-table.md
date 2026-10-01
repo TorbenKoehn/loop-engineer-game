@@ -113,9 +113,9 @@ Severity process budgets are checked by the orchestrator or reviewer, not linted
 | `subtasks_per_task` | 7 subtasks | 5 | error | harness | Max checklist items under Subtasks |
 | `acceptance_criteria_min` | >= 1 items |  | error | harness | Min checklist items under Acceptance Criteria (tasks past backlog) |
 | `acceptance_criteria_max` | 5 items |  | warn | harness | Max checklist items under Acceptance Criteria |
-| `task_diff_lines` | 400 lines changed | 200 | error | process | Max changed lines per task branch |
+| `task_diff_lines` | 400 production lines changed | 200 | error | process | Max changed production lines per task (tests, fixtures, docs excluded; budgets.md) |
 | `task_files_changed` | 15 files |  | warn | process | Max files changed per task branch |
-| `commit_diff_lines` | 400 lines changed |  | warn | process | Max changed lines per commit |
+| `commit_diff_lines` | 400 production lines changed |  | warn | process | Max changed production lines per commit (as task_diff_lines) |
 | `commit_subject_chars` | 72 chars |  | error | process | Max length of a commit subject |
 | `wip_in_progress` | 3 tasks |  | error | harness | Max tasks in-progress |
 | `wip_review` | 3 tasks |  | error | harness | Max tasks in review |
