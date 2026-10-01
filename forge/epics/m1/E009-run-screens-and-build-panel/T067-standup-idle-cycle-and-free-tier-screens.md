@@ -5,7 +5,7 @@ title: Standup, Idle Cycle and Free Tier screens
 summary: "Standup as a #standup chat thread with reply buttons showing exact outcomes, Idle Cycle heal-or-upgrade with a tool picker, and the Free Tier memory unboxing."
 keywords: ["ui", "events", "standup", "rest", "free-tier", "screens"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: opus
 size: M
@@ -48,3 +48,4 @@ The non-combat nodes present their choices with exact outcomes, so no click is a
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

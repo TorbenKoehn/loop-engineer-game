@@ -40,7 +40,7 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (33)
+## Backlog (32)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -63,7 +63,6 @@ generated: true
 | [T053](epics/m1/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
 | [T054](epics/m1/E008-run-end-meta-state-and-saves/T054-desync-detection-and-replay-vs-snapshot.md) | Desync detection and replay-vs-snapshot test | E008 | p2 | opus | M |
 | [T062](epics/m1/E006-ui-shell-and-combat-replay/T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | E006 | p2 | opus | M |
-| [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 | [T069](epics/m1/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Build preview: 6 s firing order dry run | E009 | p2 | opus | M |
 | [T070](epics/m1/E009-run-screens-and-build-panel/T070-run-end-summary-and-agents-md-screens.md) | Run end summary and AGENTS.md screens | E009 | p2 | opus | M |
 | [T074](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T074-seed-replay-cli-from-save-strings.md) | Seed replay CLI from save strings | E010 | p2 | sonnet | S |
@@ -86,12 +85,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
 | [T071](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T071-random-and-greedy-bots.md) | Random and greedy bots | E010 | p1 | opus | M |
+| [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 
 ## Review (0/3)
 
