@@ -5,7 +5,7 @@ title: npm run check runs build and e2e
 summary: "npm run check runs vite build and the Playwright suite after vitest when the working tree changes src/ or tests/e2e/, else prints a skip reason; a failing spec fails check."
 keywords: ["check", "e2e", "playwright", "build", "gate", "verification"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: sonnet
 size: S
@@ -54,3 +54,4 @@ the change can affect them, so a red spec fails check for every implementer and 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

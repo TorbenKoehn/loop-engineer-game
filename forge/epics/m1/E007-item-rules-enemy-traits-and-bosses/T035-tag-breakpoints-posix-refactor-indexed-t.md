@@ -5,7 +5,7 @@ title: Tag breakpoints POSIX, Refactor, Indexed, TDD
 summary: "Pure breakpoint counting over equipped tool tags and the M1 breakpoint effects POSIX, Refactor, Indexed and TDD, exported for run selectors and the build panel."
 keywords: ["breakpoints", "tags", "synergy", "build", "sim"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: S
@@ -47,3 +47,4 @@ Tag synergies reward coherent builds and are shown in the build panel from the s
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

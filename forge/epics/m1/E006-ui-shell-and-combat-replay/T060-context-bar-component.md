@@ -5,7 +5,7 @@ title: Context bar component
 summary: "Full-width context bar with baseline, signal and hatched noise segments, 25%/70% ticks, policy marker, F/W and zone label, noise source hover and policy-disabled warning."
 keywords: ["context-bar", "ui", "zones", "noise", "policy"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -49,3 +49,4 @@ The context bar is the slice's central readability test (exit criterion 3), so i
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

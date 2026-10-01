@@ -40,15 +40,13 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 0/7 |
 
-## Backlog (33)
+## Backlog (31)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T035](epics/m1/E007-item-rules-enemy-traits-and-bosses/T035-tag-breakpoints-posix-refactor-indexed-t.md) | Tag breakpoints POSIX, Refactor, Indexed, TDD | E007 | p1 | opus | S |
 | [T039](epics/m1/E007-item-rules-enemy-traits-and-bosses/T039-m1-item-behaviour-tests-over-real-conten.md) | M1 item behaviour tests over real content | E007 | p1 | opus | M |
 | [T045](epics/m1/E004-run-structure-and-map/T045-build-actions-and-loadout-selectors.md) | Build actions and loadout selectors | E004 | p1 | opus | M |
 | [T057](epics/m1/E006-ui-shell-and-combat-replay/T057-debug-test-hooks-and-url-flags.md) | Debug test hooks and URL flags | E006 | p1 | sonnet | S |
-| [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel: loadout, stash, policy, breakpoints | E009 | p1 | opus | M |
 | [T073](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T073-balance-targets-file-and-ci-gate.md) | Balance targets file and CI gate | E010 | p1 | sonnet | S |
@@ -78,11 +76,10 @@ generated: true
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 | [T108](epics/m0/E024-harness-upkeep-2/T108-split-run-apply-and-legalactions-under-f.md) | Split run apply and legalActions under fn_lines | E024 | p2 | sonnet | S |
 
-## Ready (8)
+## Ready (7)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T102](epics/m0/E024-harness-upkeep-2/T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | E024 | p0 | sonnet | S |
 | [T103](epics/m0/E024-harness-upkeep-2/T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | E024 | p0 | sonnet | S |
 | [T104](epics/m0/E024-harness-upkeep-2/T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | E024 | p1 | opus | M |
 | [T105](epics/m0/E024-harness-upkeep-2/T105-regroup-crowded-src-folders-below-dir-fi.md) | Regroup crowded src folders below dir_files warn_at | E024 | p1 | opus | M |
@@ -91,9 +88,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T102](epics/m0/E024-harness-upkeep-2/T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | E024 | p0 | sonnet | S |
+| [T035](epics/m1/E007-item-rules-enemy-traits-and-bosses/T035-tag-breakpoints-posix-refactor-indexed-t.md) | Tag breakpoints POSIX, Refactor, Indexed, TDD | E007 | p1 | opus | S |
+| [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
 
 ## Review (0/3)
 
