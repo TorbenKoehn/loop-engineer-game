@@ -52,3 +52,4 @@ Players reshape their loadout between fights and the UI shows exactly the number
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (opus)
+- 2026-10-01: maxTurns hit (90), resumed
