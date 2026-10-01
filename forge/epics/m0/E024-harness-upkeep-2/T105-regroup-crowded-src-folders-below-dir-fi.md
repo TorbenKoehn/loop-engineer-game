@@ -50,11 +50,13 @@ paths and path references change.
 
 ## Notes
 
+- Orchestrator decision 2026-10-01 (R085 F1): option (a) - src/content/strings keeps 11-12 files (generated string registry folder; the generator scans one folder by design). Its dir_files warning is accepted; all other src folders are below warn_at.
+
 - 2026-10-01: Source: RT003 P1, widened by the orchestrator to all eight folders as one mechanical move. Layout in Subtasks is a suggestion; the implementer picks names by coupling and records the final map in the Log.
 - 2026-10-01: Must run alone: no other task touching `src/`, `tools/balance/` or `tools/golden/` may be in flight. Waits for T067 (adds three files to `src/ui/screens`) and T072 (`tools/balance` imports `src/run`). Ordered after T102 so check covers e2e, and T104 per the orchestrator's order.
 - 2026-10-01: Allowed paths: `src/**`, `tools/balance/**`, `tools/golden/**`, `tools/content/**`, `tests/e2e/**`, `docs/architecture/**`, `.claude/skills/**`, `CLAUDE.md`, `biome.jsonc`, `vite.config.ts`.
 - 2026-10-01: `task_files_changed` (15, warn) will be exceeded by design (one move, ~40 renames plus importers). Override reason for the Log: pure renames with import-only edits, reviewed as one move map.
-- 2026-10-01: Blocked by: `src/content/strings` cannot drop below 12 files without a decision. It must hold the 10 `en-<area>.ts` modules plus `areas.gen.ts` (the generator scans only this dir and emits `./en-<area>.ts` imports; generator format is Out of scope, AC4 pins `areas.gen.ts` unchanged), so 11 is the floor and AC1's no-warning for this folder contradicts AC4/Out of scope. Options: (a) accept 11-12 here (move `en.ts` out for 11, still a warn); (b) allow a generator change so area modules live in `strings/areas/` (changes `areas.gen.ts`); (c) merge two area modules (code change). Everything else is done and green.
+- 2026-10-01: (resolved by orchestrator decision below) `src/content/strings` cannot drop below 12 files without a decision. It must hold the 10 `en-<area>.ts` modules plus `areas.gen.ts` (the generator scans only this dir and emits `./en-<area>.ts` imports; generator format is Out of scope, AC4 pins `areas.gen.ts` unchanged), so 11 is the floor and AC1's no-warning for this folder contradicts AC4/Out of scope. Options: (a) accept 11-12 here (move `en.ts` out for 11, still a warn); (b) allow a generator change so area modules live in `strings/areas/` (changes `areas.gen.ts`); (c) merge two area modules (code change). Everything else is done and green.
 
 ## Log
 
