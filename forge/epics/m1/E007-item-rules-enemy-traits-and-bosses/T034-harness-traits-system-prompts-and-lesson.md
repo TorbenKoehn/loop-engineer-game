@@ -44,6 +44,8 @@ The harness and prompt chosen at run start, and the AGENTS.md lesson, change fig
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R040 F1): src/run/combat.ts `combatInput` does not yet pass harness trait rules to the sim (CombatInput has no field) - wire them here.
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

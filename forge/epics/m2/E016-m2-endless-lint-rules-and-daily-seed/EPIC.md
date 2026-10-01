@@ -29,3 +29,7 @@ Milestone M2 (backlog, not yet planned into tasks). After this epic players who 
 ## Definition of Done
 
 - [ ] M2 exit criterion 6: golden logs on 30 seeds cover all three phases and Endless loop 2, byte-identical in CI
+
+## Notes
+
+- Orchestrator 2026-10-01 (R040 F1): `combatInput` in src/run/combat.ts does not yet pass lint rules as FightModifiers - wire it when this epic is planned.

@@ -32,3 +32,7 @@ Milestone M2 (backlog, not yet planned into tasks). After this epic a run spans 
 
 - [ ] M2 exit criteria 2 (per-phase boss win rates) and 5 (fight lengths in every phase) pass
 - [ ] Golden logs cover all three phases
+
+## Notes
+
+- Orchestrator 2026-10-01 (R040 F1): `combatInput` in src/run/combat.ts does not yet pass OwnedTool.weightMod (Prune) - wire it when this epic is planned.
