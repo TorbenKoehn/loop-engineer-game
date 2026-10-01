@@ -5,7 +5,7 @@ title: Enemy intent cycles, action verbs and phase scaling
 summary: "Enemy opening and cycle intents with windups, the action verbs hit, multiHit, throttle, slow, stun, guard, heal, spawn and a noise hook, the 5-enemy cap and phase scaling."
 keywords: ["sim", "enemies", "intents", "verbs", "spawn", "phase-scaling"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -51,3 +51,4 @@ Enemies telegraph and execute their intents on time, using only the documented v
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

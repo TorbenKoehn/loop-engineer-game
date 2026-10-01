@@ -5,7 +5,7 @@ title: Content validation and M1 slice id test
 summary: "src/content/validate.ts implementing validation rules 1-6, the M1 id-list test against the vertical slice, starting-baseline checks and CONTENT_VERSION."
 keywords: ["content", "validation", "slice", "tests", "content-version"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Catch broken references, out-of-budget numbers and accidental deletions automati
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
