@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E008"
-summary: "Index of forge/reviews/E008: 2 files, 0 subdirectories"
-keywords: ["review", "agents", "history", "lessons", "meta", "slice", "state", "stats"]
+summary: "Index of forge/reviews/E008: 3 files, 0 subdirectories"
+keywords: ["review", "meta", "agents", "history", "lessons", "save", "schema", "slice"]
 type: index
 status: active
 updated: 2026-10-01
@@ -17,3 +17,4 @@ generated: true
 |---|---|---|---|
 | [R050-T048.md](R050-T048.md) | Review of T048: Run end, slice win and run stats | Review of T048 (approved) | review, slice, stats |
 | [R051-T049.md](R051-T049.md) | Review of T049: Meta state, history and AGENTS.md lessons | Review of T049 (approved) | review, meta, state, history, agents, lessons |
+| [R055-T050.md](R055-T050.md) | Review of T050: Run and meta save schema with storage adapt… | Review of T050 (approved) | review, meta, save, schema, with, storage |

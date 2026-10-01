@@ -45,6 +45,7 @@ The player can close the tab at any node and continue exactly where they were, a
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R055 F1): after a runtime storage fallback the stale le:run:current stays in localStorage - handle or document it.
 - Orchestrator 2026-10-01 (R051 F1): wire src/ui/store/meta.ts to build its view with `metaView(meta)` so UI runs get run numbers and history dedup; also add `lastRun` to the MetaState comment in docs/architecture/save.md (R051 F4).
 
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.

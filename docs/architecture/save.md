@@ -6,6 +6,7 @@ type: doc
 status: active
 updated: 2026-10-01
 related: [run-state.md, testing.md, overview.md, adr/adr-005-save-action-log.md]
+related_code: [src/save/schema.ts, src/save/storage.ts, src/save/checksum.ts]
 ---
 
 # Save system and migrations
@@ -29,7 +30,7 @@ export interface RunSaveV1 {
   contentVersion: number;     // CONTENT_VERSION at save time
   gameVersion: string;        // build version, informational
   seed: string;
-  setup: RunSetup;            // includes the unlock and lesson snapshot
+  setup: SetupSnapshot;       // includes the unlock and lesson snapshot
   actions: readonly Action[]; // every accepted action since newRun
   snapshot: RunState;         // state after the last action
   checksum: string;           // SHA-256 hex of the canonical JSON of the fields above
@@ -41,8 +42,12 @@ export interface MetaSaveV1 {
 }
 ```
 
-Canonical JSON: keys sorted, no whitespace. The snapshot is authoritative for loading;
-the action log is for replay, desync detection and bug reports.
+Canonical JSON: keys sorted, no whitespace, undefined fields dropped. The snapshot is
+authoritative for loading; the action log is for replay, desync detection and bug reports.
+SHA-256 is a small synchronous implementation (`src/save/checksum.ts`), not
+`crypto.subtle`, so a `pagehide` autosave completes before the page goes. `runSave` and
+`metaSave` seal a save; `parseRunSave` and `parseMetaSave` reject bad JSON (`parse`),
+another schema or shape (`schema`) and a wrong checksum (`checksum`).
 
 ## Storage
 
@@ -53,14 +58,17 @@ the action log is for replay, desync detection and bug reports.
 | `le:meta` | `MetaSaveV1` |
 | `le:meta:backup` | previous meta save |
 
-- Adapter interface `Storage { get(k), set(k, v), remove(k) }`; the browser
-  implementation wraps `localStorage` in try/catch and falls back to memory (private
-  mode, quota). A banner warns when saves are memory-only.
+- Adapter interface `SaveStorage { get(k), set(k, v), remove(k), memoryOnly }`.
+  `browserStorage()` probes `localStorage` (writes and removes `le:probe`) and wraps it in
+  try/catch; when it throws (private mode, quota) the adapter switches to memory for good,
+  copying the readable save keys, and `memoryOnly` becomes true. A banner warns when
+  saves are memory-only. `memoryStorage()` is the test and fallback implementation.
+- `writeRunSave` / `writeMetaSave` rotate the current value to the backup key, then write.
 - **Autosave** after every completed node (mode returns to `map`, `phaseEnd` or
   `runEnd`) and on `pagehide`. Never during combat playback: a reload mid-fight restarts
   playback of the already-resolved fight.
-- Run end: meta is updated first, then the run save is removed (so a crash cannot lose
-  TD or duplicate it: `endRun` is idempotent by run id).
+- Run end (`saveRunEnd`): meta is written first, then the run save and its backup are
+  removed (so a crash cannot lose TD or duplicate it: `endRun` is idempotent by run id).
 - Expected size: a full run is about 400 actions; save ≤ 60 kB.
 
 ## Export / import string
