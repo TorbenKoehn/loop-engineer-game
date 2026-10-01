@@ -5,7 +5,7 @@ title: Context bar quantities, baseline and zones
 summary: "Ctx state W, B, S, N, F with baseline from the loadout, integer zone tests, Focused bonus and Cold penalty in the damage formula, and the Rot charge-rate multiplier."
 keywords: ["context", "zones", "baseline", "window", "focused", "rot"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -51,3 +51,4 @@ Make the context bar part of every fight: the loadout sets the baseline, the fil
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

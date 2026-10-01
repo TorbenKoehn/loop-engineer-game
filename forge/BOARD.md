@@ -39,11 +39,10 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
-## Backlog (62)
+## Backlog (60)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T025](epics/m1/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
 | [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
@@ -56,7 +55,6 @@ generated: true
 | [T036](epics/m1/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
 | [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
 | [T039](epics/m1/E007-item-rules-enemy-traits-and-bosses/T039-m1-item-behaviour-tests-over-real-conten.md) | M1 item behaviour tests over real content | E007 | p1 | opus | M |
-| [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
 | [T043](epics/m1/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
 | [T044](epics/m1/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
 | [T045](epics/m1/E004-run-structure-and-map/T045-build-actions-and-loadout-selectors.md) | Build actions and loadout selectors | E004 | p1 | opus | M |
@@ -115,10 +113,12 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T025](epics/m1/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
+| [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
 | [T055](epics/m1/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
 
 ## Review (0/3)

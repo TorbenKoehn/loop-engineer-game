@@ -5,7 +5,7 @@ title: "Fight nodes: build CombatInput and resolve"
 summary: "travel to a fight node builds CombatInput from run state and content, calls resolveCombat without log, applies Trust and once-per-run flags, and enters combatReview."
 keywords: ["run", "combat-input", "travel", "fight-node", "reducer"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Connect the run to the sim: fights are resolved inside the reducer, so bots, tes
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
