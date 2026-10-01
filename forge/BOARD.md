@@ -37,8 +37,9 @@ generated: true
 | [E020](epics/E020-m3-onboarding-and-accessibility-complete/EPIC.md) | M3 Onboarding and accessibility complete | backlog | p3 | 0/0 |
 | [E021](epics/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
+| [E023](epics/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 0/8 |
 
-## Backlog (75)
+## Backlog (78)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -117,21 +118,29 @@ generated: true
 | [T082](epics/E011-juice-audio-settings-and-tutorial/T082-settings-overlay-volume-reduced-motion-c.md) | Settings overlay: volume, reduced motion, CRT | E011 | p2 | opus | M |
 | [T083](epics/E011-juice-audio-settings-and-tutorial/T083-keyboard-controls-for-combat-and-shell.md) | Keyboard controls for combat and shell | E011 | p2 | sonnet | S |
 | [T085](epics/E011-juice-audio-settings-and-tutorial/T085-ascii-portraits-for-slice-harnesses-and.md) | ASCII portraits for slice harnesses and enemies | E011 | p2 | sonnet | S |
+| [T087](epics/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
+| [T090](epics/E023-harness-upkeep/T090-split-tsconfig-into-app-and-tools-projec.md) | Split tsconfig into app and tools projects | E023 | p2 | opus | M |
+| [T092](epics/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 
-## Ready (3)
+## Ready (7)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T007](epics/E001-game-foundation/T007-architecture-import-rule-test.md) | Architecture import-rule test | E001 | p0 | sonnet | S |
 | [T005](epics/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
-| [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
+| [T086](epics/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T088](epics/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
+| [T089](epics/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
+| [T091](epics/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
+| [T093](epics/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
+| [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
 
 ## Review (0/3)
 

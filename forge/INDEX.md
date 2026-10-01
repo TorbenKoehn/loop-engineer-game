@@ -15,7 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 22 subdirectories | m2, m3, agents-md, boss, content, accessibility, art, ascii-art |
+| [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 23 subdirectories | m2, m3, agents-md, boss, content, accessibility, art, ascii-art |
 | [reviews/](reviews/INDEX.md) | Index of forge/reviews: 6 files, 0 subdirectories | review, integer, biome, forkable, seeded, budgets, check, code |
 
 ## Files
