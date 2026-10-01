@@ -1,7 +1,7 @@
 ---
 title: "Index: docs/architecture"
 summary: "Index of docs/architecture: 8 files, 1 subdirectories"
-keywords: ["combat", "content", "data-driven", "determinism", "preact", "accessibility", "action-log", "actions"]
+keywords: ["combat", "content", "determinism", "preact", "accessibility", "action-log", "actions", "adr"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,7 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [adr/](adr/INDEX.md) | Index of docs/architecture/adr: 5 files, 0 subdirectories | adr, preact, typescript, accessibility, action-log, canvas, content, data-driven |
+| [adr/](adr/INDEX.md) | Index of docs/architecture/adr: 6 files, 0 subdirectories | adr, typescript, preact, tooling, accessibility, action-log, canvas, content |
 
 ## Files
 

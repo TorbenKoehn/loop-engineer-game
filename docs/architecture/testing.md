@@ -40,14 +40,7 @@ data and text rather than pixels where possible.
 
 ## Coverage budgets (Vitest v8 coverage, enforced in CI)
 
-| Area | Lines | Branches |
-|---|---|---|
-| `src/sim` | ≥ 95% | ≥ 90% |
-| `src/run` | ≥ 90% | ≥ 85% |
-| `src/save` | ≥ 90% | ≥ 85% |
-| `src/content` (builders, validate) | ≥ 90% | — |
-| `src/ui` (logic modules: store, playback, fold, i18n) | ≥ 70% | — |
-| `src/render-fx`, `src/audio` | no gate (covered by smoke) | — |
+Numbers live in `harness.config.json` ([budgets table](../harness/budgets-table.md)): `coverage_sim_lines`, `coverage_sim_branches`, `coverage_total_lines`. Do not restate them here. `src/render-fx` and `src/audio` have no gate (covered by smoke).
 
 ## Property tests (fast-check)
 

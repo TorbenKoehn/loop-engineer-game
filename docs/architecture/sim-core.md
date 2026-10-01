@@ -106,8 +106,14 @@ Rules: every stored number is a safe integer; divisions are always wrapped in
 - **Fork by path, not by state**: `fork(runSeed, 'combat/p1-r3-c2')` hashes
   `runSeed + '/' + path`. A subsystem's randomness never depends on how many numbers were
   drawn elsewhere, so changing the shop never changes a fight.
-- API: `int(rng, lo, hi)` inclusive, `pick(rng, arr)`, `weighted(rng, entries)`,
-  `shuffle(rng, arr)` (Fisher–Yates). No float API is exported.
+- Types: `Seed = string`, `Rng = [number, number, number, number]`, `Weighted<T>`.
+- API (`src/sim/rng.ts`):
+  - `createRng(seed: Seed): Rng`; `forkSeed(seed, path): Seed`; `fork(seed, path): Rng`
+  - `nextU32(rng): number` (advances state); `nextInt(rng, n): number` in `[0, n)`
+  - `int(rng, lo, hi): number` inclusive; `pick<T>(rng, arr): T`
+  - `weighted<T>(rng, entries: readonly Weighted<T>[]): T`; `shuffle<T>(rng, arr): T[]` (Fisher–Yates, returns a copy)
+  - `serialize(rng): string`; `restore(json): Rng`
+  - No float API is exported.
 - Combat randomness is rare by design (slice content uses none); every combat draw emits a
   `roll` event so the log explains it.
 

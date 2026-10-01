@@ -1,7 +1,7 @@
 ---
 title: "Index: docs"
 summary: "Index of docs: 0 files, 4 subdirectories"
-keywords: ["accessibility", "agents", "budgets", "aa", "achievements", "action-log", "actions", "agents-md"]
+keywords: ["accessibility", "agents", "budgets", "aa", "achievements", "action-log", "actions", "adr"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,7 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [architecture/](architecture/INDEX.md) | Index of docs/architecture: 8 files, 1 subdirectories | combat, content, data-driven, determinism, preact, accessibility, action-log, actions |
+| [architecture/](architecture/INDEX.md) | Index of docs/architecture: 8 files, 1 subdirectories | combat, content, determinism, preact, accessibility, action-log, actions, adr |
 | [game/](game/INDEX.md) | Index of docs/game: 4 files, 3 subdirectories | agents-md, exit-criteria, scope, aa, accessibility, achievements, animation, art-direction |
 | [harness/](harness/INDEX.md) | Index of docs/harness: 8 files, 0 subdirectories | budgets, delegation, harness, limits, lint, skills, agents, autonomy |
 | [research/](research/INDEX.md) | Index of docs/research: 0 files, 3 subdirectories | claude-md, agents, architecture, assets, budgets, claude-code, code-review, complexity |

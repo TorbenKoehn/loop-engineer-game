@@ -16,11 +16,21 @@ User goal (2026-10-01): finish the complete game in AA quality (M1 → M2 → M3
 
 ## In flight
 
-- T003 (RNG) and T006 (check script): implementers running in parallel in the main tree.
-- Planner: planning M1 epics/tasks (E002+) and M2/M3 backlog epics.
+- T002 (Biome): implementer resumed after hitting its turn limit.
+- Doc-gardener: applying planner open-question decisions (event names, coverage SSOT,
+  ADR-006 native .ts imports, RNG API doc, `npm run check` in CLAUDE.md).
 
-## Pending follow-ups (scaffold as tasks once the planner is done)
+## Decisions (2026-10-01)
 
+- Plan is complete for M1 (T007–T085); M2/M3 epics E012–E022 get tasks just in time.
+- `backlog_items` warning accepted while M1 backlog is large; not raising the budget.
+- event-log.md wins on event names; harness.config.json wins on coverage numbers.
+- M1 exit criterion "moderated playtest" cannot be run by agents: replace with an
+  automated comprehension proxy + ask the user for a human playtest at M1 end.
+
+## Pending follow-ups (scaffold as harness tasks once T002 is done)
+
+- Harness: forge/epics has 22 subdirs (> dir_subdirs); group epics by milestone.
 - Harness: review scaffolder produces titles > `fm_title_chars` (R001 finding).
 - Harness: `codeGlobs` miss `.tsx` files, so UI code escapes code budgets.
 - Tooling: single tsconfig uses bundler resolution; tools/ lost nodenext checking

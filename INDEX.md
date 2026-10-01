@@ -1,7 +1,7 @@
 ---
 title: "Index: root"
 summary: "Index of root: 1 files, 4 subdirectories"
-keywords: ["accessibility", "agents-md", "budgets", "forge", "aa", "acceptance-criteria", "achievements", "action-log"]
+keywords: ["accessibility", "budgets", "forge", "aa", "acceptance-criteria", "achievements", "action-log", "actions"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,7 +16,7 @@ generated: true
 | Directory | Summary | Keywords |
 |---|---|---|
 | [.claude/](.claude/INDEX.md) | Index of .claude: 4 files, 1 subdirectories | acceptance-criteria, checks, code-review, decomposition, delegation, epic, evidence, forge |
-| [docs/](docs/INDEX.md) | Index of docs: 0 files, 4 subdirectories | accessibility, agents, budgets, aa, achievements, action-log, actions, agents-md |
+| [docs/](docs/INDEX.md) | Index of docs: 0 files, 4 subdirectories | accessibility, agents, budgets, aa, achievements, action-log, actions, adr |
 | [forge/](forge/INDEX.md) | Index of forge: 2 files, 2 subdirectories | accessibility, agents-md, art, ascii-art, biome, board, boss, check |
 | [tools/](tools/INDEX.md) | Index of tools: 0 files, 1 subdirectories | budgets, forge, harness, hooks, index, lint |
 

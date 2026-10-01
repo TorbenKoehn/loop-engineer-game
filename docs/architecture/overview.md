@@ -5,7 +5,7 @@ keywords: [architecture, modules, dependencies, data-flow, layering]
 type: doc
 status: active
 updated: 2026-10-01
-related: [sim-core.md, content-model.md, run-state.md, ui.md, save.md, testing.md, adr/adr-001-tech-stack.md]
+related: [sim-core.md, content-model.md, run-state.md, ui.md, save.md, testing.md, adr/adr-001-tech-stack.md, adr/adr-006-native-node-imports.md]
 ---
 
 # Architecture overview
@@ -13,7 +13,7 @@ related: [sim-core.md, content-model.md, run-state.md, ui.md, save.md, testing.m
 Browser game, Vite 8 + strict TypeScript, Preact 10 + @preact/signals for a DOM UI, one
 Canvas2D overlay for juice. The game logic is a pure, integer, seeded simulation that
 runs identically in the browser, in Vitest and in the headless balance CLI.
-Decisions: [ADR-001](adr/adr-001-tech-stack.md) to [ADR-005](adr/adr-005-save-action-log.md).
+Decisions: [ADR-001](adr/adr-001-tech-stack.md) to [ADR-005](adr/adr-005-save-action-log.md), [ADR-006](adr/adr-006-native-node-imports.md) (import convention).
 
 ## Module map
 

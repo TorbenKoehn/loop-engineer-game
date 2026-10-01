@@ -27,7 +27,7 @@ playback speed (2x halves them; skip shows none).
 | Zone flash | `zoneChanged` | Bar glows in the new zone colour 200 ms; label types out | Colour change only |
 | Compaction moment | `compaction` | Dim screen 70%, centred "Compacting conversation…" typed at 60 chars/s, bar drains over 600 ms; auto 1000 ms, planned 500 ms | Text only, no drain animation |
 | Intent windup | last 500 ms of an intent | Intent chip pulses 2 Hz, tick sound | Ring only |
-| Enemy resolved | `enemyResolved` | Card "strikes through" (text line-through) then collapses 300 ms | Instant removal + log line |
+| Enemy resolved | `resolved` | Card "strikes through" (text line-through) then collapses 300 ms | Instant removal + log line |
 | Deadline | each Deadline second | Clock pulses red, red vignette 8% | Clock colour only |
 | Typed text | event text, log | 120 chars/s, any key completes | Instant |
 | Victory | `fightEnd win` | Status bar sweeps cyan 400 ms, "✓ resolved" | Static |
@@ -59,7 +59,7 @@ Every sound has a role, a pitch rule and a max rate.
 | `compaction` | `compaction` | Tape-rewind swoosh | Auto lower than planned | 1 |
 | `intent_tick` | windup last 500 ms | Quiet tick | Fixed | 4 |
 | `deadline` | each Deadline second | Low alarm | Rises each second | 1 |
-| `resolve` | `enemyResolved` | Bright chord | Fixed | 3 |
+| `resolve` | `resolved` | Bright chord | Fixed | 3 |
 | `win` / `lose` | fight end | Jingle 1 s / falling tone | Fixed | — |
 | `ui_click`, `ui_buy`, `ui_error` | UI | Clicks and a cash blip | Fixed | 10 |
 

@@ -1,7 +1,7 @@
 ---
 title: "Index: docs/architecture/adr"
-summary: "Index of docs/architecture/adr: 5 files, 0 subdirectories"
-keywords: ["adr", "preact", "typescript", "accessibility", "action-log", "canvas", "content", "data-driven"]
+summary: "Index of docs/architecture/adr: 6 files, 0 subdirectories"
+keywords: ["adr", "typescript", "preact", "tooling", "accessibility", "action-log", "canvas", "content"]
 type: index
 status: active
 updated: 2026-10-01
@@ -20,3 +20,4 @@ generated: true
 | [adr-003-dom-ui.md](adr-003-dom-ui.md) | ADR-003 DOM UI over a game engine | Render all screens, including combat, as Preact DOM components styled as a terminal/IDE, with a single Canvas2D overlay for particles and flashes. | adr, ui, dom, preact, canvas, accessibility |
 | [adr-004-content-typed-ts.md](adr-004-content-typed-ts.md) | ADR-004 Content as typed TS data | Define all game content as typed TypeScript data with define helpers and a small trigger-condition-effect DSL, plus named handlers as an escape hatch. | adr, content, dsl, typescript, data-driven, validation |
 | [adr-005-save-action-log.md](adr-005-save-action-log.md) | ADR-005 Save = seed + action log + snapshot | Saves store the seed, every accepted action and a state snapshot, versioned with migrations; the snapshot loads, the log replays for desync checks and bug reports. | adr, save, replay, migrations, action-log, persistence |
+| [adr-006-native-node-imports.md](adr-006-native-node-imports.md) | ADR-006 Native Node imports with .ts extensions | All code under src/ uses relative imports with explicit .ts/.tsx extensions and erasable-only TypeScript so sim, content, run and tools/balance run natively on Node 24 without a bundler. | adr, imports, node, typescript, erasable-syntax, extensions, tooling |

@@ -43,6 +43,8 @@ Make the coverage budgets enforceable from the first sim commit, so vertical-sli
 
 ## Notes
 
+- Orchestrator 2026-10-01: coverage thresholds must be read from harness.config.json (coverage_sim_lines, coverage_sim_branches, coverage_total_lines); config is the single source of truth, docs only reference the ids.
+
 - 2026-10-01: budgets-table.md lists coverage_sim_lines 90 / branches 85 while testing.md and vertical-slice.md say 95 / 90; implement testing.md and report the mismatch.
 
 ## Log

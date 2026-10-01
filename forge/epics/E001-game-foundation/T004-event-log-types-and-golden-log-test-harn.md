@@ -28,7 +28,7 @@ Define the typed event log (toolFired, damage, noise, zone, compaction and so on
 
 ## Acceptance Criteria
 
-- [ ] CombatEvent is a discriminated union with tick, kind, src, dst and integer value
+- [ ] CombatEvent is a discriminated union per docs/architecture/event-log.md (time field `t` in integer ms)
 - [ ] A golden test compares a fixture run to a stored log and fails with a readable diff on change
 - [ ] An explicit update command regenerates goldens (never silently)
 - [ ] Log serialization is stable (sorted keys, integers only)

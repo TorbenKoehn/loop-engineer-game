@@ -69,5 +69,5 @@ summaries, text-size setting, pseudo-locale (strings still go through `t()` from
 | 4 | Same seed + same actions give a byte-identical combat log | golden-log tests on 20 seeds in CI |
 | 5 | Median normal-fight length 20–35 s at 1x; elite 30–45 s; boss 40–60 s | balance report |
 | 6 | Save at any node, reload, continue: identical result to an uninterrupted run | replay-vs-snapshot test on 50 bot runs |
-| 7 | `npm test`, `harness:lint`, type-check and Playwright smoke are green; `src/sim` line coverage ≥ 95% | CI |
+| 7 | `npm test`, `harness:lint`, type-check and Playwright smoke are green; coverage budgets (`coverage_sim_lines`, `coverage_sim_branches`, `coverage_total_lines`) are met | CI |
 | 8 | A scripted Phase-1 run via the UI at skip speed finishes in < 60 s | Playwright smoke |
