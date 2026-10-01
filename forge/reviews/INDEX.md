@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 2 files, 0 subdirectories"
-keywords: ["review", "biome", "check", "preact", "scaffold", "script", "strict", "typescript"]
+summary: "Index of forge/reviews: 4 files, 0 subdirectories"
+keywords: ["review", "forkable", "integer", "seeded", "biome", "check", "preact", "scaffold"]
 type: index
 status: active
 updated: 2026-10-01
@@ -17,3 +17,5 @@ generated: true
 |---|---|---|---|
 | [R001-T001.md](R001-T001.md) | Review of T001: Scaffold Vite, Preact and strict TS app | Review of T001 (approved) | review, scaffold, vite, preact, strict, typescript |
 | [R002-T006.md](R002-T006.md) | Review of T006: Unified check script | Review of T006 (approved) | review, unified, check, script, biome, vitest |
+| [R003-T003.md](R003-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (changes-requested) | review, seeded, forkable, integer |
+| [R004-T003.md](R004-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (approved) | review, seeded, forkable, integer |
