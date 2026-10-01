@@ -5,7 +5,7 @@ title: Export and import save string codec
 summary: "Save string LE1. + base64url(deflate-raw(canonical JSON)) via CompressionStream, with prefix, checksum and schema validation and plain-English errors."
 keywords: ["save", "export", "import", "codec", "compression"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: sonnet
 size: S
@@ -47,3 +47,4 @@ Players and agents can move a run as one string, which bug reports and the repla
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

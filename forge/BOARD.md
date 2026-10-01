@@ -40,7 +40,7 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (46)
+## Backlog (45)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -69,7 +69,6 @@ generated: true
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
 | [T046](epics/m1/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
 | [T047](epics/m1/E004-run-structure-and-map/T047-standup-events-and-next-fight-modifiers.md) | Standup events and next-fight modifiers | E004 | p2 | opus | M |
-| [T051](epics/m1/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
 | [T052](epics/m1/E008-run-end-meta-state-and-saves/T052-save-migration-framework-and-frozen-fixt.md) | Save migration framework and frozen fixtures | E008 | p2 | sonnet | S |
 | [T053](epics/m1/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
 | [T054](epics/m1/E008-run-end-meta-state-and-saves/T054-desync-detection-and-replay-vs-snapshot.md) | Desync detection and replay-vs-snapshot test | E008 | p2 | opus | M |
@@ -100,12 +99,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T063](epics/m1/E009-run-screens-and-build-panel/T063-title-harness-select-and-system-prompt-s.md) | Title, harness select and system prompt screens | E009 | p1 | opus | M |
+| [T051](epics/m1/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
 
 ## Review (0/3)
 
