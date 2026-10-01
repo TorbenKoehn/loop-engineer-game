@@ -1,7 +1,7 @@
 ---
 title: "Index: forge"
-summary: "Index of forge: 1 files, 2 subdirectories"
-keywords: ["balance", "biome", "board", "budgets", "canvas", "check", "combat", "compaction"]
+summary: "Index of forge: 2 files, 2 subdirectories"
+keywords: ["biome", "check", "balance", "board", "budgets", "canvas", "combat", "compaction"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,10 +16,11 @@ generated: true
 | Directory | Summary | Keywords |
 |---|---|---|
 | [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 6 subdirectories | determinism, balance, biome, budgets, canvas, check, combat, compaction |
-| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 1 files, 0 subdirectories | preact, review, scaffold, strict, typescript, vite |
+| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 2 files, 0 subdirectories | review, biome, check, preact, scaffold, script, strict, typescript |
 
 ## Files
 
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [BOARD.md](BOARD.md) | Forge Board | Generated Kanban board of forge tasks with WIP counts and epic progress | kanban, board, forge, tasks, epics |
+| [HANDOFF.md](HANDOFF.md) | Orchestrator handoff | Live orchestrator state - work in flight, pending follow-ups and session caveats not visible on BOARD.md. | handoff, orchestrator, state, follow-ups |

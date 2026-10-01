@@ -13,11 +13,13 @@
     "harness:board": "node tools/harness/cli.ts board",
     "harness:check": "node tools/harness/cli.ts check",
     "harness:new": "node tools/harness/cli.ts new",
+    "check": "node tools/check/run.ts",
     "test": "vitest run"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",
     "@types/node": "^26.6.3",
+    "fast-check": "^4.10.2",
     "typescript": "^7.0.2",
     "vite": "^8.3.2",
     "vitest": "^5.0.3",
