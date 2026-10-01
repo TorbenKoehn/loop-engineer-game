@@ -2,3 +2,4 @@
 *.png binary
 *.jpg binary
 *.woff2 binary
+src/content/strings/areas.gen.ts merge=union
