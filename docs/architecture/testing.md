@@ -60,7 +60,7 @@ policies; shrinking is kept on to get minimal failing loadouts.
 
 - M1: 20 seeds (both harnesses, every slice encounter at least once). M2: 30 seeds across
   phases 1–3 and Endless loop 2.
-- Stored: `src/sim/golden/fixtures/` with per-fight `{ nodeId, inputHash, logHash,
+- Stored: `tools/golden/fixtures/` with per-fight `{ nodeId, inputHash, logHash,
   events }`, plus full JSONL for short reference fights.
 - M1 stores 1 full reference log plus a hash summary of 5 seeds until the real combat sim
   exists; T024 adds the full 5 reference fights.

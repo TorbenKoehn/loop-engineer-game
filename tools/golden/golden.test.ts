@@ -7,9 +7,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, it } from 'vitest';
-import { serializeLog, stableStringify } from '../events.ts';
+import { serializeLog, stableStringify } from '../../src/sim/events.ts';
+import { type StubInput, stubFight } from '../../src/sim/golden/stub-fight.ts';
 import { checkGolden, isUpdateMode, lineDiff, sha256 } from './golden.ts';
-import { type StubInput, stubFight } from './stub-fight.ts';
 
 const FIXTURES = fileURLToPath(new URL('./fixtures/', import.meta.url));
 const INPUTS: readonly StubInput[] = [

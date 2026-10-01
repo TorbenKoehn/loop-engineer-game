@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 11 files, 0 subdirectories"
-keywords: ["review", "integer", "biome", "forkable", "harness", "seeded", "vitest", "area"]
+summary: "Index of forge/reviews: 12 files, 0 subdirectories"
+keywords: ["review", "integer", "biome", "forkable", "harness", "seeded", "test", "vitest"]
 type: index
 status: active
 updated: 2026-10-01
@@ -26,3 +26,4 @@ generated: true
 | [R009-T009.md](R009-T009.md) | Review of T009: Content types and effect DSL builders | Review of T009 (approved) | review, content, types, effect, builders |
 | [R010-T093.md](R010-T093.md) | Review of T093: Harden the src/sim determinism ban | Review of T093 (approved) | review, harden, determinism |
 | [R011-T094.md](R011-T094.md) | Review of T094: Batch git calls in harness lint | Review of T094 (approved) | review, batch, calls, harness, lint, stays |
+| [R012-T007.md](R012-T007.md) | Review of T007: Architecture import-rule test | Review of T007 (approved) | review, architecture, import, rule, test |
