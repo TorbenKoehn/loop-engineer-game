@@ -69,6 +69,8 @@ Check, in order, and stop at the first failure:
 3. `git diff -U0 -- <task file>`: under Acceptance Criteria only `[ ]` → `[x]` changes.
 4. Every checked AC has an evidence line in the Log.
 5. The check sequence from `CLAUDE.md`, each command piped through `tail -n 15`; all exit 0.
+6. `git add -A -- <allowed paths>`, then `npm run harness:diff`: exit 0, or the breach is
+   flagged in the task's Notes (budgets.md#measuring-task-diffs).
 
 On failure: resume the same agent once via SendMessage with the exact failure output
 (no new attempt). If the resumed run fails again, start the next attempt per the ladder.

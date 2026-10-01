@@ -15,6 +15,7 @@
     "harness:board": "node tools/harness/cli.ts board",
     "harness:check": "node tools/harness/cli.ts check",
     "harness:new": "node tools/harness/cli.ts new",
+    "harness:diff": "node tools/harness/cli.ts diff",
     "check": "node tools/check/run.ts",
     "e2e": "playwright test",
     "test": "vitest run",

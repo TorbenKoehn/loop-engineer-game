@@ -35,6 +35,7 @@ with `.ts` extensions. Every limit lives in `harness.config.json`; nothing is ha
 | `npm run harness:lint` | Frontmatter, budget, integrity, drift and freshness lint; exit 1 on errors. `-- --json` for JSON |
 | `npm run harness:check` | budgets table + board + index + lint |
 | `npm run harness:new -- <kind> ...` | Scaffold forge items |
+| `npm run harness:diff` | Print `production=<n> total=<m>` of the staged diff (docs/harness/budgets.md#measuring-task-diffs); exit 1 over `task_diff_lines` or 2x total |
 | `npm test` | vitest |
 
 Scaffolding (IDs are allocated globally, next free number):
@@ -117,7 +118,7 @@ Wired in `.claude/settings.json` using the exec form (`command: "node"` plus `ar
 cli.ts                       entry for all commands
 core/    types config glob frontmatter scan forge git date structure lint
 gen/     index board scaffold table          (generated files and scaffolding)
-budgets/ index util overrides meta dirs      (check registry; docs/ code/ forge/ subfolders)
+budgets/ index util overrides meta dirs      (check registry; docs/ code/ forge/ subfolders; forge/diff.ts: harness:diff)
 hooks/   post-edit stop session-start io
 test/    *.test.ts testutil
 ```

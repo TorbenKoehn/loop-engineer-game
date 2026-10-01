@@ -74,3 +74,9 @@ export function lastCommitDates(root: string): (rel: string) => string | null {
     return cache.get(rel) ?? null;
   };
 }
+
+/** Staged `--numstat -z -M --diff-filter=d` (whole-file deletions dropped); null outside a repo. */
+export function stagedNumstat(root: string): string | null {
+  const args = ['diff', '--cached', '--numstat', '-z', '-M', '--diff-filter=d'];
+  return git(root, args)?.toString('utf8') ?? null;
+}

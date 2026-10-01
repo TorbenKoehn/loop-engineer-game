@@ -24,4 +24,4 @@ generated: true
 | [E007/](E007/INDEX.md) | Index of forge/reviews/E007: 3 files, 0 subdirectories | review, conditions, effects, engine, harness, lessons, modifiers, passive |
 | [E008/](E008/INDEX.md) | Index of forge/reviews/E008: 5 files, 0 subdirectories | review, save, meta, agents, codec, export, fixtures, framework |
 | [E009/](E009/INDEX.md) | Index of forge/reviews/E009: 2 files, 0 subdirectories | review, harness, nodes, prompt, reachable, screen, select, system |
-| [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 5 files, 0 subdirectories | review, determinism, epics, milestone, batch, biome, calls, covers |
+| [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 6 files, 0 subdirectories | review, determinism, epics, harness, milestone, batch, biome, calls |

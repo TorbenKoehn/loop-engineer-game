@@ -1,5 +1,7 @@
 import { parseArgs } from 'node:util';
-import { findRoot } from './core/config.ts';
+import { diffBreaches, measureDiff, parseNumstat } from './budgets/forge/diff.ts';
+import { budget, findRoot, loadConfig } from './core/config.ts';
+import { stagedNumstat } from './core/git.ts';
 import { formatFindings, hasErrors, lint } from './core/lint.ts';
 import { scanRepo } from './core/scan.ts';
 import { writeBoard } from './gen/board.ts';
@@ -29,6 +31,24 @@ function runLint(root: string, json: boolean): number {
     console.log(JSON.stringify({ summary, findings }, null, 2));
   } else console.log(formatFindings(findings));
   return hasErrors(findings) ? 1 : 0;
+}
+
+function runCheck(root: string, json: boolean): number {
+  runBudgets(root);
+  runBoard(root);
+  runIndex(root);
+  return runLint(root, json);
+}
+
+/** Staged diff size against `task_diff_lines` and the 2x total rule; exit 1 on a breach. */
+export function runDiff(root: string): number {
+  const numstat = stagedNumstat(root);
+  if (numstat === null) throw new Error('git diff --cached failed (not a git repo?)');
+  const size = measureDiff(parseNumstat(numstat));
+  const breaches = diffBreaches(size, budget(loadConfig(root), 'task_diff_lines').value);
+  console.log(`production=${size.production} total=${size.total}`);
+  for (const b of breaches) console.error(`harness:diff ${b}`);
+  return breaches.length ? 1 : 0;
 }
 
 function runNew(root: string, argv: string[]): void {
@@ -68,16 +88,15 @@ export function main(argv: string[]): number {
     case 'lint':
       return runLint(root, rest.includes('--json'));
     case 'check':
-      runBudgets(root);
-      runBoard(root);
-      runIndex(root);
-      return runLint(root, rest.includes('--json'));
+      return runCheck(root, rest.includes('--json'));
     case 'new':
       runNew(root, rest);
       return 0;
+    case 'diff':
+      return runDiff(root);
     default:
       console.error(
-        'usage: cli.ts index|board|budgets|lint [--json]|check|new <epic|task|review|retro> [--flags]',
+        'usage: cli.ts index|board|budgets|lint [--json]|check|diff|new <epic|task|review|retro> [--flags]',
       );
       return 2;
   }

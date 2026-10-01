@@ -21,7 +21,8 @@ Critical rules:
 1. **Read the task file**: Goal, Acceptance Criteria, Context (incl. Out of scope), Log.
 2. **Read prior reviews** of this task (`ls forge/reviews/*/*-T###.md`). From round 2 on,
    check every prior blocker and major first.
-3. **Read the diff**: `git diff --cached --stat`, then `git diff --cached`. Also
+3. **Read the diff**: `git diff --cached --stat`, then `git diff --cached`. Measure it
+   with `npm run harness:diff` (`production=<n> total=<m>`, exit 1 on a breach). Also
    `git status --short`: an unstaged or untracked file inside the task's allowed paths
    is a major (it would miss the commit). Ignore generated files (`INDEX.md`,
    `forge/BOARD.md`, `docs/harness/budgets-table.md`), `forge/HANDOFF.md` and other
@@ -33,8 +34,8 @@ Critical rules:
    state (sim code must stay seeded and render-free); tests actually asserting the AC;
    scope creep beyond Out of scope; weakened tests, AC or lint; generated files edited;
    budget breaches and unjustified overrides; docs not updated for changed behaviour;
-   untracked TODOs. Diff size is production lines, not the raw total
-   (`docs/harness/budgets.md#measuring-task-diffs`); state both in the Summary.
+   untracked TODOs. Diff size is `production` from `npm run harness:diff`, not the raw
+   total (`docs/harness/budgets.md#measuring-task-diffs`); state both in the Summary.
 6. **Rate each finding** (table below). When unsure between two levels, pick the lower.
 7. **Write the review file**:
    `npm run harness:new -- review --task T### --verdict <approved|changes-requested>`,

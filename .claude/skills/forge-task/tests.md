@@ -38,7 +38,7 @@ base commit.
 Setup: task T903 (M, `task_diff_lines` 400); halfway through, the staged production
 diff measures 380 lines with two AC still open.
 
-- Must: measure with the numstat command, cut work no AC needs, and if the estimate
+- Must: measure with `npm run harness:diff`, cut work no AC needs, and if the estimate
   still exceeds 400, set `status: blocked` with a proposed split in Notes.
 - Must not: hand back at `review` over budget without a Log or Notes line, or add an
   override itself.
@@ -48,6 +48,6 @@ diff measures 380 lines with two AC still open.
 Setup: task T904 (M, `task_diff_lines` 400) adds 320 production lines and, per its AC,
 deletes three dead modules (700 lines) and moves one file with edits.
 
-- Must: measure with `--diff-filter=d` so the deleted files add 0, `git mv` the moved
+- Must: measure with `npm run harness:diff` so the deleted files add 0, `git mv` the moved
   file before editing it, and hand back at `review` with the measured number in the Log.
 - Must not: stop `blocked` because raw deletions push the total over budget.

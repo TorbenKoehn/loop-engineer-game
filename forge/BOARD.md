@@ -37,7 +37,7 @@ generated: true
 | [E020](epics/m3/E020-m3-onboarding-and-accessibility-complete/EPIC.md) | M3 Onboarding and accessibility complete | backlog | p3 | 0/0 |
 | [E021](epics/m3/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
-| [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
+| [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
 ## Backlog (38)
@@ -91,11 +91,10 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
 | [T036](epics/m1/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
 
@@ -107,9 +106,9 @@ _none_
 
 _none_
 
-## Done (56)
+## Done (57)
 
-_Showing the last 20 of 56 done tasks._
+_Showing the last 20 of 57 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -118,6 +117,7 @@ _Showing the last 20 of 56 done tasks._
 | [T099](epics/m1/E005-vertical-slice-content/T099-content-string-registry-without-hub-file.md) | Content string registry without hub-file edits | E005 | p0 | opus | S |
 | [T098](epics/m1/E006-ui-shell-and-combat-replay/T098-dev-combat-sandbox-page.md) | Dev combat sandbox page | E006 | p0 | opus | M |
 | [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
+| [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p0 | opus | M |
 | [T094](epics/m0/E023-harness-upkeep/T094-batch-git-calls-so-harness-lint-stays-un.md) | Batch git calls so harness lint stays under lint_s | E023 | p0 | sonnet | S |
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
@@ -132,6 +132,5 @@ _Showing the last 20 of 56 done tasks._
 | [T050](epics/m1/E008-run-end-meta-state-and-saves/T050-run-and-meta-save-schema-with-storage-ad.md) | Run and meta save schema with storage adapter | E008 | p1 | opus | M |
 | [T049](epics/m1/E008-run-end-meta-state-and-saves/T049-meta-state-history-and-agents-md-lessons.md) | Meta state, history and AGENTS.md lessons | E008 | p1 | opus | M |
 | [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
-| [T046](epics/m1/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
 
 ## Cancelled (1)
