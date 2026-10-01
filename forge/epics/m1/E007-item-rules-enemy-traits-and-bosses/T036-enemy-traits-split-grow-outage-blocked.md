@@ -5,7 +5,7 @@ title: Enemy traits Split, Grow, Outage, Blocked
 summary: "Enemy traits Split (spawn children at index), Grow (timed Severity and damage growth), Outage (disabled tag effects) and Blocked (immune while others live), with trait events."
 keywords: ["traits", "enemies", "split", "grow", "outage", "blocked"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ Each phase-1 enemy teaches its mechanic through its trait, implemented exactly a
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
