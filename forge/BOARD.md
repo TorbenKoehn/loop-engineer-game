@@ -19,7 +19,7 @@ generated: true
 | [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 5/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
-| [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 7/8 |
+| [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 8/8 |
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 1/9 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
@@ -121,11 +121,9 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (0/3)
 
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T016](epics/m1/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
+_none_
 
 ## Review (0/3)
 
@@ -135,9 +133,9 @@ _none_
 
 _none_
 
-## Done (25)
+## Done (26)
 
-_Showing the last 20 of 25 done tasks._
+_Showing the last 20 of 26 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -152,6 +150,7 @@ _Showing the last 20 of 25 done tasks._
 | [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T018](epics/m1/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T017](epics/m1/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
+| [T016](epics/m1/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
 | [T015](epics/m1/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
 | [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
 | [T013](epics/m1/E005-vertical-slice-content/T013-m1-skills-and-memories-data.md) | M1 skills and memories data | E005 | p1 | sonnet | S |
@@ -160,6 +159,5 @@ _Showing the last 20 of 25 done tasks._
 | [T010](epics/m1/E005-vertical-slice-content/T010-generated-plain-english-text-from-templa.md) | Generated plain-English text from templates | E005 | p1 | opus | M |
 | [T009](epics/m1/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
 | [T008](epics/m0/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
-| [T007](epics/m0/E001-game-foundation/T007-architecture-import-rule-test.md) | Architecture import-rule test | E001 | p0 | sonnet | S |
 
 ## Cancelled (0)

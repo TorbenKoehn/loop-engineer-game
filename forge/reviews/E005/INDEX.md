@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E005"
-summary: "Index of forge/reviews/E005: 10 files, 0 subdirectories"
-keywords: ["review", "data", "content", "harness", "memories", "prompt", "skills", "system"]
+summary: "Index of forge/reviews/E005: 11 files, 0 subdirectories"
+keywords: ["review", "data", "content", "harness", "memories", "prompt", "skills", "slice"]
 type: index
 status: active
 updated: 2026-10-01
@@ -25,3 +25,4 @@ generated: true
 | [R024-T013.md](R024-T013.md) | Review of T013: M1 skills and memories data | Review of T013 (approved) | review, skills, memories, data |
 | [R027-T015.md](R027-T015.md) | Review of T015: M1 events, next-fight modifiers and lessons | Review of T015 (approved) | review, events, next, fight, modifiers, lessons |
 | [R029-T016.md](R029-T016.md) | Review of T016: Content validation and M1 slice id test | Review of T016 (changes-requested) | review, content, validation, slice, test |
+| [R032-T016.md](R032-T016.md) | Review of T016: Content validation and M1 slice id test | Review of T016 (approved) | review, content, validation, slice, test |

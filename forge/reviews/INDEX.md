@@ -17,6 +17,6 @@ generated: true
 |---|---|---|
 | [E001/](E001/INDEX.md) | Index of forge/reviews/E001: 8 files, 0 subdirectories | review, biome, forkable, integer, seeded, test, vitest, architecture |
 | [E002/](E002/INDEX.md) | Index of forge/reviews/E002: 6 files, 0 subdirectories | review, enemy, combat, formula, skeleton, tool, walking, action |
-| [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 10 files, 0 subdirectories | review, data, content, harness, memories, prompt, skills, system |
+| [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 11 files, 0 subdirectories | review, data, content, harness, memories, prompt, skills, slice |
 | [E006/](E006/INDEX.md) | Index of forge/reviews/E006: 2 files, 0 subdirectories | combat, page, review, sandbox |
 | [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 5 files, 0 subdirectories | review, determinism, epics, milestone, batch, biome, calls, covers |
