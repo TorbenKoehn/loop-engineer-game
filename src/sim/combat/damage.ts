@@ -4,6 +4,7 @@ import type { Family } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
 import { pct as scale } from '../int.ts';
 import { zoneIx } from './context/ctx.ts';
+import { isBlocked } from './enemy/traits.ts';
 import { raise } from './rules/state.ts';
 import { emit, type Sim } from './state.ts';
 import { hpOf, isAgent, setHp, type Unit, unitRef } from './targeting.ts';
@@ -48,8 +49,13 @@ export function computeAmount(base: number, mods: readonly Mod[] = []): Amount {
   return { base, flat, pct, amount, why: [...flatIds, ...pctIds] };
 }
 
+/** Enemy damage checks (Elusive: E012): a Blocked enemy takes 0 unless the hit bypasses. */
+const gate = (sim: Sim, unit: Unit, a: Amount): Amount =>
+  !(a.bypass || isAgent(unit)) && isBlocked(sim, unit) ? { ...a, amount: 0 } : a;
+
 /** Lands an amount on a unit and emits `damage`; returns the Trust or Severity lost. */
-export function dealDamage(sim: Sim, src: Ref, unit: Unit, a: Amount): number {
+export function dealDamage(sim: Sim, src: Ref, unit: Unit, raw: Amount): number {
+  const a = gate(sim, unit, raw);
   const guard = a.bypass ? 0 : Math.min(unit.guard, a.amount);
   const dealt = Math.min(hpOf(unit), a.amount - guard);
   unit.guard -= guard;

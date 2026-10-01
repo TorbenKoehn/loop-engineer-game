@@ -6,6 +6,7 @@ import { deadlineDamage } from './deadline.ts';
 import { checkEnd, type End, resolveDead, WIN } from './end.ts';
 import { enemiesAct } from './enemy/act.ts';
 import { announceIntent } from './enemy/cycle.ts';
+import { tickTraits } from './enemy/traits.ts';
 import { fireTools } from './fire.ts';
 import { runRules } from './rules/engine.ts';
 import { createSim, emit, enemyRef, type Sim, TICK_MS } from './state.ts';
@@ -55,16 +56,17 @@ function runTicks(sim: Sim): End {
   }
 }
 
-/** One tick. Step 2: timed rules; timed traits arrive with E007. */
+/** One tick in the combat tick order (steps 1 to 8). */
 function tick(sim: Sim): End | undefined {
   sim.t += TICK_MS; // 1
   tickStatuses(sim);
-  runRules(sim, { on: 'every' }); // 2
+  tickTraits(sim); // 2: timed traits, then timed rules
+  runRules(sim, { on: 'every' });
   chargeAll(sim); // 3
   fireTools(sim); // 4
   if (sim.enemies.every((e) => e.sev <= 0)) {
-    resolveDead(sim); // 5: ties favour the player, enemies do not act
-    return WIN;
+    resolveDead(sim); // 5: ties favour the player; Split children keep the fight going
+    if (sim.enemies.length === 0) return WIN;
   }
   enemiesAct(sim); // 6
   deadlineDamage(sim); // 7

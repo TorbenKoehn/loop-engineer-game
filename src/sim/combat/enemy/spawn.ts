@@ -1,6 +1,6 @@
 // The spawn verb: its caps, insertion into the line and the 5-enemy cap
 // (docs/game/systems/combat.md "Readability rules" 1). Spawns enter at the encounter phase.
-import type { Verb } from '../../../content/types/index.ts';
+import type { EnemyDef, Verb } from '../../../content/types/index.ts';
 import { createEnemy, type EnemyRt, emit, enemyRef, type Sim } from '../state.ts';
 import { announceIntent } from './cycle.ts';
 
@@ -20,8 +20,7 @@ export interface Spawner {
  * dropped spawn as `spawn` without dst, v 0 and index -1 when any cap blocks it.
  */
 export function spawnEnemy(sim: Sim, from: Spawner, v: SpawnVerb): void {
-  const def = sim.defs.find((d) => d.id === v.enemy);
-  if (!def) throw new Error(`spawn: enemy '${v.enemy}' is not in the encounter defs`);
+  const def = defOf(sim, v.enemy);
   const src = enemyRef(from.enemy);
   const alive = sim.enemies.filter((e) => e.sev > 0);
   if (blocked(from, v, alive)) {
@@ -37,6 +36,13 @@ export function spawnEnemy(sim: Sim, from: Spawner, v: SpawnVerb): void {
   const d = { def: def.id, index: front ? 0 : alive.length, reason: 'intent' } as const;
   emit(sim, { kind: 'spawn', src, dst: enemyRef(enemy), v: enemy.sev, d });
   announceIntent(sim, enemy);
+}
+
+/** The encounter def `id` may enter the fight as (starting line or spawnDefs). */
+export function defOf(sim: Sim, id: string): EnemyDef {
+  const def = sim.defs.find((d) => d.id === id);
+  if (!def) throw new Error(`spawn: enemy '${id}' is not in the encounter defs`);
+  return def;
 }
 
 const spawnCount = (from: Spawner): number => from.enemy.spawned[from.intent] ?? 0;

@@ -31,9 +31,10 @@ export interface Act {
 type Handler<V extends Verb> = (act: Act, v: V) => void;
 type Handlers = { readonly [K in Verb['verb']]: Handler<Extract<Verb, { verb: K }>> };
 
-/** Enemy amount (phase-scaled, floor) -> dmgTakenPct mods (min 1) -> Guardrails -> Trust. */
+/** Enemy amount (phase-scaled, floor) + Grow -> dmgTakenPct (min 1) -> Guardrails -> Trust. */
 function hitAgent({ sim, enemy }: Act, n: number): void {
-  const a = computeAmount(scaleDmg(enemy.def, sim.phase, n), takenMods(sim, enemy.def.family));
+  const base = scaleDmg(enemy.def, sim.phase, n) + enemy.traitState.dmg;
+  const a = computeAmount(base, takenMods(sim, enemy.def.family));
   dealDamage(sim, enemyRef(enemy), sim.agent, a);
 }
 

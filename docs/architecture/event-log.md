@@ -5,7 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts, src/sim/combat/context/compaction.ts]
+related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/enemy/traits.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts, src/sim/combat/context/compaction.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -50,7 +50,7 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 | `compaction` | ctx | stun ms | `{ kind: 'auto'\|'planned'\|'tool', S, lostBuff? }` |
 | `statusOn` / `statusOff` | t/e -> a/t/e | duration ms | `{ status, remaining }` |
 | `prime` / `primeUsed` | t -> t | pct | `{ filter }` |
-| `trait` | e | value | `{ trait, what }` (Grow, Leak, Flaky toggle, StageTimer reset…) |
+| `trait` | e (-> t) | value | `{ trait, what }` (Grow `sev` and `dmg` with the gain; Outage `timedOut` -> the timed-out tool, v 0, after its `primeUsed*`; Leak, Flaky toggle, StageTimer reset…) |
 | `armorBroken` | t -> e | layer ix | `{ remaining }` |
 | `enemyActed` | e -> a | — | `{ intent, verbs }` |
 | `redirect` | e -> a | — | `{ consumed }` |
@@ -69,6 +69,9 @@ Conventions:
   the change is 0.
 - **Dropped spawn**: a `spawn` intent blocked by its limits emits `spawn` with `src` the
   spawner, **no `dst`**, `v: 0` and `d.index: -1` (`reason: 'intent'`). No enemy is added.
+  A Split child beyond the 5-enemy cap logs the same with `reason: 'split'`.
+- **Split**: each child emits `spawn` (`src` the resolved parent, `reason: 'split'`) right
+  after the parent's `resolved`, then its `intentSet`; `d.index` is its index in the new line.
 - **`statusOff` on expiry**: `src: 'sys'`, `v: 0`.
 - **`statusOff` via `clearStatus`**: `src` is the clearing tool, `v` is the ms that were
   left on the status (cut short).

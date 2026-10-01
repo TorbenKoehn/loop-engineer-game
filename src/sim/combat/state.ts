@@ -55,7 +55,8 @@ export interface EnemyRt {
   readonly uid: number;
   readonly def: EnemyDef;
   sev: number;
-  readonly maxSev: number;
+  /** Grows with the Grow trait. */
+  maxSev: number;
   /** Guardrails, capped at maxSev. */
   guard: number;
   intentIx: number;
@@ -65,6 +66,8 @@ export interface EnemyRt {
   killedBy: Ref;
   /** Successful spawns per intent id this fight (spawn `perFight` cap). */
   readonly spawned: Record<string, number>;
+  /** Timed traits (enemy/traits.ts): ms in the fight, counted in step 2; Grow attack bonus. */
+  readonly traitState: { ms: number; dmg: number };
 }
 
 export interface AgentRt {
@@ -159,6 +162,7 @@ export function createEnemy(def: EnemyDef, uid: number, phase: Phase): EnemyRt {
     statuses: [],
     killedBy: 'sys',
     spawned: {},
+    traitState: { ms: 0, dmg: 0 },
   };
 }
 

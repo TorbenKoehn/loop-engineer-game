@@ -3,6 +3,7 @@ import { content } from '../content/index.ts';
 import type { Family } from '../content/types/basics.ts';
 import type { EnemyDef } from '../content/types/enemy.ts';
 import type { FightModifier } from '../content/types/event.ts';
+import type { EncounterId } from '../content/types/ids.ts';
 import { createSim } from '../sim/combat/state.ts';
 import type { CombatEvent, Ref } from '../sim/events.ts';
 import { type CombatInput, resolveCombat } from '../sim/index.ts';
@@ -413,5 +414,86 @@ describe('traits, prompts and lessons in combat', () => {
       ['a', 2],
     ]);
     expect(deadline(['process_off', 'process_def'])).toEqual(plain);
+  });
+});
+
+// T036: enemy traits Split, Grow, Outage and Blocked on their real enemies, wired by the run.
+describe('enemy traits over real content', () => {
+  const base = onMap();
+  /** The first fight's input against encounter `id`, with Trust to spare. */
+  function at(id: EncounterId, tools?: string[]): CombatInput {
+    const input = combatInput(base, { ...node(base, firstNode(base)), encounter: id });
+    const pick = (t: string) => content.tools.filter((d) => d.id === t);
+    const own = tools?.flatMap(pick).map((d) => ({ def: d, version: 1 as const }));
+    const agent = { ...input.agent, trust: 500, maxTrust: 500, tools: own ?? input.agent.tools };
+    return { ...input, agent };
+  }
+  type Of<K> = Extract<CombatEvent, { kind: K }>;
+  const of = <K extends CombatEvent['kind']>(events: readonly CombatEvent[], kind: K) =>
+    events.filter((e): e is Of<K> => e.kind === kind);
+
+  it('Split(2, 50): Dependency Hell resolves into 2 Transitive Deps at its index', () => {
+    const { events } = resolveCombat(at('p1h1'));
+    const dead = of(events, 'resolved').find((e) => e.src === 'e2');
+    const front = of(events, 'resolved').some((e) => e.src === 'e1' && e.seq < (dead?.seq ?? 0));
+    const ix = front ? 0 : 1; // Context Drift stands in front of it unless already resolved
+    const splits = of(events, 'spawn').filter((e) => e.d.reason === 'split');
+    expect(splits.map((e) => [e.t, e.src, e.dst, e.v, e.d.def, e.d.index])).toEqual([
+      [dead?.t, 'e2', 'e3', 60, 'transitive_dep', ix],
+      [dead?.t, 'e2', 'e4', 60, 'transitive_dep', ix + 1],
+    ]);
+    expect(of(events, 'resolved').map((e) => e.src)).toEqual(expect.arrayContaining(['e3', 'e4']));
+  });
+
+  it('Grow(4000, 6, 1): Scope Creep gains +6 Severity and +1 attack every 4000 ms', () => {
+    const { events } = resolveCombat(at('p1e4', ['cat']));
+    const grown = of(events, 'trait').filter((e) => e.t <= 8000);
+    expect(grown.map((e) => [e.t, e.src, e.v, e.d.what])).toEqual([
+      [4000, 'e3', 6, 'sev'],
+      [4000, 'e3', 1, 'dmg'],
+      [8000, 'e3', 6, 'sev'],
+      [8000, 'e3', 1, 'dmg'],
+    ]);
+    const hits = of(events, 'damage').filter((e) => e.src === 'e3' && e.t <= 9000);
+    expect(hits.map((e) => [e.t, e.d.base])).toEqual([
+      [3000, 2],
+      [6000, 3],
+      [9000, 4],
+    ]);
+  });
+
+  it('Outage(Web): web_search fires and adds output but does nothing; Cache exempts it', () => {
+    const input = at('p1e5', ['web_search']);
+    const { events } = resolveCombat(input);
+    const fired = of(events, 'toolFired').map((e) => e.t);
+    const outage = of(events, 'trait').filter((e) => e.src === 'e2' && e.dst === 't0');
+    expect(outage.map((e) => [e.t, e.d.trait, e.d.what])).toEqual(
+      fired.map((t) => [t, 'outage', 'timedOut']),
+    );
+    expect(of(events, 'tokens').filter((e) => e.src === 't0')[0]).toMatchObject({ t: fired[0] });
+    expect(of(events, 'damage').filter((e) => e.src === 't0')).toEqual([]);
+    const cache = def(content.memories, 'cache');
+    const cached = resolveCombat({ ...input, memories: cache ? [cache] : [] }).events;
+    expect(of(cached, 'damage').find((e) => e.src === 't0')?.t).toBe(fired[0]);
+  });
+
+  it('Blocked: Yak Shave takes 0 while its tasks live; Deadline still hits it', () => {
+    const { events } = resolveCombat(at('p1x1'));
+    const sed = of(events, 'damage').filter((e) => e.src === 't2');
+    const first = sed.filter((e) => e.t === sed[0]?.t);
+    expect(first.map((e) => [e.dst, (e.v ?? 0) > 0])).toEqual([
+      ['e1', true],
+      ['e2', true],
+      ['e3', true],
+      ['e4', false],
+    ]);
+    const idle = { ...at('p1x1', []), encounter: { ...at('p1x1').encounter, deadlineMs: 1000 } };
+    const deadline = of(resolveCombat(idle).events, 'damage').filter((e) => e.src === 'sys');
+    expect(deadline.slice(0, 4).map((e) => [e.t, e.dst, e.v])).toEqual([
+      [2000, 'e1', 1],
+      [2000, 'e2', 1],
+      [2000, 'e3', 1],
+      [2000, 'e4', 1],
+    ]);
   });
 });

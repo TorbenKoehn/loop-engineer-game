@@ -1,7 +1,8 @@
 // Fight end: tick step 8 and the timeout cap (docs/game/systems/combat.md "Tick order").
 // Ties favour the player: enemies are checked before Trust.
 import { OVERTIME_CAP_MS } from './deadline.ts';
-import { emit, enemyRef, type Sim } from './state.ts';
+import { splitChildren } from './enemy/traits.ts';
+import { type EnemyRt, emit, enemyRef, type Sim } from './state.ts';
 import type { EndReason, Outcome } from './types.ts';
 
 export interface End {
@@ -13,13 +14,21 @@ export const WIN: End = { outcome: 'win', reason: 'resolved' };
 const LOSS_TRUST: End = { outcome: 'loss', reason: 'trust' };
 const TIMEOUT: End = { outcome: 'loss', reason: 'timeout' };
 
-/** Resolves enemies at Severity <= 0, front to back. On-death traits and spawns: E007. */
+/** Resolves enemies at Severity <= 0, front to back; Split children take the dead one's index. */
 export function resolveDead(sim: Sim): void {
+  let alive = sim.enemies.filter((e) => e.sev > 0).length;
+  const line: EnemyRt[] = [];
   for (const enemy of sim.enemies) {
-    if (enemy.sev <= 0)
-      emit(sim, { kind: 'resolved', src: enemyRef(enemy), d: { by: enemy.killedBy } });
+    if (enemy.sev > 0) {
+      line.push(enemy);
+      continue;
+    }
+    emit(sim, { kind: 'resolved', src: enemyRef(enemy), d: { by: enemy.killedBy } });
+    const children = splitChildren(sim, enemy, { index: line.length, alive });
+    alive += children.length;
+    line.push(...children);
   }
-  sim.enemies = sim.enemies.filter((e) => e.sev > 0);
+  sim.enemies = line;
 }
 
 /** Step 8: win if no enemy is left, else loss at Trust <= 0, else timeout at the hard cap. */
