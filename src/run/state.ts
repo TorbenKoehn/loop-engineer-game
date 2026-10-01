@@ -141,13 +141,20 @@ export type ShopOffer = {
 /** The open shop on `node`; `rerolls` counts the rerolls this visit. */
 export type ShopPending = { kind: 'shop'; node: NodeId; rerolls: number; offers: ShopOffer[] };
 
+/** Credits and interest are already paid; shown as separate lines. */
+export type RewardPending = {
+  kind: 'reward';
+  credits: number;
+  interest: number;
+  cards: RewardCard[];
+};
+
 export type Pending =
   | { kind: 'promptOffer'; prompts: PromptId[] }
-  /** Credits and interest are already paid; shown as separate lines. */
-  | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] }
+  | RewardPending
   | ShopPending
-  /** `item` was gained without space; `next` is the mode after discardItem, `resume` its shop. */
-  | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending }
+  /** `item` was gained without space; `next` follows discardItem, `resume` is its shop/reward. */
+  | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending | RewardPending }
   /** The 3 AGENTS.md lessons offered at run end (meta-progression.md#agentsmd-lessons). */
   | { kind: 'lessonOffer'; lessons: LessonId[] };
 

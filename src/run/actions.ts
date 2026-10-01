@@ -15,6 +15,10 @@ export type Action =
   | { t: 'reroll' }
   | { t: 'leaveShop' }
   | { t: 'abandon' }
+  | { t: 'restHeal' }
+  /** `slot` indexes the equipped tools. */
+  | { t: 'restUpgrade'; slot: number }
+  | { t: 'takeTreasure' }
   /** `replace` names the AGENTS.md line to overwrite; required when it is full. */
   | { t: 'pickLesson'; ix: number; replace?: number }
   | { t: 'skipLesson' };

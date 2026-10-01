@@ -28,6 +28,12 @@ function label(a: Action): string {
       return t('ui.action.reroll');
     case 'leaveShop':
       return t('ui.action.leave_shop');
+    case 'restHeal':
+      return t('ui.action.rest_heal');
+    case 'restUpgrade':
+      return t('ui.action.rest_upgrade', { n: a.slot + 1 });
+    case 'takeTreasure':
+      return t('ui.action.take_treasure');
     case 'abandon':
       return t('ui.action.abandon');
     case 'pickLesson':

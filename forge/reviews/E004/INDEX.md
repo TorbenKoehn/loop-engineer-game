@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E004"
-summary: "Index of forge/reviews/E004: 5 files, 0 subdirectories"
-keywords: ["review", "build", "combatinput", "credits", "encounter", "fight", "generation", "interest"]
+summary: "Index of forge/reviews/E004: 7 files, 0 subdirectories"
+keywords: ["review", "cycle", "elite", "free", "idle", "tier", "build", "combatinput"]
 type: index
 status: active
 updated: 2026-10-01
@@ -20,3 +20,5 @@ generated: true
 | [R040-T042.md](R040-T042.md) | Review of T042: Fight nodes: build CombatInput and resolve | Review of T042 (approved) | review, fight, nodes, build, combatinput, resolve |
 | [R044-T043.md](R044-T043.md) | Review of T043: Rewards: credits, interest and 1-of-3 picks | Review of T043 (approved) | review, rewards, credits, interest, picks |
 | [R046-T044.md](R046-T044.md) | Review of T044: Package Registry shop: offers, buy, reroll,… | Review of T044 (approved) | review, package, registry, shop, offers, reroll |
+| [R059-T046.md](R059-T046.md) | Review of T046: Idle Cycle, Free Tier and elite memory nodes | Review of T046 (changes-requested) | review, idle, cycle, free, tier, elite |
+| [R060-T046.md](R060-T046.md) | Review of T046: Idle Cycle, Free Tier and elite memory nodes | Review of T046 (approved) | review, idle, cycle, free, tier, elite |

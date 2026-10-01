@@ -156,9 +156,10 @@ describe('run end', () => {
       }
       return s;
     };
-    // Deterministic seed search: the first of s0..s199 that ships (win rate is E010 balance).
+    // Deterministic seed search: s0..s199 until one ships and one loses (win rate is E010 balance).
     const ends: RunState[] = [];
-    for (let i = 0; i < 200 && !ends.some((s) => s.result?.outcome === 'shipped'); i++) {
+    const seen = (o: string) => ends.some((s) => s.result?.outcome === o);
+    for (let i = 0; i < 200 && !(seen('shipped') && seen('ctrlc')); i++) {
       ends.push(play(`s${i}`));
     }
     const shipped = ends.find((s) => s.result?.outcome === 'shipped');

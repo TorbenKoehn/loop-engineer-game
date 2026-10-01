@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -111,8 +111,8 @@ otherwise needs `replace`, the line to overwrite (`noLessonSlot` if missing or i
 | `reward` | `pickReward`, `skipReward`, build actions |
 | `shop` | `buy`, `sell`, `reroll`, `prune`, `leaveShop`, build actions |
 | `event` | `chooseEvent`, build actions |
-| `rest` | `restHeal`, `restUpgrade` |
-| `treasure` | `takeTreasure` |
+| `rest` | `restHeal`, `restUpgrade` (`slot` = equipped tool index, below v3) |
+| `treasure` | `takeTreasure` (Free Tier; a Critical Bug win adds its memory to the open reward, discard resumes it) |
 | `discard` | `discardItem` (when an item is gained with no space) |
 | `phaseEnd` | `continue` |
 | `shipped` | `shipIt`, `keepLooping` |

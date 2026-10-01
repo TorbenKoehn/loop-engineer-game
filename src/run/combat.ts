@@ -4,6 +4,7 @@ import { content } from '../content/index.ts';
 import type { EncounterDef, EnemyDef } from '../content/types/enemy.ts';
 import { type CombatInput, resolveCombat } from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
+import { eliteMemory } from './nodes/memory.ts';
 import { enterReward } from './rewards.ts';
 import type { MapNode, RunState } from './state.ts';
 import { addFight, endRun } from './stats.ts';
@@ -101,5 +102,7 @@ export function fight(state: RunState, node: MapNode): RunState {
 export function afterCombat(state: RunState): RunState {
   if (state.combat?.outcome.outcome !== 'win') return endRun(state, 'ctrlc');
   const node = state.map.nodes.find((n) => n.id === state.combat?.nodeId);
-  return node?.type === 'release' ? endRun(state, 'shipped') : enterReward(state);
+  if (node?.type === 'release') return endRun(state, 'shipped');
+  const rewarded = enterReward(state);
+  return node?.type === 'criticalBug' ? eliteMemory(rewarded) : rewarded;
 }

@@ -5,6 +5,8 @@ import { afterCombat, fight } from './combat.ts';
 import { discardItem, discardRefs } from './gain.ts';
 import { reachable } from './map/graph.ts';
 import { lessonActions, pickLesson, skipLesson } from './meta/lessons.ts';
+import { takeTreasure } from './nodes/memory.ts';
+import { restActions, restHeal, restUpgrade } from './nodes/rest.ts';
 import { pickReward, rewardActions, skipReward } from './rewards.ts';
 import { buy, enterShop, leaveShop, reroll, sell, shopActions } from './shop.ts';
 import type { MapNode, NodeId, RunState } from './state.ts';
@@ -36,7 +38,9 @@ function travel(state: RunState, node: NodeId): ApplyResult {
 /** Fight nodes resolve the fight, registry nodes open the shop; others stay on the map. */
 function arrive(state: RunState, node: MapNode): RunState {
   if (node.encounter !== null) return fight(state, node);
-  return node.type === 'registry' ? enterShop(state, node.id) : state;
+  if (node.type === 'registry') return enterShop(state, node.id);
+  if (node.type === 'idleCycle') return { ...state, mode: 'rest' };
+  return node.type === 'freeTier' ? { ...state, mode: 'treasure' } : state;
 }
 
 /** Gives up from the map: a loss without a lesson offer. */
@@ -74,6 +78,12 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return leaveShop(state);
     case 'abandon':
       return abandon(state);
+    case 'restHeal':
+      return restHeal(state);
+    case 'restUpgrade':
+      return restUpgrade(state, action.slot);
+    case 'takeTreasure':
+      return takeTreasure(state);
     case 'pickLesson':
       return pickLesson(state, action.ix, action.replace);
     case 'skipLesson':
@@ -102,6 +112,10 @@ export function legalActions(state: RunState): readonly Action[] {
       return rewardActions(state);
     case 'shop':
       return shopActions(state);
+    case 'rest':
+      return restActions(state);
+    case 'treasure':
+      return [{ t: 'takeTreasure' }];
     case 'runEnd':
       return lessonActions(state);
     case 'discard':
