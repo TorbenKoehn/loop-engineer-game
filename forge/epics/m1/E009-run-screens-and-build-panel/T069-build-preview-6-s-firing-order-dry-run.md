@@ -5,7 +5,7 @@ title: "Sim preview: 6 s firing order dry run"
 summary: "A pure sim function previewFiring(input, ms) that dry-runs a loadout with no enemies and returns the firing order, documented in sim-core.md and fast enough to run after every build action."
 keywords: ["preview", "sim", "dry-run", "firing-order", "previewFiring"]
 type: task
-status: ready
+status: in-progress
 priority: p2
 model: opus
 size: S
@@ -52,3 +52,4 @@ shows after every change.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

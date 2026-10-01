@@ -80,23 +80,23 @@ generated: true
 | [T115](epics/m1/E011-juice-audio-settings-and-tutorial/T115-audio-buses-autoplay-safe-start-and-hidd.md) | Audio buses, autoplay-safe start and hidden mute | E011 | p2 | sonnet | S |
 | [T116](epics/m1/E011-juice-audio-settings-and-tutorial/T116-settings-overlay-with-volume-motion-and.md) | Settings overlay with volume, motion and CRT | E011 | p2 | sonnet | M |
 
-## Ready (6)
+## Ready (5)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T104](epics/m0/E024-harness-upkeep-2/T104-harness-diff-counts-css-and-skips-genera.md) | harness:diff counts CSS and skips generated files | E024 | p1 | opus | M |
 | [T118](epics/m0/E024-harness-upkeep-2/T118-lint-warns-on-pinned-sim-numbers-in-e2e.md) | Lint warns on pinned sim numbers in e2e specs | E024 | p1 | sonnet | S |
-| [T069](epics/m1/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Sim preview: 6 s firing order dry run | E009 | p2 | opus | S |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T068](epics/m1/E009-run-screens-and-build-panel/T068-build-panel-loadout-stash-policy-breakpo.md) | Build panel tree: loadout, stash, equip and chips | E009 | p1 | opus | M |
 | [T119](epics/m0/E024-harness-upkeep-2/T119-check-stays-green-under-parallel-load.md) | Check stays green under parallel load | E024 | p1 | sonnet | S |
+| [T069](epics/m1/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Sim preview: 6 s firing order dry run | E009 | p2 | opus | S |
 
 ## Review (0/3)
 
