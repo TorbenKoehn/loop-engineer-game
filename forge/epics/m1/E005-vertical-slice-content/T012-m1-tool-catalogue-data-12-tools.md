@@ -5,7 +5,7 @@ title: M1 tool catalogue data (12 tools)
 summary: "The 12 vertical-slice tools as typed data with tags, rarity, weight, cooldown, output, pipe, target, v1/v2/v3 effects, unlock refs, names and flavour lines."
 keywords: ["content", "tools", "catalogue", "cooldowns", "versions"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Provide every M1 tool exactly as the catalogue states so combat, rewards and the
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

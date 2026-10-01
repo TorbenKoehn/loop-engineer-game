@@ -5,7 +5,7 @@ title: Statuses and charge-rate formula
 summary: "Haste, Slow, Throttle and Stun on tools, agent and enemies with timers, stacking, caps and duration mods; the clamped charge-rate formula; status and charge effects with selectors."
 keywords: ["sim", "statuses", "charge-rate", "haste", "throttle", "stun"]
 type: task
-status: backlog
+status: ready
 priority: p0
 model: opus
 size: M

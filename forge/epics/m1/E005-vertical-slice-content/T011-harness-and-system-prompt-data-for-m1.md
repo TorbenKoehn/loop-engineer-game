@@ -5,7 +5,7 @@ title: Harness and system prompt data for M1
 summary: "Terminal Purist and IDE Companion harness defs with traits as rules, and the senior, concise and step_by_step system prompts with weights, effects and strings."
 keywords: ["content", "harness", "system-prompts", "traits", "starters"]
 type: task
-status: backlog
+status: ready
 priority: p1
 model: sonnet
 size: S

@@ -5,7 +5,7 @@ title: Targeting, damage formula and Guardrails
 summary: "Target selectors front, back, lowest, all, self; the visible damage formula with flat and percent mods and why ids; Guardrails on agent and enemies; guard and heal effects."
 keywords: ["sim", "targeting", "damage-formula", "guardrails", "heal", "why"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -51,3 +51,4 @@ Implement the one visible damage formula and the targeting rules so every hit is
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

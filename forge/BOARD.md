@@ -39,21 +39,16 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 4/9 |
 
-## Backlog (75)
+## Backlog (70)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
-| [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
 | [T021](epics/m1/E002-combat-simulation-core/T021-enemy-intent-cycles-action-verbs-and-pha.md) | Enemy intent cycles, action verbs and phase scaling | E002 | p0 | opus | M |
 | [T025](epics/m1/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
 | [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
-| [T011](epics/m1/E005-vertical-slice-content/T011-harness-and-system-prompt-data-for-m1.md) | Harness and system prompt data for M1 | E005 | p1 | sonnet | S |
-| [T012](epics/m1/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
 | [T013](epics/m1/E005-vertical-slice-content/T013-m1-skills-and-memories-data.md) | M1 skills and memories data | E005 | p1 | sonnet | S |
-| [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
 | [T015](epics/m1/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
 | [T016](epics/m1/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
 | [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
@@ -119,18 +114,24 @@ generated: true
 | [T090](epics/m0/E023-harness-upkeep/T090-split-tsconfig-into-app-and-tools-projec.md) | Split tsconfig into app and tools projects | E023 | p2 | opus | M |
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 
-## Ready (4)
+## Ready (6)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
 | [T005](epics/m0/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
+| [T011](epics/m1/E005-vertical-slice-content/T011-harness-and-system-prompt-data-for-m1.md) | Harness and system prompt data for M1 | E005 | p1 | sonnet | S |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
+| [T012](epics/m1/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
+| [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
 
 ## Review (0/3)
 

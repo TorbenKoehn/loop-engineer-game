@@ -5,7 +5,7 @@ title: Phase-1 enemies, elite, boss and encounter pools
 summary: "Phase-1 enemies, Yak Shave elite with its tasks and Side Quest, Legacy Monolith with stages and add, and encounters p1e1-p1e5, p1h1-p1h5, p1x1, p1b as data."
 keywords: ["content", "enemies", "phase-1", "boss", "encounters", "elite"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Provide every slice enemy and encounter as data with exact stat blocks, intents 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
