@@ -5,7 +5,7 @@ title: Sim determinism property tests and reference goldens
 summary: "fast-check property tests for determinism and sim invariants, canonical JSONL serialisation with SHA-256 hashes, and 5 reference golden fights."
 keywords: ["sim", "property-tests", "golden-logs", "determinism", "fast-check", "hashing"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Lock in determinism: the same input always gives the same log, sim invariants ho
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
