@@ -6,7 +6,7 @@ summary: "npm run harness:diff prints production and total changed lines of the 
 keywords: ["harness-diff", "task_diff_lines", "numstat", "production-lines", "budgets", "review"]
 type: task
 status: ready
-priority: p1
+priority: p0
 model: opus
 size: M
 updated: 2026-10-01

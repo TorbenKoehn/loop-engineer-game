@@ -5,7 +5,7 @@ title: Seeded map generation and encounter selection
 summary: "7x5 phase map with 4 non-crossing paths, fixed and weighted rows, placement constraints, tutorial row, and encounter selection per node from easy, hard and elite pools."
 keywords: ["map", "generation", "encounters", "seeded", "run"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ Every run gets a fair, seeded map whose nodes already know their encounter, so t
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

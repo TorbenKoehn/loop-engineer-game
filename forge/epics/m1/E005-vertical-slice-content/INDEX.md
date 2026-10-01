@@ -1,6 +1,6 @@
 ---
 title: "Index: forge/epics/m1/E005-vertical-slice-content"
-summary: "Index of forge/epics/m1/E005-vertical-slice-content: 9 files, 0 subdirectories"
+summary: "Index of forge/epics/m1/E005-vertical-slice-content: 10 files, 0 subdirectories"
 keywords: ["content", "dsl", "slice", "strings", "types", "validation", "boss", "builders"]
 type: index
 status: active
@@ -24,3 +24,4 @@ generated: true
 | [T014-phase-1-enemies-elite-boss-and-encounter.md](T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | Phase-1 enemies, Yak Shave elite with its tasks and Side Quest, Legacy Monolith with stages and add, and encounters p1e1-p1e5, p1h1-p1h5, p1x1, p1b as data. | content, enemies, phase-1, boss, encounters, elite |
 | [T015-m1-events-next-fight-modifiers-and-lesso.md](T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | The 4 vertical-slice Standup events as data, next-fight modifier types, the enemy family table and all 10 AGENTS.md lessons with strings. | content, events, standup, lessons, modifiers |
 | [T016-content-validation-and-m1-slice-id-test.md](T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | src/content/validate.ts implementing validation rules 1-6, the M1 id-list test against the vertical slice, starting-baseline checks and CONTENT_VERSION. | content, validation, slice, tests, content-version |
+| [T099-content-string-registry-without-hub-file.md](T099-content-string-registry-without-hub-file.md) | Content string registry without hub-file edits | Adding a content area must not require editing en.ts or src/content/index.ts; five parallel content tasks conflicted on these hub files (RT002 P1). | task, content, string, registry, without, file |
