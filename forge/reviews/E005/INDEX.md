@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E005"
-summary: "Index of forge/reviews/E005: 7 files, 0 subdirectories"
-keywords: ["review", "data", "harness", "prompt", "system", "boss", "builders", "catalogue"]
+summary: "Index of forge/reviews/E005: 8 files, 0 subdirectories"
+keywords: ["review", "data", "harness", "memories", "prompt", "skills", "system", "boss"]
 type: index
 status: active
 updated: 2026-10-01
@@ -22,3 +22,4 @@ generated: true
 | [R021-T011.md](R021-T011.md) | Review of T011: Harness and system prompt data for M1 | Review of T011 (changes-requested) | review, harness, system, prompt, data |
 | [R022-T013.md](R022-T013.md) | Review of T013: M1 skills and memories data | Review of T013 (changes-requested) | review, skills, memories, data |
 | [R023-T011.md](R023-T011.md) | Review of T011: Harness and system prompt data for M1 | Review of T011 (approved) | review, harness, system, prompt, data |
+| [R024-T013.md](R024-T013.md) | Review of T013: M1 skills and memories data | Review of T013 (approved) | review, skills, memories, data |

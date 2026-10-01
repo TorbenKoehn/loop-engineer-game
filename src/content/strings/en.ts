@@ -4,6 +4,7 @@
 // Trigger and cond templates wrap the effect clause `{then}`.
 import { enEnemies } from './en-enemies.ts';
 import { enHarnesses } from './en-harnesses.ts';
+import { enSkills } from './en-skills.ts';
 import { enTools } from './en-tools.ts';
 
 export const en = {
@@ -145,6 +146,7 @@ export const en = {
   ...enEnemies,
   ...enHarnesses,
   ...enTools,
+  ...enSkills,
 } as const;
 
 export type StringKey = keyof typeof en;

@@ -17,7 +17,7 @@ generated: true
 |---|---|---|
 | [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 4 subdirectories | agents-md, boss, accessibility, achievements, arch-test, art, ascension, ascii-art |
 | [retros/](retros/INDEX.md) | Index of forge/retros: 1 files, 0 subdirectories | diff-budget, e001, hotfix, retro, sizing, worktrees |
-| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 0 files, 4 subdirectories | review, architecture, batch, biome, boss, builders, calls, catalogue |
+| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 0 files, 4 subdirectories | review, architecture, batch, biome, boss, calls, combat, damage |
 
 ## Files
 
