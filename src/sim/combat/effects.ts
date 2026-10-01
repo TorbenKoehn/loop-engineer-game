@@ -2,6 +2,7 @@
 // All three go through the damage formula (docs/game/systems/combat.md "Damage formula").
 import type { Effect, Value } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
+import { compact } from './context/compaction.ts';
 import { removeTokens } from './context/tokens.ts';
 import { type Amount, computeAmount, dealDamage, type Mod } from './damage.ts';
 import { addPrimes } from './order/primes.ts';
@@ -23,12 +24,13 @@ export function applyEffects(sim: Sim, tool: ToolRt, mods: readonly Mod[] = NO_M
   for (const effect of tool.def.effects) applyEffect(sim, act, effect);
 }
 
-/** One effect of a tool or an item rule. compact, summon, mod, custom: T029, E013, T033, T037. */
+/** One effect of a tool or an item rule. summon, mod, custom: E013, T033, T037. */
 export function applyEffect(sim: Sim, act: Activation, effect: Effect): void {
   const { src } = act;
   const version = versionOf(act);
   if (effect.do === 'dmg') hit(sim, act, effect);
   else if (effect.do === 'removeCtx') removeTokens(sim, src, valueAt(effect.v, version));
+  else if (effect.do === 'compact') compact(sim, 'tool');
   else if (effect.do === 'guard') gainGuard(sim, src, sim.agent, amountOf(act, effect.v));
   else if (effect.do === 'heal') heal(sim, src, sim.agent, amountOf(act, effect.v));
   else if (isStatusEffect(effect)) applyStatusEffect(sim, act, effect);

@@ -24,20 +24,24 @@ export function removeTokens(sim: Sim, src: Ref, n: number): number {
   return removed;
 }
 
-/** After the effects: S += max(0, output + mods); negative output removes (no mods). */
-export function outputTokens(sim: Sim, tool: ToolRt, outputMods = 0): void {
+/**
+ * After the effects: S += max(0, output + mods); negative output removes (no mods).
+ * Returns the tokens added (0 for a removal).
+ */
+export function outputTokens(sim: Sim, tool: ToolRt, outputMods = 0): number {
   const { output } = tool.def;
   const src = toolRef(tool);
-  if (output < 0) removeTokens(sim, src, -output);
-  else {
-    const out = Math.max(0, output + outputMods);
-    sim.agent.ctx.S += out;
-    if (out > 0) emitTokens(sim, src, out, 'output');
+  if (output < 0) {
+    removeTokens(sim, src, -output);
+    return 0;
   }
+  const out = Math.max(0, output + outputMods);
+  sim.agent.ctx.S += out;
+  if (out > 0) emitTokens(sim, src, out, 'output');
+  return out;
 }
 
-/** Output, then the overflow check and the zone once. Returns whether it auto-compacted. */
+/** Output, then the compaction check and the zone once. Returns whether it auto-compacted. */
 export function addOutput(sim: Sim, tool: ToolRt, outputMods = 0): boolean {
-  outputTokens(sim, tool, outputMods);
-  return checkOverflow(sim);
+  return checkOverflow(sim, outputTokens(sim, tool, outputMods) > 0);
 }

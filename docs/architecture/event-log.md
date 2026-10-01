@@ -36,7 +36,7 @@ the line shifts), `s<uid>` summon, `ctx` the context bar, `sys` system (Deadline
 
 | Kind | src -> dst | `v` | `d` |
 |---|---|---|---|
-| `fightStart` | sys | deadlineMs | `{ W, B, S, N, zone, trust, maxTrust }` |
+| `fightStart` | sys | deadlineMs | `{ W, B, S, N, zone, trust, maxTrust, policyOff? }` |
 | `spawn` | e/sys -> e | sev | `{ def, index, reason: 'start'\|'split'\|'clone'\|'intent'\|'stage'\|'event' }` |
 | `intentSet` | e | windupMs | `{ intent, ix }` |
 | `toolFired` | t | progress overflow (0) | `{ def, version, echo? }` |
@@ -72,7 +72,11 @@ Conventions:
 - **`statusOff` on expiry**: `src: 'sys'`, `v: 0`.
 - **`statusOff` via `clearStatus`**: `src` is the clearing tool, `v` is the ms that were
   left on the status (cut short).
-- **`compaction`**: `d.S` is the signal after the reset (`N` is 0). `lostBuff` names the
+- **`fightStart.policyOff`**: `1` when the compaction policy would loop and is disabled
+  (UI warning); absent otherwise and for policy never. Added in `LOG_VERSION` 2.
+- **`compaction`**: `d.kind` is `auto` (overflow, Stun 2000 ms), `planned` (policy) or
+  `tool` (the `compact` effect of a tool or item rule); both Stun 1000 ms (`v`).
+  `d.S` is the signal after the reset (`N` is 0). `lostBuff` names the
   buff an auto-compaction removed: `<tool ref>:haste` (followed by `statusOff` from `ctx`)
   or `<tool ref>:<prime id>`, e.g. `t2:prime:read_file`; absent when none was held.
 
@@ -89,7 +93,7 @@ re-deriving rules. Adding a kind or a field is a **log format change**: bump
   breaks ties for equal `t`.
 - One activation produces, in order: `toolFired`, `primeUsed*` (one per consumed prime),
   its effect events (`damage`, `guard`, …), `tokens` (output), events of `toolFired` rules,
-  `compaction?` (with its `statusOn` Stun and the lost buff's `statusOff?`), events of
+  `compaction?` (auto or planned, with its `statusOn` Stun and the lost buff's `statusOff?`), events of
   `compaction` rules, `zoneChanged?` (at most one per activation: the zone is updated once,
   after `F`, any compaction and the compaction rules changed it, so `zoneChanged` never
   enters Overflow), `pipe?`. A noise injection orders `tokens`, `compaction?`,

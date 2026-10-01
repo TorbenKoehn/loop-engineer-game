@@ -1,6 +1,6 @@
 // resolveCombat: input -> fixed 50 ms ticks in the combat tick order -> result and event log.
 // Rules: docs/game/systems/combat.md "Tick order"; API: docs/architecture/sim-core.md.
-import { checkOverflow } from './context/compaction.ts';
+import { checkOverflow, policyOff } from './context/compaction.ts';
 import { zoneIx } from './context/ctx.ts';
 import { deadlineDamage } from './deadline.ts';
 import { checkEnd, type End, resolveDead, WIN } from './end.ts';
@@ -35,9 +35,11 @@ export function resolveCombat(input: CombatInput, opts: CombatOptions = {}): Com
 
 function startFight(sim: Sim): void {
   const { trust, maxTrust, ctx } = sim.agent;
-  const d = { W: ctx.W, B: ctx.B, S: ctx.S, N: ctx.N, zone: zoneIx(ctx.zone), trust, maxTrust };
+  const off = policyOff(ctx) ? { policyOff: 1 as const } : {}; // would loop: UI warning
+  const zone = zoneIx(ctx.zone);
+  const d = { W: ctx.W, B: ctx.B, S: ctx.S, N: ctx.N, zone, trust, maxTrust, ...off };
   emit(sim, { kind: 'fightStart', src: 'sys', v: sim.deadlineMs, d });
-  checkOverflow(sim); // the one overflow check after the start modifiers
+  checkOverflow(sim); // the one compaction check after the start modifiers
   for (const [index, enemy] of sim.enemies.entries()) {
     const spawn = { def: enemy.def.id, index, reason: 'start' } as const;
     emit(sim, { kind: 'spawn', src: 'sys', dst: enemyRef(enemy), v: enemy.sev, d: spawn });

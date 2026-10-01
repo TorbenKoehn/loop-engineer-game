@@ -2,7 +2,7 @@
 // Format spec: docs/architecture/event-log.md. Data only, no text; every number is a safe integer.
 
 /** Log format version. Bump on any kind or field change and update goldens in the same change. */
-export const LOG_VERSION = 1;
+export const LOG_VERSION = 2;
 
 /** `a` agent, `t<slot>` tool, `e<uid>` enemy, `s<uid>` summon, `ctx` context bar, `sys` system. */
 export type Ref = 'a' | `t${number}` | `e${number}` | `s${number}` | 'ctx' | 'sys';
@@ -30,7 +30,10 @@ type End = { outcome: 'win' | 'loss'; reason: 'resolved' | 'trust' | 'timeout'; 
 
 /** Discriminated union over `kind`; the table in event-log.md is the source of truth. */
 export type CombatEvent =
-  | Ev<'fightStart', Ints<'W' | 'B' | 'S' | 'N' | 'zone' | 'trust' | 'maxTrust'>>
+  | Ev<
+      'fightStart',
+      Ints<'W' | 'B' | 'S' | 'N' | 'zone' | 'trust' | 'maxTrust'> & { policyOff?: 1 }
+    >
   | Ev<'spawn', { def: string; index: number; reason: SpawnReason }>
   | Ev<'intentSet', { intent: string; ix: number }>
   | Ev<'toolFired', { def: string; version: number; echo?: number }>

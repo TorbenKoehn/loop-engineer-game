@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E003"
-summary: "Index of forge/reviews/E003: 4 files, 0 subdirectories"
-keywords: ["review", "context", "auto", "baseline", "blockers", "compaction", "enemy", "injection"]
+summary: "Index of forge/reviews/E003: 5 files, 0 subdirectories"
+keywords: ["review", "compaction", "context", "auto", "baseline", "blockers", "compact", "effect"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R043-T026.md](R043-T026.md) | Review of T026: Tool outputs and context removal | Review of T026 (approved) | review, tool, outputs, context, removal |
 | [R047-T027.md](R047-T027.md) | Review of T027: Enemy noise injection and blockers | Review of T027 (approved) | review, enemy, noise, injection, blockers |
 | [R049-T028.md](R049-T028.md) | Review of T028: Auto-compaction on overflow | Review of T028 (approved) | review, auto, compaction, overflow |
+| [R061-T029.md](R061-T029.md) | Review of T029: Planned compaction policy and compact effect | Review of T029 (approved) | review, planned, compaction, policy, compact, effect |

@@ -21,7 +21,7 @@ export const WINDOW_MIN = 40;
 export const ZONES: readonly Zone[] = ['cold', 'focused', 'rot', 'overflow'];
 export const zoneIx = (zone: Zone): number => ZONES.indexOf(zone);
 
-/** The agent's context bar. Fill F = S + N. Policy and compaction state: T029. */
+/** The agent's context bar. Fill F = S + N. */
 export interface Ctx {
   readonly W: number;
   readonly B: number;
@@ -36,6 +36,10 @@ export interface Ctx {
   block: number;
   /** `focusPct` mods: added to the Focused bonus, each with its own why id. */
   readonly focus: readonly Mod[];
+  /** Planned compaction threshold in percent; 0 = never. */
+  readonly policy: number;
+  /** t of the last compaction of any kind; absent before the first (planned lockout). */
+  lastCompactT?: number;
 }
 
 /** Integer zone tests on F = S + N against W. */
@@ -86,7 +90,8 @@ export function createCtx(
   const start = startTokens(input.modifiers);
   const block = sumMods(mods, 'noiseBlock');
   const focus = statMods(mods, 'focusPct').map((m) => ({ id: m.id, pct: m.v }));
-  const ctx: Ctx = { W, B, S: B + start.signal, N: 0, zone: 'cold', coldPenalty, block, focus };
+  const S = B + start.signal;
+  const ctx: Ctx = { W, B, S, N: 0, zone: 'cold', coldPenalty, block, focus, policy: input.policy };
   ctx.N = blockNoise(ctx, start.noise);
   ctx.zone = zoneOf(ctx.S + ctx.N, W);
   return ctx;

@@ -8,7 +8,7 @@ import { emitTokens } from './tokens.ts';
 
 export const ROT_NOISE_MULT = 2;
 
-/** n -> phase scale -> x2 in Rot -> blockers -> N += n' (emitted if non-zero) -> overflow check. */
+/** n -> phase scale -> x2 in Rot -> blockers -> N += n' (emitted if non-zero) -> compaction. */
 export function injectNoise(sim: Sim, enemy: EnemyRt, n: number): void {
   const { ctx } = sim.agent;
   const scaled = scaleNoise(enemy.def, sim.phase, n);
@@ -17,5 +17,5 @@ export function injectNoise(sim: Sim, enemy: EnemyRt, n: number): void {
     ctx.N += added;
     emitTokens(sim, enemyRef(enemy), added, 'noise');
   }
-  checkOverflow(sim);
+  checkOverflow(sim, added > 0);
 }

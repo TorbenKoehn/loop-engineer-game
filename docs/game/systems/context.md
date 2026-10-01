@@ -92,6 +92,11 @@ Build-phase setting: `compact at 70% | 80% | 90% | never`. Default **80%**.
 - Effect: `N = 0`; `S = min(B + floor(W × 10 / 100), W − 1)`; **Stun 1000 ms**; buffs are
   kept. Emit `compaction {kind:'planned'}`.
 - Disabled (UI warning) if `(B + floor(W × 10 / 100)) × 100 ≥ W × p`, which would loop.
+  `fightStart` carries `policyOff: 1` then.
+- The lockout counts from the last compaction of any kind. Removals never trigger it.
+  Unlike auto-compaction, tools that had not fired yet this tick still fire.
+- The `compact` effect (tool `compact`, item rules) runs the same effect at once, ignoring
+  policy and lockout: `compaction {kind:'tool'}`.
 
 The decision: compact early (lose tempo, stay Focused) or ride Rot (slower tools, but
 items like `brute_force` and Long-Context Training reward it).

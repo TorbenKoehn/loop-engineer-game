@@ -1,7 +1,7 @@
 // Tick step 4: the agent's tools fire left to right, then reset (no carry-over). An
 // auto-compaction ends the step: tools that had not fired yet keep their progress for later.
 // Primes are consumed by the activation; pipes fill the right neighbour before the loop reaches it.
-import { compactIfFull } from './context/compaction.ts';
+import { compactIfDue } from './context/compaction.ts';
 import { zoneMods } from './context/ctx.ts';
 import { outputTokens } from './context/tokens.ts';
 import { updateZone } from './context/zone.ts';
@@ -23,9 +23,9 @@ export function fireTools(sim: Sim): void {
     // Zone before the activation: Focused / Cold scale every amount, never tokens.
     const items = damageMods(sim, tool);
     applyEffects(sim, tool, [...zoneMods(sim.agent.ctx), ...items, ...consumePrimes(sim, tool)]);
-    outputTokens(sim, tool, activeSum(sim, 'output', tool));
+    const added = outputTokens(sim, tool, activeSum(sim, 'output', tool));
     fireRules(sim, { on: 'toolFired', slot: tool.slot }); // "when X fires": before compaction
-    const compacted = compactIfFull(sim); // compaction?
+    const compacted = compactIfDue(sim, added > 0); // compaction? (auto or planned)
     fireRules(sim); // compaction rules
     updateZone(sim); // once per activation: zoneChanged?
     tool.piped = false; // "was piped" lasts through this activation, then clears
