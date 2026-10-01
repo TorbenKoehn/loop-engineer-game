@@ -34,6 +34,8 @@ function label(a: Action): string {
       return t('ui.action.rest_upgrade', { n: a.slot + 1 });
     case 'takeTreasure':
       return t('ui.action.take_treasure');
+    case 'chooseEvent':
+      return t('ui.action.choose_event', { n: a.ix + 1 });
     case 'abandon':
       return t('ui.action.abandon');
     case 'pickLesson':

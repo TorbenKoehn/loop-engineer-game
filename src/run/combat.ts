@@ -4,6 +4,7 @@ import { content } from '../content/index.ts';
 import type { EncounterDef, EnemyDef } from '../content/types/enemy.ts';
 import { type CombatInput, resolveCombat } from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
+import { addedEnemies, afterFight, simModifiers } from './events/modifiers.ts';
 import { eliteMemory } from './nodes/memory.ts';
 import { enterReward } from './rewards.ts';
 import type { MapNode, RunState } from './state.ts';
@@ -47,11 +48,14 @@ function spawnDefsOf(line: readonly EnemyDef[]): EnemyDef[] {
   return all.slice(line.length);
 }
 
-/** The sim input for the fight on `node`; the seed depends only on run seed and node id. */
+/**
+ * The sim input for the fight on `node`; the seed depends only on run seed and node id.
+ * Event addEnemy modifiers append their enemies at the back of the line.
+ */
 export function combatInput(state: RunState, node: MapNode): CombatInput {
   const { setup, agent } = state;
   const encounter = byId(content.encounters, node.encounter);
-  const enemies = encounter.enemies.map(enemy);
+  const enemies = [...encounter.enemies, ...addedEnemies(state.nextFight)].map(enemy);
   const harness = byId(content.harnesses, setup.harness);
   return {
     seed: forkSeed(setup.seed, `combat/${node.id}`),
@@ -75,11 +79,11 @@ export function combatInput(state: RunState, node: MapNode): CombatInput {
       phase: state.phase,
       loop: state.loop,
     },
-    modifiers: [...state.nextFight],
+    modifiers: simModifiers(state.nextFight),
   };
 }
 
-/** Resolves the fight, applies Trust, once-per-run flags and run stats, enters combatReview. */
+/** Resolves the fight, applies Trust, flags, stats and spent modifiers, enters combatReview. */
 export function fight(state: RunState, node: MapNode): RunState {
   const input = combatInput(state, node);
   const { outcome, reason, endT, stats, agentAfter, events } = resolveCombat(input);
@@ -92,6 +96,7 @@ export function fight(state: RunState, node: MapNode): RunState {
       maxTrust: agentAfter.maxTrust,
       oncePerRun: [...agentAfter.usedOncePerRun],
     },
+    nextFight: afterFight(state.nextFight),
     combat: { nodeId: node.id, input, outcome: { outcome, reason, endT, stats } },
     stats: addFight(state.stats, events, outcome === 'win'),
   };

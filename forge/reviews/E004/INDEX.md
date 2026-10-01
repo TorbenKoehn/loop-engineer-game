@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E004"
-summary: "Index of forge/reviews/E004: 7 files, 0 subdirectories"
-keywords: ["review", "cycle", "elite", "free", "idle", "tier", "build", "combatinput"]
+summary: "Index of forge/reviews/E004: 8 files, 0 subdirectories"
+keywords: ["review", "cycle", "elite", "fight", "free", "idle", "tier", "build"]
 type: index
 status: active
 updated: 2026-10-01
@@ -22,3 +22,4 @@ generated: true
 | [R046-T044.md](R046-T044.md) | Review of T044: Package Registry shop: offers, buy, reroll,… | Review of T044 (approved) | review, package, registry, shop, offers, reroll |
 | [R059-T046.md](R059-T046.md) | Review of T046: Idle Cycle, Free Tier and elite memory nodes | Review of T046 (changes-requested) | review, idle, cycle, free, tier, elite |
 | [R060-T046.md](R060-T046.md) | Review of T046: Idle Cycle, Free Tier and elite memory nodes | Review of T046 (approved) | review, idle, cycle, free, tier, elite |
+| [R068-T047.md](R068-T047.md) | Review of T047: Standup events and next-fight modifiers | Review of T047 (approved) | review, standup, events, next, fight, modifiers |

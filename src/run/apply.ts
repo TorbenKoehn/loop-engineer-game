@@ -2,6 +2,7 @@
 // See docs/architecture/run-state.md#reducer and #modes.
 import { type Action, type ApplyResult, fail } from './actions.ts';
 import { afterCombat, fight } from './combat.ts';
+import { chooseEvent, enterEvent, eventActions } from './events/standup.ts';
 import { discardItem, discardRefs } from './gain.ts';
 import { reachable } from './map/graph.ts';
 import { lessonActions, pickLesson, skipLesson } from './meta/lessons.ts';
@@ -35,11 +36,12 @@ function travel(state: RunState, node: NodeId): ApplyResult {
   return { ok: true, state: arrive(moved, target) };
 }
 
-/** Fight nodes resolve the fight, registry nodes open the shop; others stay on the map. */
+/** Fight nodes resolve the fight, registry nodes open the shop, Standups draw an event. */
 function arrive(state: RunState, node: MapNode): RunState {
   if (node.encounter !== null) return fight(state, node);
   if (node.type === 'registry') return enterShop(state, node.id);
   if (node.type === 'idleCycle') return { ...state, mode: 'rest' };
+  if (node.type === 'standup') return enterEvent(state, node.id);
   return node.type === 'freeTier' ? { ...state, mode: 'treasure' } : state;
 }
 
@@ -84,6 +86,8 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return restUpgrade(state, action.slot);
     case 'takeTreasure':
       return takeTreasure(state);
+    case 'chooseEvent':
+      return chooseEvent(state, action.ix);
     case 'pickLesson':
       return pickLesson(state, action.ix, action.replace);
     case 'skipLesson':
@@ -116,6 +120,8 @@ export function legalActions(state: RunState): readonly Action[] {
       return restActions(state);
     case 'treasure':
       return [{ t: 'takeTreasure' }];
+    case 'event':
+      return eventActions(state);
     case 'runEnd':
       return lessonActions(state);
     case 'discard':

@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts, src/run/events/standup.ts, src/run/events/outcomes.ts, src/run/events/modifiers.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -57,6 +57,7 @@ export interface RunState {
            policy: 70 | 80 | 90 | 0; oncePerRun: string[] };
   pending: Pending | null;                // rewards, shop offers, event, rest, treasure
   nextFight: FightModifier[];             // from events
+  seenEvents: EventId[];                  // Standup events drawn this run
   combat: { nodeId: string; input: CombatInput; outcome: CombatSummary } | null;
   stats: RunStats;                        // counters for summary and achievements
   result: null | { outcome: 'shipped' | 'ctrlc' | 'abandoned'; td: number;
@@ -71,7 +72,8 @@ type Pending =
   | { kind: 'promptOffer'; prompts: PromptId[] }
   | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] } // already paid
   | { kind: 'discard'; item: OwnedItem; next: Mode }   // gained without space
-  | { kind: 'lessonOffer'; lessons: LessonId[] };      // run end, 3 lessons
+  | { kind: 'lessonOffer'; lessons: LessonId[] }       // run end, 3 lessons
+  | { kind: 'event'; node: NodeId; event: EventId; rng: string }; // rng after the draw
 // RunStats: { nodesVisited; taskPicksNoRare (pity at 6); nodesCleared (fights won);
 //   cause; damageBySource; compactions; zoneMs[4]; lastFight: { zoneMs[4]; compactions } }
 ```
@@ -80,6 +82,16 @@ type Pending =
 awaiting space. RunStats come from each fight's event log (`src/run/stats.ts`): damage
 the agent took by enemy def id or `deadline`, the source of its last hit (`cause`), ms per
 zone index (cold, focused, rot, overflow) per run (`zoneMs`) and of the last fight.
+
+A Standup draws one event of the phase, unlocked and not in `seenEvents`
+(`src/run/events/standup.ts`; none left: it stays on the map). `pending.rng` is the
+serialised `event/<nodeId>` RNG after the draw, so random picks and 50% rolls continue it.
+`chooseEvent` pays the cost, applies the outcomes in order (Trust 0 ends the run as
+`ctrlc`) and returns to the map. A choice whose cost exceeds the credits or whose tag is not
+equipped is not legal; `eventChoices(state)` gives the UI each choice with its reason
+(`insufficientCredits`, `missingTag`). Each fight spends `nextFight`: `addEnemy` appends
+its enemies at the back of the encounter and counts `fights` down; the other modifiers go
+to `CombatInput.modifiers` once (`src/run/events/modifiers.ts`).
 
 `OwnedTool = { id, version, weightMod }`. Everything is plain JSON-compatible data
 (no `Map`, `Set`, `Date`, class instances, `undefined` values).

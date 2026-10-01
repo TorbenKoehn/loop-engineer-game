@@ -19,6 +19,8 @@ export type Action =
   /** `slot` indexes the equipped tools. */
   | { t: 'restUpgrade'; slot: number }
   | { t: 'takeTreasure' }
+  /** `ix` indexes the open event's choices. */
+  | { t: 'chooseEvent'; ix: number }
   /** `replace` names the AGENTS.md line to overwrite; required when it is full. */
   | { t: 'pickLesson'; ix: number; replace?: number }
   | { t: 'skipLesson' };
@@ -30,6 +32,7 @@ export type ActionError =
   | 'notOffered'
   | 'notReachable'
   | 'insufficientCredits'
+  | 'missingTag'
   | 'lastTool'
   | 'noLessonSlot';
 

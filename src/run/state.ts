@@ -6,6 +6,7 @@ import type { Rarity } from '../content/types/basics.ts';
 import type { FightModifier } from '../content/types/event.ts';
 import type {
   EncounterId,
+  EventId,
   HarnessId,
   LessonId,
   MemoryId,
@@ -156,7 +157,9 @@ export type Pending =
   /** `item` was gained without space; `next` follows discardItem, `resume` is its shop/reward. */
   | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending | RewardPending }
   /** The 3 AGENTS.md lessons offered at run end (meta-progression.md#agentsmd-lessons). */
-  | { kind: 'lessonOffer'; lessons: LessonId[] };
+  | { kind: 'lessonOffer'; lessons: LessonId[] }
+  /** The Standup on `node`; `rng` is the serialised event RNG after the draw (50% rolls). */
+  | { kind: 'event'; node: NodeId; event: EventId; rng: string };
 
 /** Zone time and compactions of one fight. */
 export interface FightStats {
@@ -212,6 +215,8 @@ export interface RunState {
   pending: Pending | null;
   /** Next-fight modifiers from events (T047). */
   nextFight: FightModifier[];
+  /** Standup events drawn this run, in order; never drawn again. */
+  seenEvents: EventId[];
   /** The last fight; set by travel to a fight node. */
   combat: CombatRecord | null;
   stats: RunStats;

@@ -58,6 +58,7 @@ export function initialState(setup: SetupSnapshot): RunState {
     },
     pending: { kind: 'promptOffer', prompts: promptOffer(snap.unlocked) },
     nextFight: [],
+    seenEvents: [],
     combat: null,
     stats: emptyStats(),
     result: null,

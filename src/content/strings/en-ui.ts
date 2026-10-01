@@ -86,6 +86,7 @@ export const enUi = {
   'ui.action.rest_heal': 'Rest: heal 30% Trust',
   'ui.action.rest_upgrade': 'Rest: upgrade tool {n}',
   'ui.action.take_treasure': 'Take the free memory',
+  'ui.action.choose_event': 'Choose option {n}',
   'ui.action.abandon': 'Abandon run',
   'ui.action.pick_lesson': 'Write lesson {n} to AGENTS.md',
   'ui.action.pick_lesson_replace': 'Write lesson {n} over line {line}',
