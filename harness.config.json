@@ -5,6 +5,7 @@
     "**/dist/**",
     "**/coverage/**",
     "CONCEPT.md",
+    "README.md",
     ".claude/worktrees/**",
     "playwright-report/**",
     "test-results/**"
