@@ -5,7 +5,7 @@ title: "Rule engine: triggers and conditions"
 summary: "Executes skill, memory, lesson, prompt and trait rules in the sim: every DSL trigger and condition, ordering per the trigger semantics, no recursion, once-per-run tracking."
 keywords: ["rules", "dsl", "triggers", "conditions", "skills", "sim"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -51,3 +51,4 @@ Items are data, not code: one rule engine turns trigger-condition-effect rules i
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

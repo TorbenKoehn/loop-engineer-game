@@ -5,7 +5,7 @@ title: Meta state, history and AGENTS.md lessons
 summary: "MetaState with endRun: history of the last 100 runs, the 3-lesson offer with capacity 1, the brute_force unlock on the first Critical Bug win, and MetaView into newRun."
 keywords: ["meta", "history", "lessons", "agents-md", "unlocks"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Runs leave a trace: history, one AGENTS.md lesson that costs context next run, a
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

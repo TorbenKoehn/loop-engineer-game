@@ -5,7 +5,7 @@ title: Combat screen route, dev-only sandbox and e2e
 summary: "Second half of the split T059: the combat screen route in the real app, dev-only sandbox, result strip with Continue, and e2e through a real run fight."
 keywords: ["task", "combat", "screen", "route", "only", "sandbox"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -46,3 +46,4 @@ Wire the combat view into the app: a CombatScreen for mode combatReview (loadFig
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
