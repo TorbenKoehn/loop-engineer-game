@@ -180,7 +180,11 @@ describe('buy', () => {
 
   it('a buy without space enters discard and returns to the shop', () => {
     const stash: OwnedItem[] = ['a', 'b', 'c', 'd'].map((id) => ({ kind: 'skill', id }));
-    const full = withAgent(shop, { credits: 30, skills: ['x', 'y', 'z'], stash });
+    const full = withAgent(shop, {
+      credits: 30,
+      skills: ['unix_philosophy', 'grep_first', 'rubber_duck'],
+      stash,
+    });
     const s = withOffers(full, [offer({ kind: 'skill', id: 'lockfile', price: 14 })]);
     const d = step(s, { t: 'buy', ix: 0 });
     expect(d.mode).toBe('discard');
@@ -189,7 +193,10 @@ describe('buy', () => {
     expect(dropped.agent.credits).toBe(16);
     expect(shopOf(dropped).offers[0]?.sold).toBe(true);
     const kept = step(d, { t: 'discardItem', item: { at: 'skill', ix: 0 } });
-    expect([kept.mode, kept.agent.skills]).toEqual(['shop', ['y', 'z', 'lockfile']]);
+    expect([kept.mode, kept.agent.skills]).toEqual([
+      'shop',
+      ['grep_first', 'rubber_duck', 'lockfile'],
+    ]);
   });
 });
 

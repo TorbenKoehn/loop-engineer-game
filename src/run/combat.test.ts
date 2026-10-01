@@ -11,7 +11,8 @@ import { forkSeed } from '../sim/rng.ts';
 import { hitIntent, intent, makeEnemy } from '../sim/testing/builders.ts';
 import type { Action } from './actions.ts';
 import { apply, legalActions } from './apply.ts';
-import { combatInput, loadoutBreakpoints } from './combat.ts';
+import { selectBreakpoints } from './build/selectors.ts';
+import { combatInput } from './combat.ts';
 import { reachable } from './map/graph.ts';
 import { newRun } from './new-run.ts';
 import type { MapNode, MetaView, RunState } from './state.ts';
@@ -98,7 +99,7 @@ describe('travel to a fight node', () => {
 describe('breakpoints', () => {
   it('the build-panel selector counts the equipped tools as the fight does', () => {
     const state = onMap(); // terminal_purist: grep, cat (Search, Shell), sed (Edit, Shell)
-    const chips = loadoutBreakpoints(state).map((b) => [b.def.tag, b.count, b.def.need]);
+    const chips = selectBreakpoints(state).map((b) => [b.def.tag, b.count, b.def.need]);
     expect(chips).toEqual([
       ['Shell', 3, 3],
       ['Edit', 1, 3],

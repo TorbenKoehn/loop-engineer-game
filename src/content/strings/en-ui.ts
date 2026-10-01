@@ -181,4 +181,5 @@ export const enUi = {
   'ui.action.pick_lesson': 'Write lesson {n} to AGENTS.md',
   'ui.action.pick_lesson_replace': 'Write lesson {n} over line {line}',
   'ui.action.skip_lesson': 'Keep AGENTS.md as it is',
+  'ui.action.build': 'Build: {action}',
 } as const;

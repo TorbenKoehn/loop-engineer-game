@@ -1,6 +1,7 @@
 // Gaining items: duplicate tools merge +1 version, new items take a free slot, then the
 // stash; with neither the run enters discard mode. See docs/game/systems/harness-loadout.md.
 import { type ApplyResult, fail, ok } from './actions.ts';
+import { overLimit } from './build/selectors.ts';
 import type { AgentState, ItemKind, ItemRef, OwnedItem, OwnedTool, RunState } from './state.ts';
 
 const MAX_VERSION = 3;
@@ -33,12 +34,22 @@ function merge(agent: AgentState, id: string): AgentState {
   };
 }
 
-/** `agent` with `item` in a free slot of its kind, else in the stash; null when both are full. */
-function place(agent: AgentState, item: OwnedItem): AgentState | null {
+/** `agent` with `item` appended to the equipped items of its kind. */
+function equipLast(agent: AgentState, item: OwnedItem): AgentState {
+  if (item.kind === 'tool') return { ...agent, tools: [...agent.tools, item.tool] };
+  if (item.kind === 'skill') return { ...agent, skills: [...agent.skills, item.id] };
+  return { ...agent, memories: [...agent.memories, item.id] };
+}
+
+/**
+ * `agent` with `item` in a free slot of its kind when the baseline limit allows, else in the
+ * stash; null when neither works.
+ */
+function place(state: RunState, item: OwnedItem): AgentState | null {
+  const { agent } = state;
   const free = agent[EQUIPPED[item.kind]].length < agent.slots[SLOTS[item.kind]];
-  if (free && item.kind === 'tool') return { ...agent, tools: [...agent.tools, item.tool] };
-  if (free && item.kind === 'skill') return { ...agent, skills: [...agent.skills, item.id] };
-  if (free && item.kind === 'memory') return { ...agent, memories: [...agent.memories, item.id] };
+  const equipped = free ? equipLast(agent, item) : null;
+  if (equipped && !overLimit(state, equipped)) return equipped;
   if (agent.stash.length < agent.slots.stash) return { ...agent, stash: [...agent.stash, item] };
   return null;
 }
@@ -48,14 +59,20 @@ export function gain(state: RunState, item: OwnedItem, next: RunState['mode']): 
   const agent =
     item.kind === 'tool' && ownedTool(state.agent, item.tool.id)
       ? merge(state.agent, item.tool.id)
-      : place(state.agent, item);
+      : place(state, item);
   if (agent) return { ...state, agent, mode: next, pending: null };
   return { ...state, mode: 'discard', pending: { kind: 'discard', item, next } };
 }
 
-/** Refs that make room for a gained `kind`: the gained item, the kind's slots, the stash. */
-export function discardRefs(agent: AgentState, kind: ItemKind): ItemRef[] {
-  const slots = agent[EQUIPPED[kind]].map((_, ix): ItemRef => ({ at: kind, ix }));
+/**
+ * Refs that make room for a gained `kind`: the gained item, the kind's slots, the stash.
+ * With `state`, an equipped item whose removal breaks the baseline limit (a window memory)
+ * is not offered.
+ */
+export function discardRefs(agent: AgentState, kind: ItemKind, state?: RunState): ItemRef[] {
+  const slots = agent[EQUIPPED[kind]].flatMap((_, ix): ItemRef[] =>
+    state && overLimit(state, remove(agent, { at: kind, ix })) ? [] : [{ at: kind, ix }],
+  );
   const stash = agent.stash.map((_, ix): ItemRef => ({ at: 'stash', ix }));
   return [{ at: 'gained' }, ...slots, ...stash];
 }
@@ -76,7 +93,7 @@ export function remove(agent: AgentState, ref: { at: ItemKind | 'stash'; ix: num
 export function discardItem(state: RunState, ref: ItemRef): ApplyResult {
   const p = state.pending;
   if (state.mode !== 'discard' || p?.kind !== 'discard') return fail('wrongMode');
-  const legal = discardRefs(state.agent, p.item.kind);
+  const legal = discardRefs(state.agent, p.item.kind, state);
   if (!legal.some((r) => sameRef(r, ref))) return fail('notOffered');
   if (ref.at === 'gained') return ok({ ...state, mode: p.next, pending: p.resume ?? null });
   const s = gain({ ...state, agent: remove(state.agent, ref) }, p.item, p.next);

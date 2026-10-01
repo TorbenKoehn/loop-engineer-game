@@ -47,6 +47,8 @@ All build decisions happen in one always-available panel that shows the context 
 
 ## Notes
 
+- Orchestrator 2026-10-01 (T045 follow-up): src/ui/screens/discard.tsx must pass `state` to `discardRefs` so it never offers a discard that apply refuses (baseline cap).
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

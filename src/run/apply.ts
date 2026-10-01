@@ -1,6 +1,7 @@
 // The pure run reducer: validate, then return a new state; never mutate the input.
 // See docs/architecture/run-state.md#reducer and #modes.
 import { type Action, type ApplyResult, fail } from './actions.ts';
+import { applyBuild } from './build/build.ts';
 import { afterCombat, fight } from './combat.ts';
 import { chooseEvent, enterEvent, eventActions } from './events/standup.ts';
 import { discardItem, discardRefs } from './gain.ts';
@@ -92,6 +93,12 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return pickLesson(state, action.ix, action.replace);
     case 'skipLesson':
       return skipLesson(state);
+    case 'moveTool':
+    case 'equip':
+    case 'unequip':
+    case 'swap':
+    case 'setPolicy':
+      return applyBuild(state, action);
     default:
       // Unreachable for typed callers; guards actions decoded from saves.
       return fail('unknownAction');
@@ -126,7 +133,7 @@ export function legalActions(state: RunState): readonly Action[] {
       return lessonActions(state);
     case 'discard':
       return state.pending?.kind === 'discard'
-        ? discardRefs(state.agent, state.pending.item.kind).map((item) => ({
+        ? discardRefs(state.agent, state.pending.item.kind, state).map((item) => ({
             t: 'discardItem',
             item,
           }))

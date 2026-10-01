@@ -44,6 +44,9 @@ function label(a: Action): string {
         : t('ui.action.pick_lesson_replace', { n: a.ix + 1, line: a.replace + 1 });
     case 'skipLesson':
       return t('ui.action.skip_lesson');
+    default:
+      // Build actions are not in legalActions; the build panel (E009) dispatches them.
+      return t('ui.action.build', { action: JSON.stringify(a) });
   }
 }
 

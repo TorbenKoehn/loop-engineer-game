@@ -1,7 +1,7 @@
 // Serialisable run actions and reducer results (docs/architecture/run-state.md#actions).
 // The union grows with the modes later E004 tasks implement.
 import type { PromptId } from '../content/types/ids.ts';
-import type { ItemRef, NodeId, RunState } from './state.ts';
+import type { ItemKind, ItemRef, NodeId, Policy, RunState } from './state.ts';
 
 export type Action =
   | { t: 'pickPrompt'; prompt: PromptId }
@@ -23,7 +23,16 @@ export type Action =
   | { t: 'chooseEvent'; ix: number }
   /** `replace` names the AGENTS.md line to overwrite; required when it is full. */
   | { t: 'pickLesson'; ix: number; replace?: number }
-  | { t: 'skipLesson' };
+  | { t: 'skipLesson' }
+  // Build actions (src/run/build/build.ts): free in map, reward, shop and event modes.
+  /** Reorders the equipped tools: the tool at `from` moves to index `to`. */
+  | { t: 'moveTool'; from: number; to: number }
+  /** Stash item `stashIx` into a free slot of its kind, inserted at `slot`. */
+  | { t: 'equip'; stashIx: number; slot: number }
+  | { t: 'unequip'; kind: ItemKind; slot: number }
+  /** Stash item `stashIx` and the equipped item of its kind at `slot` trade places. */
+  | { t: 'swap'; stashIx: number; slot: number }
+  | { t: 'setPolicy'; policy: Policy };
 
 /** Why apply rejected an action; the state is unchanged. */
 export type ActionError =
@@ -34,7 +43,8 @@ export type ActionError =
   | 'insufficientCredits'
   | 'missingTag'
   | 'lastTool'
-  | 'noLessonSlot';
+  | 'noLessonSlot'
+  | 'baselineOverLimit';
 
 export type ApplyResult = { ok: true; state: RunState } | { ok: false; error: ActionError };
 

@@ -2,14 +2,10 @@
 // outcome. See docs/architecture/run-state.md#actions and sim-core.md#api.
 import { content } from '../content/index.ts';
 import type { EncounterDef, EnemyDef } from '../content/types/enemy.ts';
-import {
-  type BreakpointProgress,
-  breakpoints,
-  type CombatInput,
-  resolveCombat,
-} from '../sim/index.ts';
+import { type CombatInput, resolveCombat } from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
-import { addedEnemies, afterFight, simModifiers } from './events/modifiers.ts';
+import { byId, loadoutInput } from './build/selectors.ts';
+import { addedEnemies, afterFight } from './events/modifiers.ts';
 import { eliteMemory } from './nodes/memory.ts';
 import { enterReward } from './rewards.ts';
 import type { MapNode, RunState } from './state.ts';
@@ -22,12 +18,6 @@ const DEADLINE_MS: Readonly<Record<EncounterDef['pool'], number>> = {
   elite: 50_000,
   boss: 75_000,
 };
-
-function byId<T extends { readonly id: string }>(list: readonly T[], id: string | null): T {
-  const found = list.find((x) => x.id === id);
-  if (!found) throw new RangeError(`run: unknown content id '${id}'`);
-  return found;
-}
 
 const enemy = (id: string): EnemyDef => byId(content.enemies, id);
 
@@ -53,34 +43,16 @@ function spawnDefsOf(line: readonly EnemyDef[]): EnemyDef[] {
   return all.slice(line.length);
 }
 
-/** Breakpoint progress of the equipped tools, as the sim counts it (build panel selector). */
-export const loadoutBreakpoints = (state: RunState): BreakpointProgress[] =>
-  breakpoints(state.agent.tools.map((t) => byId(content.tools, t.id)));
-
 /**
  * The sim input for the fight on `node`; the seed depends only on run seed and node id.
  * Event addEnemy modifiers append their enemies at the back of the line.
  */
 export function combatInput(state: RunState, node: MapNode): CombatInput {
-  const { setup, agent } = state;
   const encounter = byId(content.encounters, node.encounter);
   const enemies = [...encounter.enemies, ...addedEnemies(state.nextFight)].map(enemy);
-  const harness = byId(content.harnesses, setup.harness);
   return {
-    seed: forkSeed(setup.seed, `combat/${node.id}`),
-    agent: {
-      model: harness.model,
-      trust: agent.trust,
-      maxTrust: agent.maxTrust,
-      tools: agent.tools.map((t) => ({ def: byId(content.tools, t.id), version: t.version })),
-      usedOncePerRun: [...agent.oncePerRun],
-    },
-    skills: agent.skills.map((id) => byId(content.skills, id)),
-    memories: agent.memories.map((id) => byId(content.memories, id)),
-    lessons: setup.lessons.map((id) => byId(content.lessons, id)),
-    prompt: byId(content.prompts, setup.prompt),
-    trait: harness.trait,
-    policy: agent.policy,
+    ...loadoutInput(state),
+    seed: forkSeed(state.setup.seed, `combat/${node.id}`),
     encounter: {
       enemies,
       spawnDefs: spawnDefsOf(enemies),
@@ -88,7 +60,6 @@ export function combatInput(state: RunState, node: MapNode): CombatInput {
       phase: state.phase,
       loop: state.loop,
     },
-    modifiers: simModifiers(state.nextFight),
   };
 }
 

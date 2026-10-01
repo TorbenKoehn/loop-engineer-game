@@ -5,6 +5,7 @@ import type { Rarity } from '../content/types/basics.ts';
 import type { UnlockRef } from '../content/types/refs.ts';
 import { fork, nextInt, pick, type Rng, weighted } from '../sim/rng.ts';
 import { type Action, type ApplyResult, fail, ok } from './actions.ts';
+import { overLimit } from './build/selectors.ts';
 import { gain, newItem, ownedTool, ownsUnique, remove } from './gain.ts';
 import { isUnlocked } from './new-run.ts';
 import { FALLBACK, RARITIES } from './rewards.ts';
@@ -136,7 +137,8 @@ export function sellPrice(state: RunState, item: OwnedItem): number {
   return Math.floor((basePrice(item, starters) * version) / 2);
 }
 
-function itemAt(agent: RunState['agent'], ref: Exclude<ItemRef, { at: 'gained' }>) {
+/** The owned item at `ref`, equipped or stashed. */
+export function itemAt(agent: RunState['agent'], ref: Exclude<ItemRef, { at: 'gained' }>) {
   if (ref.at === 'stash') return agent.stash[ref.ix];
   if (ref.at === 'tool') {
     const tool = agent.tools[ref.ix];
@@ -146,7 +148,7 @@ function itemAt(agent: RunState['agent'], ref: Exclude<ItemRef, { at: 'gained' }
   return id === undefined ? undefined : newItem(ref.at, id);
 }
 
-/** Sells an equipped or stashed item; refused when it would leave no equipped tool. */
+/** Sells an owned item; refused when it leaves no equipped tool or breaks the baseline limit. */
 export function sell(state: RunState, ref: ItemRef): ApplyResult {
   if (!shopOf(state)) return fail('wrongMode');
   if (ref.at === 'gained') return fail('notOffered');
@@ -154,6 +156,7 @@ export function sell(state: RunState, ref: ItemRef): ApplyResult {
   if (!item) return fail('notOffered');
   const agent = remove(state.agent, ref);
   if (item.kind === 'tool' && agent.tools.length === 0) return fail('lastTool');
+  if (overLimit(state, agent)) return fail('baselineOverLimit');
   const credits = agent.credits + sellPrice(state, item);
   return ok({ ...state, agent: { ...agent, credits } });
 }

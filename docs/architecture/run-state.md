@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts, src/run/events/standup.ts, src/run/events/outcomes.ts, src/run/events/modifiers.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts, src/run/events/standup.ts, src/run/events/outcomes.ts, src/run/events/modifiers.ts, src/run/build/build.ts, src/run/build/selectors.ts, src/run/gain.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -142,7 +142,8 @@ export type Action =
   | { t: 'restHeal' } | { t: 'restUpgrade'; slot: number } | { t: 'takeTreasure' }
   | { t: 'discardItem'; item: ItemRef }
   | { t: 'moveTool'; from: number; to: number } | { t: 'equip'; stashIx: number; slot: number }
-  | { t: 'unequip'; kind: ItemKind; slot: number } | { t: 'setPolicy'; policy: 70 | 80 | 90 | 0 }
+  | { t: 'unequip'; kind: ItemKind; slot: number } | { t: 'swap'; stashIx: number; slot: number }
+  | { t: 'setPolicy'; policy: 70 | 80 | 90 | 0 }
   | { t: 'shipIt' } | { t: 'keepLooping' } | { t: 'pickLesson'; ix: number; replace?: number }
   | { t: 'skipLesson' } | { t: 'abandon' };
 ```
@@ -151,8 +152,25 @@ export type Action =
 lessons, encounter), calls `resolveCombat(input)`, applies
 the outcome (Trust, once-per-run flags, stats folded from the log) and switches to
 `combatReview`. The log is not stored; the UI recomputes it from `input` for playback.
-`loadoutBreakpoints(state)` (`src/run/combat.ts`) gives the build panel the breakpoint
-progress of the equipped tools from the same `breakpoints` function the sim uses.
+
+Build actions (`src/run/build/build.ts`) are free in `map`, `reward`, `shop` and `event`
+and keep mode and `pending`: `moveTool` reorders the tools, `equip` inserts a stash item
+into a free slot of its kind at `slot`, `unequip` moves an equipped item to the end of the
+stash (not the last tool: `lastTool`), `swap` trades a stash item with the equipped item of
+its kind at `slot`, `setPolicy` takes 70, 80, 90 or 0. Equip, unequip and swap fail with
+`baselineOverLimit` when the new loadout has `B × 100 > W × 80`, `W` with its window mods
+(prompt, memories), so a window memory cannot be unequipped while the loadout needs it.
+The same check keeps every other path within the limit: a gained item takes a free slot
+only within it (else the stash), `sell` refuses, discard does not offer such a removal.
+`legalActions` leaves the build actions out so random walks still end; `buildActions(state)`
+lists the accepted ones for bots and tests.
+
+Selectors (`src/run/build/selectors.ts`) give the build panel the numbers the next fight
+starts with, computed by the sim's own functions on `loadoutInput(state)` (the fight's
+`CombatInput` without seed and enemies): `selectBaseline`, `selectWindow`,
+`selectStartZone` (after next-fight start signal and noise) equal `B`, `W` and `zone` of
+that fight's `fightStart`; `selectBreakpoints` the breakpoint progress; `selectPipes` each
+tool's fight-start pipe ms into its right neighbour (mod conditions not checked).
 
 ## Replay
 
