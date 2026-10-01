@@ -22,7 +22,7 @@ generated: true
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 5/11 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
-| [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
+| [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 1/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 0/8 |
 | [E010](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 0/8 |
 | [E011](epics/m1/E011-juice-audio-settings-and-tutorial/EPIC.md) | Juice, audio, settings and tutorial | backlog | p1 | 0/7 |
@@ -105,11 +105,9 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (0/3)
 
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
+_none_
 
 ## Review (0/3)
 
@@ -119,9 +117,9 @@ _none_
 
 _none_
 
-## Done (43)
+## Done (44)
 
-_Showing the last 20 of 43 done tasks._
+_Showing the last 20 of 44 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -136,6 +134,7 @@ _Showing the last 20 of 43 done tasks._
 | [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 | [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
 | [T055](epics/m1/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
+| [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
 | [T044](epics/m1/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
 | [T043](epics/m1/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
 | [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
@@ -144,6 +143,5 @@ _Showing the last 20 of 43 done tasks._
 | [T028](epics/m1/E003-context-window-mechanic/T028-auto-compaction-on-overflow.md) | Auto-compaction on overflow | E003 | p1 | opus | M |
 | [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
 | [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
-| [T025](epics/m1/E003-context-window-mechanic/T025-context-bar-quantities-baseline-and-zone.md) | Context bar quantities, baseline and zones | E003 | p0 | opus | M |
 
 ## Cancelled (1)

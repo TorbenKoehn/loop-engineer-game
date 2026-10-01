@@ -6,6 +6,7 @@ import { apply, legalActions } from './apply.ts';
 import { reachable } from './map/graph.ts';
 import { newRun } from './new-run.ts';
 import { replay } from './replay.ts';
+import { enterReward } from './rewards.ts';
 import type { NodeType, OwnedItem, Pending, RewardCard, RunState } from './state.ts';
 
 const META = { unlocked: [], lessons: [], lintCap: 0 };
@@ -36,6 +37,8 @@ const withAgent = (s: RunState, agent: Partial<RunState['agent']>): RunState => 
   agent: { ...s.agent, ...agent },
 });
 const reward = (s: RunState) => step(s, { t: 'continue' });
+/** M1 ships the run on a Release win (T048); its rewards return with Phase 1-2 bosses (E012). */
+const releaseReward = (s: RunState) => enterReward(wonAt(s, 'release'));
 const pending = <K extends Pending['kind']>(s: RunState, kind: K) => {
   if (s.pending?.kind !== kind) throw new Error(`no ${kind} pending`);
   return s.pending as Extract<Pending, { kind: K }>;
@@ -73,7 +76,7 @@ describe('payout and interest', () => {
     const rolls = SEEDS.map((seed) => pending(reward(wonAt(onMap(seed), 'criticalBug')), 'reward'));
     expect(rolls.every((p) => p.credits >= 22 && p.credits <= 28)).toBe(true);
     expect(new Set(rolls.map((p) => p.credits)).size).toBeGreaterThan(1);
-    expect(pending(reward(wonAt(onMap(), 'release')), 'reward').credits).toBe(40);
+    expect(pending(releaseReward(onMap()), 'reward').credits).toBe(40);
   });
 });
 
@@ -101,7 +104,7 @@ describe('reward cards', () => {
   });
 
   it('Release cards are rare where possible, falling back to the next lower rarity', () => {
-    const cards = SEEDS.flatMap((seed) => cardsOf(reward(wonAt(onMap(seed), 'release'))));
+    const cards = SEEDS.flatMap((seed) => cardsOf(releaseReward(onMap(seed))));
     // No rare tool is unlocked in the base pool: tools fall back to uncommon, never common.
     expect(cards.filter((c) => c.kind === 'tool').every((c) => c.rarity === 'uncommon')).toBe(true);
     expect(cards.some((c) => c.id === 'long_context_training')).toBe(true);

@@ -7,6 +7,7 @@ import { reachable } from './map/graph.ts';
 import { pickReward, rewardActions, skipReward } from './rewards.ts';
 import { buy, enterShop, leaveShop, reroll, sell, shopActions } from './shop.ts';
 import type { MapNode, NodeId, RunState } from './state.ts';
+import { endRun } from './stats.ts';
 
 function pickPrompt(state: RunState, prompt: string): ApplyResult {
   if (state.mode !== 'promptPick' || state.pending?.kind !== 'promptOffer') {
@@ -37,6 +38,12 @@ function arrive(state: RunState, node: MapNode): RunState {
   return node.type === 'registry' ? enterShop(state, node.id) : state;
 }
 
+/** Gives up from the map: a loss without a lesson offer. */
+function abandon(state: RunState): ApplyResult {
+  if (state.mode !== 'map') return fail('wrongMode');
+  return { ok: true, state: endRun(state, 'abandoned') };
+}
+
 function continueRun(state: RunState): ApplyResult {
   if (state.mode !== 'combatReview') return fail('wrongMode');
   return { ok: true, state: afterCombat(state) };
@@ -64,6 +71,8 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return reroll(state);
     case 'leaveShop':
       return leaveShop(state);
+    case 'abandon':
+      return abandon(state);
     default:
       // Unreachable for typed callers; guards actions decoded from saves.
       return fail('unknownAction');
@@ -78,7 +87,10 @@ export function legalActions(state: RunState): readonly Action[] {
         ? state.pending.prompts.map((prompt) => ({ t: 'pickPrompt', prompt }))
         : [];
     case 'map':
-      return reachable(state.map).map((node) => ({ t: 'travel', node }));
+      return [
+        ...reachable(state.map).map((node): Action => ({ t: 'travel', node })),
+        { t: 'abandon' },
+      ];
     case 'combatReview':
       return [{ t: 'continue' }];
     case 'reward':

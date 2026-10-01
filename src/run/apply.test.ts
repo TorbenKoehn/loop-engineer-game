@@ -36,6 +36,8 @@ function walk(seed: string, picks: readonly number[], visit = (_: RunState) => {
   return { state, actions };
 }
 
+const notAbandon = (a: Action) => a.t !== 'abandon';
+
 describe('newRun', () => {
   it('new run picks a prompt and reaches map', () => {
     const start = newRun(setup(), META);
@@ -148,6 +150,23 @@ describe('run properties', () => {
         expect(JSON.parse(JSON.stringify(state))).toStrictEqual(state);
       }),
       { numRuns: 100 },
+    );
+  });
+
+  it('random legal sequences never throw and reach runEnd within 2000 actions', () => {
+    const MAX = 2000;
+    fc.assert(
+      fc.property(seeds, picks, fc.boolean(), (seed, ps, abandons) => {
+        let state = newRun(setup(seed), META);
+        for (let n = 0; n < MAX && state.mode !== 'runEnd'; n++) {
+          const legal = legalActions(state).filter(abandons ? Boolean : notAbandon);
+          state = step(state, legal[(ps[n % ps.length] as number) % legal.length] as Action);
+        }
+        expect(state.mode).toBe('runEnd');
+        expect(state.result?.outcome).toMatch(/^(shipped|ctrlc|abandoned)$/);
+        expect(legalActions(state)).toEqual([]);
+      }),
+      { numRuns: 50 },
     );
   });
 

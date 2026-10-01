@@ -6,6 +6,7 @@ import { type CombatInput, resolveCombat } from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
 import { enterReward } from './rewards.ts';
 import type { MapNode, RunState } from './state.ts';
+import { addFight, endRun } from './stats.ts';
 
 /** Fallback when an encounter sets no deadline (docs/game/systems/combat.md). */
 const DEADLINE_MS: Readonly<Record<EncounterDef['pool'], number>> = {
@@ -75,10 +76,10 @@ export function combatInput(state: RunState, node: MapNode): CombatInput {
   };
 }
 
-/** Resolves the fight without a log, applies Trust and once-per-run flags, enters combatReview. */
+/** Resolves the fight, applies Trust, once-per-run flags and run stats, enters combatReview. */
 export function fight(state: RunState, node: MapNode): RunState {
   const input = combatInput(state, node);
-  const { outcome, reason, endT, stats, agentAfter } = resolveCombat(input, { log: false });
+  const { outcome, reason, endT, stats, agentAfter, events } = resolveCombat(input);
   return {
     ...state,
     mode: 'combatReview',
@@ -89,9 +90,16 @@ export function fight(state: RunState, node: MapNode): RunState {
       oncePerRun: [...agentAfter.usedOncePerRun],
     },
     combat: { nodeId: node.id, input, outcome: { outcome, reason, endT, stats } },
+    stats: addFight(state.stats, events, outcome === 'win'),
   };
 }
 
-/** A win pays out and offers rewards; a loss ends the run (run end: E008). */
-export const afterCombat = (state: RunState): RunState =>
-  state.combat?.outcome.outcome === 'win' ? enterReward(state) : { ...state, mode: 'runEnd' };
+/**
+ * A loss ends the run as ctrlc. M1 slice: a won Release (the Phase-1 boss) ships the run
+ * (vertical-slice.md#slice-specific-deviations); other wins pay out and offer rewards.
+ */
+export function afterCombat(state: RunState): RunState {
+  if (state.combat?.outcome.outcome !== 'win') return endRun(state, 'ctrlc');
+  const node = state.map.nodes.find((n) => n.id === state.combat?.nodeId);
+  return node?.type === 'release' ? endRun(state, 'shipped') : enterReward(state);
+}

@@ -1,6 +1,6 @@
 // The serialisable run state (docs/architecture/run-state.md#runstate-shape).
 // Plain JSON data only: no Map, Set, Date, class instances or undefined values.
-// Fights, rewards, events and run end add their fields with their tasks (E004, E008).
+// Later modes (events, rest, phases) add their fields with their tasks.
 
 import type { Rarity } from '../content/types/basics.ts';
 import type { FightModifier } from '../content/types/event.ts';
@@ -145,10 +145,33 @@ export type Pending =
   /** `item` was gained without space; `next` is the mode after discardItem, `resume` its shop. */
   | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending };
 
+/** Zone time and compactions of one fight. */
+export interface FightStats {
+  /** ms per event zone index: cold, focused, rot, overflow. */
+  zoneMs: number[];
+  compactions: number;
+}
+
+/** Counters for the run-end summary and history (meta-progression.md#run-history). */
 export interface RunStats {
   nodesVisited: number;
   /** Task picks in a row offered without a rare card (pity, economy.md). */
   taskPicksNoRare: number;
+  /** Fight nodes won. */
+  nodesCleared: number;
+  /** Enemy def id or `deadline` that dealt the agent's final damage; null before any hit. */
+  cause: string | null;
+  /** Damage the agent took this run, by enemy def id or `deadline`. */
+  damageBySource: Record<string, number>;
+  /** Compactions this run. */
+  compactions: number;
+  lastFight: FightStats;
+}
+
+/** How the run ended; `td` (Training Data) stays 0 until E015. */
+export interface RunResult {
+  outcome: 'shipped' | 'ctrlc' | 'abandoned';
+  td: number;
 }
 
 /** The resolved fight without its log; the UI recomputes the log from `input`. */
@@ -175,4 +198,6 @@ export interface RunState {
   /** The last fight; set by travel to a fight node. */
   combat: CombatRecord | null;
   stats: RunStats;
+  /** Set when mode becomes runEnd. */
+  result: RunResult | null;
 }

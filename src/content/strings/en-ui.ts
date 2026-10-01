@@ -26,4 +26,5 @@ export const enUi = {
   'ui.action.sell': 'Sell {item}',
   'ui.action.reroll': 'Reroll',
   'ui.action.leave_shop': 'Leave the registry',
+  'ui.action.abandon': 'Abandon run',
 } as const;

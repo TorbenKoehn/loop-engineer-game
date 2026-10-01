@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -69,12 +69,14 @@ type Pending =
   | { kind: 'promptOffer'; prompts: PromptId[] }
   | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] } // already paid
   | { kind: 'discard'; item: OwnedItem; next: Mode };  // gained without space
-// RunStats: { nodesVisited; taskPicksNoRare }  (Task offers in a row without a rare; pity at 6)
+// RunStats: { nodesVisited; taskPicksNoRare (pity at 6); nodesCleared (fights won);
+//   cause; damageBySource; compactions; lastFight: { zoneMs[4]; compactions } }
 ```
 
 `ItemRef` names an equipped slot (`at` = kind, `ix`), a stash index, or the gained item
-awaiting space. Release win: `continue` enters `reward`, then returns to `map`; `phaseEnd`
-is deferred (E008/E012).
+awaiting space. RunStats come from each fight's event log (`src/run/stats.ts`): damage
+the agent took by enemy def id or `deadline`, the source of its last hit (`cause`), ms per
+zone index (cold, focused, rot, overflow) and compactions of the last fight.
 
 `OwnedTool = { id, version, weightMod }`. Everything is plain JSON-compatible data
 (no `Map`, `Set`, `Date`, class instances, `undefined` values).
@@ -87,6 +89,10 @@ setup -> promptPick -> map -> (fight -> combatReview -> reward)
        map(boss) -> fight -> combatReview -> reward -> phaseEnd -> map(next phase)
        phase 3 boss won -> shipped (-> endless? -> map) ; trust 0 -> ctrlc ; -> runEnd
 ```
+
+M1 slice: `continue` after a won Release ends the run (`result.outcome = 'shipped'`, no
+reward); any lost fight ends it as `ctrlc`; `abandon` on the map as `abandoned` (no lesson
+offer). Phase 1-2 boss rewards and `phaseEnd`: E012.
 
 | Mode | Legal actions |
 |---|---|
@@ -120,9 +126,9 @@ export type Action =
   | { t: 'skipLesson' } | { t: 'abandon' };
 ```
 
-`travel` to a fight node builds the `CombatInput`, calls `resolveCombat(input, {log:
-false})`, applies the outcome (Trust, once-per-run flags, stats) and switches to
-`combatReview`. The UI recomputes the log with `{log: true}` for playback.
+`travel` to a fight node builds the `CombatInput`, calls `resolveCombat(input)`, applies
+the outcome (Trust, once-per-run flags, stats folded from the log) and switches to
+`combatReview`. The log is not stored; the UI recomputes it from `input` for playback.
 
 ## Replay
 

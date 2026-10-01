@@ -6,6 +6,7 @@ import type { PromptId } from '../content/types/ids.ts';
 import type { UnlockId, UnlockRef } from '../content/types/refs.ts';
 import { generateMap } from './map/generate.ts';
 import type { MetaView, RunSetup, RunState, SetupSnapshot } from './state.ts';
+import { emptyStats } from './stats.ts';
 
 /** Credits at run start (docs/game/systems/economy.md). */
 export const START_CREDITS = 10;
@@ -58,7 +59,8 @@ export function initialState(setup: SetupSnapshot): RunState {
     pending: { kind: 'promptOffer', prompts: promptOffer(snap.unlocked) },
     nextFight: [],
     combat: null,
-    stats: { nodesVisited: 0, taskPicksNoRare: 0 },
+    stats: emptyStats(),
+    result: null,
   };
 }
 

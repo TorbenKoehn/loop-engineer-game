@@ -13,7 +13,8 @@ export type Action =
   | { t: 'buy'; ix: number }
   | { t: 'sell'; item: ItemRef }
   | { t: 'reroll' }
-  | { t: 'leaveShop' };
+  | { t: 'leaveShop' }
+  | { t: 'abandon' };
 
 /** Why apply rejected an action; the state is unchanged. */
 export type ActionError =

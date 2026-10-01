@@ -28,6 +28,8 @@ function label(a: Action): string {
       return t('ui.action.reroll');
     case 'leaveShop':
       return t('ui.action.leave_shop');
+    case 'abandon':
+      return t('ui.action.abandon');
   }
 }
 
