@@ -15,7 +15,7 @@ generated: true
 
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
-| [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 7/8 |
+| [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 8/8 |
 | [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 5/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
@@ -118,12 +118,11 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
-| [T005](epics/m0/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
 | [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
 
 ## Review (0/3)
@@ -134,9 +133,9 @@ _none_
 
 _none_
 
-## Done (26)
+## Done (27)
 
-_Showing the last 20 of 26 done tasks._
+_Showing the last 20 of 27 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|

@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E001"
-summary: "Index of forge/reviews/E001: 8 files, 0 subdirectories"
-keywords: ["review", "biome", "forkable", "integer", "seeded", "test", "vitest", "architecture"]
+summary: "Index of forge/reviews/E001: 9 files, 0 subdirectories"
+keywords: ["review", "test", "biome", "forkable", "integer", "seeded", "vitest", "architecture"]
 type: index
 status: active
 updated: 2026-10-01
@@ -23,3 +23,4 @@ generated: true
 | [R007-T008.md](R007-T008.md) | Review of T008: Per-area coverage gates in Vitest | Review of T008 (approved) | review, area, coverage, gates, vitest |
 | [R008-T004.md](R008-T004.md) | T004 review: event log types and golden harness | Round 1 approved: CombatEvent union, canonical JSONL and golden harness meet all AC; minor doc drift (src/sim/golden, node imports, update command) needs a follow-up. | review, event-log, golden, test, harness, serialisation |
 | [R012-T007.md](R012-T007.md) | Review of T007: Architecture import-rule test | Review of T007 (approved) | review, architecture, import, rule, test |
+| [R033-T005.md](R033-T005.md) | Review of T005: Playwright smoke test setup | Review of T005 (approved) | review, playwright, smoke, test, setup |

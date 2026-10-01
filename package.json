@@ -16,12 +16,14 @@
     "harness:check": "node tools/harness/cli.ts check",
     "harness:new": "node tools/harness/cli.ts new",
     "check": "node tools/check/run.ts",
+    "e2e": "playwright test",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "golden:update": "node tools/golden/update.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
+    "@playwright/test": "^1.63.0",
     "@preact/preset-vite": "^2.10.6",
     "@types/node": "^26.6.3",
     "@vitest/coverage-v8": "^5.0.3",

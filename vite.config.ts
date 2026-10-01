@@ -8,7 +8,7 @@ const t = coverageThresholds();
 export default defineConfig({
   plugins: [preact()],
   test: {
-    exclude: [...configDefaults.exclude, '.claude/worktrees/**'],
+    exclude: [...configDefaults.exclude, '.claude/worktrees/**', 'tests/e2e/**'],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],
