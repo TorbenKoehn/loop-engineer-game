@@ -15,7 +15,7 @@ generated: true
 
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
-| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 5/8 |
+| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 6/8 |
 | [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 1/8 |
 | [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
@@ -134,11 +134,10 @@ generated: true
 | [T091](epics/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 | [T093](epics/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
 
 ## Review (0/3)
@@ -149,13 +148,14 @@ _none_
 
 _none_
 
-## Done (6)
+## Done (7)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 | [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
 | [T006](epics/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
+| [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T003](epics/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
 | [T002](epics/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
 | [T001](epics/E001-game-foundation/T001-scaffold-vite-preact-and-strict-typescri.md) | Scaffold Vite, Preact and strict TypeScript app | E001 | p0 | sonnet | S |

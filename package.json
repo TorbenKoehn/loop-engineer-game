@@ -17,7 +17,8 @@
     "harness:new": "node tools/harness/cli.ts new",
     "check": "node tools/check/run.ts",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "golden:update": "node tools/golden/update.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",

@@ -1,6 +1,6 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 7 files, 0 subdirectories"
+summary: "Index of forge/reviews: 8 files, 0 subdirectories"
 keywords: ["review", "integer", "biome", "forkable", "seeded", "vitest", "area", "budgets"]
 type: index
 status: active
@@ -22,3 +22,4 @@ generated: true
 | [R005-T002.md](R005-T002.md) | Review of T002: Configure Biome with code budgets | Review of T002 (approved) | review, configure, biome, with, code, budgets |
 | [R006-T017.md](R006-T017.md) | Review of T017: Integer math helpers for the sim | Review of T017 (approved) | review, integer, math, helpers |
 | [R007-T008.md](R007-T008.md) | Review of T008: Per-area coverage gates in Vitest | Review of T008 (approved) | review, area, coverage, gates, vitest |
+| [R008-T004.md](R008-T004.md) | T004 review: event log types and golden harness | Round 1 approved: CombatEvent union, canonical JSONL and golden harness meet all AC; minor doc drift (src/sim/golden, node imports, update command) needs a follow-up. | review, event-log, golden, test, harness, serialisation |
