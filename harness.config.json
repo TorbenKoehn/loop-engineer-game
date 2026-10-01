@@ -113,7 +113,7 @@
           },
           "milestone": {
             "kind": "enum",
-            "required": false,
+            "required": true,
             "values": [
               "m0",
               "m1",

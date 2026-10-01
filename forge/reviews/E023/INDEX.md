@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E023"
-summary: "Index of forge/reviews/E023: 1 files, 0 subdirectories"
-keywords: ["dirs", "epics", "milestone", "places", "review", "scaffolder"]
+summary: "Index of forge/reviews/E023: 4 files, 0 subdirectories"
+keywords: ["review", "epics", "milestone", "batch", "calls", "determinism", "dirs", "forge"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,4 +15,7 @@ generated: true
 
 | File | Title | Summary | Keywords |
 |---|---|---|---|
+| [R010-T093.md](R010-T093.md) | Review of T093: Harden the src/sim determinism ban | Review of T093 (approved) | review, harden, determinism |
+| [R011-T094.md](R011-T094.md) | Review of T094: Batch git calls in harness lint | Review of T094 (approved) | review, batch, calls, harness, lint, stays |
 | [R016-T086.md](R016-T086.md) | Review of T086: Scaffolder places epics in milestone dirs | Review of T086 (approved) | review, scaffolder, places, epics, milestone, dirs |
+| [R017-T087.md](R017-T087.md) | Review of T087: Migrate forge epics into milestone dirs | Review of T087 (approved) | review, migrate, forge, epics, into, milestone |

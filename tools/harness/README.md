@@ -40,13 +40,13 @@ with `.ts` extensions. Every limit lives in `harness.config.json`; nothing is ha
 Scaffolding (IDs are allocated globally, next free number):
 
 ```
-npm run harness:new -- epic --title "Core loop" [--priority p1] [--milestone m1]
+npm run harness:new -- epic --title "Core loop" [--priority p1] --milestone m1
 npm run harness:new -- task --epic E001 --title "Spawn enemies" [--model sonnet] [--priority p2] [--size S]
 npm run harness:new -- review --task T001 --verdict approved
 npm run harness:new -- retro --title "Sprint one"
 ```
 
-Layout: `forge/epics/E001-slug/EPIC.md` (with `--milestone m1`: `forge/epics/m1/E001-slug/EPIC.md`), `forge/epics/E001-slug/T001-slug.md`,
+Layout: `forge/epics/m1/E001-slug/EPIC.md`, `forge/epics/m1/E001-slug/T001-slug.md`,
 `forge/reviews/E001/R001-T001.md`, `forge/retros/RT001-slug.md`.
 
 ## Config
@@ -85,7 +85,7 @@ Rules: at most `override_max_factor` (2) times the default, `reason` of at least
 
 Errors, checked on every lint:
 
-- `done_needs_review`: ###-T###.md` with `verdict: approved`.
+- `done_needs_review`: a `done` task needs a `forge/reviews/E###/R###-T###.md` with `verdict: approved`.
 - `status_transition`: versus HEAD content (one batched `git cat-file --batch`); allowed `backlog>ready>in-progress>review>done`,
   `review>in-progress`, any `>blocked`, `blocked>ready|in-progress`; done is terminal.
 - `ac_decrease`: acceptance criteria may not shrink once a task left backlog/ready.

@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Reviews one forge task's staged diff against its acceptance criteria in a fresh context and writes forge/reviews/R###-T###.md with severity-rated findings and a verdict. Read-only otherwise. Use after an implementer hands back a task in status review.
+description: Reviews one forge task's staged diff against its acceptance criteria in a fresh context and writes ###-T###.md with severity-rated findings and a verdict. Read-only otherwise. Use after an implementer hands back a task in status review.
 tools: Read, Grep, Glob, Bash, Edit
 model: opus
 effort: high

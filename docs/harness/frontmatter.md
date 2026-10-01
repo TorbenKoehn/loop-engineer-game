@@ -46,7 +46,7 @@ git after the doc's `updated` date.
 | `adr` | same | | Decisions in `docs/architecture/` |
 | `gdd` | same | | Game design in `docs/game/` |
 | `index` | same | | Generated `INDEX.md` and `BOARD.md` only |
-| `epic` | backlog, ready, in-progress, review, done, blocked | `id` E###, `priority` | `forge/epics/*/EPIC.md` |
+| `epic` | backlog, ready, in-progress, review, done, blocked | `id` E###, `priority` | `forge/epics/m*/*/EPIC.md` |
 | `task` | same as epic | `id` T###, `epic`, `priority`, `model`, `size`, `depends_on`, `assignee` | Task files |
 | `review` | docs set | `id` R###, `task`, `verdict` | `forge/reviews/` |
 | `retro` | docs set | `id` RT### | `forge/retros/` |

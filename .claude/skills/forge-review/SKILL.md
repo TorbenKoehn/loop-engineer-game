@@ -19,7 +19,7 @@ Critical rules:
 ## Steps
 
 1. **Read the task file**: Goal, Acceptance Criteria, Context (incl. Out of scope), Log.
-2. **Read prior reviews** of this task (`ls forge/reviews/ | grep T###`). From round 2 on,
+2. **Read prior reviews** of this task (###`). From round 2 on,
    check every prior blocker and major first.
 3. **Read the diff**: `git diff --cached --stat`, then `git diff --cached`. Also
    `git status --short`: unstaged or untracked files are a finding (major) because they

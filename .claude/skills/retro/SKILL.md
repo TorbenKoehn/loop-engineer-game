@@ -24,8 +24,8 @@ Critical rules:
 ls forge/retros/                                   # last retro id and its Actions
 git log --format="%h %s" --grep="^RT[0-9]" -1      # last retro commit = <base>
 git log --format="%h %s" <base>..HEAD              # tasks done since (T###: ...)
-grep -h "started attempt\|changes-requested\|Superseded\|Blocked by" forge/epics/*/T*.md
-grep -h "^| F[0-9]* | \(blocker\|major\)" forge/reviews/*.md   # blocking findings
+grep -h "started attempt\|changes-requested\|Superseded\|Blocked by" forge/epics/m*/E*/T*.md
+grep -h "^| F[0-9]* | \(blocker\|major\)" forge/reviews/E*/*.md   # blocking findings
 npm run harness:lint -- --json                     # warning counts by rule
 grep -rn "budget_override\|budget-override:" docs forge src tools .claude
 ```

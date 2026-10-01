@@ -24,13 +24,17 @@ describe('scaffold', () => {
 
   it('creates epic, tasks, review, retro with globally unique ids and lints clean', () => {
     const root = makeRepo();
-    const epic = scaffold(root, 'epic', { title: 'Core loop', date: '2026-10-01' });
-    expect(epic).toBe('forge/epics/E001-core-loop/EPIC.md');
+    const epic = scaffold(root, 'epic', {
+      title: 'Core loop',
+      milestone: 'm1',
+      date: '2026-10-01',
+    });
+    expect(epic).toBe('forge/epics/m1/E001-core-loop/EPIC.md');
     const t1 = scaffold(root, 'task', { epic: 'E001', title: 'First task', date: '2026-10-01' });
-    scaffold(root, 'epic', { title: 'Second', date: '2026-10-01' });
+    scaffold(root, 'epic', { title: 'Second', milestone: 'm1', date: '2026-10-01' });
     const t2 = scaffold(root, 'task', { epic: 'E002', title: 'Other task', date: '2026-10-01' });
-    expect(t1).toBe('forge/epics/E001-core-loop/T001-first-task.md');
-    expect(t2).toBe('forge/epics/E002-second/T002-other-task.md');
+    expect(t1).toBe('forge/epics/m1/E001-core-loop/T001-first-task.md');
+    expect(t2).toBe('forge/epics/m1/E002-second/T002-other-task.md');
     expect(
       scaffold(root, 'review', { task: 'T001', verdict: 'approved', date: '2026-10-01' }),
     ).toBe('forge/reviews/E001/R001-T001.md');

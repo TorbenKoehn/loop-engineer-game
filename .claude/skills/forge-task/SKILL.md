@@ -20,7 +20,7 @@ Critical rules (read before anything else):
 
 1. **Read the spec.** The task file in full, then its epic's Goal (`EPIC.md`), then the
    Context paths. Read further only where those lead. Do not browse `docs/research/`.
-2. **Read prior reviews.** `ls forge/reviews/ | grep T###`. If any exist, list every
+2. **Read prior reviews.** ###`. If any exist, list every
    blocker and major finding; they come first in this attempt.
 3. **Claim it.** If the status is still `ready` (worktree runs), set `in-progress` and
    append `- <date>: started attempt N (<model>)` to the Log. Otherwise the

@@ -15,7 +15,7 @@ existing `src/` file.
 
 ## 2. Rework after a changes-requested review
 
-Setup: task T901 in `in-progress`, `forge/reviews/R900-T901.md` with one blocker
+Setup: task T901 in `in-progress`, `forge/reviews/E900/R900-T901.md` with one blocker
 (off-by-one in a loop) and two nits.
 
 - Must: read R900 before coding, fix the blocker, append

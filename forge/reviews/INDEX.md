@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 15 files, 1 subdirectories"
-keywords: ["review", "integer", "biome", "combat", "enemy", "forkable", "harness", "seeded"]
+summary: "Index of forge/reviews: 0 files, 4 subdirectories"
+keywords: ["review", "integer", "architecture", "batch", "biome", "builders", "calls", "combat"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,24 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 1 files, 0 subdirectories | dirs, epics, milestone, places, review, scaffolder |
-
-## Files
-
-| File | Title | Summary | Keywords |
-|---|---|---|---|
-| [R001-T001.md](R001-T001.md) | Review of T001: Scaffold Vite, Preact and strict TS app | Review of T001 (approved) | review, scaffold, vite, preact, strict, typescript |
-| [R002-T006.md](R002-T006.md) | Review of T006: Unified check script | Review of T006 (approved) | review, unified, check, script, biome, vitest |
-| [R003-T003.md](R003-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (changes-requested) | review, seeded, forkable, integer |
-| [R004-T003.md](R004-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (approved) | review, seeded, forkable, integer |
-| [R005-T002.md](R005-T002.md) | Review of T002: Configure Biome with code budgets | Review of T002 (approved) | review, configure, biome, with, code, budgets |
-| [R006-T017.md](R006-T017.md) | Review of T017: Integer math helpers for the sim | Review of T017 (approved) | review, integer, math, helpers |
-| [R007-T008.md](R007-T008.md) | Review of T008: Per-area coverage gates in Vitest | Review of T008 (approved) | review, area, coverage, gates, vitest |
-| [R008-T004.md](R008-T004.md) | T004 review: event log types and golden harness | Round 1 approved: CombatEvent union, canonical JSONL and golden harness meet all AC; minor doc drift (src/sim/golden, node imports, update command) needs a follow-up. | review, event-log, golden, test, harness, serialisation |
-| [R009-T009.md](R009-T009.md) | Review of T009: Content types and effect DSL builders | Review of T009 (approved) | review, content, types, effect, builders |
-| [R010-T093.md](R010-T093.md) | Review of T093: Harden the src/sim determinism ban | Review of T093 (approved) | review, harden, determinism |
-| [R011-T094.md](R011-T094.md) | Review of T094: Batch git calls in harness lint | Review of T094 (approved) | review, batch, calls, harness, lint, stays |
-| [R012-T007.md](R012-T007.md) | Review of T007: Architecture import-rule test | Review of T007 (approved) | review, architecture, import, rule, test |
-| [R013-T010.md](R013-T010.md) | Review of T010: Generated plain-English text from templates | Review of T010 (approved) | review, generated, plain, english, text, from |
-| [R014-T018.md](R014-T018.md) | Review of T018: combat walking skeleton | Round 1, changes-requested: code meets all 5 AC and follows the tick order, but the 583-line diff breaches task_diff_lines (400) with no allowed override. | review, combat, walking, skeleton, tool, enemy |
-| [R015-T018.md](R015-T018.md) | Review of T018: Combat skeleton, one tool vs one enemy | Review of T018 (approved) | review, combat, walking, skeleton, tool, enemy |
+| [E001/](E001/INDEX.md) | Index of forge/reviews/E001: 8 files, 0 subdirectories | review, biome, forkable, integer, seeded, test, vitest, architecture |
+| [E002/](E002/INDEX.md) | Index of forge/reviews/E002: 3 files, 0 subdirectories | review, combat, enemy, skeleton, tool, walking, helpers, integer |
+| [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 2 files, 0 subdirectories | review, builders, content, effect, english, from, generated, plain |
+| [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 4 files, 0 subdirectories | review, epics, milestone, batch, calls, determinism, dirs, forge |

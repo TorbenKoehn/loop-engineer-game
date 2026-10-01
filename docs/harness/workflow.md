@@ -96,7 +96,7 @@ checks, never `--no-verify`, never amend a pushed commit.
 
 ## Review verdicts
 
-The reviewer writes `forge/reviews/R###-T###.md` (procedure: `forge-review` skill).
+The reviewer writes `forge/reviews/E###/R###-T###.md` (procedure: `forge-review` skill).
 
 - **approved**: no blocker or major. The orchestrator records done and commits. Minor
   and nit findings never trigger a round; worthwhile ones become backlog tasks.

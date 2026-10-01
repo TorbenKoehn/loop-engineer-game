@@ -50,9 +50,9 @@ The forge is an in-repo Kanban board built from frontmatter Markdown:
 ```
 forge/BOARD.md                     generated board (WIP counts, epic progress)
 forge/HANDOFF.md                   orchestrator state, overwritten each cycle
-forge/epics/E001-slug/EPIC.md      epic: goal, scope, out of scope, DoD
-forge/epics/E001-slug/T001-slug.md task: goal, context, AC, subtasks, notes, log
-forge/reviews/R001-T001.md         one review per review round
+forge/epics/m1/E001-slug/EPIC.md   epic: goal, scope, out of scope, DoD
+forge/epics/m1/E001-slug/T001-slug.md task: goal, context, AC, subtasks, notes, log
+forge/reviews/E001/R001-T001.md    one review per review round
 forge/retros/RT001-slug.md         retrospective with at most 3 actions
 ```
 

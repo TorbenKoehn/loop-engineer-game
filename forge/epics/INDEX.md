@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics"
-summary: "Index of forge/epics: 0 files, 23 subdirectories"
-keywords: ["m2", "m3", "agents-md", "boss", "content", "accessibility", "art", "ascii-art"]
+summary: "Index of forge/epics: 0 files, 4 subdirectories"
+keywords: ["agents-md", "boss", "accessibility", "achievements", "arch-test", "art", "ascension", "ascii-art"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,26 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [E001-game-foundation/](E001-game-foundation/INDEX.md) | Index of forge/epics/E001-game-foundation: 9 files, 0 subdirectories | testing, determinism, biome, rng, typescript, vite, vitest, arch-test |
-| [E002-combat-simulation-core/](E002-combat-simulation-core/INDEX.md) | Index of forge/epics/E002-combat-simulation-core: 9 files, 0 subdirectories | sim, determinism, combat, damage-formula, statuses, tick, chain, charge-rate |
-| [E003-context-window-mechanic/](E003-context-window-mechanic/INDEX.md) | Index of forge/epics/E003-context-window-mechanic: 8 files, 0 subdirectories | context, compaction, window, baseline, modifiers, noise, zones, blockers |
-| [E004-run-structure-and-map/](E004-run-structure-and-map/INDEX.md) | Index of forge/epics/E004-run-structure-and-map: 9 files, 0 subdirectories | run, reducer, economy, events, map, rewards, shop, actions |
-| [E005-vertical-slice-content/](E005-vertical-slice-content/INDEX.md) | Index of forge/epics/E005-vertical-slice-content: 9 files, 0 subdirectories | content, dsl, slice, strings, types, validation, boss, builders |
-| [E006-ui-shell-and-combat-replay/](E006-ui-shell-and-combat-replay/INDEX.md) | Index of forge/epics/E006-ui-shell-and-combat-replay: 9 files, 0 subdirectories | ui, clock, combat-view, replay, seeking, signals, tooltips, zones |
-| [E007-item-rules-enemy-traits-and-bosses/](E007-item-rules-enemy-traits-and-bosses/INDEX.md) | Index of forge/epics/E007-item-rules-enemy-traits-and-bosses: 9 files, 0 subdirectories | sim, handlers, traits, boss, breakpoints, dsl, rules, skills |
-| [E008-run-end-meta-state-and-saves/](E008-run-end-meta-state-and-saves/INDEX.md) | Index of forge/epics/E008-run-end-meta-state-and-saves: 8 files, 0 subdirectories | save, agents-md, autosave, meta, migrations, run-end, schema, checksum |
-| [E009-run-screens-and-build-panel/](E009-run-screens-and-build-panel/INDEX.md) | Index of forge/epics/E009-run-screens-and-build-panel: 9 files, 0 subdirectories | ui, screens, build-panel, map, run-end, shop, agents-md, breakpoints |
-| [E010-balance-sim-bots-and-m1-exit-gates/](E010-balance-sim-bots-and-m1-exit-gates/INDEX.md) | Index of forge/epics/E010-balance-sim-bots-and-m1-exit-gates: 9 files, 0 subdirectories | balance, exit-criteria, cli, bots, golden-logs, playwright, win-rate, bug-reports |
-| [E011-juice-audio-settings-and-tutorial/](E011-juice-audio-settings-and-tutorial/INDEX.md) | Index of forge/epics/E011-juice-audio-settings-and-tutorial: 8 files, 0 subdirectories | accessibility, audio, juice, ascii-art, reduced-motion, settings, tutorial, art |
-| [E012-m2-phases-2-and-3-and-the-full-run/](E012-m2-phases-2-and-3-and-the-full-run/INDEX.md) | Index of forge/epics/E012-m2-phases-2-and-3-and-the-full-run: 1 files, 0 subdirectories | boss, content, m2, phases, run-structure, traits |
-| [E013-m2-swarm-orchestrator-and-yolo-mode/](E013-m2-swarm-orchestrator-and-yolo-mode/INDEX.md) | Index of forge/epics/E013-m2-swarm-orchestrator-and-yolo-mode: 1 files, 0 subdirectories | harness, m2, sub-agents, swarm, system-prompts, yolo |
-| [E014-m2-full-item-and-event-catalogue/](E014-m2-full-item-and-event-catalogue/INDEX.md) | Index of forge/epics/E014-m2-full-item-and-event-catalogue: 1 files, 0 subdirectories | content, events, m2, memories, skills, tools |
-| [E015-m2-meta-progression-and-unlock-tree/](E015-m2-meta-progression-and-unlock-tree/INDEX.md) | Index of forge/epics/E015-m2-meta-progression-and-unlock-tree: 1 files, 0 subdirectories | agents-md, m2, meta-progression, migration, training-data, unlocks |
-| [E016-m2-endless-lint-rules-and-daily-seed/](E016-m2-endless-lint-rules-and-daily-seed/INDEX.md) | Index of forge/epics/E016-m2-endless-lint-rules-and-daily-seed: 1 files, 0 subdirectories | ascension, daily-seed, endless, lint-rules, m2, modes |
-| [E017-m2-achievements-stats-codex-and-strings/](E017-m2-achievements-stats-codex-and-strings/INDEX.md) | Index of forge/epics/E017-m2-achievements-stats-codex-and-strings: 1 files, 0 subdirectories | achievements, codex, localisation, m2, pseudo-locale, stats |
-| [E018-m2-full-game-balance-and-performance/](E018-m2-full-game-balance-and-performance/INDEX.md) | Index of forge/epics/E018-m2-full-game-balance-and-performance: 1 files, 0 subdirectories | balance, bots, m2, performance, targets, tuning |
-| [E019-m3-juice-particles-and-music/](E019-m3-juice-particles-and-music/INDEX.md) | Index of forge/epics/E019-m3-juice-particles-and-music: 1 files, 0 subdirectories | audio, juice, m3, mixing, music, particles |
-| [E020-m3-onboarding-and-accessibility-complete/](E020-m3-onboarding-and-accessibility-complete/INDEX.md) | Index of forge/epics/E020-m3-onboarding-and-accessibility-complete: 1 files, 0 subdirectories | accessibility, m3, onboarding, remapping, screen-reader, settings |
-| [E021-m3-art-themes-and-title/](E021-m3-art-themes-and-title/INDEX.md) | Index of forge/epics/E021-m3-art-themes-and-title: 1 files, 0 subdirectories | art, ascii-art, logo, m3, themes, title |
-| [E022-m3-aa-release-readiness/](E022-m3-aa-release-readiness/INDEX.md) | Index of forge/epics/E022-m3-aa-release-readiness: 1 files, 0 subdirectories | copy-edit, m3, performance, playtest, release, soak-test |
-| [E023-harness-upkeep/](E023-harness-upkeep/INDEX.md) | Index of forge/epics/E023-harness-upkeep: 10 files, 0 subdirectories | harness, biome, code-budgets, enforced_by, epics, milestone, ts-nocheck, tsconfig |
+| [m0/](m0/INDEX.md) | Index of forge/epics/m0: 0 files, 2 subdirectories | biome, arch-test, code-budgets, determinism, enforced_by, epics, harness, milestone |
+| [m1/](m1/INDEX.md) | Index of forge/epics/m1: 0 files, 10 subdirectories | agents-md, boss, breakpoints, dsl, map, run-end, shop, sim |
+| [m2/](m2/INDEX.md) | Index of forge/epics/m2: 0 files, 7 subdirectories | m2, content, achievements, agents-md, ascension, balance, boss, bots |
+| [m3/](m3/INDEX.md) | Index of forge/epics/m3: 0 files, 4 subdirectories | m3, accessibility, art, ascii-art, audio, copy-edit, juice, logo |
