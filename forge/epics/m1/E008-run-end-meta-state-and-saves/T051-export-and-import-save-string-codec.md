@@ -48,3 +48,4 @@ Players and agents can move a run as one string, which bug reports and the repla
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: done (R056)

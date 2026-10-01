@@ -6,7 +6,7 @@ type: doc
 status: active
 updated: 2026-10-01
 related: [run-state.md, testing.md, overview.md, adr/adr-005-save-action-log.md]
-related_code: [src/save/schema.ts, src/save/storage.ts, src/save/checksum.ts]
+related_code: [src/save/schema.ts, src/save/storage.ts, src/save/checksum.ts, src/save/codec.ts]
 ---
 
 # Save system and migrations
@@ -75,8 +75,10 @@ another schema or shape (`schema`) and a wrong checksum (`checksum`).
 
 - Format: `LE1.` + base64url( deflate-raw( UTF-8 canonical JSON of `RunSaveV1` ) ).
 - Compression uses the native `CompressionStream('deflate-raw')` (no dependency).
-- Import validates prefix, checksum and schema, then migrates. Errors are shown in plain
-  English ("This save is from a newer version").
+- `encodeSave` / `decodeSave` (`src/save/codec.ts`, async) implement it. Import validates
+  prefix, compression, schema and checksum, then migrates. `decodeSave` never throws; it
+  returns `{ ok: false, error, message }` with a plain-English message ("This save is from
+  a newer version." when the schema is above the current one).
 - Bug reports: players paste the string; agents run `node tools/balance/replay.ts
   <string>` to reproduce, which prints the run summary and can dump any fight's log.
 
