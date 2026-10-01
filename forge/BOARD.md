@@ -16,7 +16,7 @@ generated: true
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
 | [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 4/8 |
-| [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 0/8 |
+| [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 1/8 |
 | [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
 | [E005](epics/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 0/8 |
@@ -126,13 +126,12 @@ generated: true
 | [T005](epics/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
 | [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
-| [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 
 ## Review (0/3)
 
@@ -142,10 +141,11 @@ _none_
 
 _none_
 
-## Done (4)
+## Done (5)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 | [T006](epics/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
 | [T003](epics/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
 | [T002](epics/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |

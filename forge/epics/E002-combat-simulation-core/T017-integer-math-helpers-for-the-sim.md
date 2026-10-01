@@ -5,7 +5,7 @@ title: Integer math helpers for the sim
 summary: "src/sim/int.ts with pct, mulDiv, clamp and ceilDiv exactly as in sim-core.md, safe-integer assertions in dev builds, and exhaustive unit tests."
 keywords: ["sim", "integer-math", "helpers", "determinism", "rounding"]
 type: task
-status: in-progress
+status: done
 priority: p0
 model: sonnet
 size: S
@@ -30,16 +30,16 @@ All sim arithmetic goes through one tested module so rounding is identical every
 
 ## Acceptance Criteria
 
-- [ ] Test `pct rounds half up` covers positive, negative and zero p against `Math.floor((x * (100 + p) + 50) / 100)`
-- [ ] Test `mulDiv asserts safe integers` expects a throw in dev mode for an unsafe product
-- [ ] Tests for clamp and ceilDiv, including exact multiples, pass
-- [ ] `src/sim/int.ts` has 100% line and branch coverage
+- [x] Test `pct rounds half up` covers positive, negative and zero p against `Math.floor((x * (100 + p) + 50) / 100)`
+- [x] Test `mulDiv asserts safe integers` expects a throw in dev mode for an unsafe product
+- [x] Tests for clamp and ceilDiv, including exact multiples, pass
+- [x] `src/sim/int.ts` has 100% line and branch coverage
 
 ## Subtasks
 
-- [ ] Implement helpers
-- [ ] Dev-only safe-integer assertion
-- [ ] Unit tests
+- [x] Implement helpers
+- [x] Dev-only safe-integer assertion
+- [x] Unit tests
 
 ## Notes
 
@@ -48,3 +48,10 @@ All sim arithmetic goes through one tested module so rounding is identical every
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: AC1 verified: npx vitest run src/sim/int (test 'pct rounds half up': examples + fast-check vs reference, p<0/0/>0)
+- 2026-10-01: AC2 verified: test 'mulDiv asserts safe integers' throws RangeError on 2**40*2**40; setDevAsserts (default on) disables for prod
+- 2026-10-01: AC3 verified: clamp and ceilDiv tests pass incl. exact multiples
+- 2026-10-01: AC4 verified: vitest --coverage (v8, installed --no-save) int.ts 100% lines and branches
+- 2026-10-01: note: prompt allowed src/sim/math*.ts but task/AC name src/sim/int.ts; followed the task
+- 2026-10-01: review requested
+- 2026-10-01: done (R006)
