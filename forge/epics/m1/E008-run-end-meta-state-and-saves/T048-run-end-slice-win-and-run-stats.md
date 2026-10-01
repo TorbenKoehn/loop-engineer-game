@@ -5,7 +5,7 @@ title: Run end, slice win and run stats
 summary: "Run-end path: a Legacy Monolith win ends the M1 run as shipped, Trust 0 as ctrlc, abandon as a loss; RunStats collects what the summary and history need."
 keywords: ["run-end", "stats", "slice", "reducer", "summary"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -49,3 +49,4 @@ Every run ends cleanly with the data needed to explain why, which the summary, l
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

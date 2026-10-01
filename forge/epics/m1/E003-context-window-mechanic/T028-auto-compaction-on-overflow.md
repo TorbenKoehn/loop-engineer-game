@@ -5,7 +5,7 @@ title: Auto-compaction on overflow
 summary: "Overflow at F ≥ W triggers auto-compaction: noise cleared, signal reset to baseline plus 10% of W, Stun 2000 ms, latest temporary buff lost, unfired tools skip the tick."
 keywords: ["context", "compaction", "overflow", "stun", "buff-loss"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ Overflowing the window is punished in the documented way, the key moment the sli
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
