@@ -21,7 +21,7 @@ generated: true
 | [E004/](E004/INDEX.md) | Index of forge/reviews/E004: 5 files, 0 subdirectories | review, build, combatinput, credits, encounter, fight, generation, interest |
 | [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 12 files, 0 subdirectories | review, data, content, harness, memories, prompt, skills, slice |
 | [E006/](E006/INDEX.md) | Index of forge/reviews/E006: 8 files, 0 subdirectories | review, combat, sandbox, only, page, route, screen, view |
-| [E007/](E007/INDEX.md) | Index of forge/reviews/E007: 1 files, 0 subdirectories | conditions, engine, review, rule, triggers |
+| [E007/](E007/INDEX.md) | Index of forge/reviews/E007: 2 files, 0 subdirectories | review, conditions, effects, engine, modifiers, passive, rule, stat |
 | [E008/](E008/INDEX.md) | Index of forge/reviews/E008: 4 files, 0 subdirectories | review, meta, save, agents, codec, export, history, import |
 | [E009/](E009/INDEX.md) | Index of forge/reviews/E009: 1 files, 0 subdirectories | harness, prompt, review, select, system, title |
 | [E023/](E023/INDEX.md) | Index of forge/reviews/E023: 5 files, 0 subdirectories | review, determinism, epics, milestone, batch, biome, calls, covers |

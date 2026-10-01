@@ -1,7 +1,9 @@
 // Context bar quantities, baseline and zones (docs/game/systems/context.md "Quantities",
 // "Zones", "Tuning knobs"). Pure: no Sim, no events; zone.ts emits zoneChanged.
-import type { Accuracy, FightModifier, ModStat, Zone } from '../../../content/types/index.ts';
+import type { Accuracy, FightModifier, Zone } from '../../../content/types/index.ts';
 import type { Mod } from '../damage.ts';
+import { collectMods, type ModRt, statMods, sumMods } from '../mods/mods.ts';
+import { createRules } from '../rules/state.ts';
 import type { CombatInput } from '../types.ts';
 
 export const ZONE_COLD_PCT = 25;
@@ -32,6 +34,8 @@ export interface Ctx {
   readonly coldPenalty: number;
   /** Blocker budget left this fight: `noiseBlock` mods (.gitignore) absorb the first noise. */
   block: number;
+  /** `focusPct` mods: added to the Focused bonus, each with its own why id. */
+  readonly focus: readonly Mod[];
 }
 
 /** Integer zone tests on F = S + N against W. */
@@ -53,14 +57,6 @@ export function baseline(input: CombatInput): number {
   return agent.model.baseWeight + prompt.weight + tools + items + lessons.length;
 }
 
-/** Sum of passive `mod` effects on `stat` from the prompt, skills, memories and lessons. */
-export function passiveMod(input: CombatInput, stat: ModStat): number {
-  const { prompt, skills, memories, lessons } = input;
-  const rules = [prompt, ...skills, ...memories, ...lessons].flatMap((def) => def.rules);
-  const effects = rules.filter((r) => r.when.on === 'passive').flatMap((r) => r.then);
-  return effects.reduce((sum, e) => (e.do === 'mod' && e.stat === stat ? sum + e.v : sum), 0);
-}
-
 /** Blockers subtract from incoming noise until the fight's budget is spent; returns the rest. */
 export function blockNoise(ctx: Ctx, n: number): number {
   const blocked = Math.min(n, ctx.block);
@@ -78,15 +74,19 @@ function startTokens(mods: readonly FightModifier[]): { noise: number; signal: n
   return start;
 }
 
-/** Fight-start bar: S = B + startSignal, N = startNoise through blockers. Window mods: T030. */
-export function createCtx(input: CombatInput): Ctx {
+/** Fight-start bar: W with window mods, S = B + startSignal, N = startNoise through blockers. */
+export function createCtx(
+  input: CombatInput,
+  mods: readonly ModRt[] = collectMods(createRules(input).list),
+): Ctx {
   const { model } = input.agent;
-  const W = Math.max(WINDOW_MIN, model.window);
+  const W = Math.max(WINDOW_MIN, model.window + sumMods(mods, 'window'));
   const B = baseline(input);
   const coldPenalty = COLD_PENALTY_PCT[model.accuracy];
   const start = startTokens(input.modifiers);
-  const block = passiveMod(input, 'noiseBlock');
-  const ctx: Ctx = { W, B, S: B + start.signal, N: 0, zone: 'cold', coldPenalty, block };
+  const block = sumMods(mods, 'noiseBlock');
+  const focus = statMods(mods, 'focusPct').map((m) => ({ id: m.id, pct: m.v }));
+  const ctx: Ctx = { W, B, S: B + start.signal, N: 0, zone: 'cold', coldPenalty, block, focus };
   ctx.N = blockNoise(ctx, start.noise);
   ctx.zone = zoneOf(ctx.S + ctx.N, W);
   return ctx;
@@ -94,7 +94,7 @@ export function createCtx(input: CombatInput): Ctx {
 
 /** Damage-formula mod of the current zone for tool damage, Guardrails and healing. */
 export function zoneMods(ctx: Ctx): Mod[] {
-  if (ctx.zone === 'focused') return [{ id: 'zone:focused', pct: FOCUS_BONUS_PCT }];
+  if (ctx.zone === 'focused') return [{ id: 'zone:focused', pct: FOCUS_BONUS_PCT }, ...ctx.focus];
   if (ctx.zone === 'cold') return [{ id: 'zone:cold', pct: -ctx.coldPenalty }];
   return [];
 }

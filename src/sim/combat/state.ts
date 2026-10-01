@@ -5,6 +5,7 @@ import type { CombatEvent, Ref } from '../events.ts';
 import { createRng, type Rng } from '../rng.ts';
 import { type Ctx, createCtx } from './context/ctx.ts';
 import { type Phase, scaleSev } from './enemy/phase.ts';
+import { collectMods, type ModRt, sumMods } from './mods/mods.ts';
 import { createRules, type RulesRt } from './rules/state.ts';
 import type { CombatInput, ToolSetup, Version } from './types.ts';
 
@@ -38,6 +39,8 @@ export interface ToolRt {
   readonly slot: number;
   readonly def: ToolDef;
   readonly version: Version;
+  /** Charge-rate add: harness speed + rate mods matching the tool (fight start). */
+  readonly rate: number;
   progress: number;
   statuses: StatusRt[];
   /** Received pipe progress since its own last activation. */
@@ -69,8 +72,6 @@ export interface AgentRt {
   readonly maxTrust: number;
   /** Guardrails, capped at maxTrust. */
   guard: number;
-  /** Harness speed: the unclamped charge-rate base in percent. Flat rate mods: T033. */
-  readonly speed: number;
   statuses: StatusRt[];
   readonly tools: ToolRt[];
   readonly ctx: Ctx;
@@ -98,10 +99,15 @@ export interface Sim {
   readonly pipeChain: { step: number; startT: number };
   /** Item rules and raised triggers (rules/engine.ts). */
   readonly rules: RulesRt;
+  /** Passive item mods in slot order (mods/mods.ts). */
+  readonly mods: readonly ModRt[];
 }
 
 export function createSim(input: CombatInput, log: boolean): Sim {
   const { agent, encounter } = input;
+  const rules = createRules(input);
+  const mods = collectMods(rules.list);
+  const rate = (def: ToolDef) => agent.model.speed + sumMods(mods, 'rate', def);
   return {
     t: 0,
     seq: 0,
@@ -116,21 +122,22 @@ export function createSim(input: CombatInput, log: boolean): Sim {
       trust: agent.trust,
       maxTrust: agent.maxTrust,
       guard: 0,
-      speed: agent.model.speed,
       statuses: [],
-      tools: agent.tools.map(createTool),
-      ctx: createCtx(input),
+      tools: agent.tools.map((setup, slot) => createTool(setup, slot, rate(setup.def))),
+      ctx: createCtx(input, mods),
       taken: 0,
     },
     enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1, encounter.phase)),
     pipeChain: { step: 0, startT: 0 },
-    rules: createRules(input),
+    rules,
+    mods,
   };
 }
 
-const createTool = (setup: ToolSetup, slot: number): ToolRt => ({
+const createTool = (setup: ToolSetup, slot: number, rate: number): ToolRt => ({
   ...setup,
   slot,
+  rate,
   progress: 0,
   statuses: [],
   piped: false,

@@ -2,6 +2,7 @@
 import type {
   EnemyDef,
   FightModifier,
+  HarnessTrait,
   LessonDef,
   MemoryDef,
   ModelStats,
@@ -46,6 +47,8 @@ export interface CombatInput {
   readonly memories: readonly MemoryDef[];
   readonly lessons: readonly LessonDef[];
   readonly prompt: SystemPromptDef;
+  /** The harness trait's rules, first in slot order (wired by the run: T034). */
+  readonly trait?: HarnessTrait;
   /** Planned compaction threshold in percent; 0 = never. */
   readonly policy: 70 | 80 | 90 | 0;
   readonly encounter: EncounterSetup;

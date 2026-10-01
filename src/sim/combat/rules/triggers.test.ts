@@ -107,6 +107,17 @@ describe('compaction', () => {
     expect(ruled(events, 'statusOn')[0]).toMatchObject({ t: compaction?.t, dst: 't0', v: 2000 });
     expect(events.some((e) => e.kind === 'statusOff' && e.src === 'ctx')).toBe(false);
   });
+
+  it('a rule that removes context still leaves one zone update per activation (R054 F2)', () => {
+    // B 25 of W 40 (Focused); output 20 overflows, S = 29 is Rot, the rule's -5 is Focused again.
+    const input = fight({ window: 40, tools: [makeTool({ weight: 5, output: 20 })] });
+    const { events } = run(input, makeRule({ on: 'compaction' }, [{ do: 'removeCtx', v: 5 }]));
+    const t = events.find((e) => e.kind === 'compaction')?.t;
+    const removal = events.find((e) => e.kind === 'tokens' && e.src === 'a');
+    expect(removal).toMatchObject({ t, v: -4, d: { S: 25, kind: 'removal' } }); // down to B
+    // Before the fix: zoneChanged to Rot after the compaction, then back to Focused.
+    expect(events.filter((e) => e.t === t && e.kind === 'zoneChanged')).toEqual([]);
+  });
 });
 
 describe('damaged', () => {

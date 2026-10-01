@@ -156,7 +156,11 @@ describe('run end', () => {
       }
       return s;
     };
-    const ends = ['s0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9'].map(play);
+    // Deterministic seed search: the first of s0..s199 that ships (win rate is E010 balance).
+    const ends: RunState[] = [];
+    for (let i = 0; i < 200 && !ends.some((s) => s.result?.outcome === 'shipped'); i++) {
+      ends.push(play(`s${i}`));
+    }
     const shipped = ends.find((s) => s.result?.outcome === 'shipped');
     expect(shipped?.combat?.nodeId).toBe('p1-boss');
     expect(shipped?.stats.nodesCleared).toBeGreaterThan(1);

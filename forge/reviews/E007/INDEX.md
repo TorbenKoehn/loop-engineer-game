@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E007"
-summary: "Index of forge/reviews/E007: 1 files, 0 subdirectories"
-keywords: ["conditions", "engine", "review", "rule", "triggers"]
+summary: "Index of forge/reviews/E007: 2 files, 0 subdirectories"
+keywords: ["review", "conditions", "effects", "engine", "modifiers", "passive", "rule", "stat"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,3 +16,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [R054-T032.md](R054-T032.md) | Review of T032: Rule engine: triggers and conditions | Review of T032 (approved) | review, rule, engine, triggers, conditions |
+| [R058-T033.md](R058-T033.md) | Review of T033: Passive stat modifiers (mod effects) | Review of T033 (approved) | review, passive, stat, modifiers, effects |

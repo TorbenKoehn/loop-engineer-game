@@ -7,9 +7,9 @@ import type { Activation } from '../status/status-effects.ts';
 import { condsPass, subjectOf, triggerMatches } from './conds.ts';
 import { type Fire, type FireSpec, type RuleRt, raise } from './state.ts';
 
-/** Raises a trigger and dispatches the queue; the caller's overflow check updates the zone. */
-export function fireRules(sim: Sim, spec: FireSpec): void {
-  raise(sim.rules, spec);
+/** Raises a trigger (if any) and dispatches the queue; the caller updates the zone. */
+export function fireRules(sim: Sim, spec?: FireSpec): void {
+  if (spec) raise(sim.rules, spec);
   drain(sim);
 }
 

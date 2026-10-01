@@ -1,7 +1,8 @@
 // Rule 2: number budgets. Item weight 0-6, tool cooldown and intent windup >= 1000 ms in
-// steps of 50, tool output -20..10, v1/v2/v3 triples non-decreasing, Severity > 0.
+// steps of 50, `every` intervals in steps of 50 (one tick), tool output -20..10, v1/v2/v3
+// triples non-decreasing, Severity > 0.
 import type { Content } from '../index.ts';
-import { effectsOf, intentsOf } from './walk.ts';
+import { effectsOf, intentsOf, rulesOf } from './walk.ts';
 
 export const WEIGHT_MIN = 0;
 export const WEIGHT_MAX = 6;
@@ -40,7 +41,12 @@ function timings(c: Content): string[] {
       timingOk(i.windupMs) ? [] : [err(`enemy ${e.id}.${i.id}: windupMs ${i.windupMs}`)],
     ),
   );
-  return [...cooldowns, ...windups];
+  const intervals = rulesOf(c).flatMap(({ owner, item: { when } }) =>
+    when.on !== 'every' || (when.ms > 0 && when.ms % TIMING_STEP_MS === 0)
+      ? []
+      : [err(`${owner}: every.ms ${when.ms} is not a multiple of ${TIMING_STEP_MS}`)],
+  );
+  return [...cooldowns, ...windups, ...intervals];
 }
 
 function outputs(c: Content): string[] {

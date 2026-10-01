@@ -1,9 +1,10 @@
 // One-shot primes (docs/game/systems/statuses.md "Primed"): `prime(filter, pct)` adds +pct% to
 // the next activation of a matching tool; all primes on a tool add up and are consumed together.
-import type { Filter, ToolDef } from '../../../content/types/index.ts';
+import type { Filter } from '../../../content/types/index.ts';
 import type { Ref } from '../../events.ts';
 import { ceilDiv } from '../../int.ts';
 import type { Mod } from '../damage.ts';
+import { matchesTool } from '../mods/filter.ts';
 import { emit, PROGRESS_PER_MS, type Sim, TICK_MS, type ToolRt, toolRef } from '../state.ts';
 import { toolRate } from '../status/charge.ts';
 
@@ -12,16 +13,6 @@ export interface PrimeSpec {
   readonly pct: number;
   /** Number of tools primed, one prime each. */
   readonly count: number;
-}
-
-/** Tool fields of a filter must all match; `family` is about enemies and never excludes a tool. */
-export function matchesTool(def: ToolDef, f: Filter): boolean {
-  return (
-    (f.tag === undefined || def.tags.includes(f.tag)) &&
-    (f.tool === undefined || def.id === f.tool) &&
-    (f.maxWeight === undefined || def.weight <= f.maxWeight) &&
-    (f.maxCooldownMs === undefined || def.cooldownMs <= f.maxCooldownMs)
-  );
 }
 
 const FILTER_KEYS = ['tag', 'tool', 'maxWeight', 'maxCooldownMs', 'family'] as const;

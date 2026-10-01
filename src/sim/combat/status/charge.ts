@@ -22,10 +22,10 @@ export function chargeRate(add: number, has: HasStatus, rot = false): number {
   return rate;
 }
 
-/** A tool's own statuses, a Stun on the agent (stops all of its tools) and the Rot zone. */
+/** A tool's rate add, own statuses, a Stun on the agent (stops all its tools), the Rot zone. */
 export const toolRate = (agent: AgentRt, tool: ToolRt): number =>
   chargeRate(
-    agent.speed,
+    tool.rate,
     (s) => hasStatus(tool, s) || (s === 'stun' && hasStatus(agent, s)),
     agent.ctx.zone === 'rot',
   );

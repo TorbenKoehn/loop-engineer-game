@@ -153,6 +153,7 @@ The list is a checked-in static module, not a runtime glob, so content runs on p
 1. Ids unique per kind; every referenced id exists (enemies in encounters, unlock refs,
    handler ids, string keys).
 2. Number budgets: `weight` 0–6, `cooldownMs`/`windupMs` ≥ 1000 and multiples of 50,
+   `every` rule intervals positive multiples of 50 (one tick),
    output −20..10, V3 values non-decreasing, Severity > 0.
 3. Every tool has 1–2 tags; every item has name, line and flavour keys in `en`.
 4. Every encounter fits ≤ 5 enemies; every phase has ≥ 5 easy, ≥ 5 hard, ≥ 2 elite

@@ -24,11 +24,11 @@ export function removeTokens(sim: Sim, src: Ref, n: number): number {
   return removed;
 }
 
-/** After the effects: S += max(0, output + mods), negative output removes. */
+/** After the effects: S += max(0, output + mods); negative output removes (no mods). */
 export function outputTokens(sim: Sim, tool: ToolRt, outputMods = 0): void {
   const { output } = tool.def;
   const src = toolRef(tool);
-  if (output < 0) removeTokens(sim, src, -(output + outputMods));
+  if (output < 0) removeTokens(sim, src, -output);
   else {
     const out = Math.max(0, output + outputMods);
     sim.agent.ctx.S += out;
@@ -39,5 +39,5 @@ export function outputTokens(sim: Sim, tool: ToolRt, outputMods = 0): void {
 /** Output, then the overflow check and the zone once. Returns whether it auto-compacted. */
 export function addOutput(sim: Sim, tool: ToolRt, outputMods = 0): boolean {
   outputTokens(sim, tool, outputMods);
-  return checkOverflow(sim); // output mods from items: E007
+  return checkOverflow(sim);
 }

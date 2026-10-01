@@ -14,10 +14,16 @@ export const AUTO_COMPACT_STUN_MS = 2000;
  * recomputed once (one zoneChanged from the zone before). Returns whether it compacted.
  */
 export function checkOverflow(sim: Sim): boolean {
+  const overflow = compactIfFull(sim);
+  updateZone(sim);
+  return overflow;
+}
+
+/** F >= W auto-compacts; the caller updates the zone. Returns whether it compacted. */
+export function compactIfFull(sim: Sim): boolean {
   const { ctx } = sim.agent;
   const overflow = ctx.S + ctx.N >= ctx.W;
   if (overflow) autoCompact(sim);
-  updateZone(sim);
   return overflow;
 }
 

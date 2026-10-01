@@ -1,5 +1,6 @@
 // The one visible damage formula (docs/game/systems/combat.md "Damage formula") and how a hit
 // lands: Guardrails absorb first, then Trust or Severity; overkill is discarded.
+import type { Family } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
 import { pct as scale } from '../int.ts';
 import { zoneIx } from './context/ctx.ts';
@@ -15,6 +16,9 @@ export interface Mod {
   readonly id: string;
   readonly flat?: number;
   readonly pct?: number;
+  /** Item damage mods: not on Guardrails or healing; `family` only against that family. */
+  readonly dmgOnly?: boolean;
+  readonly family?: Family;
 }
 
 /** Formula inputs and result, exactly as the tooltip shows them. */

@@ -2,7 +2,7 @@
 import type { Rule, Trigger } from '../../../content/types/index.ts';
 import type { CombatInput } from '../types.ts';
 
-/** One rule of the prompt, a skill, a memory or a lesson; passive ones never fire (T033). */
+/** One rule of the trait, prompt, a skill, memory or lesson; passive ones are mods (mods/). */
 export interface RuleRt {
   /** `<kind>:<def id>#<rule index>`, e.g. `skill:rubber_duck#0`; the oncePerRun key. */
   readonly id: string;
@@ -27,7 +27,7 @@ export interface Fire {
 export type FireSpec = Omit<Fire, 'chain'>;
 
 export interface RulesRt {
-  /** Collection order = slot order: prompt, skills, memories, lessons. */
+  /** Collection order = slot order: trait, prompt, skills, memories, lessons. */
   readonly list: readonly RuleRt[];
   readonly pending: Fire[];
   chain: readonly number[]; // of the rule whose effects run now
@@ -35,11 +35,17 @@ export interface RulesRt {
 }
 
 type Owner = { readonly id: string; readonly rules: readonly Rule[] };
-const KINDS = ['prompt', 'skill', 'memory', 'lesson'] as const;
+const KINDS = ['trait', 'prompt', 'skill', 'memory', 'lesson'] as const;
 
 export function createRules(input: CombatInput): RulesRt {
-  const { prompt, skills, memories, lessons } = input;
-  const owners: readonly (readonly Owner[])[] = [[prompt], skills, memories, lessons];
+  const { trait, prompt, skills, memories, lessons } = input;
+  const owners: readonly (readonly Owner[])[] = [
+    trait ? [trait] : [],
+    [prompt],
+    skills,
+    memories,
+    lessons,
+  ];
   const list = owners.flatMap((defs, k) =>
     defs.flatMap((def) =>
       def.rules.map((rule, ix) => ({ id: `${KINDS[k]}:${def.id}#${ix}`, src: def.id, rule })),

@@ -33,18 +33,26 @@ Each tick runs these steps in this order. Within a step, the agent's tools go le
 right, enemies go front to back. Every state change emits an event.
 
 1. `t += 50`. Decrease all status timers by 50; expire those at ≤ 0.
-2. Timed traits tick (Grow, Leak, Flaky toggle, stage timers, sub-agent lifespans).
+2. Timed traits tick (Grow, Leak, Flaky toggle, stage timers, sub-agent lifespans);
+   `every` item rules run.
 3. Charge: every tool and every enemy intent gains `50 × rate` progress.
 4. Agent fires: each tool with `progress ≥ cooldownMs × 100` fires, then resets to 0
    (no carry-over). A tool filled by a pipe during this step fires in the same step if it
-   is to the right. After each activation: apply effects, add output, check compaction.
+   is to the right. After each activation: apply effects, add output, run `toolFired`
+   rules, check compaction, run `compaction` rules, update the zone once, pipe.
 5. If all enemies are resolved: **win**, stop.
 6. Enemies act: each intent with `progress ≥ windupMs × 100` resolves, then the enemy
-   advances to its next intent (cycle) and progress resets.
-7. Deadline damage at each full second after `deadlineMs` (`deadlineMs + 1000k`, below).
+   advances to its next intent (cycle) and progress resets. After each enemy action the
+   rules it raised (`damaged`, `trustBelow`, `compaction`) run.
+7. Deadline damage at each full second after `deadlineMs` (`deadlineMs + 1000k`, below),
+   then the rules it raised (`trustBelow`).
 8. Death checks: enemies at Severity ≤ 0 are resolved (on-death traits run, spawns are
    inserted at the dead enemy's index). If all enemies are resolved: win. Else if
    Trust ≤ 0: **loss**.
+
+`fightStart` rules run at t = 0 before the first tick, `fightWon` rules after the win,
+before `fightEnd`. Passive item `mod` effects are not rules that fire: they change the
+numbers below (rate, damage, output, pipes, window, Focused bonus, blockers, durations).
 
 Ties always favour the player: the agent acts before enemies in the same tick.
 
@@ -99,8 +107,8 @@ One visible formula, shown on hover (Balatro-style).
 
 ```
 base   = tool value at its version (v1/v2/v3)
-flat   = Σ flat adds (skills, breakpoints, buffs)
-pct    = zone (+20 Focused | −coldPenalty Cold) + Σ % mods, min −90
+flat   = Σ flat adds (skills, breakpoints, buffs; dmgFlat for damage only)
+pct    = zone (+20 Focused + focusPct | −coldPenalty Cold) + Σ % mods, min −90
 amount = max(1, floor(((base + flat) × (100 + pct) + 50) / 100))
 ```
 

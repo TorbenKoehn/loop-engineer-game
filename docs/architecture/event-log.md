@@ -76,8 +76,10 @@ Conventions:
   buff an auto-compaction removed: `<tool ref>:haste` (followed by `statusOff` from `ctx`)
   or `<tool ref>:<prime id>`, e.g. `t2:prime:read_file`; absent when none was held.
 
-`why` lists modifier ids in application order (`zone:focused`, `skill:unix_philosophy`,
-`prime:read_file`), so the UI can render "14 dmg (Focused +20%, piped +30%)" without
+`why` lists modifier ids in application order: flat adds first, then % mods as zone,
+passive item mods in slot order (`<kind>:<def id>`, kind `trait|prompt|skill|memory|lesson`), primes
+(`zone:focused`, `skill:unix_philosophy`, `prime:read_file`); enemy hits list the
+agent's `dmgTakenPct` mods, so the UI can render "14 dmg (Focused +20%, piped +30%)" without
 re-deriving rules. Adding a kind or a field is a **log format change**: bump
 `LOG_VERSION` and update golden files (`npm run golden:update`, fixtures in `tools/golden/fixtures/`) in the same change.
 
@@ -85,12 +87,16 @@ re-deriving rules. Adding a kind or a field is a **log format change**: bump
 
 - Events are appended in the exact order effects happen within the tick order; `seq`
   breaks ties for equal `t`.
-- One activation produces, in order: `toolFired`, `primeUsed*` (one per consumed prime), its effect events (`damage`, `guard`,
-  …), `tokens` (output), `compaction?` (with its `statusOn` Stun and the lost buff's
-  `statusOff?`), `zoneChanged?` (at most one per activation: the zone is updated once,
-  after `F` and any compaction changed it, so `zoneChanged` never enters Overflow),
-  `pipe?`, skill-triggered events. A noise injection orders `tokens`, `compaction?`,
+- One activation produces, in order: `toolFired`, `primeUsed*` (one per consumed prime),
+  its effect events (`damage`, `guard`, …), `tokens` (output), events of `toolFired` rules,
+  `compaction?` (with its `statusOn` Stun and the lost buff's `statusOff?`), events of
+  `compaction` rules, `zoneChanged?` (at most one per activation: the zone is updated once,
+  after `F`, any compaction and the compaction rules changed it, so `zoneChanged` never
+  enters Overflow), `pipe?`. A noise injection orders `tokens`, `compaction?`,
   `zoneChanged?` the same way.
+- Item rule effects have `src: 'a'` (the agent). Rules raised by enemy actions, Deadline
+  damage or step 2 run after that step (see [combat tick order](../game/systems/combat.md#tick-order));
+  they update the zone once afterwards if any rule ran.
 - The UI must never reorder events; playback is strictly by `seq`.
 
 ## Canonical serialisation and hashing

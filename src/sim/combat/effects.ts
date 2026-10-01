@@ -17,7 +17,7 @@ import { hpOf, isAgent, maxHpOf, selectTargets, setHp, type Unit, unitRef } from
 
 const NO_MODS: readonly Mod[] = [];
 
-/** `mods` (zone, primes; item mods T033) apply to every amount of this activation. */
+/** `mods` (zone, item damage mods, primes) apply to the amounts of this activation. */
 export function applyEffects(sim: Sim, tool: ToolRt, mods: readonly Mod[] = NO_MODS): void {
   const act: Activation = { src: toolRef(tool), id: tool.def.id, tool, picks: new Map(), mods };
   for (const effect of tool.def.effects) applyEffect(sim, act, effect);
@@ -41,13 +41,21 @@ export function applyEffect(sim: Sim, act: Activation, effect: Effect): void {
 function hit(sim: Sim, act: Activation, effect: Extract<Effect, { do: 'dmg' }>): void {
   const { tool } = act;
   for (const unit of selectTargets(sim, effect.target ?? tool?.def.target ?? 'front')) {
-    const dealt = dealDamage(sim, act.src, unit, amountOf(act, effect.v));
+    const family = isAgent(unit) ? undefined : unit.def.family;
+    const mods = act.mods.filter((m) => !m.family || m.family === family);
+    const dealt = dealDamage(sim, act.src, unit, computeAmount(base(act, effect.v), mods));
     if (tool && !isAgent(unit)) tool.dealt += dealt;
   }
 }
 
+const base = (act: Activation, v: Value): number => valueAt(v, versionOf(act));
+
+/** Guardrails and healing: zone and primes, no item damage mods. */
 const amountOf = (act: Activation, v: Value): Amount =>
-  computeAmount(valueAt(v, versionOf(act)), act.mods);
+  computeAmount(
+    base(act, v),
+    act.mods.filter((m) => !m.dmgOnly),
+  );
 
 /** Adds Guardrails, capped at max Trust or max Severity; emits `guard` with the gain. */
 export function gainGuard(sim: Sim, src: Ref, unit: Unit, a: Amount): number {

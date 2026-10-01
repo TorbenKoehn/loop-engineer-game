@@ -1,5 +1,6 @@
 // Pipes (docs/game/systems/combat.md "Pipes"): `pipeMs: P` adds P x 100 progress to the right
 // neighbour, capped at full; the left-to-right fire loop then fires it in the same step.
+import { activeSum } from '../mods/mods.ts';
 import { emit, PROGRESS_PER_MS, type Sim, type ToolRt, toolRef } from '../state.ts';
 import { hasStatus } from '../status/statuses.ts';
 
@@ -12,7 +13,8 @@ const halted = (sim: Sim, tool: ToolRt): boolean =>
 
 /** Pipes from `from` into its right neighbour; never wraps (Feedback Loop: E007). */
 export function pipe(sim: Sim, from: ToolRt): void {
-  const ms = from.def.pipeMs ?? 0; // TODO(T033): pipeMs mods from skills and breakpoints.
+  const own = from.def.pipeMs ?? 0; // pipeMs mods lengthen existing pipes only
+  const ms = own > 0 ? own + activeSum(sim, 'pipeMs', from) : 0;
   const to = sim.agent.tools[from.slot + 1];
   if (ms <= 0 || !to || halted(sim, to)) return;
   to.progress = Math.min(to.def.cooldownMs * PROGRESS_PER_MS, to.progress + ms * PROGRESS_PER_MS);

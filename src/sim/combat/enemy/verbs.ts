@@ -4,6 +4,7 @@ import type { Status, Verb, VerbSel } from '../../../content/types/index.ts';
 import { injectNoise } from '../context/noise.ts';
 import { computeAmount, dealDamage } from '../damage.ts';
 import { gainGuard, heal } from '../effects.ts';
+import { takenMods } from '../mods/mods.ts';
 import { type EnemyRt, enemyRef, type Sim } from '../state.ts';
 import { pickTools } from '../status/select.ts';
 import { applyStatus } from '../status/statuses.ts';
@@ -30,9 +31,10 @@ export interface Act {
 type Handler<V extends Verb> = (act: Act, v: V) => void;
 type Handlers = { readonly [K in Verb['verb']]: Handler<Extract<Verb, { verb: K }>> };
 
-/** Enemy amount (phase-scaled base, floor) -> agent Guardrails -> Trust. Damage mods: T033. */
+/** Enemy amount (phase-scaled, floor) -> dmgTakenPct mods (min 1) -> Guardrails -> Trust. */
 function hitAgent({ sim, enemy }: Act, n: number): void {
-  dealDamage(sim, enemyRef(enemy), sim.agent, computeAmount(scaleDmg(enemy.def, sim.phase, n)));
+  const a = computeAmount(scaleDmg(enemy.def, sim.phase, n), takenMods(sim, enemy.def.family));
+  dealDamage(sim, enemyRef(enemy), sim.agent, a);
 }
 
 function statusTools({ sim, enemy }: Act, status: Status, sel: VerbSel, ms: number): void {

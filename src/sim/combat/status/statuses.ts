@@ -3,6 +3,7 @@
 import type { Status } from '../../../content/types/index.ts';
 import type { Ref } from '../../events.ts';
 import { mulDiv } from '../../int.ts';
+import { activeSum } from '../mods/mods.ts';
 import {
   type AgentRt,
   type EnemyRt,
@@ -30,7 +31,7 @@ export const MIN_STATUS_MS = 50;
 export interface StatusApp {
   readonly status: Status;
   readonly ms: number;
-  /** Duration modifier in percent, e.g. 50 for Lockfile "-50% Throttle" (sources: E007). */
+  /** Extra duration cut in percent, on top of the item mods (durationCut). */
   readonly mod?: number;
 }
 
@@ -49,6 +50,14 @@ export const hasStatus = (h: Holder, status: Status): boolean =>
 export const modDuration = (ms: number, mod = 0): number =>
   Math.max(MIN_STATUS_MS, mulDiv(ms, 100 - mod, 100));
 
+/** throttleDurPct cuts Throttle and Slow on tools, stunDurPct Stun on the agent (v -50: 50). */
+function durationCut(sim: Sim, h: Holder, status: Status): number {
+  if (isTool(h) && (status === 'throttle' || status === 'slow')) {
+    return -activeSum(sim, 'throttleDurPct', h);
+  }
+  return isAgentHolder(h) && status === 'stun' ? -activeSum(sim, 'stunDurPct') : 0;
+}
+
 /**
  * Applies a status and emits `statusOn` (v: applied ms, remaining after stacking).
  * Haste and Slow add up; Throttle and Stun keep the longer remaining; both capped.
@@ -59,7 +68,7 @@ export function applyStatus(sim: Sim, src: Ref, h: Holder, app: StatusApp): void
     for (const tool of h.tools) applyStatus(sim, src, tool, app);
     return;
   }
-  const ms = modDuration(app.ms, app.mod);
+  const ms = modDuration(app.ms, (app.mod ?? 0) + durationCut(sim, h, app.status));
   const cap = STATUS_CAP_MS[app.status];
   const adds = app.status === 'haste' || app.status === 'slow';
   let entry = h.statuses.find((s) => s.status === app.status);
