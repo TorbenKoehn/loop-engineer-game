@@ -1,20 +1,16 @@
-// Dev combat sandbox (T098): pick a harness, a Phase-1 encounter and a seed, then replay the
-// fight with the combat view components on createPlayback. T101 rewrites it around the store.
+// Dev combat sandbox (`?sandbox`, dev builds only, see src/main.tsx): pick a harness, a
+// Phase-1 encounter and a seed; the fight lands in the run store and plays on CombatScreen.
 import { signal } from '@preact/signals';
 import { useEffect } from 'preact/hooks';
-import { content, GAME_TITLE } from '../../content/index.ts';
+import { content } from '../../content/index.ts';
 import type { Action } from '../../run/actions.ts';
-import { apply, legalActions } from '../../run/apply.ts';
-import { combatInput } from '../../run/combat.ts';
-import { newRun } from '../../run/new-run.ts';
-import { loadFight, type Replay } from '../combat/fight.ts';
+import { legalActions } from '../../run/apply.ts';
+import { fight } from '../../run/combat.ts';
+import { Screen } from '../app.tsx';
 import { harnessName } from '../combat/names.ts';
-import { createPlayback, rafClock } from '../combat/playback.ts';
-import { Arena } from '../combat/view/arena.tsx';
-import { ToolRow } from '../combat/view/tool-row.tsx';
-import { ResultStrip, Transport } from '../combat/view/transport.tsx';
-import { meta } from '../store/meta.ts';
-import { speed } from '../store/playback.ts';
+import { t } from '../i18n.ts';
+import { Shell } from '../shell/shell.tsx';
+import { dispatch, run, startRun } from '../store/run.ts';
 
 interface Setup {
   readonly harness: string;
@@ -23,25 +19,17 @@ interface Setup {
 }
 
 const setup = signal<Setup>({ harness: 'terminal_purist', encounter: 'p1e1', seed: '1' });
-const replay = signal<Replay | null>(null);
 const encounters = content.encounters.filter((e) => e.phase === 1);
 
-/** Fight input from a fresh run (first prompt picked) at a row-1 node with the chosen encounter. */
-function start(s: Setup): Replay {
-  const run = newRun({ seed: s.seed, harness: s.harness, lint: [], tutorial: false }, meta.value);
-  const res = apply(run, legalActions(run)[0] as Action);
-  if (!res.ok) throw new Error(`sandbox: ${res.error}`);
+/** A fresh run (first prompt picked) fighting the chosen encounter at a row-1 node. */
+function start(s: Setup): void {
+  startRun({ seed: s.seed, harness: s.harness, lint: [], tutorial: false });
+  if (run.value) dispatch(legalActions(run.value)[0] as Action);
+  const state = run.value;
+  if (!state) return;
   const node = { id: 'p1-r1-c0', row: 1, col: 0, type: 'task', encounter: s.encounter } as const;
-  const fight = loadFight(combatInput(res.state, node), s.harness);
-  return {
-    fight,
-    pb: createPlayback({ events: fight.events, start: fight.start, clock: rafClock, speed }),
-  };
-}
-
-function run(): void {
-  replay.value?.pb.dispose();
-  replay.value = start(setup.value);
+  // Dev shortcut past dispatch: in a real run the map picks the encounter.
+  run.value = fight(state, node);
 }
 
 const field = (key: keyof Setup) => (e: { currentTarget: { value: string } }) => {
@@ -55,11 +43,11 @@ function SetupPanel() {
       class="setup panel"
       onSubmit={(e) => {
         e.preventDefault();
-        run();
+        start(setup.value);
       }}
     >
       <label class="setup__field">
-        <span class="setup__label">harness</span>
+        <span class="setup__label">{t('ui.sandbox.harness')}</span>
         <select value={s.harness} onChange={field('harness')}>
           {content.harnesses.map((h) => (
             <option key={h.id} value={h.id}>
@@ -69,7 +57,7 @@ function SetupPanel() {
         </select>
       </label>
       <label class="setup__field">
-        <span class="setup__label">encounter · phase 1</span>
+        <span class="setup__label">{t('ui.sandbox.encounter')}</span>
         <select value={s.encounter} onChange={field('encounter')}>
           {encounters.map((enc) => (
             <option key={enc.id} value={enc.id}>
@@ -79,11 +67,11 @@ function SetupPanel() {
         </select>
       </label>
       <label class="setup__field">
-        <span class="setup__label">seed</span>
+        <span class="setup__label">{t('ui.title.seed')}</span>
         <input type="text" value={s.seed} spellcheck={false} onInput={field('seed')} />
       </label>
       <button type="submit" class="btn btn--primary" data-testid="run">
-        ▶ Run fight
+        ▶ {t('ui.sandbox.run')}
       </button>
     </form>
   );
@@ -91,26 +79,12 @@ function SetupPanel() {
 
 export function Sandbox() {
   useEffect(() => {
-    if (!replay.value) run();
+    if (!run.value) start(setup.value);
   }, []);
-  const r = replay.value;
   return (
-    <div class="sandbox">
-      <header class="top">
-        <h1 class="logo">{GAME_TITLE.toUpperCase()}</h1>
-        <p class="top__tag">combat sandbox · dev build</p>
-      </header>
+    <Shell>
       <SetupPanel />
-      {r && (
-        <main class="stage">
-          <section class="panel arena" aria-label="Fight">
-            <Transport r={r} />
-            <Arena r={r} />
-            <ToolRow r={r} />
-            <ResultStrip r={r} />
-          </section>
-        </main>
-      )}
-    </div>
+      <Screen />
+    </Shell>
   );
 }

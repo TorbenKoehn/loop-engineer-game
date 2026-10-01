@@ -54,7 +54,11 @@ function StatusBar() {
           <span>{t('ui.status.phase', { phase: r.phase })}</span>
         </>
       )}
-      <span class="shell-status__end">{t('ui.status.speed', { speed: speed.value })}</span>
+      <span class="shell-status__end" data-testid="speed">
+        {speed.value === 'skip'
+          ? `⏭ ${t('ui.combat.skip')}`
+          : t('ui.status.speed', { speed: speed.value })}
+      </span>
     </footer>
   );
 }

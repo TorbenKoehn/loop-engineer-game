@@ -1,8 +1,11 @@
 import { render } from 'preact';
 import { App } from './ui/app.tsx';
-import { Sandbox } from './ui/sandbox/sandbox.tsx';
 
-// `?sandbox` opens the dev combat sandbox (T098) instead of the game.
-const sandbox = new URLSearchParams(location.search).has('sandbox');
 const root = document.getElementById('app');
-if (root) render(sandbox ? <Sandbox /> : <App />, root);
+// `?sandbox` opens the dev combat sandbox; `import.meta.env.DEV` is false in production
+// builds, so the branch and the lazily imported sandbox module are dropped there.
+if (root && import.meta.env.DEV && new URLSearchParams(location.search).has('sandbox')) {
+  void import('./ui/sandbox/sandbox.tsx').then(({ Sandbox }) => render(<Sandbox />, root));
+} else if (root) {
+  render(<App />, root);
+}

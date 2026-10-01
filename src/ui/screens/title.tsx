@@ -22,7 +22,7 @@ export function Title() {
         />
       </label>
       <button type="submit">{t('ui.title.new_run')}</button>
-      <a href="?sandbox">{t('ui.title.sandbox')}</a>
+      {import.meta.env.DEV && <a href="?sandbox">{t('ui.title.sandbox')}</a>}
     </form>
   );
 }

@@ -5,7 +5,7 @@ keywords: [ui, preact, signals, replay-player, screens, fx, test-hooks]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/ui/i18n.ts, src/ui/store/**, src/ui/combat/**]
+related_code: [src/ui/i18n.ts, src/ui/store/**, src/ui/combat/**, src/ui/app.tsx, src/ui/screens/combat.tsx, src/ui/sandbox/**, src/main.tsx]
 related: [overview.md, run-state.md, event-log.md, ../game/ux/screens.md, ../game/ux/juice-audio.md, adr/adr-003-dom-ui.md]
 ---
 
@@ -18,6 +18,7 @@ related: [overview.md, run-state.md, event-log.md, ../game/ux/screens.md, ../gam
 - Fx and audio bus
 - Input
 - i18n
+- Dev sandbox route
 - Test hooks (`window.__game`, dev and e2e builds only)
 - Performance budgets
 
@@ -56,7 +57,15 @@ export function dispatch(action: Action): void {
 `RestScreen`, `TreasureScreen`, `PhaseEnd`, `RunEnd`, `AgentsMd`, plus overlays
 (`Settings`, `Codex`, `History`, `Help`). The IDE shell (`Shell`: top bar, explorer,
 editor, terminal, status bar) wraps every screen. No router library; `mode` is the route.
-Screens are lazy-loaded except Title, Shell and Combat.
+Screens are lazy-loaded except Title, Shell and Combat. Until a screen's task lands,
+`Placeholder` lists the mode's legal actions as buttons.
+
+`CombatScreen` (`src/ui/screens/combat.tsx`, mode `combatReview`) rebuilds the fight from
+`run.combat.input` with `loadFight`, plays it with `createPlayback` on `rafClock` and the
+store `speed` (so speed persists between fights), and disposes the playback when the fight
+changes or the screen unmounts. Its view components live in `src/ui/combat/view/`; the
+result strip's Continue dispatches `continue`. The status bar shows the current speed
+(`2x`, `⏭ Skip`).
 
 ## Combat replay player
 
@@ -124,8 +133,12 @@ builds only it also logs `console.error` (never throws).
 
 ## Dev sandbox route
 
-`?sandbox` opens the dev combat sandbox (`src/ui/sandbox/`, linked from Title), a plain
-terminal-style combat view outside the normal screen flow.
+Dev builds only: `?sandbox` opens the combat sandbox (`src/ui/sandbox/`, linked from
+Title). `src/main.tsx` imports it lazily behind `import.meta.env.DEV`, so production builds
+drop it and ignore the flag. Pick a harness, a Phase-1 encounter and a seed; the sandbox
+starts a run, picks the first prompt, resolves the fight with `fight()` from
+`src/run/combat.ts` into the store and renders the normal `Shell` and `CombatScreen`. It
+follows the JSX-text rule like every screen.
 
 ## Test hooks (`window.__game`, dev and e2e builds only)
 

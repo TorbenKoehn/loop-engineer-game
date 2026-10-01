@@ -3,7 +3,9 @@
 // roles only, never pixels.
 import { expect, test } from '@playwright/test';
 
-test('combat sandbox loads, resolves a fight and logs no console errors', async ({ page }) => {
+test('the production build ignores ?sandbox: title only, no sandbox link, no console errors', async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on('console', (m) => {
     if (m.type() === 'error') errors.push(m.text());
@@ -12,12 +14,11 @@ test('combat sandbox loads, resolves a fight and logs no console errors', async 
 
   await page.goto('/?sandbox');
   await expect(page).toHaveTitle(/Loop Engineer/);
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(/loop engineer/i);
-
-  // The sandbox auto-runs a fight; skip to its end and read the result strip.
-  await page.getByRole('button', { name: /skip/i }).click();
-  await expect(page.getByTestId('result')).toContainText(/Resolved|Trust lost|Timed out/);
-  await expect(page.getByRole('group', { name: 'Playback' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Loop Engineer');
+  await expect(page.getByRole('button', { name: 'New run' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Combat sandbox' })).toHaveCount(0);
+  await expect(page.getByTestId('run')).toHaveCount(0);
+  await expect(page.getByRole('region', { name: 'Fight' })).toHaveCount(0);
 
   expect(errors).toEqual([]);
 });

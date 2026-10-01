@@ -1,13 +1,11 @@
 // Localisation rule 1 (docs/game/ux/localisation.md): no JSX text node with letters outside
-// t(). Symbols and numbers are allowed. The dev combat sandbox (T098, `?sandbox`) is not a
-// player screen and is exempt until T059 replaces it.
+// t(). Symbols and numbers are allowed. No exemptions: the dev sandbox follows the rule too.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { parseAst } from 'vite';
 import { describe, expect, it } from 'vitest';
 
 const UI = import.meta.dirname;
-const EXEMPT = /^sandbox\//;
 const LETTER = /\p{L}/u;
 
 /** Letters-bearing JSX text nodes in `source`, as trimmed strings. */
@@ -45,7 +43,6 @@ describe('JSX text lint (localisation rule 1)', () => {
     const offenders: string[] = [];
     for (const file of tsxFiles(UI)) {
       const rel = relative(UI, file).replaceAll('\\', '/');
-      if (EXEMPT.test(rel)) continue;
       for (const text of jsxTextWithLetters(readFileSync(file, 'utf8'))) {
         offenders.push(`${rel}: ${text}`);
       }

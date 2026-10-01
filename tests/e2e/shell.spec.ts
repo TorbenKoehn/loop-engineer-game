@@ -36,10 +36,3 @@ test('a run with a fixed seed shows the shell and the status bar from RunState',
 
   expect(errors).toEqual([]);
 });
-
-test('?sandbox keeps the dev combat sandbox reachable', async ({ page }) => {
-  await page.goto('/');
-  await page.getByRole('link', { name: 'Combat sandbox' }).click();
-  await expect(page).toHaveURL(/\?sandbox/);
-  await expect(page.getByRole('group', { name: 'Playback' })).toBeVisible();
-});
