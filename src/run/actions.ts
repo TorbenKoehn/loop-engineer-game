@@ -9,10 +9,20 @@ export type Action =
   | { t: 'continue' }
   | { t: 'pickReward'; ix: 0 | 1 | 2 }
   | { t: 'skipReward' }
-  | { t: 'discardItem'; item: ItemRef };
+  | { t: 'discardItem'; item: ItemRef }
+  | { t: 'buy'; ix: number }
+  | { t: 'sell'; item: ItemRef }
+  | { t: 'reroll' }
+  | { t: 'leaveShop' };
 
 /** Why apply rejected an action; the state is unchanged. */
-export type ActionError = 'unknownAction' | 'wrongMode' | 'notOffered' | 'notReachable';
+export type ActionError =
+  | 'unknownAction'
+  | 'wrongMode'
+  | 'notOffered'
+  | 'notReachable'
+  | 'insufficientCredits'
+  | 'lastTool';
 
 export type ApplyResult = { ok: true; state: RunState } | { ok: false; error: ActionError };
 

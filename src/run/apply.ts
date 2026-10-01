@@ -5,7 +5,8 @@ import { afterCombat, fight } from './combat.ts';
 import { discardItem, discardRefs } from './gain.ts';
 import { reachable } from './map/graph.ts';
 import { pickReward, rewardActions, skipReward } from './rewards.ts';
-import type { NodeId, RunState } from './state.ts';
+import { buy, enterShop, leaveShop, reroll, sell, shopActions } from './shop.ts';
+import type { MapNode, NodeId, RunState } from './state.ts';
 
 function pickPrompt(state: RunState, prompt: string): ApplyResult {
   if (state.mode !== 'promptPick' || state.pending?.kind !== 'promptOffer') {
@@ -27,7 +28,13 @@ function travel(state: RunState, node: NodeId): ApplyResult {
     map: { ...state.map, visited: [...state.map.visited, node], current: node },
     stats: { ...state.stats, nodesVisited: state.stats.nodesVisited + 1 },
   };
-  return { ok: true, state: target.encounter === null ? moved : fight(moved, target) };
+  return { ok: true, state: arrive(moved, target) };
+}
+
+/** Fight nodes resolve the fight, registry nodes open the shop; others stay on the map. */
+function arrive(state: RunState, node: MapNode): RunState {
+  if (node.encounter !== null) return fight(state, node);
+  return node.type === 'registry' ? enterShop(state, node.id) : state;
 }
 
 function continueRun(state: RunState): ApplyResult {
@@ -49,6 +56,14 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return skipReward(state);
     case 'discardItem':
       return discardItem(state, action.item);
+    case 'buy':
+      return buy(state, action.ix);
+    case 'sell':
+      return sell(state, action.item);
+    case 'reroll':
+      return reroll(state);
+    case 'leaveShop':
+      return leaveShop(state);
     default:
       // Unreachable for typed callers; guards actions decoded from saves.
       return fail('unknownAction');
@@ -68,6 +83,8 @@ export function legalActions(state: RunState): readonly Action[] {
       return [{ t: 'continue' }];
     case 'reward':
       return rewardActions(state);
+    case 'shop':
+      return shopActions(state);
     case 'discard':
       return state.pending?.kind === 'discard'
         ? discardRefs(state.agent, state.pending.item.kind).map((item) => ({

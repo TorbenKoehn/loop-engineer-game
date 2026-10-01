@@ -22,4 +22,8 @@ export const enUi = {
   'ui.action.pick_reward': 'Take card {n}',
   'ui.action.skip_reward': 'Skip (+{credits} Credits)',
   'ui.action.discard': 'Discard {item}',
+  'ui.action.buy': 'Buy offer {n}',
+  'ui.action.sell': 'Sell {item}',
+  'ui.action.reroll': 'Reroll',
+  'ui.action.leave_shop': 'Leave the registry',
 } as const;

@@ -4,9 +4,9 @@ import { content } from '../content/index.ts';
 import type { Rarity } from '../content/types/basics.ts';
 import { fork, int, nextInt, pick, type Rng, weighted } from '../sim/rng.ts';
 import { type Action, type ApplyResult, fail, ok } from './actions.ts';
-import { gain, ownedTool, ownsSkill } from './gain.ts';
+import { gain, newItem, ownedTool, ownsUnique } from './gain.ts';
 import { isUnlocked } from './new-run.ts';
-import type { NodeType, OwnedItem, RewardCard, RunState } from './state.ts';
+import type { NodeType, RewardCard, RunState } from './state.ts';
 
 export const SKIP_CREDITS = 6;
 const INTEREST_STEP = 10;
@@ -26,9 +26,9 @@ const SOURCES: Readonly<Record<Source, SourceTable>> = {
   release: { credits: [40, 40], tool: 50, rarity: { common: 0, uncommon: 0, rare: 100 } },
 };
 
-const RARITIES: readonly Rarity[] = ['common', 'uncommon', 'rare'];
+export const RARITIES: readonly Rarity[] = ['common', 'uncommon', 'rare'];
 /** Buckets to try when the rolled one is empty: the next lower, then higher. */
-const FALLBACK: Readonly<Record<Rarity, readonly Rarity[]>> = {
+export const FALLBACK: Readonly<Record<Rarity, readonly Rarity[]>> = {
   common: ['common', 'uncommon', 'rare'],
   uncommon: ['uncommon', 'common', 'rare'],
   rare: ['rare', 'uncommon', 'common'],
@@ -45,7 +45,7 @@ function pool(roll: Roll, kind: Kind, taken: readonly RewardCard[]) {
   const { agent, setup } = roll.state;
   const defs = kind === 'tool' ? content.tools : content.skills;
   const owned = (id: string) =>
-    kind === 'tool' ? ownedTool(agent, id)?.version === 3 : ownsSkill(agent, id);
+    kind === 'tool' ? ownedTool(agent, id)?.version === 3 : ownsUnique(agent, kind, id);
   return defs.filter(
     (d) =>
       isUnlocked(d.unlock, setup.unlocked) &&
@@ -106,11 +106,7 @@ export function pickReward(state: RunState, ix: number): ApplyResult {
   if (state.mode !== 'reward' || state.pending?.kind !== 'reward') return fail('wrongMode');
   const card = state.pending.cards[ix];
   if (!card) return fail('notOffered');
-  const item: OwnedItem =
-    card.kind === 'tool'
-      ? { kind: 'tool', tool: { id: card.id, version: 1, weightMod: 0 } }
-      : { kind: 'skill', id: card.id };
-  return ok(gain(state, item, 'map'));
+  return ok(gain(state, newItem(card.kind, card.id), 'map'));
 }
 
 export function skipReward(state: RunState): ApplyResult {

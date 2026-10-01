@@ -124,12 +124,26 @@ export type ItemRef = { at: ItemKind | 'stash'; ix: number } | { at: 'gained' };
 /** One 1-of-3 reward card (docs/game/systems/economy.md#reward-picks-1-of-3). */
 export type RewardCard = { kind: 'tool' | 'skill'; id: ToolId | SkillId; rarity: Rarity };
 
+/** One Package Registry offer; `price` already includes the sale. */
+export type ShopOffer = {
+  kind: ItemKind;
+  id: ToolId | SkillId | MemoryId;
+  rarity: Rarity;
+  price: number;
+  sale: boolean;
+  sold: boolean;
+};
+
+/** The open shop on `node`; `rerolls` counts the rerolls this visit. */
+export type ShopPending = { kind: 'shop'; node: NodeId; rerolls: number; offers: ShopOffer[] };
+
 export type Pending =
   | { kind: 'promptOffer'; prompts: PromptId[] }
   /** Credits and interest are already paid; shown as separate lines. */
   | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] }
-  /** `item` was gained without space; `next` is the mode after discardItem. */
-  | { kind: 'discard'; item: OwnedItem; next: Mode };
+  | ShopPending
+  /** `item` was gained without space; `next` is the mode after discardItem, `resume` its shop. */
+  | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending };
 
 export interface RunStats {
   nodesVisited: number;

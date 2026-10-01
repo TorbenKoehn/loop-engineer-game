@@ -13,9 +13,13 @@ export function ownedTool(agent: AgentState, id: string): OwnedTool | undefined 
   return [...agent.tools, ...stashed].find((t) => t.id === id);
 }
 
-/** Whether the unique skill `id` is owned, equipped or stashed. */
-export const ownsSkill = (agent: AgentState, id: string): boolean =>
-  agent.skills.includes(id) || agent.stash.some((i) => i.kind === 'skill' && i.id === id);
+/** Whether the unique skill or memory `id` is owned, equipped or stashed. */
+export const ownsUnique = (agent: AgentState, kind: 'skill' | 'memory', id: string): boolean =>
+  agent[EQUIPPED[kind]].includes(id) || agent.stash.some((i) => i.kind === kind && i.id === id);
+
+/** A fresh item of `kind`; tools start at v1. */
+export const newItem = (kind: ItemKind, id: string): OwnedItem =>
+  kind === 'tool' ? { kind, tool: { id, version: 1, weightMod: 0 } } : { kind, id };
 
 function merge(agent: AgentState, id: string): AgentState {
   const bump = (t: OwnedTool): OwnedTool =>
@@ -60,7 +64,8 @@ const sameRef = (a: ItemRef, b: ItemRef): boolean =>
   a.at === b.at && (a.at === 'gained' || (b.at !== 'gained' && a.ix === b.ix));
 const drop = <T>(list: readonly T[], ix: number): T[] => list.filter((_, i) => i !== ix);
 
-function remove(agent: AgentState, ref: { at: ItemKind | 'stash'; ix: number }): AgentState {
+/** `agent` without the item at `ref`. */
+export function remove(agent: AgentState, ref: { at: ItemKind | 'stash'; ix: number }): AgentState {
   if (ref.at === 'stash') return { ...agent, stash: drop(agent.stash, ref.ix) };
   if (ref.at === 'tool') return { ...agent, tools: drop(agent.tools, ref.ix) };
   if (ref.at === 'skill') return { ...agent, skills: drop(agent.skills, ref.ix) };
@@ -73,6 +78,7 @@ export function discardItem(state: RunState, ref: ItemRef): ApplyResult {
   if (state.mode !== 'discard' || p?.kind !== 'discard') return fail('wrongMode');
   const legal = discardRefs(state.agent, p.item.kind);
   if (!legal.some((r) => sameRef(r, ref))) return fail('notOffered');
-  if (ref.at === 'gained') return ok({ ...state, mode: p.next, pending: null });
-  return ok(gain({ ...state, agent: remove(state.agent, ref) }, p.item, p.next));
+  if (ref.at === 'gained') return ok({ ...state, mode: p.next, pending: p.resume ?? null });
+  const s = gain({ ...state, agent: remove(state.agent, ref) }, p.item, p.next);
+  return ok({ ...s, pending: s.pending ?? p.resume ?? null });
 }

@@ -20,6 +20,14 @@ function label(a: Action): string {
       return t('ui.action.skip_reward', { credits: SKIP_CREDITS });
     case 'discardItem':
       return t('ui.action.discard', { item: JSON.stringify(a.item) });
+    case 'buy':
+      return t('ui.action.buy', { n: a.ix + 1 });
+    case 'sell':
+      return t('ui.action.sell', { item: JSON.stringify(a.item) });
+    case 'reroll':
+      return t('ui.action.reroll');
+    case 'leaveShop':
+      return t('ui.action.leave_shop');
   }
 }
 
