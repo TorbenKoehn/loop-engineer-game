@@ -32,12 +32,18 @@ worktree path):
 git -C <wt> add -A
 git -C <wt> diff --cached --binary -- . \
   ":(exclude,glob)**/INDEX.md" ":(exclude)forge/BOARD.md" \
-  ":(exclude)docs/harness/budgets-table.md" > <scratchpad>/T###.patch
+  ":(exclude)docs/harness/budgets-table.md" ":(exclude,glob)**/*.gen.ts" > <scratchpad>/T###.patch
 git apply --index <scratchpad>/T###.patch      # in the main tree, which must be clean
+npm run content:index && git add src/content/strings/areas.gen.ts
 ```
 
-Generated files are excluded because every worktree regenerates them; `harness:check` in
-the main tree rebuilds them.
+Generated files are excluded because every worktree regenerates them. In the main tree
+`content:index` rebuilds `areas.gen.ts` and `harness:check` rebuilds the rest; never
+merge a generated file (a union merge broke the registry test, R083).
+
+While a task runs in a worktree, do not edit or commit its task file in the main tree.
+A Log line such as `maxTurns hit, resumed` goes into the resume message, and the agent
+appends it in the worktree (main-tree Log commits conflicted with T045 and T061).
 
 - `git apply` fails (conflict with a task committed meanwhile): discard the patch and
   re-delegate the task sequentially on the new `HEAD`. Log

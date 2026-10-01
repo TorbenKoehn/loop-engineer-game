@@ -29,6 +29,8 @@ Critical rules (read before anything else):
    `subtasks_per_task`). Check items off as you go.
 5. **Implement the smallest change that meets every AC.**
    - Logic: write the failing vitest test first, then the code.
+   - Only goldens pin fight numbers. Other tests and e2e specs assert format and
+     relations (`Trust ${before} → ${after}` read from the page, not `42 → 66`; T035).
    - Follow `docs/architecture/` conventions for `src/`, `tools/harness/README.md`
      for tools.
    - Diff budget: measure production lines when about half the subtasks are done and

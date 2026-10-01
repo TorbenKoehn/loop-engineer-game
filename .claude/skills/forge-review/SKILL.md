@@ -32,6 +32,8 @@ Critical rules:
    with the command and result, or not verified, with the reason.
 5. **Scan for problems** in this order: correctness and edge cases; determinism and
    state (sim code must stay seeded and render-free); tests actually asserting the AC;
+   a test or e2e spec outside goldens that pins a fight number (major: T067 pinned
+   `42 → 66` and T035 broke it; testing.md "Rules for agents writing tests");
    scope creep beyond Out of scope; weakened tests, AC or lint; generated files edited;
    budget breaches and unjustified overrides; docs not updated for changed behaviour;
    untracked TODOs. Diff size is `production` from `npm run harness:diff`, not the raw

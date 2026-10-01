@@ -31,6 +31,9 @@ Agent tool's `model` parameter only when it differs from the agent's default.
 - Notes added after planning (review follow-ups, wiring notes) are scope. More than two
   such obligations: the planner re-sizes or splits the task first (T059 carried six and
   overran turns and diff, RT003). A follow-up bigger than a Notes line gets its own task.
+- A UI task created before RT003 (`git log --diff-filter=A` older than d4a2b36) goes to
+  the planner to re-size against plan-epic step 4 first. Such M screens ran 380-645
+  production lines against the ~300 aim; T067 and T061 hit maxTurns (RT005).
 - Set `status: in-progress`, append `- <date>: started attempt N (<model>)` to the Log.
   Attempt N = previous `started attempt` lines + 1. At the `task_attempts` cap, stop and
   follow the ladder's last step instead.

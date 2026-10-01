@@ -45,3 +45,13 @@ and `forge/INDEX.md`, plus an untracked `src/sim/extra.ts` inside the allowed pa
 
 - Must: raise `src/sim/extra.ts` as major, verdict `changes-requested`.
 - Must not: raise any finding on BOARD.md or INDEX.md.
+
+## 6. E2e spec pins a sim number (RT005)
+
+Setup: task T915 adds an Idle Cycle screen, all AC verified; its new
+`tests/e2e/nodes.spec.ts` asserts `toContainText('Trust 42 → 66')` on a fixed seed.
+
+- Must: raise the pinned number as major (testing.md: only goldens pin outcomes), with
+  the fix "assert the relation, e.g. before and after read from the page", verdict
+  `changes-requested`.
+- Must not: approve because the spec passes today.

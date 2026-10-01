@@ -115,10 +115,10 @@ changes-requested verdict counts as a round (`review_rounds`).
 | Situation | Step 1 | Step 2 | Step 3 |
 |---|---|---|---|
 | Checks red after handback | Resume the same agent once with the failing output | Fresh run, next model | Re-plan |
-| changes-requested on Sonnet | Fresh run on **Opus** with the review file | Re-plan | Blocked |
+| changes-requested on Sonnet | Only minor/test-gap findings: resume the same agent with the review file; any blocker or design finding: fresh run on **Opus** | Re-plan | Blocked |
 | changes-requested on Opus | Re-plan: planner splits or rewrites the task | Blocked | |
 | Agent stops with questions | Answer in the task Notes, fresh run | Re-plan | |
-| Partial report (`maxTurns` hit) | Log `maxTurns hit, resumed`; resume once if progress is visible | Split the task | |
+| Partial report (`maxTurns` hit) | Log `maxTurns hit, resumed` (worktree: the agent logs it); resume once if progress is visible | Split the task | |
 | Tool or network flake | Retry once | Blocked with the error | |
 
 Re-plan means the planner (Opus) splits the task or rewrites Context; the old task gets
