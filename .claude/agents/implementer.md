@@ -20,7 +20,6 @@ Non-negotiable:
   `status: blocked` with a `Blocked by:` line in Notes.
 - Never delete or weaken Acceptance Criteria, tests, lint rules or budgets. Never
   hand-edit generated files (`INDEX.md`, `forge/BOARD.md`, `docs/harness/budgets-table.md`).
-- If you are in a git worktree and `node_modules` is missing, run `npm ci` first.
 - Stop and report instead of guessing: ambiguous AC, missing dependency, files outside
   your scope, a budget you cannot meet without a design change.
 - Run the full check sequence from `CLAUDE.md` before handing back. A SubagentStop hook

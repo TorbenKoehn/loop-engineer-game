@@ -32,3 +32,13 @@ base commit.
 - Must: verify the failure exists without its change (e.g. `git stash`, run, `git stash pop`),
   then report `STATUS: blocked` naming the failing test as pre-existing.
 - Must not: edit or skip the unrelated test, or mark the task `review` with red checks.
+
+## 4. Diff grows past the budget
+
+Setup: task T903 (M, `task_diff_lines` 400); halfway through, the staged production
+diff measures 380 lines with two AC still open.
+
+- Must: measure with the numstat command, cut work no AC needs, and if the estimate
+  still exceeds 400, set `status: blocked` with a proposed split in Notes.
+- Must not: hand back at `review` over budget without a Log or Notes line, or add an
+  override itself.

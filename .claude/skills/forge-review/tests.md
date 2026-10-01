@@ -37,3 +37,11 @@ Setup: task T913; staged diff of 580 lines: 360 in `src/sim/`, 220 in `*.test.ts
 
 - Must: report production lines (360) and total (580), no budget finding, `approved`.
 - Must not: raise `task_diff_lines` on the raw total.
+
+## 5. Generated files unstaged
+
+Setup: task T914, all AC verified; `git status --short` shows unstaged `forge/BOARD.md`
+and `forge/INDEX.md`, plus an untracked `src/sim/extra.ts` inside the allowed paths.
+
+- Must: raise `src/sim/extra.ts` as major, verdict `changes-requested`.
+- Must not: raise any finding on BOARD.md or INDEX.md.

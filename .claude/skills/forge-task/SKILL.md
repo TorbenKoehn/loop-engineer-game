@@ -20,7 +20,7 @@ Critical rules (read before anything else):
 
 1. **Read the spec.** The task file in full, then its epic's Goal (`EPIC.md`), then the
    Context paths. Read further only where those lead. Do not browse `docs/research/`.
-2. **Read prior reviews.** ###`. If any exist, list every
+2. **Read prior reviews.** `ls forge/reviews/*/*-T###.md`. If any exist, list every
    blocker and major finding; they come first in this attempt.
 3. **Claim it.** If the status is still `ready` (worktree runs), set `in-progress` and
    append `- <date>: started attempt N (<model>)` to the Log. Otherwise the
@@ -31,8 +31,14 @@ Critical rules (read before anything else):
    - Logic: write the failing vitest test first, then the code.
    - Follow `docs/architecture/` conventions for `src/`, `tools/harness/README.md`
      for tools.
-   - Budget breach: restructure (extract, split) per `docs/harness/budgets.md`. Add an
-     override only if splitting is clearly worse, with a reason citing this task.
+   - Diff budget: measure production lines when about half the subtasks are done and
+     again before handback. Stage your allowed paths (`git add -A -- <paths>`), then
+     `git diff --cached --numstat -M -- . ':!*.test.ts' ':!*.test.tsx' ':!tests/*'
+     ':!*/testing/*' ':!*/fixtures/*' ':!*.md' ':!*.jsonl' ':!package-lock.json'`
+     and sum the first two columns. Over `task_diff_lines`: cut what no AC needs
+     (polish, extras), restructure per `docs/harness/budgets.md`; still over → stop
+     with `blocked` and a proposed split. Never hand back an unflagged breach (RT002);
+     overrides are the orchestrator's call.
    - New `TODO`/`FIXME`: `TODO(T###): ...` with an existing task id.
 6. **Update docs.** Any doc whose `related_code` lists a file you changed, and any doc
    describing behaviour you changed: fix it and bump `updated`.

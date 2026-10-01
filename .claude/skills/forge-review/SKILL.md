@@ -19,11 +19,13 @@ Critical rules:
 ## Steps
 
 1. **Read the task file**: Goal, Acceptance Criteria, Context (incl. Out of scope), Log.
-2. **Read prior reviews** of this task (###`). From round 2 on,
+2. **Read prior reviews** of this task (`ls forge/reviews/*/*-T###.md`). From round 2 on,
    check every prior blocker and major first.
 3. **Read the diff**: `git diff --cached --stat`, then `git diff --cached`. Also
-   `git status --short`: unstaged or untracked files are a finding (major) because they
-   would miss the commit.
+   `git status --short`: an unstaged or untracked file inside the task's allowed paths
+   is a major (it would miss the commit). Ignore generated files (`INDEX.md`,
+   `forge/BOARD.md`, `docs/harness/budgets-table.md`), `forge/HANDOFF.md` and other
+   tasks' files: the orchestrator regenerates and stages them at commit (RT002).
 4. **Verify each AC.** Re-run the command or test that proves it (targeted, e.g.
    `npx vitest run <name>`); read the code path it exercises. Record per AC: verified,
    with the command and result, or not verified, with the reason.

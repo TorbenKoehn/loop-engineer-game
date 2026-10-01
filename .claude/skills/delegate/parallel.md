@@ -1,17 +1,23 @@
 # Parallel writers with worktrees
 
-Use only when two or three `ready` tasks have disjoint Context paths and no
-`depends_on` between them. Otherwise run them one after another. At most one of them
-may touch shared root config (`package.json` and lockfile, `biome.jsonc`,
-`vite.config.ts`, `tsconfig.json`, `harness.config.json`): patches on these conflict
-(RT001). A task that adds a dependency runs alone.
+Use only when two or three `ready` tasks are independent. Otherwise run them one after
+another. Independent means all of:
+- disjoint Context paths and no `depends_on` between them;
+- at most one touches shared root config (`package.json` and lockfile, `biome.jsonc`,
+  `vite.config.ts`, `tsconfig.json`, `harness.config.json`) (RT001); a task that adds a
+  dependency runs alone;
+- at most one edits a hub file that gains a line per area (`src/content/strings/en.ts`,
+  `src/content/index.ts`) (RT002);
+- neither changes an exported type or signature that the other's Context imports
+  (T021 `spawnDefs` broke the parallel T098 adapter, RT002).
 
 ## Start
 
 1. The main tree must be clean (`git status --short` empty): worktrees branch from
    `HEAD`, so uncommitted work would be missing in them and conflict later.
-2. Do not edit the tasks' status in the main tree. Record them in `forge/HANDOFF.md`
-   under In flight instead; each implementer sets `in-progress` in its own worktree.
+2. Set every task `in-progress` with its `started attempt` Log line, run
+   `npm run harness:check` (it errors above `wip_in_progress`, counting main-tree work
+   too), and commit `forge: start T###, T###`. Add each to HANDOFF.md In flight.
 3. Spawn all implementers in one message, each with `isolation: worktree` and the
    worktree note in its prompt (SKILL.md step 3).
 
@@ -36,6 +42,10 @@ the main tree rebuilds them.
   `- <date>: re-run after merge conflict`; this does not count as a failed attempt.
 - Applied: continue with SKILL.md step 5 (verify) and step 6 (review, commit) exactly as
   for a sequential task. Only then bring back the next worktree.
+- Rework (verify failure or changes-requested): never send the agent into the main tree;
+  the permission classifier blocks it (RT002). Undo the patch in the main tree
+  (`git apply -R --index <patch>`), copy the review file into the worktree, let the
+  agent rework there, then export and apply the patch again.
 
 ## Clean up
 

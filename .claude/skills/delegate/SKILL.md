@@ -37,8 +37,8 @@ Agent tool's `model` parameter only when it differs from the agent's default.
 Fill the template in `docs/harness/delegation.md#prompt-template`:
 - task path and attempt number; for rework, the latest review file path;
 - allowed paths: the task's Context paths plus their tests and docs, as globs;
-- for worktrees: "You run in a git worktree: run `npm ci` if node_modules is missing,
-  and set the task to in-progress yourself."
+- for worktrees: "You run in a git worktree: run `npm ci` if node_modules is missing.
+  Edit files only inside this worktree."
 
 Reviewer and planner prompts use the short forms in the same file.
 
@@ -67,7 +67,8 @@ then delegate a fresh attempt; otherwise re-plan with the planner.
 
 ## 6. Review and record
 
-1. `git add -A` (the staged diff is what the reviewer sees and what gets committed).
+1. `npm run harness:check`, then `git add -A` (regenerated files staged too; the staged
+   diff is what the reviewer sees and what gets committed).
 2. Spawn `reviewer` with the reviewer prompt (task path, round N, prior reviews).
 3. Read the verdict from the review file's frontmatter, not from the report.
    - approved: set `status: done`, Log `- <date>: done (R###)`, `npm run harness:check`,

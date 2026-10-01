@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/retros"
-summary: "Index of forge/retros: 1 files, 0 subdirectories"
-keywords: ["diff-budget", "e001", "hotfix", "retro", "sizing", "worktrees"]
+summary: "Index of forge/retros: 2 files, 0 subdirectories"
+keywords: ["diff-budget", "retro", "worktrees", "e001", "e002", "e005", "hotfix", "parallel"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,3 +16,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [RT001-first-retro-e001-foundation-and-early-e0.md](RT001-first-retro-e001-foundation-and-early-e0.md) | First retro: E001 foundation and early E002/E005/E023 | 12 tasks done, 11 approved first round. task_diff_lines now counts production lines only; parallel worktrees keep shared config serial; orchestrator gets a narrow hotfix exception. | retro, diff-budget, worktrees, hotfix, sizing, e001 |
+| [RT002-second-retro-e005-content-e002-combat-sa.md](RT002-second-retro-e005-content-e002-combat-sa.md) | Second retro: E005 content, E002 combat, sandbox | 14 tasks done, 9/13 approved first round. Implementers measure the diff mid-task and stop over budget; parallel independence covers hub files and API edges; generated files are no review finding. | retro, diff-budget, worktrees, parallel, review-noise, e005, e002 |

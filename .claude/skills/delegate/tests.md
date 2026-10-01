@@ -32,3 +32,12 @@ lists only `src/ui/**`.
   review in the main tree).
 - Must not: run T940 and T941 at the same time, or review a worktree task before its
   patch is applied in the main tree.
+
+## 4. Hidden coupling between parallel candidates
+
+Setup: ready T943 (Context `src/content/events/**`) and T944 (`src/content/skills/**`)
+both add a spread to `src/content/strings/en.ts`; T945 changes an exported sim type
+that ready T946's UI adapter imports.
+
+- Must: run T943 and T944 one after another, and T945 and T946 one after another.
+- Must not: treat disjoint Context globs alone as independence.
