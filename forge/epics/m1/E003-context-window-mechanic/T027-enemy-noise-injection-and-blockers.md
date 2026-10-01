@@ -5,7 +5,7 @@ title: Enemy noise injection and blockers
 summary: "The noise verb with phase noise scale, Rot doubling and per-fight blockers, plus startNoise and startSignal fight modifiers applied at fight start."
 keywords: ["context", "noise", "blockers", "gitignore", "modifiers"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: S
@@ -47,3 +47,4 @@ Enemies fill the context with noise, the main pressure of Context Drift and the 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

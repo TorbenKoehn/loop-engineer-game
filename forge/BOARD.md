@@ -39,14 +39,13 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
-## Backlog (56)
+## Backlog (54)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
-| [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
 | [T028](epics/m1/E003-context-window-mechanic/T028-auto-compaction-on-overflow.md) | Auto-compaction on overflow | E003 | p1 | opus | M |
 | [T029](epics/m1/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
 | [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
@@ -54,7 +53,6 @@ generated: true
 | [T036](epics/m1/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
 | [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
 | [T039](epics/m1/E007-item-rules-enemy-traits-and-bosses/T039-m1-item-behaviour-tests-over-real-conten.md) | M1 item behaviour tests over real content | E007 | p1 | opus | M |
-| [T044](epics/m1/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
 | [T045](epics/m1/E004-run-structure-and-map/T045-build-actions-and-loadout-selectors.md) | Build actions and loadout selectors | E004 | p1 | opus | M |
 | [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
 | [T049](epics/m1/E008-run-end-meta-state-and-saves/T049-meta-state-history-and-agents-md-lessons.md) | Meta state, history and AGENTS.md lessons | E008 | p1 | opus | M |
@@ -109,10 +107,12 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
+| [T044](epics/m1/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
 | [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 
 ## Review (0/3)

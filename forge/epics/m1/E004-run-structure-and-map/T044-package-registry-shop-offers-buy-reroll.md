@@ -5,7 +5,7 @@ title: "Package Registry shop: offers, buy, reroll, sell"
 summary: "Shop with 5 rolled offers and one sale, buy with merges, rerolls with rising cost and forked RNG, and selling at half base price per version, without Prune in M1."
 keywords: ["shop", "economy", "reroll", "sell", "prices", "registry"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ The shop turns credits into build decisions using the documented prices, odds an
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
