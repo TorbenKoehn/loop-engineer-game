@@ -39,7 +39,7 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 4/12 |
 
-## Backlog (70)
+## Backlog (69)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -48,7 +48,6 @@ generated: true
 | [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
-| [T015](epics/m1/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
 | [T016](epics/m1/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
 | [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
 | [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
@@ -114,7 +113,7 @@ generated: true
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 
-## Ready (6)
+## Ready (5)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -123,13 +122,14 @@ generated: true
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
-| [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
+| [T015](epics/m1/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
+| [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
 
 ## Review (0/3)
 

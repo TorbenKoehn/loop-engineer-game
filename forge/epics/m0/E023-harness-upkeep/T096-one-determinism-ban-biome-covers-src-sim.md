@@ -5,7 +5,7 @@ title: "One determinism ban: Biome covers src/sim and src/run"
 summary: "The Biome determinism ban applies to src/run as well as src/sim and the duplicate regex ban (BANNED_GLOBALS in tests/architecture/checker.ts) is deleted; model.window and { window: 1 } stay legal."
 keywords: ["determinism", "biome", "gritql", "src-run", "banned-globals", "architecture-test"]
 type: task
-status: ready
+status: in-progress
 priority: p2
 model: sonnet
 size: S
@@ -52,3 +52,4 @@ one place and editors flag it.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

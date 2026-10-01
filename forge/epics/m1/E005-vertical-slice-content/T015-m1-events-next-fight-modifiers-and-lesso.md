@@ -5,7 +5,7 @@ title: M1 events, next-fight modifiers and lessons
 summary: "The 4 vertical-slice Standup events as data, next-fight modifier types, the enemy family table and all 10 AGENTS.md lessons with strings."
 keywords: ["content", "events", "standup", "lessons", "modifiers"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -49,3 +49,4 @@ Provide the event and lesson data the run reducer and meta state need, with ever
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)
