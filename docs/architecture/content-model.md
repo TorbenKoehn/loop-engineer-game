@@ -119,7 +119,7 @@ intent (`monolith_stage`: stage switch on armor breaks); `hook` handlers are pas
 effects that the sim queries at one fixed point ([sim-core](sim-core.md) "Custom hooks").
 Rules: a handler emits events like any effect; each has a unit test; content may only
 reference registered ids (`validateContent(..., { handlers: HANDLER_IDS })`, tested in
-`src/run/boss.test.ts`). Target: ≤ 10 handlers in the full game.
+`src/run/combat/boss.test.ts`). Target: ≤ 10 handlers in the full game.
 
 ## Generated text
 
@@ -137,7 +137,9 @@ A new area is added by creating files only; `src/content/strings/en.ts` and
 1. Data: put the defs in their own module in the kind's folder (`src/content/<kind>/`,
    e.g. `enemies/yak-shave.ts`) and add it to that kind's barrel `<kind>/index.ts`, which
    owns catalogue order. `src/content/index.ts` imports one barrel per kind and only
-   changes when a new kind is added to `Content`.
+   changes when a new kind is added to `Content`. A kind with one module is a flat file
+   (`harnesses.ts`, `prompts.ts`, `lessons.ts`, `memories.ts`); a second module makes it a
+   folder.
 2. Strings: create `src/content/strings/en-<area>.ts` exporting `en<Area>` (`en-yak-shave.ts`
    exports `enYakShave`), a flat `as const` record.
 3. Run `npm run content:index`. It rewrites the generated `src/content/strings/areas.gen.ts`
@@ -146,7 +148,7 @@ A new area is added by creating files only; `src/content/strings/en.ts` and
 
 Checks (vitest, so `npm run check` and CI fail on drift):
 `tools/content/strings-registry.test.ts` fails when an `en-*.ts` module is missing from
-`areas.gen.ts` or the file differs from the generator output; `en.test.ts` fails on a key
+`areas.gen.ts` or the file differs from the generator output; `text/en.test.ts` fails on a key
 defined twice across `enCore` and the area modules (a spread would override it silently) and
 asserts the key count of `en` equals the sum of its parts. Unknown keys stay a `tsc` error.
 The list is a checked-in static module, not a runtime glob, so content runs on plain Node 24

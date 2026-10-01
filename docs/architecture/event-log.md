@@ -5,7 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/enemy/traits.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts, src/sim/combat/context/compaction.ts]
+related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/traits/traits.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts, src/sim/combat/compaction/compaction.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 

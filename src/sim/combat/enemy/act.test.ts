@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import type { CombatEvent } from '../../events.ts';
 import { fight, hitIntent, intent, makeEnemy, makeTool } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim } from '../state.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import { enemiesAct } from './act.ts';
 
 type Of<K> = Extract<CombatEvent, { kind: K }>;

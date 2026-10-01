@@ -51,8 +51,8 @@ Fill the template in `docs/harness/delegation.md#prompt-template`:
   - an AC that names Playwright: `tests/e2e/<name>.spec.ts`;
   - a new `Action` variant: `src/ui/screens/placeholder.tsx`;
   - a file an AC names (T095 blocked on `delegate/SKILL.md`);
-  - a change to fight outcomes (`src/sim/**`, content numbers, `src/run/combat.ts`):
-    `src/run/combat.test.ts`, `tests/e2e/combat.spec.ts` and `tools/golden/fixtures/**`
+  - a change to fight outcomes (`src/sim/**`, content numbers, `src/run/combat/combat.ts`):
+    `src/run/combat/combat.test.ts`, `tests/e2e/combat.spec.ts` and `tools/golden/fixtures/**`
     via `npm run golden:update` (T029, T033, T046, T024, RT004);
 - for worktrees: "You run in a git worktree: run `npm ci` if node_modules is missing.
   Edit files only inside this worktree."

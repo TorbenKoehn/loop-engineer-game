@@ -20,10 +20,10 @@ import {
   makeTool,
   withSkills,
 } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim } from '../state.ts';
 import { toolRate } from '../status/charge.ts';
 import { applyStatus } from '../status/statuses.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import type { CombatInput } from '../types.ts';
 
 const mod = (stat: ModStat, v: number, filter?: Filter): Effect =>

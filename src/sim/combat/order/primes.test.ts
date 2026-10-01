@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import type { Filter, ToolDef } from '../../../content/types/index.ts';
 import { fight, makeTool } from '../../testing/builders.ts';
-import { fireTools } from '../fire.ts';
 import { matchesTool } from '../mods/filter.ts';
 import { createSim, PROGRESS_PER_MS, type Sim, type ToolRt } from '../state.ts';
 import { applyStatus } from '../status/statuses.ts';
+import { fireTools } from '../tick/fire.ts';
 import { addPrimes, filterKey } from './primes.ts';
 
 /** A [Search] tool that primes the next [Edit] activation. */

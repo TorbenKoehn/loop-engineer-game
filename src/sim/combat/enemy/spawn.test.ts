@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import type { EnemyDef } from '../../../content/types/index.ts';
 import { fight, hitIntent, intent, makeEnemy } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim, type Sim } from '../state.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import { enemiesAct } from './act.ts';
 import { MAX_ENEMIES, type SpawnVerb } from './spawn.ts';
 

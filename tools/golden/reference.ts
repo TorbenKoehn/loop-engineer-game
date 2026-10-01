@@ -5,7 +5,7 @@
 import type { FightModifier } from '../../src/content/types/event.ts';
 import type { LessonId, PromptId } from '../../src/content/types/ids.ts';
 import { apply } from '../../src/run/apply.ts';
-import { combatInput } from '../../src/run/combat.ts';
+import { combatInput } from '../../src/run/combat/combat.ts';
 import { reachable } from '../../src/run/map/graph.ts';
 import { newRun } from '../../src/run/new-run.ts';
 import type { Policy, RunState } from '../../src/run/state.ts';

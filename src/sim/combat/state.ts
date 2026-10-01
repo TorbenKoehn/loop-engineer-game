@@ -66,7 +66,7 @@ export interface EnemyRt {
   killedBy: Ref;
   /** Successful spawns per intent id this fight (spawn `perFight` cap). */
   readonly spawned: Record<string, number>;
-  /** Timed traits (enemy/traits.ts): ms in the fight, counted in step 2; Grow attack bonus. */
+  /** Timed traits (traits/traits.ts): ms in the fight, counted in step 2; Grow attack bonus. */
   readonly traitState: { ms: number; dmg: number };
   /** Armor trait: layers left and the current layer's hp (0 and 0 without armor). */
   readonly armor: { layers: number; hp: number };

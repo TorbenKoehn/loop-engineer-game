@@ -3,8 +3,8 @@
 import { describe, expect, it } from 'vitest';
 import type { Tag, ToolDef } from '../content/types/index.ts';
 import { breakpoints } from './breakpoints.ts';
-import { resolveCombat } from './combat/resolve.ts';
 import { createSim } from './combat/state.ts';
+import { resolveCombat } from './combat/tick/resolve.ts';
 import type { CombatInput } from './combat/types.ts';
 import type { CombatEvent } from './events.ts';
 import { fight, makeTool } from './testing/builders.ts';

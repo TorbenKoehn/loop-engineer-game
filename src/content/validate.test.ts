@@ -6,10 +6,10 @@ import { passive } from './dsl/rule.ts';
 import { unlockedBy } from './dsl/unlock.ts';
 import { type Content, content } from './index.ts';
 import { en, type Strings } from './strings/en.ts';
-import { sliceOf } from './testing/slice-doc.ts';
 import type { EncounterDef, Intent } from './types/enemy.ts';
 import type { ToolDef } from './types/items.ts';
 import { compareSummary, summarize, type ValidateOptions, validateContent } from './validate.ts';
+import { sliceOf } from './validation/slice-doc.ts';
 
 const doc = readFileSync(new URL('../../docs/game/vertical-slice.md', import.meta.url), 'utf8');
 const slice = sliceOf(doc);

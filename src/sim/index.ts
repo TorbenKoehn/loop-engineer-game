@@ -3,5 +3,5 @@
 export const SIM_VERSION = 1;
 
 export { type BreakpointProgress, breakpoints } from './breakpoints.ts';
-export { resolveCombat } from './combat/resolve.ts';
+export { resolveCombat } from './combat/tick/resolve.ts';
 export type * from './combat/types.ts';

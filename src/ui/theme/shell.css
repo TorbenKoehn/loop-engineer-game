@@ -1,10 +1,10 @@
 /* IDE shell layout (docs/game/ux/screens.md "Shell layout"). Layout only; styling is T056. */
-@import "./screens.css";
-@import "./map.css";
-@import "./reward.css";
-@import "./shop.css";
-@import "./nodes.css";
-@import "./run-end.css";
+@import "./screens/screens.css";
+@import "./screens/map.css";
+@import "./screens/reward.css";
+@import "./screens/shop.css";
+@import "./screens/nodes.css";
+@import "./screens/run-end.css";
 
 .shell {
   height: 100vh;

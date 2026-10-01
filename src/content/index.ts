@@ -7,7 +7,7 @@ import { enemies } from './enemies/index.ts';
 import { events } from './events/index.ts';
 import { harnesses } from './harnesses.ts';
 import { FAMILY_MEMBERS, lessons } from './lessons.ts';
-import { memories } from './memories/index.ts';
+import { memories } from './memories.ts';
 import { prompts } from './prompts.ts';
 import { skills } from './skills/index.ts';
 import { tools } from './tools/index.ts';

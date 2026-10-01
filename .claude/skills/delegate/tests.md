@@ -44,8 +44,8 @@ exported sim type that ready T946's UI adapter imports.
 
 ## 5. Companion files and grown scope (RT003)
 
-Setup: ready T947 (Context `src/run/rewards.ts`) changes reward behaviour, adds an
-`Action` variant and UI text; `docs/architecture/run-state.md` lists `src/run/rewards.ts`
+Setup: ready T947 (Context `src/run/nodes/rewards.ts`) changes reward behaviour, adds an
+`Action` variant and UI text; `docs/architecture/run-state.md` lists `src/run/nodes/rewards.ts`
 in `related_code`. Ready T948 has four orchestrator Notes from later reviews. Ready
 T950 is an M screen task created before RT003.
 
@@ -56,10 +56,10 @@ T950 is an M screen task created before RT003.
 
 ## 6. Sim change ripples into e2e and goldens (RT004)
 
-Setup: ready T949 (Context `src/sim/combat/context/**`) changes when compaction fires;
+Setup: ready T949 (Context `src/sim/combat/compaction/**`) changes when compaction fires;
 `tests/e2e/combat.spec.ts` asserts a Trust number and `tools/golden/fixtures/` pins logs.
 
-- Must: allow `src/run/combat.test.ts`, `tests/e2e/combat.spec.ts` and
+- Must: allow `src/run/combat/combat.test.ts`, `tests/e2e/combat.spec.ts` and
   `tools/golden/fixtures/**` in the prompt; in verification `npm run check` (runs build and
   e2e), and run it again on main after merging the worktree.
 - Must not: send T949 to review before `npm run check` passed on main after the merge.

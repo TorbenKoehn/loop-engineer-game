@@ -11,7 +11,7 @@ import {
   makeTool,
   withSkills,
 } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import type { CombatInput } from '../types.ts';
 
 const guard = (v: number): Effect => ({ do: 'guard', v });

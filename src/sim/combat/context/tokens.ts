@@ -1,7 +1,7 @@
 // Tool output tokens and removal (docs/game/systems/context.md "Outputs"). No zone % on tokens.
 import type { Ref } from '../../events.ts';
+import { checkOverflow } from '../compaction/compaction.ts';
 import { emit, type Sim, type ToolRt, toolRef } from '../state.ts';
-import { checkOverflow } from './compaction.ts';
 
 type Kind = 'output' | 'removal' | 'noise';
 

@@ -4,7 +4,7 @@ import { ZONES } from '../../sim/combat/context/ctx.ts';
 import { breakpoints, resolveCombat } from '../../sim/index.ts';
 import type { Action } from '../actions.ts';
 import { apply } from '../apply.ts';
-import { combatInput } from '../combat.ts';
+import { combatInput } from '../combat/combat.ts';
 import { reachable } from '../map/graph.ts';
 import { newRun } from '../new-run.ts';
 import type { AgentState, MetaView, RunState } from '../state.ts';

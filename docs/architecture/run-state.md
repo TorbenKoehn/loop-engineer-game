@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts, src/run/events/standup.ts, src/run/events/outcomes.ts, src/run/events/modifiers.ts, src/run/build/build.ts, src/run/build/selectors.ts, src/run/gain.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/nodes/rewards.ts, src/run/stats.ts, src/run/combat/combat.ts, src/run/nodes/rest.ts, src/run/nodes/memory.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts, src/run/events/standup.ts, src/run/events/outcomes.ts, src/run/events/modifiers.ts, src/run/build/build.ts, src/run/build/selectors.ts, src/run/gain.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 

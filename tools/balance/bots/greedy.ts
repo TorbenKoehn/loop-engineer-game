@@ -6,7 +6,7 @@
 import { content } from '../../../src/content/index.ts';
 import type { Action } from '../../../src/run/actions.ts';
 import { newItem } from '../../../src/run/gain.ts';
-import { interest } from '../../../src/run/rewards.ts';
+import { interest } from '../../../src/run/nodes/rewards.ts';
 import type { ItemKind, ItemRef, NodeType, OwnedItem, RunState } from '../../../src/run/state.ts';
 import type { Bot } from './bot.ts';
 import { choiceScore } from './event-score.ts';

@@ -2,7 +2,7 @@
 import type { StringKey } from '../../content/strings/en.ts';
 import type { Action } from '../../run/actions.ts';
 import { legalActions } from '../../run/apply.ts';
-import { SKIP_CREDITS } from '../../run/rewards.ts';
+import { SKIP_CREDITS } from '../../run/nodes/rewards.ts';
 import { t } from '../i18n.ts';
 import { dispatch, run, type UiMode } from '../store/run.ts';
 

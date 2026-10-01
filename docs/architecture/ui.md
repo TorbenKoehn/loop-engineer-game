@@ -66,12 +66,12 @@ a run starts. HarnessSelect is a native radio group (arrow keys choose, Enter st
 preselects and tags IDE Companion on the first run (`harnessChoice`). PromptPick renders
 `pending.prompts` as buttons that dispatch `pickPrompt`. Screens take initial focus with
 `useInitialFocus` and move between cards with `arrowFocus` (`screens/focus.ts`); their
-styles live in `theme/screens.css`, imported by `shell.css`.
+styles live in `theme/screens/screens.css`, imported by `shell.css`.
 
 `MapScreen` (`src/ui/screens/map/`, lazy via `lazyScreen` in `app.tsx`, a signal loader
 without `preact/compat`) draws the DAG bottom to top on a character grid: pure geometry in
 `layout.ts` (node states, box-drawing link rows, arrow-key moves), nodes and preview in
-`node.tsx`, styles in `theme/map.css`. One roving tab stop; arrows move, click or Enter on a
+`node.tsx`, styles in `theme/screens/map.css`. One roving tab stop; arrows move, click or Enter on a
 reachable node dispatches `travel`; hover or focus previews the encounter (elites hidden). The
 top bar breadcrumb reads `phase-1/implement › row 3` from the current node.
 
@@ -82,8 +82,8 @@ changes or the screen unmounts. Its view components live in `src/ui/combat/view/
 result strip's Continue dispatches `continue`. The status bar shows the current speed
 (`2x`, `⏭ Skip`).
 
-`RewardScreen` and `DiscardScreen` (`src/ui/screens/reward.tsx`, `discard.tsx`, lazy) render
-`pending` of modes `reward` and `discard`; styles in `theme/reward.css`. Reward cards are
+`RewardScreen` and `DiscardScreen` (`src/ui/screens/nodes/reward.tsx`, `discard.tsx`, lazy) render
+`pending` of modes `reward` and `discard`; styles in `theme/screens/reward.css`. Reward cards are
 diff hunks (`+` added lines, `-` the owned version's line for a duplicate tool, whose header
 reads `v1 → v2`, via `nextVersion` in `screens/item-text.ts`); lines come from
 `describeTool`/`describeRule`. The receipt lists Reward, Interest and Total from the pending
@@ -91,7 +91,7 @@ payout (already paid by `enterReward`). Discard lists every ref from `discardRef
 button dispatching `discardItem`.
 
 `StandupScreen`, `RestScreen` and `FreeTierScreen` (`screens/nodes/standup.tsx`, `rest.tsx`,
-`free-tier.tsx`, lazy; styles in `theme/nodes.css`) render modes `event`, `rest` and
+`free-tier.tsx`, lazy; styles in `theme/screens/nodes.css`) render modes `event`, `rest` and
 `treasure`. The Standup is a `#standup` message (speaker `event.<id>.speaker`, setup split on
 newlines, at most 3) with one reply button per `eventChoices` entry: outcome lines from
 `screens/nodes/outcome-text.ts`, cost tag, and a disabled reply's reason (`blockText`). Exact
@@ -100,7 +100,7 @@ whether it equips, stashes or needs room) come from `preview(action)` in `store/
 runs `apply` without dispatching, so no rule is copied into the UI.
 
 `RunEndScreen` (`screens/run-end/run-end.tsx`, lazy, mode `runEnd`; styles in
-`theme/run-end.css`) shows `^C` (loss, abandon) or "Merged to main!" in 64 px `--brand`, the
+`theme/screens/run-end.css`) shows `^C` (loss, abandon) or "Merged to main!" in 64 px `--brand`, the
 cause, top-3 damage sources and last-fight zone time as text bars, compactions and one hint.
 `screens/run-end/summary.ts` computes it purely from `RunStats` and the last fight's log
 (recomputed from `run.combat.input`); `pickHint` takes the first matching onboarding rule
@@ -193,7 +193,7 @@ Dev builds only: `?sandbox` opens the combat sandbox (`src/ui/sandbox/`, linked 
 Title). `src/main.tsx` imports it lazily behind `import.meta.env.DEV`, so production builds
 drop it and ignore the flag. Pick a harness, a Phase-1 encounter and a seed; the sandbox
 starts a run, picks the first prompt, resolves the fight with `fight()` from
-`src/run/combat.ts` into the store and renders the normal `Shell` and `CombatScreen`. It
+`src/run/combat/combat.ts` into the store and renders the normal `Shell` and `CombatScreen`. It
 follows the JSX-text rule like every screen.
 
 ## Test hooks (`window.__game`, dev and e2e builds only)

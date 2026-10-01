@@ -1,9 +1,9 @@
 // Reference fights for combat UI tests. Test support only: the CombatInput comes from run
-// state through combatInput (src/run/combat.ts), exactly like a fight node in a real run.
+// state through combatInput (src/run/combat/combat.ts), exactly like a fight node in a real run.
 import { content } from '../../../content/index.ts';
 import type { Action } from '../../../run/actions.ts';
 import { apply, legalActions } from '../../../run/apply.ts';
-import { combatInput } from '../../../run/combat.ts';
+import { combatInput } from '../../../run/combat/combat.ts';
 import { newRun } from '../../../run/new-run.ts';
 import type { RunState } from '../../../run/state.ts';
 import type { CombatInput } from '../../../sim/index.ts';

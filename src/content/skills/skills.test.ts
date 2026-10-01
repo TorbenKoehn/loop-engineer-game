@@ -2,7 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { rule } from '../dsl/rule.ts';
-import { memories } from '../memories/index.ts';
+import { memories } from '../memories.ts';
 import { en } from '../strings/en.ts';
 import { describeRule } from '../text.ts';
 import {

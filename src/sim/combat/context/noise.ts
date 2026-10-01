@@ -1,9 +1,9 @@
 // Enemy noise injection (docs/game/systems/context.md "Noise"). Fight-start noise: ctx.ts.
 
+import { checkOverflow } from '../compaction/compaction.ts';
 import { scaleNoise } from '../enemy/phase.ts';
 import { cutNoise } from '../mods/custom.ts';
 import { type EnemyRt, enemyRef, type Sim } from '../state.ts';
-import { checkOverflow } from './compaction.ts';
 import { blockNoise } from './ctx.ts';
 import { emitTokens } from './tokens.ts';
 

@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import type { ToolDef } from '../../../content/types/index.ts';
 import type { CombatEvent } from '../../events.ts';
 import { fight, makeTool } from '../../testing/builders.ts';
-import { fireTools } from '../fire.ts';
 import { createSim, PROGRESS_PER_MS, type Sim, type ToolRt } from '../state.ts';
 import { applyStatus } from '../status/statuses.ts';
+import { fireTools } from '../tick/fire.ts';
 
 const piper = (pipeMs: number, id = 'cat'): ToolDef => makeTool({ id, cooldownMs: 1000, pipeMs });
 

@@ -3,7 +3,7 @@ import { content } from '../../content/index.ts';
 import type { FightModifier } from '../../content/types/event.ts';
 import type { Action } from '../actions.ts';
 import { apply } from '../apply.ts';
-import { combatInput, fight } from '../combat.ts';
+import { combatInput, fight } from '../combat/combat.ts';
 import { reachable } from '../map/graph.ts';
 import { newRun } from '../new-run.ts';
 import type { MapNode, RunState } from '../state.ts';

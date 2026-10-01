@@ -5,7 +5,7 @@ import { useEffect } from 'preact/hooks';
 import { content } from '../../content/index.ts';
 import type { Action } from '../../run/actions.ts';
 import { legalActions } from '../../run/apply.ts';
-import { fight } from '../../run/combat.ts';
+import { fight } from '../../run/combat/combat.ts';
 import { Screen } from '../app.tsx';
 import { harnessName } from '../combat/names.ts';
 import { t } from '../i18n.ts';

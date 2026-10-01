@@ -4,10 +4,10 @@ import type { Family } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
 import { pct as scale } from '../int.ts';
 import { zoneIx } from './context/ctx.ts';
-import { breakArmor, hitArmor, isBlocked } from './enemy/traits.ts';
 import { raise } from './rules/state.ts';
 import { emit, type Sim, toolRef } from './state.ts';
 import { hpOf, isAgent, setHp, type Unit, unitRef } from './targeting.ts';
+import { breakArmor, hitArmor, isBlocked } from './traits/traits.ts';
 
 /** Floor of the summed percent mods. */
 export const MIN_PCT = -90;

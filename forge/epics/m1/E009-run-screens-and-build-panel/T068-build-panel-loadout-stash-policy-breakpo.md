@@ -46,7 +46,7 @@ equip actions; reorder (T110), policy and drawer (T111) and the preview (T112) b
 
 ## Notes
 
-- Orchestrator 2026-10-01 (T045 follow-up): src/ui/screens/discard.tsx must pass `state` to `discardRefs` so it never offers a discard that apply refuses (baseline cap).
+- Orchestrator 2026-10-01 (T045 follow-up): src/ui/screens/nodes/discard.tsx must pass `state` to `discardRefs` so it never offers a discard that apply refuses (baseline cap).
 - 2026-10-01 (RT005 re-size): narrowed to tree, chips and equip (~250 production lines); reorder moved to T110, policy, combat lock and drawer to T111. Report CSS separately (at most 300).
 - 2026-10-01: Meets the Definition of Ready; all depends_on done.
 

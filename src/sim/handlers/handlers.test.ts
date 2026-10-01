@@ -1,9 +1,9 @@
 // T037: the handler registry and the monolith_stage handler (phase-1-implement.md "Boss:
 // Legacy Monolith"). The hooks are tested in combat/mods/custom.test.ts and
-// combat/enemy/traits.test.ts; real content in src/run/boss.test.ts.
+// combat/traits/traits.test.ts; real content in src/run/combat/boss.test.ts.
 import { describe, expect, it } from 'vitest';
 import type { EnemyDef } from '../../content/types/index.ts';
-import { resolveCombat } from '../combat/resolve.ts';
+import { resolveCombat } from '../combat/tick/resolve.ts';
 import type { CombatEvent } from '../events.ts';
 import { fight, hitIntent, makeEnemy, makeTool } from '../testing/builders.ts';
 import { enemyHandler, HANDLER_IDS, HANDLERS } from './index.ts';

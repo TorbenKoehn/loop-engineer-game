@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { LessonDef, MemoryDef, SkillDef } from '../../../content/types/index.ts';
 import { fight, makeTool } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import type { CombatInput } from '../types.ts';
 import { baseline, type Ctx, createCtx, WINDOW_MIN, zoneMods, zoneOf } from './ctx.ts';
 

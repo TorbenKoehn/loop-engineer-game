@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Cond, Trigger } from '../../../content/types/index.ts';
 import { fight, makeRule, makeSkill, makeTool, withSkills } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import type { CombatInput } from '../types.ts';
 
 const ANY_FIRE: Trigger = { on: 'toolFired' };

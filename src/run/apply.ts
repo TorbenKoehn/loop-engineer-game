@@ -2,15 +2,15 @@
 // See docs/architecture/run-state.md#reducer and #modes.
 import { type Action, type ApplyResult, fail } from './actions.ts';
 import { applyBuild } from './build/build.ts';
-import { afterCombat, fight } from './combat.ts';
+import { afterCombat, fight } from './combat/combat.ts';
 import { chooseEvent, enterEvent, eventActions } from './events/standup.ts';
 import { discardItem, discardRefs } from './gain.ts';
 import { reachable } from './map/graph.ts';
 import { lessonActions, pickLesson, skipLesson } from './meta/lessons.ts';
 import { takeTreasure } from './nodes/memory.ts';
 import { restActions, restHeal, restUpgrade } from './nodes/rest.ts';
-import { pickReward, rewardActions, skipReward } from './rewards.ts';
-import { buy, enterShop, leaveShop, reroll, sell, shopActions } from './shop.ts';
+import { pickReward, rewardActions, skipReward } from './nodes/rewards.ts';
+import { buy, enterShop, leaveShop, reroll, sell, shopActions } from './nodes/shop.ts';
 import type { MapNode, NodeId, RunState } from './state.ts';
 import { endRun } from './stats.ts';
 

@@ -80,13 +80,13 @@ stored combat input, which is cheap and deterministic.
 
 ```
 src/
-  sim/        rng.ts int.ts combat/ (state, tick, charge, fire, effects, targeting,
-              context, statuses, traits, deadline, events) summons/
-  content/    types/ dsl/ tools/ skills/ memories/ enemies/ encounters/ events/
-              harnesses.ts prompts.ts lessons.ts sounds.ts strings/en.ts validate.ts
-  run/        state.ts actions.ts apply.ts map/ rewards.ts shop.ts events.ts meta/
+  sim/        rng.ts int.ts events.ts handlers/ combat/ (state damage effects targeting
+              tick/ context/ compaction/ enemy/ traits/ status/ order/ rules/ mods/)
+  content/    types/ dsl/ tools/ skills/ enemies/ encounters/ events/ strings/ text/
+              validation/ harnesses.ts prompts.ts lessons.ts memories.ts text.ts validate.ts
+  run/        state.ts actions.ts apply.ts gain.ts combat/ nodes/ map/ events/ meta/ build/
   save/       schema.ts migrations/ storage.ts codec.ts
-  ui/         app.tsx store/ screens/ combat/ components/ i18n.ts input/
+  ui/         app.tsx store/ screens/ combat/ shell/ theme/ i18n.ts
   render-fx/  fx.ts overlay.ts shake.ts
   audio/      sfx.ts music.ts mixer.ts
   debug/      hooks.ts
@@ -94,5 +94,6 @@ tests/        e2e/ arch.test.ts   (combat goldens: tools/golden/fixtures)
 tools/balance/ cli.ts bots/ report.ts
 ```
 
-Code budgets from `harness.config.json` apply: ≤ 300 code lines per TS file, ≤ 50 lines
+Folders: at most 10 files and 10 subfolders, depth 4; split by topic (T105). Code budgets from
+`harness.config.json` apply: ≤ 300 code lines per TS file, ≤ 50 lines
 per function, ≤ 4 parameters, complexity ≤ 10. Files split by concept, not by layer.

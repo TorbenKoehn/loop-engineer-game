@@ -3,7 +3,7 @@ import { content } from '../../content/index.ts';
 import { baseline } from '../../sim/combat/context/ctx.ts';
 import type { Action } from '../actions.ts';
 import { apply, legalActions } from '../apply.ts';
-import { combatInput } from '../combat.ts';
+import { combatInput } from '../combat/combat.ts';
 import { reachable } from '../map/graph.ts';
 import { isUnlocked, newRun } from '../new-run.ts';
 import type { MetaView, RunState } from '../state.ts';

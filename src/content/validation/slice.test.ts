@@ -3,10 +3,10 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { CONTENT_VERSION, content } from '../index.ts';
 import { en } from '../strings/en.ts';
-import { parseSliceDoc, sliceOf } from '../testing/slice-doc.ts';
 import type { HarnessDef, SystemPromptDef } from '../types/harness.ts';
 import { validateContent } from '../validate.ts';
 import type { SliceIds } from './slice.ts';
+import { parseSliceDoc, sliceOf } from './slice-doc.ts';
 import { summarize } from './summary.ts';
 
 const read = (rel: string) => readFileSync(new URL(rel, import.meta.url), 'utf8');

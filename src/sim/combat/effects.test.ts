@@ -3,8 +3,8 @@ import type { CombatEvent } from '../events.ts';
 import { fight, hitIntent, makeEnemy, makeTool } from '../testing/builders.ts';
 import { computeAmount } from './damage.ts';
 import { gainGuard, heal } from './effects.ts';
-import { resolveCombat } from './resolve.ts';
 import { createSim } from './state.ts';
+import { resolveCombat } from './tick/resolve.ts';
 import type { CombatInput } from './types.ts';
 
 const ofKind = (events: readonly CombatEvent[], kind: CombatEvent['kind']) =>

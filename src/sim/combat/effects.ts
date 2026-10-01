@@ -2,7 +2,7 @@
 // All three go through the damage formula (docs/game/systems/combat.md "Damage formula").
 import type { Effect, Value } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
-import { compact } from './context/compaction.ts';
+import { compact } from './compaction/compaction.ts';
 import { removeTokens } from './context/tokens.ts';
 import { type Amount, computeAmount, dealDamage, type Mod } from './damage.ts';
 import { addPrimes } from './order/primes.ts';

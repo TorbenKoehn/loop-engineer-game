@@ -40,7 +40,7 @@ Critical rules:
      fixing every existing finding (T002), a screen's components plus its route, e2e
      test and removal of what it replaces (T098, T059 → T100 + T101).
    - New files go where? If the target folder is at `dir_files` warn_at, the Context
-     names the subfolder for them (`src/run`, `src/sim/combat` at 14 of 15, RT003).
+     names the subfolder for them (RT003; T105 regrouped `src/` to at most 10 per folder).
 5. **Create each task:**
    `npm run harness:new -- task --epic E### --title "<outcome>" --size S --model sonnet --priority p2`.
    Then fill:

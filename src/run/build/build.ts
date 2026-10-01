@@ -2,7 +2,7 @@
 // Free in map, reward, shop and event modes (docs/game/systems/harness-loadout.md#build-phase).
 import { type Action, type ApplyResult, fail, ok } from '../actions.ts';
 import { remove } from '../gain.ts';
-import { itemAt } from '../shop.ts';
+import { itemAt } from '../nodes/shop.ts';
 import type { AgentState, ItemKind, Mode, OwnedItem, Policy, RunState } from '../state.ts';
 import { overLimit } from './selectors.ts';
 

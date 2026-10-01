@@ -1,7 +1,7 @@
 ---
 title: "Index: forge"
 summary: "Index of forge: 2 files, 3 subdirectories"
-keywords: ["acceptance-criteria", "accessibility", "achievements", "agents", "agents-md", "allowed-paths", "apply", "arch-test"]
+keywords: ["accessibility", "achievements", "agents", "agents-md", "allowed-paths", "arch-test", "art", "ascension"]
 type: index
 status: active
 updated: 2026-10-01
@@ -15,7 +15,7 @@ generated: true
 
 | Directory | Summary | Keywords |
 |---|---|---|
-| [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 4 subdirectories | agents-md, boss, acceptance-criteria, accessibility, achievements, apply, arch-test, art |
+| [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 4 subdirectories | accessibility, boss, content, achievements, agents-md, arch-test, art, ascension |
 | [retros/](retros/INDEX.md) | Index of forge/retros: 5 files, 0 subdirectories | retro, diff-budget, e2e, max-turns, parallel, sizing, worktrees, allowed-paths |
 | [reviews/](reviews/INDEX.md) | Index of forge/reviews: 0 files, 12 subdirectories | review, agents, batch, biome, build, combat, cycle, enemy |
 

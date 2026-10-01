@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { CombatEvent } from '../events.ts';
 import { fight, makeEnemy, makeTool } from '../testing/builders.ts';
-import { resolveCombat } from './resolve.ts';
 import { createSim } from './state.ts';
 import { selectTargets, unitRef } from './targeting.ts';
+import { resolveCombat } from './tick/resolve.ts';
 
 /** A line of enemies with the given Severities, front to back. */
 const line = (...sevs: number[]) =>

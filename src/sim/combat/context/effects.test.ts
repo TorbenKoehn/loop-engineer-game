@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import type { Accuracy, Status } from '../../../content/types/index.ts';
 import type { CombatEvent } from '../../events.ts';
 import { type FightSpec, fight, hitIntent, makeEnemy, makeTool } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim } from '../state.ts';
 import { chargeRate, enemyRate, toolRate } from '../status/charge.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 
 /** dmg, guard and heal 10 each; the agent starts at 20 of 40 Trust. */
 const tri = (weight = 3) =>

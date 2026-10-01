@@ -1,6 +1,6 @@
 // T034: passive custom hooks - double_first_resolve (step_by_step), context_noise_cut and
 // throttle_shorter (lessons); T037: rot_no_slow and feedback_loop (skills). Real content is
-// tested through the run in src/run/combat.test.ts.
+// tested through the run in src/run/combat/combat.test.ts.
 import { describe, expect, it } from 'vitest';
 import type { Effect, Family, LessonDef } from '../../../content/types/index.ts';
 import type { CombatEvent } from '../../events.ts';
@@ -13,10 +13,10 @@ import {
   withSkills,
 } from '../../testing/builders.ts';
 import { injectNoise } from '../context/noise.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim, type EnemyRt, type ToolRt } from '../state.ts';
 import { toolRate } from '../status/charge.ts';
 import { applyStatus } from '../status/statuses.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import type { CombatInput } from '../types.ts';
 
 const custom = (handler: string, args?: Record<string, number>): Effect =>

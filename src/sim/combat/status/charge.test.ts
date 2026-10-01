@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import type { Status, ToolDef } from '../../../content/types/index.ts';
 import type { CombatEvent } from '../../events.ts';
 import { fight, makeEnemy, makeTool } from '../../testing/builders.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim } from '../state.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import { chargeAll, chargeRate, enemyRate, toolRate } from './charge.ts';
 import { applyStatus } from './statuses.ts';
 

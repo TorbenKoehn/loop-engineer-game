@@ -27,11 +27,13 @@ function lazyScreen(load: () => Promise<FunctionComponent>): FunctionComponent {
 }
 
 const MapScreen = lazyScreen(() => import('./screens/map/map-screen.tsx').then((m) => m.MapScreen));
-const RewardScreen = lazyScreen(() => import('./screens/reward.tsx').then((m) => m.RewardScreen));
-const DiscardScreen = lazyScreen(() =>
-  import('./screens/discard.tsx').then((m) => m.DiscardScreen),
+const RewardScreen = lazyScreen(() =>
+  import('./screens/nodes/reward.tsx').then((m) => m.RewardScreen),
 );
-const ShopScreen = lazyScreen(() => import('./screens/shop.tsx').then((m) => m.ShopScreen));
+const DiscardScreen = lazyScreen(() =>
+  import('./screens/nodes/discard.tsx').then((m) => m.DiscardScreen),
+);
+const ShopScreen = lazyScreen(() => import('./screens/nodes/shop.tsx').then((m) => m.ShopScreen));
 const StandupScreen = lazyScreen(() =>
   import('./screens/nodes/standup.tsx').then((m) => m.StandupScreen),
 );

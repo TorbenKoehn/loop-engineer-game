@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import type { ToolDef } from '../../../content/types/index.ts';
 import type { CombatEvent } from '../../events.ts';
 import { type FightSpec, fight, makeTool } from '../../testing/builders.ts';
-import { fireTools } from '../fire.ts';
-import { resolveCombat } from '../resolve.ts';
 import { createSim, PROGRESS_PER_MS, type Sim } from '../state.ts';
+import { fireTools } from '../tick/fire.ts';
+import { resolveCombat } from '../tick/resolve.ts';
 import { addOutput, removeTokens } from './tokens.ts';
 import { updateZone } from './zone.ts';
 
