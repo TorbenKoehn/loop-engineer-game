@@ -40,12 +40,11 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (42)
+## Backlog (40)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
-| [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
 | [T035](epics/m1/E007-item-rules-enemy-traits-and-bosses/T035-tag-breakpoints-posix-refactor-indexed-t.md) | Tag breakpoints POSIX, Refactor, Indexed, TDD | E007 | p1 | opus | S |
 | [T036](epics/m1/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
 | [T037](epics/m1/E007-item-rules-enemy-traits-and-bosses/T037-armor-trait-handler-registry-and-legacy.md) | Armor trait, handler registry and Legacy Monolith | E007 | p1 | opus | M |
@@ -66,7 +65,6 @@ generated: true
 | [T031](epics/m1/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
 | [T047](epics/m1/E004-run-structure-and-map/T047-standup-events-and-next-fight-modifiers.md) | Standup events and next-fight modifiers | E004 | p2 | opus | M |
-| [T052](epics/m1/E008-run-end-meta-state-and-saves/T052-save-migration-framework-and-frozen-fixt.md) | Save migration framework and frozen fixtures | E008 | p2 | sonnet | S |
 | [T053](epics/m1/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
 | [T054](epics/m1/E008-run-end-meta-state-and-saves/T054-desync-detection-and-replay-vs-snapshot.md) | Desync detection and replay-vs-snapshot test | E008 | p2 | opus | M |
 | [T062](epics/m1/E006-ui-shell-and-combat-replay/T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | E006 | p2 | opus | M |
@@ -96,11 +94,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
 | [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
+| [T052](epics/m1/E008-run-end-meta-state-and-saves/T052-save-migration-framework-and-frozen-fixt.md) | Save migration framework and frozen fixtures | E008 | p2 | sonnet | S |
 
 ## Review (0/3)
 

@@ -5,7 +5,7 @@ title: Harness traits, system prompts and lessons in combat
 summary: "Muscle Memory and Undo Stack traits, senior/concise/step_by_step prompt effects (incl. double first activation) and all lesson effects working in fights."
 keywords: ["harness", "traits", "system-prompts", "lessons", "sim"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ The harness and prompt chosen at run start, and the AGENTS.md lesson, change fig
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
