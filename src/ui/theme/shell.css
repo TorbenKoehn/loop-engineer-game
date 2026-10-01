@@ -1,5 +1,6 @@
 /* IDE shell layout (docs/game/ux/screens.md "Shell layout"). Layout only; styling is T056. */
 @import "./screens.css";
+@import "./map.css";
 
 .shell {
   height: 100vh;
@@ -18,6 +19,12 @@
 .shell-top {
   grid-area: top;
   justify-content: space-between;
+}
+.crumbs__sep {
+  color: var(--fg-muted);
+}
+.crumbs__row {
+  color: var(--brand-text);
 }
 .shell-explorer {
   grid-area: explorer;

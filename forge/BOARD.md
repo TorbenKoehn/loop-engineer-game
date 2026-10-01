@@ -23,7 +23,7 @@ generated: true
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 6/11 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 2/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 5/7 |
-| [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 1/8 |
+| [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 2/8 |
 | [E010](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 0/8 |
 | [E011](epics/m1/E011-juice-audio-settings-and-tutorial/EPIC.md) | Juice, audio, settings and tutorial | backlog | p1 | 0/7 |
 | [E012](epics/m2/E012-m2-phases-2-and-3-and-the-full-run/EPIC.md) | M2 Phases 2 and 3 and the full run | backlog | p2 | 0/0 |
@@ -93,13 +93,12 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
 | [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
-| [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 
 ## Review (0/3)
 
@@ -109,9 +108,9 @@ _none_
 
 _none_
 
-## Done (54)
+## Done (55)
 
-_Showing the last 20 of 54 done tasks._
+_Showing the last 20 of 55 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -124,6 +123,7 @@ _Showing the last 20 of 54 done tasks._
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 | [T063](epics/m1/E009-run-screens-and-build-panel/T063-title-harness-select-and-system-prompt-s.md) | Title, harness select and system prompt screens | E009 | p1 | opus | M |
 | [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 | [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
@@ -134,6 +134,5 @@ _Showing the last 20 of 54 done tasks._
 | [T049](epics/m1/E008-run-end-meta-state-and-saves/T049-meta-state-history-and-agents-md-lessons.md) | Meta state, history and AGENTS.md lessons | E008 | p1 | opus | M |
 | [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
 | [T046](epics/m1/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
-| [T044](epics/m1/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
 
 ## Cancelled (1)

@@ -76,7 +76,8 @@ test('title, harness cards and prompt cards work by keyboard and set initial foc
   await page.keyboard.press('Enter');
 
   // System prompt pick: 3 quoted cards with weight and effect line, plus the tip.
-  await expect(page.getByRole('banner')).toContainText('phase-1/promptPick');
+  await expect(page.getByRole('banner')).toContainText('phase-1/implement');
+  await expect(page.getByRole('heading', { name: 'Pick a system prompt' })).toBeVisible();
   await expect(page.getByTestId('status-bar')).toContainText('Trust 80/80');
   await expect(page.getByText('Prompts cost context. Smaller is leaner.')).toBeVisible();
   const cards = page.getByTestId(/^prompt-/);
@@ -92,7 +93,7 @@ test('title, harness cards and prompt cards work by keyboard and set initial foc
   await page.keyboard.press('ArrowRight');
   await expect(cards.nth(1)).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.getByRole('banner')).toContainText('phase-1/map');
+  await expect(page.getByRole('heading', { name: 'Route to the release' })).toBeVisible();
 
   expect(errors).toEqual([]);
 });

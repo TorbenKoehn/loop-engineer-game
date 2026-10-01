@@ -7,7 +7,7 @@ describe('t()', () => {
 
   it('reads en.ts and fills named placeholders', () => {
     expect(t('ui.title.new_run')).toBe('New run');
-    expect(t('ui.shell.breadcrumb', { phase: 1, mode: 'map' })).toBe('phase-1/map');
+    expect(t('ui.shell.breadcrumb', { phase: 1, name: 'implement' })).toBe('phase-1/implement');
     expect(t('effect.dmg', { n: 6, target: 'the front enemy' })).toBe(
       'deal 6 damage to the front enemy',
     );

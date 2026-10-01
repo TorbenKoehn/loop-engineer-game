@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E009"
-summary: "Index of forge/reviews/E009: 1 files, 0 subdirectories"
-keywords: ["harness", "prompt", "review", "select", "system", "title"]
+summary: "Index of forge/reviews/E009: 2 files, 0 subdirectories"
+keywords: ["review", "harness", "nodes", "prompt", "reachable", "screen", "select", "system"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,3 +16,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [R057-T063.md](R057-T063.md) | Review of T063: Title, harness select and system prompt scr… | Review of T063 (approved) | review, title, harness, select, system, prompt |
+| [R063-T064.md](R063-T064.md) | Review of T064: Map screen with reachable nodes and travel | Review of T064 (approved) | review, screen, with, reachable, nodes, travel |

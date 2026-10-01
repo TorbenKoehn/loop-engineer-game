@@ -68,6 +68,13 @@ preselects and tags IDE Companion on the first run (`harnessChoice`). PromptPick
 `useInitialFocus` and move between cards with `arrowFocus` (`screens/focus.ts`); their
 styles live in `theme/screens.css`, imported by `shell.css`.
 
+`MapScreen` (`src/ui/screens/map/`, lazy via `lazyScreen` in `app.tsx`, a signal loader
+without `preact/compat`) draws the DAG bottom to top on a character grid: pure geometry in
+`layout.ts` (node states, box-drawing link rows, arrow-key moves), nodes and preview in
+`node.tsx`, styles in `theme/map.css`. One roving tab stop; arrows move, click or Enter on a
+reachable node dispatches `travel`; hover or focus previews the encounter (elites hidden). The
+top bar breadcrumb reads `phase-1/implement › row 3` from the current node.
+
 `CombatScreen` (`src/ui/screens/combat.tsx`, mode `combatReview`) rebuilds the fight from
 `run.combat.input` with `loadFight`, plays it with `createPlayback` on `rafClock` and the
 store `speed` (so speed persists between fights), and disposes the playback when the fight

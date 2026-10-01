@@ -19,7 +19,8 @@ test('a run with a fixed seed shows the shell and the status bar from RunState',
   await page.getByTestId('harness-terminal_purist').click();
   await page.getByRole('button', { name: 'Start run' }).click();
 
-  await expect(page.getByRole('banner')).toContainText('phase-1/promptPick');
+  await expect(page.getByRole('banner')).toContainText('phase-1/implement');
+  await expect(page.getByRole('heading', { name: 'Pick a system prompt' })).toBeVisible();
   await expect(page.getByRole('banner')).toContainText('seed K7Q2-M9XA');
   await expect(page.getByRole('complementary', { name: 'Explorer' })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Terminal' })).toBeVisible();
@@ -34,7 +35,7 @@ test('a run with a fixed seed shows the shell and the status bar from RunState',
     .getByTestId(/^prompt-/)
     .first()
     .click();
-  await expect(page.getByRole('banner')).toContainText('phase-1/map');
+  await expect(page.getByRole('heading', { name: 'Route to the release' })).toBeVisible();
 
   expect(errors).toEqual([]);
 });

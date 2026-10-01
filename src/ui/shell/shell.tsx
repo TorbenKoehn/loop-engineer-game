@@ -1,15 +1,37 @@
 // The IDE shell around every screen: top bar, explorer, editor, terminal, status bar (screens.md).
 import type { ComponentChildren } from 'preact';
 import type { StringKey } from '../../content/strings/en.ts';
+import type { RunState } from '../../run/state.ts';
 import { fmtNumber, t } from '../i18n.ts';
 import { speed } from '../store/playback.ts';
-import { ctxWindow, lastError, mode, run } from '../store/run.ts';
+import { ctxWindow, lastError, run } from '../store/run.ts';
+
+/** `phase-1/implement › row 3` (screens.md "Shell layout"); the row of the current node. */
+function Breadcrumb({ r }: { r: RunState }) {
+  const node = r.map.nodes.find((n) => n.id === r.map.current);
+  const name = t(`ui.phase.${r.phase}` as StringKey);
+  return (
+    <nav class="crumbs" aria-label={t('ui.shell.location')}>
+      <span>{t('ui.shell.breadcrumb', { phase: r.phase, name })}</span>
+      {node && (
+        <>
+          <span class="crumbs__sep" aria-hidden="true">
+            {' › '}
+          </span>
+          <span class="crumbs__row">
+            {node.type === 'release' ? t('ui.shell.boss') : t('ui.shell.row', { row: node.row })}
+          </span>
+        </>
+      )}
+    </nav>
+  );
+}
 
 function TopBar() {
   const r = run.value;
   return (
     <header class="shell-top">
-      <nav>{r && t('ui.shell.breadcrumb', { phase: r.phase, mode: mode.value })}</nav>
+      {r ? <Breadcrumb r={r} /> : <nav />}
       <span>{r && t('ui.shell.seed', { seed: r.setup.seed })}</span>
     </header>
   );

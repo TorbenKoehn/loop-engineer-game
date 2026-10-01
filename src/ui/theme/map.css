@@ -1,0 +1,269 @@
+/*
+ * Map screen (screens.md "Map") on the Crimson tokens. The DAG is a character grid: a gutter
+ * of row numbers, then 5ch node columns with 3ch link columns between them. Node state is told
+ * by fill and border style as well as colour: current = red fill, reachable = solid red
+ * border that pulses, ahead = solid border, visited = dashed, out of reach = dotted and faded.
+ * Under prefers-reduced-motion the pulse becomes a static ring.
+ */
+
+.map {
+  grid-template-columns: max-content minmax(220px, 300px);
+  align-items: start;
+  column-gap: 32px;
+}
+
+.map__head {
+  grid-column: 1 / -1;
+}
+
+.map__grid {
+  display: grid;
+  min-inline-size: 0;
+  margin: 0;
+  grid-template-columns: 3ch repeat(4, 5ch 3ch) 5ch;
+  grid-auto-rows: minmax(1.25em, auto);
+  padding: 14px 20px 14px 4px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.map__gutter {
+  align-self: center;
+  padding-inline-end: 1ch;
+  text-align: end;
+  font-size: var(--size-meta);
+  color: var(--noise);
+}
+
+.map__gutter--here {
+  color: var(--brand-text);
+  font-weight: 700;
+}
+
+.map__gutter--here::before {
+  content: "›";
+}
+
+/* Links: one box-drawing glyph, centred, with clipped horizontal runs out to the cell edges. */
+
+.link {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  line-height: 1.25;
+  white-space: pre;
+  color: var(--noise);
+  user-select: none;
+}
+
+/* Diagonals stretch across the link column so they meet the node corners. */
+.link--diag {
+  justify-content: center;
+  transform: scale(2.4, 1.5);
+}
+
+.link i {
+  flex: 1 1 0;
+  overflow: hidden;
+  font-style: normal;
+  direction: rtl;
+}
+
+.link i:last-child {
+  direction: ltr;
+}
+
+.link--next {
+  color: var(--fg);
+}
+
+.link--path {
+  color: var(--brand-text);
+}
+
+/* Nodes */
+
+.node {
+  justify-self: center;
+  align-self: center;
+  width: 5ch;
+  height: 1.9em;
+  padding: 0;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  font-weight: 700;
+  color: var(--fg-muted);
+  cursor: default;
+  transition:
+    background-color var(--fast),
+    border-color var(--fast),
+    color var(--fast);
+}
+
+.node--ahead {
+  border-style: solid;
+  color: var(--fg);
+}
+
+.node--gone {
+  border-style: dotted;
+  opacity: 0.45;
+}
+
+.node--visited {
+  background: var(--bg-raised);
+  border-color: var(--brand-deep);
+}
+
+.node--release {
+  width: 7ch;
+  height: 2.2em;
+  border-style: double;
+  border-width: 3px;
+}
+
+.node--next {
+  border: 1px solid var(--brand-text);
+  color: var(--brand-text);
+  cursor: pointer;
+  animation: node-pulse 1.6s ease-in-out infinite;
+}
+
+.node--current {
+  background: var(--brand);
+  border: 1px solid var(--brand-text);
+  color: var(--on-brand);
+  box-shadow: 0 0 18px -4px var(--brand);
+}
+
+.node:hover,
+.node:focus-visible {
+  background: var(--bg-raised);
+  border-color: var(--fg-muted);
+  opacity: 1;
+}
+
+.node--next:hover,
+.node--next:focus-visible {
+  background: var(--brand-deep);
+  border-color: var(--brand-text);
+  color: var(--on-brand);
+}
+
+.node--current:hover,
+.node--current:focus-visible {
+  background: var(--brand);
+}
+
+@keyframes node-pulse {
+  50% {
+    box-shadow:
+      0 0 0 2px var(--brand-deep),
+      0 0 16px 0 var(--brand);
+  }
+}
+
+/* Side panel: preview of the inspected node, then the legend. */
+
+.map__side {
+  position: sticky;
+  top: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.preview {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  padding: 14px 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.preview--next,
+.preview--current {
+  border-inline-start-color: var(--brand);
+}
+
+.preview__icon {
+  grid-row: span 2;
+  align-self: center;
+  font-size: var(--size-number);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--brand-text);
+}
+
+.preview__title {
+  margin: 0;
+  font-size: var(--size-body);
+}
+
+.preview__line,
+.preview__meta,
+.preview__go {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.preview__line {
+  grid-column: 2;
+  color: var(--fg-muted);
+}
+
+.preview__meta {
+  margin-top: 6px;
+  font-size: var(--size-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+}
+
+.preview__go {
+  font-size: var(--size-meta);
+  color: var(--brand-text);
+}
+
+.preview__go::before {
+  content: "↵ ";
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 2px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--size-meta);
+  color: var(--fg-muted);
+}
+
+.legend b {
+  display: inline-block;
+  width: 3ch;
+  color: var(--fg);
+}
+
+/* Abandon is a legal map action (run-map.md "Run end"); kept quiet, below the legend. */
+.map__abandon {
+  justify-self: start;
+  font-size: var(--size-meta);
+  color: var(--fg-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node {
+    transition: none;
+  }
+
+  .node--next {
+    animation: none;
+    box-shadow: 0 0 0 2px var(--brand-deep);
+  }
+}
