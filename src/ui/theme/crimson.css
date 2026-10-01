@@ -1,0 +1,77 @@
+/*
+ * Crimson, the default dark theme (docs/game/ux/art-direction.md "Colour tokens").
+ * Token values must match the table there; src/ui/theme/contrast.test.ts checks both the
+ * values and WCAG AA contrast. Components use these properties, never raw hex values.
+ * Linked from index.html: the architecture checker only allows .ts/.tsx imports in src/ui.
+ */
+:root[data-theme="crimson"] {
+  --bg: #0b0809;
+  --bg-panel: #141012;
+  --bg-raised: #1d1719;
+  --border: #3a2a2e;
+  --fg: #ede6e7;
+  --fg-muted: #a8999c;
+  --brand: #d91e36;
+  --brand-text: #ff4d5e;
+  --brand-deep: #8e1426;
+  --on-brand: #ffffff;
+  --good: #3dd6d0;
+  --warn: #f2a93b;
+  --danger: #ff2d45;
+  --cold: #5b8def;
+  --noise: #6e6467;
+  --enemy: #b48cff;
+  --credits: #f2d16b;
+
+  color-scheme: dark;
+}
+
+:root {
+  /* JetBrains Mono is self-hosted later (T055); until then the closest local monospace. */
+  --font-mono:
+    "JetBrains Mono", "Cascadia Mono", "Cascadia Code", "Fira Code", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", "DejaVu Sans Mono", monospace;
+  --size-meta: 12px;
+  --size-body: 15px;
+  --size-heading: 18px;
+  --size-number: 28px;
+  --line: 1.45;
+  --radius: 3px;
+  --fast: 120ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--size-body);
+  line-height: var(--line);
+  font-variant-ligatures: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--brand-deep);
+  color: var(--on-brand);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-text);
+  outline-offset: 2px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
