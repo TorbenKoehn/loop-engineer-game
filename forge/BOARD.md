@@ -84,19 +84,19 @@ generated: true
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 
-## Ready (4)
+## Ready (3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p0 | opus | M |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
 | [T034](epics/m1/E007-item-rules-enemy-traits-and-bosses/T034-harness-traits-system-prompts-and-lesson.md) | Harness traits, system prompts and lessons in combat | E007 | p1 | opus | M |
 

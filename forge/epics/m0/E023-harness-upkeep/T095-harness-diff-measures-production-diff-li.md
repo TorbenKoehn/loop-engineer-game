@@ -5,7 +5,7 @@ title: "harness:diff measures production diff lines"
 summary: "npm run harness:diff prints production and total changed lines of the staged diff with the budgets.md exclusions and fails over task_diff_lines or 2x total; forge-review and delegate name it."
 keywords: ["harness-diff", "task_diff_lines", "numstat", "production-lines", "budgets", "review"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -55,3 +55,4 @@ numbers and the 2x-total rule is checked by a program.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
