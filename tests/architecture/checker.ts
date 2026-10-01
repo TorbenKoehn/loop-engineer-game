@@ -34,14 +34,18 @@ const BARE_OK: Partial<Record<Module, RegExp>> = {
   'tools/balance': /^node:/,
 };
 const PURE: readonly Module[] = ['sim', 'run'];
+/** Free reference to a global: not a property access (`x.window`) nor an object key (`window:`). */
+function freeRef(names: string): RegExp {
+  return new RegExp(`(?<![\\w$.])(?:${names})\\b(?!\\s*\\??:)`);
+}
 const BANNED_GLOBALS: readonly [string, RegExp][] = [
   ['Math.random', /\bMath\s*\.\s*random\b/],
-  ['Date', /\bDate\b/],
-  ['performance', /\bperformance\b/],
-  ['timers', /\b(setTimeout|setInterval|setImmediate|requestAnimationFrame)\b/],
-  ['window', /\bwindow\b/],
-  ['document', /\bdocument\b/],
-  ['crypto', /\bcrypto\b/],
+  ['Date', freeRef('Date')],
+  ['performance', freeRef('performance')],
+  ['timers', freeRef('setTimeout|setInterval|setImmediate|requestAnimationFrame')],
+  ['window', freeRef('window')],
+  ['document', freeRef('document')],
+  ['crypto', freeRef('crypto')],
 ];
 const IMPORT_RE =
   /\b(?:import|export)\s[^'"`;]*?\bfrom\s*['"]([^'"]+)['"]|\bimport\s*['"]([^'"]+)['"]|\bimport\(\s*['"]([^'"]+)['"]\s*\)/g;
