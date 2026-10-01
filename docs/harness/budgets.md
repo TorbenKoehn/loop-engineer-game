@@ -47,11 +47,17 @@ silent override.
 ## Measuring task diffs
 
 `task_diff_lines` and `commit_diff_lines` count production lines: added + deleted in
-`git diff --cached --numstat -M`, excluding `*.test.ts(x)`, `tests/`, `**/testing/`,
-`**/fixtures/`, `*.jsonl`, lockfiles, Markdown (docs, task and review files) and pure
-renames. Data and string tables count. Tests are excluded so the budget never pushes
-an implementer toward thinner tests (RT001). Reviewers report both numbers; a total
-above 2× the value is a breach as well.
+`git diff --cached --numstat -M --diff-filter=d`, excluding `*.test.ts(x)`, `tests/`,
+`**/testing/`, `**/fixtures/`, `*.jsonl`, lockfiles, Markdown (docs, task and review
+files) and pure renames. Data and string tables count. Tests are excluded so the budget
+never pushes an implementer toward thinner tests (RT001). Reviewers report both numbers;
+a total above 2× the value is a breach as well.
+
+Deleting a whole dead file is free: `--diff-filter=d` drops deleted files from both
+numbers (RT003; T100 measured 1378 with them, 552 without). Lines removed from a kept
+file still count. To move and edit a file, `git mv` it first and stage the move, so
+`-M` sees a rename and counts only the edits (T100's undetected `tool-row.tsx` and
+`transport.tsx` moves counted as all-new).
 
 ## Overrides
 

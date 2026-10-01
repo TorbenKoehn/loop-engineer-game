@@ -33,10 +33,12 @@ Critical rules (read before anything else):
      for tools.
    - Diff budget: measure production lines when about half the subtasks are done and
      again before handback. Stage your allowed paths (`git add -A -- <paths>`), then
-     `git diff --cached --numstat -M -- . ':!*.test.ts' ':!*.test.tsx' ':!tests/*'
-     ':!*/testing/*' ':!*/fixtures/*' ':!*.md' ':!*.jsonl' ':!package-lock.json'`
-     and sum the first two columns. Over `task_diff_lines`: cut what no AC needs
-     (polish, extras), restructure per `docs/harness/budgets.md`; still over → stop
+     `git diff --cached --numstat -M --diff-filter=d -- . ':!*.test.ts' ':!*.test.tsx'
+     ':!tests/*' ':!*/testing/*' ':!*/fixtures/*' ':!*.md' ':!*.jsonl'
+     ':!package-lock.json'` and sum the first two columns. Deleted dead files are free;
+     `git mv` before editing a moved file (budgets.md#measuring-task-diffs). Over
+     `task_diff_lines`: cut what no AC needs (polish, extras), restructure per
+     `docs/harness/budgets.md`; still over → stop
      with `blocked` and a proposed split. Never hand back an unflagged breach (RT002);
      overrides are the orchestrator's call.
    - New `TODO`/`FIXME`: `TODO(T###): ...` with an existing task id.

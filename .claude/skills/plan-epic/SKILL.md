@@ -36,7 +36,10 @@ Critical rules:
    - Size by production lines (budgets.md#measuring-task-diffs); aim M at ~300. Split
      these: a type module plus its consumers (T009), one template per kind of a union
      (T010), API types plus the loop using them (T018), adopting a tool or rule plus
-     fixing every existing finding (T002).
+     fixing every existing finding (T002), a screen's components plus its route, e2e
+     test and removal of what it replaces (T098, T059 → T100 + T101).
+   - New files go where? If the target folder is at `dir_files` warn_at, the Context
+     names the subfolder for them (`src/run`, `src/sim/combat` at 14 of 15, RT003).
 5. **Create each task:**
    `npm run harness:new -- task --epic E### --title "<outcome>" --size S --model sonnet --priority p2`.
    Then fill:

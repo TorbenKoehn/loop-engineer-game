@@ -1,7 +1,7 @@
 ---
 title: "Index: forge"
 summary: "Index of forge: 2 files, 3 subdirectories"
-keywords: ["accessibility", "achievements", "action", "agents-md", "arch-test", "architecture", "art", "ascension"]
+keywords: ["accessibility", "achievements", "action", "agents-md", "allowed-paths", "arch-test", "architecture", "art"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,7 +16,7 @@ generated: true
 | Directory | Summary | Keywords |
 |---|---|---|
 | [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 4 subdirectories | agents-md, boss, accessibility, achievements, arch-test, art, ascension, ascii-art |
-| [retros/](retros/INDEX.md) | Index of forge/retros: 2 files, 0 subdirectories | diff-budget, retro, worktrees, e001, e002, e005, hotfix, parallel |
+| [retros/](retros/INDEX.md) | Index of forge/retros: 3 files, 0 subdirectories | diff-budget, retro, parallel, sizing, worktrees, allowed-paths, doc-drift, e001 |
 | [reviews/](reviews/INDEX.md) | Index of forge/reviews: 0 files, 8 subdirectories | review, biome, combat, enemy, slice, action, architecture, auto |
 
 ## Files
@@ -24,4 +24,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [BOARD.md](BOARD.md) | Forge Board | Generated Kanban board of forge tasks with WIP counts and epic progress | kanban, board, forge, tasks, epics |
-| [HANDOFF.md](HANDOFF.md) | Orchestrator handoff | Live orchestrator state - work in flight, pending follow-ups and session caveats not visible on BOARD.md. | handoff, orchestrator, state, follow-ups |
+| [HANDOFF.md](HANDOFF.md) | Orchestrator handoff | Live orchestrator state - goal, decisions and caveats not visible on BOARD.md; in-flight work is on BOARD.md. | handoff, orchestrator, state, decisions |

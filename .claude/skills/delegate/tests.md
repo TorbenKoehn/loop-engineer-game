@@ -35,9 +35,20 @@ lists only `src/ui/**`.
 
 ## 4. Hidden coupling between parallel candidates
 
-Setup: ready T943 (Context `src/content/events/**`) and T944 (`src/content/skills/**`)
-both add a spread to `src/content/strings/en.ts`; T945 changes an exported sim type
-that ready T946's UI adapter imports.
+Setup: ready T943 (Context `src/run/shop/**`) and T944 (`src/run/events/**`) both add
+an `Action` variant handled in `src/ui/screens/placeholder.tsx`; T945 changes an
+exported sim type that ready T946's UI adapter imports.
 
 - Must: run T943 and T944 one after another, and T945 and T946 one after another.
 - Must not: treat disjoint Context globs alone as independence.
+
+## 5. Companion files and grown scope (RT003)
+
+Setup: ready T947 (Context `src/run/rewards.ts`) changes reward behaviour, adds an
+`Action` variant and UI text; `docs/architecture/run-state.md` lists `src/run/rewards.ts`
+in `related_code`. Ready T948 has four orchestrator Notes from later reviews.
+
+- Must: give T947's prompt `run-state.md`, its string area file with `areas.gen.ts`, and
+  `src/ui/screens/placeholder.tsx` as allowed paths; send T948 to the planner to re-size
+  or split before starting it.
+- Must not: start T947 with Context paths only, or start T948 as planned.

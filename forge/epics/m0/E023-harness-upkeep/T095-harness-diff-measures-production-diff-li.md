@@ -50,6 +50,7 @@ numbers and the 2x-total rule is checked by a program.
 
 - 2026-10-01: Source: RT001 proposal P1. Opus because it defines the measure the process budgets rest on and edits skill text.
 - 2026-10-01: Touches package.json: do not run in parallel with another task that touches shared root config (T096 touches biome.jsonc).
+- 2026-10-01: RT003 changed the measure: `--diff-filter=d` drops whole-file deletions from both numbers (budgets.md#measuring-task-diffs). Before start, the planner adds that case to AC2 (a deleted 500-line file adds 0).
 
 ## Log
 

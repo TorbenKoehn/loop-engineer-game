@@ -6,8 +6,10 @@ another. Independent means all of:
 - at most one touches shared root config (`package.json` and lockfile, `biome.jsonc`,
   `vite.config.ts`, `tsconfig.json`, `harness.config.json`) (RT001); a task that adds a
   dependency runs alone;
-- at most one edits a hub file that gains a line per area (`src/content/strings/en.ts`,
-  `src/content/index.ts`) (RT002);
+- at most one edits a hub file that gains a line per area or variant
+  (`src/content/index.ts`, `src/ui/screens/placeholder.tsx` per `Action` variant: T042
+  broke T055, RT003); a companion doc both would edit (SKILL.md step 3) goes to one of
+  them only, the other logs it as a doc follow-up (RT002, RT003);
 - neither changes an exported type or signature that the other's Context imports
   (T021 `spawnDefs` broke the parallel T098 adapter, RT002).
 

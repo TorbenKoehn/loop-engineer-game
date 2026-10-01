@@ -28,6 +28,9 @@ Agent tool's `model` parameter only when it differs from the agent's default.
 - WIP below `wip_in_progress` and `wip_review` (see `forge/BOARD.md`).
 - `git status --short` shows nothing but your own forge bookkeeping. Unknown changes:
   find their owner (HANDOFF.md) before starting anything.
+- Notes added after planning (review follow-ups, wiring notes) are scope. More than two
+  such obligations: the planner re-sizes or splits the task first (T059 carried six and
+  overran turns and diff, RT003). A follow-up bigger than a Notes line gets its own task.
 - Set `status: in-progress`, append `- <date>: started attempt N (<model>)` to the Log.
   Attempt N = previous `started attempt` lines + 1. At the `task_attempts` cap, stop and
   follow the ladder's last step instead.
@@ -36,7 +39,14 @@ Agent tool's `model` parameter only when it differs from the agent's default.
 
 Fill the template in `docs/harness/delegation.md#prompt-template`:
 - task path and attempt number; for rework, the latest review file path;
-- allowed paths: the task's Context paths plus their tests and docs, as globs;
+- allowed paths, as globs: the task's Context paths and their tests, plus its companion
+  files (RT003), so follow-ups and scope stops do not pile up:
+  - docs whose `related_code` names a file in those paths
+    (`grep -l "^related_code:.*<dir>" -r docs`) and the doc that describes the behaviour;
+  - new UI or content text: its string area `src/content/strings/en-<area>.ts` and
+    `areas.gen.ts` (via `npm run content:index`);
+  - an AC that names Playwright: `tests/e2e/<name>.spec.ts`;
+  - a new `Action` variant: `src/ui/screens/placeholder.tsx`;
 - for worktrees: "You run in a git worktree: run `npm ci` if node_modules is missing.
   Edit files only inside this worktree."
 

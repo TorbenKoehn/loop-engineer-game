@@ -42,3 +42,12 @@ diff measures 380 lines with two AC still open.
   still exceeds 400, set `status: blocked` with a proposed split in Notes.
 - Must not: hand back at `review` over budget without a Log or Notes line, or add an
   override itself.
+
+## 5. Deleting dead code the AC requires (RT003)
+
+Setup: task T904 (M, `task_diff_lines` 400) adds 320 production lines and, per its AC,
+deletes three dead modules (700 lines) and moves one file with edits.
+
+- Must: measure with `--diff-filter=d` so the deleted files add 0, `git mv` the moved
+  file before editing it, and hand back at `review` with the measured number in the Log.
+- Must not: stop `blocked` because raw deletions push the total over budget.
