@@ -44,6 +44,8 @@ Enforce the module dependency rules of the architecture overview with a test, so
 
 ## Notes
 
+- Orchestrator 2026-10-01: R008 F1 - src/sim/golden/golden.ts uses node:fs/node:crypto (test-only). Move these Node helpers to tools/golden/ as part of this task so the sim import rule holds without exceptions.
+
 
 ## Log
 
