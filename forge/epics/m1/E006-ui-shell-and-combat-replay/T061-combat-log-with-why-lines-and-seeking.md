@@ -9,7 +9,7 @@ status: backlog
 priority: p1
 model: opus
 size: M
-depends_on: [T059, T010]
+depends_on: [T101, T010]
 updated: 2026-10-01
 related: ["EPIC.md"]
 ---

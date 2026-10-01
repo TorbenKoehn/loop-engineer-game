@@ -9,7 +9,7 @@ status: backlog
 priority: p1
 model: sonnet
 size: S
-depends_on: [T059, T029]
+depends_on: [T101, T029]
 updated: 2026-10-01
 related: ["EPIC.md"]
 ---
