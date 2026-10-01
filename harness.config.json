@@ -5,7 +5,9 @@
     "**/dist/**",
     "**/coverage/**",
     "CONCEPT.md",
-    ".claude/worktrees/**"
+    ".claude/worktrees/**",
+    "playwright-report/**",
+    "test-results/**"
   ],
   "codeGlobs": [
     "src/**/*.ts",
