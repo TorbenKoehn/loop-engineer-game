@@ -42,9 +42,11 @@ describe('pipes', () => {
     expect(capped.events.map(brief)).toEqual([
       ['toolFired', 't0', undefined],
       ['damage', 't0', 'e1'],
+      ['tokens', 't0', 'ctx'],
       ['pipe', 't0', 't1'],
       ['toolFired', 't1', undefined],
       ['damage', 't1', 'e1'],
+      ['tokens', 't1', 'ctx'],
     ]);
     expect(slot(capped, 1).progress).toBe(0); // reset, the 1500 ms over full are lost
   });

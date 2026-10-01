@@ -2,6 +2,7 @@
 // All three go through the damage formula (docs/game/systems/combat.md "Damage formula").
 import type { Effect, Value } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
+import { removeTokens } from './context/tokens.ts';
 import { type Amount, computeAmount, dealDamage, type Mod } from './damage.ts';
 import { addPrimes } from './order/primes.ts';
 import { emit, type Sim, type ToolRt, toolRef, valueAt } from './state.ts';
@@ -21,6 +22,7 @@ function applyEffect(sim: Sim, act: Activation, effect: Effect): void {
   const { tool } = act;
   const src = toolRef(tool);
   if (effect.do === 'dmg') hit(sim, act, effect);
+  else if (effect.do === 'removeCtx') removeTokens(sim, src, valueAt(effect.v, tool.version));
   else if (effect.do === 'guard') gainGuard(sim, src, sim.agent, amountOf(act, effect.v));
   else if (effect.do === 'heal') heal(sim, src, sim.agent, amountOf(act, effect.v));
   else if (isStatusEffect(effect)) applyStatusEffect(sim, act, effect);
