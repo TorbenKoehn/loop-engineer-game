@@ -1,5 +1,5 @@
 // The fight itself: the agent card on the left, the enemy line on the right (front first).
-import type { EnemyView } from '../fold.ts';
+import type { EnemyView } from '../../combat/fold.ts';
 import { enemyName, harnessName, intentName } from '../names.ts';
 import type { Player } from '../player.ts';
 import { formatSeconds, windupLeft } from '../timeline.ts';

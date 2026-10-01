@@ -1,5 +1,6 @@
-// Replay state shared with the shell; the player itself arrives with T058.
+// Replay state shared with the shell; the player is src/ui/combat/playback.ts (pass it `speed`).
 import { signal } from '@preact/signals';
+import type { Speed } from '../combat/playback.ts';
 
 /** Persists between fights (screens.md "Controls"); shown in the status bar. */
-export const speed = signal<1 | 2 | 4 | 'skip'>(1);
+export const speed = signal<Speed>(1);

@@ -1,11 +1,11 @@
 // Timer-driven replay of one resolved fight for the sandbox (T098): an injectable clock
-// advances playback time by frame time x speed and the view folds forward. The full
-// replay player (checkpoints, seeking, fx bus) is T059's (docs/architecture/ui.md).
+// advances playback time by frame time x speed and the view folds forward. TODO(T059): the
+// sandbox switches to src/ui/combat/playback.ts (checkpoints, seeking, fx bus).
 import { batch, type Signal, signal } from '@preact/signals';
 import type { Ref } from '../../sim/events.ts';
 import { type CombatInput, type CombatResult, resolveCombat } from '../../sim/index.ts';
+import { advanceTo, type CombatView, initialView } from '../combat/fold.ts';
 import { buildInput, type SandboxSetup } from './adapter.ts';
-import { advanceTo, initialView, type SandboxView } from './fold.ts';
 import { buildLog, type LogLine } from './log-text.ts';
 import { enemyLabels } from './names.ts';
 import { fireTimes } from './timeline.ts';
@@ -39,7 +39,7 @@ export interface Fight {
   readonly log: readonly LogLine[];
   /** `toolFired` times per slot. */
   readonly fires: readonly (readonly number[])[];
-  readonly start: SandboxView;
+  readonly start: CombatView;
   /** Enemy display labels by ref (`Typo #2`). */
   readonly labels: ReadonlyMap<Ref, string>;
 }
@@ -65,7 +65,7 @@ export type Speed = 1 | 2 | 4;
 export interface Player {
   readonly fight: Fight;
   readonly time: Signal<number>;
-  readonly view: Signal<SandboxView>;
+  readonly view: Signal<CombatView>;
   readonly speed: Signal<Speed>;
   readonly playing: Signal<boolean>;
   play(): void;

@@ -1,6 +1,6 @@
 // Small shared pieces of the sandbox view: bars, status chips and damage pops.
 import type { Ref } from '../../../sim/events.ts';
-import type { Pop, StatusChip } from '../fold.ts';
+import type { Pop, StatusChip } from '../../combat/fold.ts';
 import { statusName } from '../names.ts';
 import { formatSeconds } from '../timeline.ts';
 

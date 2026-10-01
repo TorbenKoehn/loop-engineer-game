@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { foldAll } from './fold.ts';
+import { foldAll } from '../combat/fold.ts';
 import { type Clock, createPlayer, runFight } from './player.ts';
 import { chargeAt, formatClock, formatSeconds, windupLeft } from './timeline.ts';
 

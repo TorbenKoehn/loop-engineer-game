@@ -1,6 +1,5 @@
-// Pure view fold for the dev combat sandbox (T098): events up to a time -> what the screen
-// shows. It never calls the sim; every number comes from the event log (docs/architecture/ui.md
-// "View fold"). T059's combat screen replaces it with the real playback store.
+// Pure view fold: events up to a time -> what the combat screen shows. It never calls the sim;
+// every number comes from the event log (docs/architecture/ui.md "View fold").
 import type { CombatEvent, EventKind, Ref } from '../../sim/events.ts';
 
 export interface StatusChip {
@@ -65,7 +64,7 @@ export interface EndView {
   readonly t: number;
 }
 
-export interface SandboxView {
+export interface CombatView {
   /** Index of the next event to apply. */
   readonly cursor: number;
   /** Time of the last applied event. */
@@ -88,7 +87,7 @@ export interface ToolSlot {
 }
 
 /** The view before the first event: tools come from the loadout, everything else from events. */
-export function initialView(tools: readonly ToolSlot[]): SandboxView {
+export function initialView(tools: readonly ToolSlot[]): CombatView {
   return {
     cursor: 0,
     t: 0,
@@ -112,7 +111,7 @@ export function initialView(tools: readonly ToolSlot[]): SandboxView {
 type Patch<U> = (unit: U) => Partial<U>;
 
 /** Applies a patch to the agent, tool or enemy with `ref`; unknown refs leave the view as is. */
-function patchUnit(view: SandboxView, ref: Ref | undefined, patch: Patch<UnitView>): SandboxView {
+function patchUnit(view: CombatView, ref: Ref | undefined, patch: Patch<UnitView>): CombatView {
   if (ref === 'a') return { ...view, agent: { ...view.agent, ...patch(view.agent) } };
   return {
     ...view,
@@ -121,30 +120,30 @@ function patchUnit(view: SandboxView, ref: Ref | undefined, patch: Patch<UnitVie
   };
 }
 
-function patchEnemy(view: SandboxView, ref: Ref | undefined, patch: Patch<EnemyView>) {
+function patchEnemy(view: CombatView, ref: Ref | undefined, patch: Patch<EnemyView>) {
   return { ...view, enemies: view.enemies.map((u) => (u.ref === ref ? { ...u, ...patch(u) } : u)) };
 }
 
-function patchTool(view: SandboxView, ref: Ref | undefined, patch: Patch<ToolView>) {
+function patchTool(view: CombatView, ref: Ref | undefined, patch: Patch<ToolView>) {
   return { ...view, tools: view.tools.map((u) => (u.ref === ref ? { ...u, ...patch(u) } : u)) };
 }
 
 /** Sets Trust (agent) or Severity (enemy) of `ref`. */
-function setHp(view: SandboxView, ref: Ref | undefined, hp: number): SandboxView {
+function setHp(view: CombatView, ref: Ref | undefined, hp: number): CombatView {
   if (ref === 'a') return { ...view, agent: { ...view.agent, trust: hp } };
   return patchEnemy(view, ref, () => ({ sev: hp }));
 }
 
-function addPop(view: SandboxView, pop: Pop): SandboxView {
+function addPop(view: CombatView, pop: Pop): CombatView {
   return { ...view, pops: [...view.pops, pop].slice(-MAX_POPS) };
 }
 
 /** Events that can have kind K (some union members share one shape, e.g. guard and heal). */
 type EventOf<E, K> = E extends { kind: infer EK } ? (K extends EK ? E : never) : never;
 export type Of<K extends EventKind> = EventOf<CombatEvent, K>;
-type Handler<K extends EventKind> = (view: SandboxView, e: Of<K>) => SandboxView;
+type Handler<K extends EventKind> = (view: CombatView, e: Of<K>) => CombatView;
 
-function onDamage(view: SandboxView, e: Of<'damage'>): SandboxView {
+function onDamage(view: CombatView, e: Of<'damage'>): CombatView {
   const absorbed = e.d.guard;
   const t = e.t;
   let next = setHp(view, e.dst, e.d.sev);
@@ -154,7 +153,7 @@ function onDamage(view: SandboxView, e: Of<'damage'>): SandboxView {
   return addPop(next, { ...pop, kind: 'damage' });
 }
 
-function onGain(view: SandboxView, e: Of<'guard'> | Of<'heal'>): SandboxView {
+function onGain(view: CombatView, e: Of<'guard'> | Of<'heal'>): CombatView {
   const next =
     e.kind === 'guard'
       ? patchUnit(view, e.dst, () => ({ guard: e.d.total }))
@@ -163,7 +162,7 @@ function onGain(view: SandboxView, e: Of<'guard'> | Of<'heal'>): SandboxView {
   return addPop(next, { ...pop, kind: e.kind });
 }
 
-function onSpawn(view: SandboxView, e: Of<'spawn'>): SandboxView {
+function onSpawn(view: CombatView, e: Of<'spawn'>): CombatView {
   const sev = e.v ?? 0;
   const ref = e.dst ?? `e${e.seq}`;
   const enemy: EnemyView = { ref, def: e.d.def, sev, maxSev: sev, guard: 0, statuses: [] };
@@ -203,8 +202,8 @@ const handlers: { [K in EventKind]?: Handler<K> } = {
   fightEnd: (view, e) => ({ ...view, end: { ...e.d, t: e.t } }),
 };
 
-/** Applies one event. Kinds the sandbox does not show only move the cursor. */
-export function foldEvent(view: SandboxView, e: CombatEvent): SandboxView {
+/** Applies one event. Kinds the view does not show only move the cursor. */
+export function foldEvent(view: CombatView, e: CombatEvent): CombatView {
   const handler = handlers[e.kind] as Handler<EventKind> | undefined;
   const next = handler ? handler(view, e) : view;
   return { ...next, cursor: view.cursor + 1, t: e.t };
@@ -212,10 +211,10 @@ export function foldEvent(view: SandboxView, e: CombatEvent): SandboxView {
 
 /** Folds forward from `view.cursor` through every event with `t <= time`. */
 export function advanceTo(
-  view: SandboxView,
+  view: CombatView,
   events: readonly CombatEvent[],
   time: number,
-): SandboxView {
+): CombatView {
   let next = view;
   for (let e = events[next.cursor]; e && e.t <= time; e = events[next.cursor]) {
     next = foldEvent(next, e);
@@ -224,6 +223,6 @@ export function advanceTo(
 }
 
 /** Folds the whole log: the state the screen shows after the fight. */
-export function foldAll(start: SandboxView, events: readonly CombatEvent[]): SandboxView {
+export function foldAll(start: CombatView, events: readonly CombatEvent[]): CombatView {
   return advanceTo(start, events, Number.POSITIVE_INFINITY);
 }

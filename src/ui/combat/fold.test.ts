@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { resolveCombat } from '../../sim/index.ts';
-import { buildInput, sandboxEncounters, sandboxHarnesses } from './adapter.ts';
+import { buildInput, sandboxEncounters, sandboxHarnesses } from '../sandbox/adapter.ts';
 import { advanceTo, foldAll, foldEvent, initialView, MAX_POPS } from './fold.ts';
 
 const SEED = { harness: 'terminal_purist', encounter: 'p1e1', seed: 'fold-test' };

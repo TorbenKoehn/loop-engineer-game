@@ -4,8 +4,8 @@
 import { describeEnemy, describeTool, type Version } from '../../content/text.ts';
 import type { CombatEvent, EventKind, Ref } from '../../sim/events.ts';
 import type { ToolSetup } from '../../sim/index.ts';
+import { type CombatView, foldEvent, initialView, type Of } from '../combat/fold.ts';
 import { enemyById } from './adapter.ts';
-import { foldEvent, initialView, type Of, type SandboxView } from './fold.ts';
 import { enemyLabels, enemyName, intentName, statusName, toolName } from './names.ts';
 import { formatSeconds } from './timeline.ts';
 
@@ -23,7 +23,7 @@ export interface LogLine {
 type Line = Omit<LogLine, 'seq' | 't'>;
 interface Ctx {
   /** View before the event. */
-  readonly view: SandboxView;
+  readonly view: CombatView;
   readonly tools: readonly ToolSetup[];
   readonly labels: ReadonlyMap<Ref, string>;
 }

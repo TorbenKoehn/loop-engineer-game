@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E006"
-summary: "Index of forge/reviews/E006: 4 files, 0 subdirectories"
-keywords: ["review", "combat", "page", "sandbox", "crimson", "i18n", "layout", "shell"]
+summary: "Index of forge/reviews/E006: 5 files, 0 subdirectories"
+keywords: ["review", "combat", "page", "sandbox", "crimson", "fold", "i18n", "layout"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R031-T098.md](R031-T098.md) | Review of T098: Dev combat sandbox page | Review of T098 (approved) | review, combat, sandbox, page |
 | [R039-T055.md](R039-T055.md) | Review of T055: UI store, shell layout and i18n walking ske… | Review of T055 (approved) | review, store, shell, layout, i18n, walking |
 | [R042-T056.md](R042-T056.md) | Review of T056: Crimson theme tokens and typography | Review of T056 (approved) | review, crimson, theme, tokens, typography |
+| [R045-T058.md](R045-T058.md) | Review of T058: Combat replay player and view fold | Review of T058 (approved) | review, combat, replay, player, view, fold |

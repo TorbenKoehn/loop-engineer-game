@@ -1,6 +1,6 @@
 // The tool row: one card per slot with its charge bar, read from the event log's fire times.
 import { Fragment } from 'preact';
-import type { ToolView } from '../fold.ts';
+import type { ToolView } from '../../combat/fold.ts';
 import { toolFlavour, toolName } from '../names.ts';
 import type { Player } from '../player.ts';
 import { chargeAt } from '../timeline.ts';

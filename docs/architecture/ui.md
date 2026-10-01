@@ -5,7 +5,7 @@ keywords: [ui, preact, signals, replay-player, screens, fx, test-hooks]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/ui/i18n.ts, src/ui/store/**]
+related_code: [src/ui/i18n.ts, src/ui/store/**, src/ui/combat/**]
 related: [overview.md, run-state.md, event-log.md, ../game/ux/screens.md, ../game/ux/juice-audio.md, adr/adr-003-dom-ui.md]
 ---
 
@@ -61,26 +61,36 @@ Screens are lazy-loaded except Title, Shell and Combat.
 ## Combat replay player
 
 ```ts
+// src/ui/combat/playback.ts: createPlayback({ events, start, clock, speed? })
 export interface Playback {
   events: readonly CombatEvent[];
-  cursor: Signal<number>;      // index of next event to apply
-  simT: Signal<number>;        // current playback time in ms
-  speed: Signal<1 | 2 | 4 | 'skip'>;
+  cursor: ReadonlySignal<number>;    // index of next event to apply
+  simT: ReadonlySignal<number>;      // current playback time in ms
+  speed: Signal<1 | 2 | 4 | 'skip'>; // pass the store's `speed` so it persists
   paused: Signal<boolean>;
-  view: Signal<CombatView>;    // derived by folding events[0..cursor)
+  view: ReadonlySignal<CombatView>;  // fold of events[0..cursor)
+  ended: ReadonlySignal<boolean>;
+  seek(index: number): void;         // restores a checkpoint, folds forward, pauses
+  finish(): void;                    // folds to the end silently
+  hold(ms?: number): void;           // hit-stop, default 60 ms
+  subscribe(fn: (e: CombatEvent) => void): () => void; // fx and audio bus
+  dispose(): void;
 }
 ```
 
-- **Clock**: injectable `Clock` interface (`now()`, `onFrame(cb)`); production uses
-  `requestAnimationFrame`, tests use a manual clock. Each frame advances
-  `simT += frameMs × speed` and applies all events with `t ≤ simT`.
-- **View fold**: `foldEvent(view, event) -> view` is a pure function that builds what
-  the screen shows (bars, numbers, chips, intents). It never calls the sim.
-- **Seeking**: checkpoints of `view` every 100 events; seeking to an index restores the
-  nearest checkpoint and folds forward. Clicking a log line seeks and pauses.
-- **Skip**: folds to the end without emitting fx or audio.
-- **Hit-stop**: the fx layer may request a playback hold (60 ms) on big hits; it is
-  disabled in reduced motion and at `skip`.
+- **Clock**: injectable `Clock` interface (`now()`, `onFrame(cb)`, `cb` gets the current
+  time); production uses `rafClock`, tests the manual clock in `src/ui/combat/testing/`.
+  Each frame advances `simT += frameMs × speed` (frameMs capped at 100 ms, so a
+  background tab does not jump) and applies all events with `t ≤ simT`.
+- **View fold**: `foldEvent(view, event) -> view` (`src/ui/combat/fold.ts`) is a pure
+  function that builds what the screen shows (bars, numbers, chips, intents). It never
+  calls the sim.
+- **Seeking**: checkpoints of `view` every 100 events (`checkpoints.ts`); seeking to an
+  index restores the nearest checkpoint and folds forward. Clicking a log line seeks and
+  pauses.
+- **Skip**: folds to the end without emitting fx or audio; seeking emits nothing either.
+- **Hit-stop**: the fx layer may request a playback hold (60 ms of real time) on big
+  hits; it is disabled in reduced motion (fx side) and ignored at `skip`.
 - The log text, tooltips' "why" lines and the run-end summary are rendered from the same
   events via `t()` templates.
 
