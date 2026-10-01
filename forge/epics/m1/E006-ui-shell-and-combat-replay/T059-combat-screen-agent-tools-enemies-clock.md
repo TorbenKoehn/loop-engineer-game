@@ -5,7 +5,7 @@ title: "Combat screen: agent, tools, enemies, clock"
 summary: "Combat screen with agent card, tool row with cooldown bars and next values, enemy line with intent chips and countdowns, Deadline clock, speed controls and the result strip."
 keywords: ["combat-view", "ui", "tools", "enemies", "intents", "clock"]
 type: task
-status: in-progress
+status: cancelled
 priority: p1
 model: opus
 size: M
@@ -47,6 +47,8 @@ A fight is readable at a glance: who fires next, what each enemy will do and whe
 
 ## Notes
 
+- Superseded by T100 + T101 (split approved by orchestrator 2026-10-01). Extra paths approved for T100/T101: src/content/strings/en-combat.ts + areas.gen.ts, src/main.tsx, index.html.
+
 - Orchestrator 2026-10-01 (R045): (4) switch the sandbox to `createPlayback` from src/ui/combat/playback.ts and delete src/ui/sandbox/player.ts (TODO(T059)); (5) first fix `rafClock` so stop() inside a frame callback stops the loop, with a test (R045 F1); (6) reference-fight tests in src/ui/combat must build input via `combatInput` once the sandbox adapter is deleted.
 
 - Orchestrator 2026-10-01: when replacing the sandbox, (1) use `combatInput` from src/run/combat.ts (T042) and delete src/ui/sandbox/adapter.ts, (2) remove the `src/ui/sandbox/**` exemption from the JSX-text lint test (R039 F2), (3) keep the `?sandbox` dev route only in dev builds.
@@ -57,3 +59,4 @@ A fight is readable at a glance: who fires next, what each enemy will do and whe
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (opus)
+- 2026-10-01: cancelled - superseded by T100 (first half, continues the in-flight worktree) and T101 (second half); diff > budget and extra paths (orchestrator decision)

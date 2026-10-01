@@ -20,7 +20,7 @@ generated: true
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 3/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 5/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
-| [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 4/9 |
+| [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 4/11 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 0/8 |
@@ -39,7 +39,7 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
-## Backlog (51)
+## Backlog (52)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -68,6 +68,7 @@ generated: true
 | [T077](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T077-m1-balance-tuning-to-exit-targets.md) | M1 balance tuning to exit targets | E010 | p1 | opus | M |
 | [T078](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/T078-playwright-full-run-smoke-and-save-round.md) | Playwright full-run smoke and save round trip | E010 | p1 | opus | M |
 | [T084](epics/m1/E011-juice-audio-settings-and-tutorial/T084-tutorial-first-run-and-scripted-fight-pa.md) | Tutorial first run and scripted fight pauses | E011 | p1 | opus | M |
+| [T101](epics/m1/E006-ui-shell-and-combat-replay/T101-combat-screen-route-dev-only-sandbox-and.md) | Combat screen route, dev-only sandbox and e2e | E006 | p1 | opus | M |
 | [T030](epics/m1/E003-context-window-mechanic/T030-context-scaled-effects-and-window-modifi.md) | Context-scaled effects and window modifiers | E003 | p2 | opus | S |
 | [T031](epics/m1/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
@@ -110,7 +111,7 @@ generated: true
 |---|---|---|---|---|---|
 | [T028](epics/m1/E003-context-window-mechanic/T028-auto-compaction-on-overflow.md) | Auto-compaction on overflow | E003 | p1 | opus | M |
 | [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
-| [T059](epics/m1/E006-ui-shell-and-combat-replay/T059-combat-screen-agent-tools-enemies-clock.md) | Combat screen: agent, tools, enemies, clock | E006 | p1 | opus | M |
+| [T100](epics/m1/E006-ui-shell-and-combat-replay/T100-combat-view-components-on-createplayback.md) | Combat view components on createPlayback | E006 | p1 | opus | M |
 
 ## Review (0/3)
 
@@ -147,4 +148,4 @@ _Showing the last 20 of 41 done tasks._
 | [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T022](epics/m1/E002-combat-simulation-core/T022-pipes-and-one-shot-primes.md) | Pipes and one-shot primes | E002 | p1 | opus | M |
 
-## Cancelled (0)
+## Cancelled (1)

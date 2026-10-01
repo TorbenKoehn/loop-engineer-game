@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/epics/m1/E006-ui-shell-and-combat-replay"
-summary: "Index of forge/epics/m1/E006-ui-shell-and-combat-replay: 10 files, 0 subdirectories"
-keywords: ["ui", "clock", "combat-view", "replay", "seeking", "signals", "tooltips", "zones"]
+summary: "Index of forge/epics/m1/E006-ui-shell-and-combat-replay: 12 files, 0 subdirectories"
+keywords: ["ui", "combat", "task", "clock", "combat-view", "replay", "sandbox", "seeking"]
 type: index
 status: active
 updated: 2026-10-01
@@ -25,3 +25,5 @@ generated: true
 | [T061-combat-log-with-why-lines-and-seeking.md](T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | Terminal-panel combat log: one t()-rendered line per event in the fixed format with why modifiers, filters, virtualisation to 200 rows, and click-to-seek with highlights. | combat-log, ui, why, seeking, virtualisation |
 | [T062-tooltips-with-plain-english-lines-and-fo.md](T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | Tooltips for items, enemies, statuses, traits and zones with name, generated line, stats and the damage formula with current numbers, on hover and keyboard focus. | tooltips, ui, formula, plain-english, accessibility |
 | [T098-dev-combat-sandbox-page.md](T098-dev-combat-sandbox-page.md) | Dev combat sandbox page | A first visible build: the browser start page runs a real Phase-1 fight with M1 content and replays it with bars, tool charge and a log in the Crimson palette. | task, combat, sandbox, page |
+| [T100-combat-view-components-on-createplayback.md](T100-combat-view-components-on-createplayback.md) | Combat view components on createPlayback | First half of the split T059: combat view components move to src/ui/combat on createPlayback; rafClock fix; test fights built via combatInput; clock tone. | task, combat, view, components, createplayback |
+| [T101-combat-screen-route-dev-only-sandbox-and.md](T101-combat-screen-route-dev-only-sandbox-and.md) | Combat screen route, dev-only sandbox and e2e | Second half of the split T059: the combat screen route in the real app, dev-only sandbox, result strip with Continue, and e2e through a real run fight. | task, combat, screen, route, only, sandbox |
