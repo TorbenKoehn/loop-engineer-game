@@ -1,6 +1,6 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 9 files, 0 subdirectories"
+summary: "Index of forge/reviews: 10 files, 0 subdirectories"
 keywords: ["review", "integer", "biome", "forkable", "seeded", "vitest", "area", "budgets"]
 type: index
 status: active
@@ -24,3 +24,4 @@ generated: true
 | [R007-T008.md](R007-T008.md) | Review of T008: Per-area coverage gates in Vitest | Review of T008 (approved) | review, area, coverage, gates, vitest |
 | [R008-T004.md](R008-T004.md) | T004 review: event log types and golden harness | Round 1 approved: CombatEvent union, canonical JSONL and golden harness meet all AC; minor doc drift (src/sim/golden, node imports, update command) needs a follow-up. | review, event-log, golden, test, harness, serialisation |
 | [R009-T009.md](R009-T009.md) | Review of T009: Content types and effect DSL builders | Review of T009 (approved) | review, content, types, effect, builders |
+| [R010-T093.md](R010-T093.md) | Review of T093: Harden the src/sim determinism ban | Review of T093 (approved) | review, harden, determinism |

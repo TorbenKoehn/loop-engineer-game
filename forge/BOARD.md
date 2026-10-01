@@ -37,7 +37,7 @@ generated: true
 | [E020](epics/E020-m3-onboarding-and-accessibility-complete/EPIC.md) | M3 Onboarding and accessibility complete | backlog | p3 | 0/0 |
 | [E021](epics/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
-| [E023](epics/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 0/8 |
+| [E023](epics/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 1/8 |
 
 ## Backlog (76)
 
@@ -120,7 +120,7 @@ generated: true
 | [T090](epics/E023-harness-upkeep/T090-split-tsconfig-into-app-and-tools-projec.md) | Split tsconfig into app and tools projects | E023 | p2 | opus | M |
 | [T092](epics/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 
-## Ready (6)
+## Ready (5)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -129,7 +129,6 @@ generated: true
 | [T088](epics/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
-| [T093](epics/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 
 ## In Progress (3/3)
 
@@ -147,10 +146,11 @@ _none_
 
 _none_
 
-## Done (8)
+## Done (9)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T093](epics/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 | [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
 | [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |

@@ -1,11 +1,18 @@
-// Bans nondeterministic APIs in src/sim (loaded for src/sim only via biome.json).
+// Bans nondeterministic APIs in src/sim (loaded for src/sim only via biome.jsonc).
+// globalThis, self, crypto, performance and timers are denied as globals in biome.jsonc.
 language js
 
 or {
-  `Math.random($_)` as $call,
-  `Date.now($_)` as $call,
-  `new Date($_)` as $call,
-  `performance.now($_)` as $call
-} where {
+  `Math.random($_)`,
+  `Math[$_]`,
+  `Date.now($_)`,
+  `new Date($_)`,
+  `performance.now($_)`,
+  `$_ = Math`,
+  `const $_ = Math`,
+  `let $_ = Math`,
+  `{ $_ } = Math`,
+  `const { $_ } = Math`
+} as $call where {
   register_diagnostic(span=$call, message="Nondeterministic API in src/sim: use the seeded RNG and tick counter.", severity="error")
 }

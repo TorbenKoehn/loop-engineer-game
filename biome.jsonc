@@ -48,7 +48,7 @@
       "suspicious": {
         // Budget explicit_any (0).
         "noExplicitAny": "error",
-        // Budget ts_ignore (0): bans @ts-ignore (and blanket @ts-nocheck-style comments).
+        // Budget ts_ignore (0): bans @ts-ignore only; @ts-nocheck is not covered (see the list below).
         "noTsIgnore": "error",
         // Budget circular_deps (0).
         "noImportCycles": "error"
@@ -74,7 +74,11 @@
                   "setTimeout": "No timers in src/sim",
                   "setInterval": "No timers in src/sim",
                   "requestAnimationFrame": "No timers in src/sim",
-                  "Date": "Nondeterministic: use the tick counter"
+                  "Date": "Nondeterministic: use the tick counter",
+                  "globalThis": "Ambient global: reaches Math.random and timers",
+                  "self": "Ambient global: reaches Math.random and timers",
+                  "crypto": "Nondeterministic: use the seeded RNG",
+                  "performance": "Nondeterministic: use the tick counter"
                 }
               }
             }
@@ -87,6 +91,7 @@
   //  - nesting_depth (3): no block-nesting rule; cognitive complexity penalises nesting.
   //  - exports_per_module (10), imports_per_module (15): no rule counts them.
   //  - duplication_pct (3): Biome has no duplication detector.
+  //  - ts_ignore (0) for @ts-nocheck: noTsIgnore does not flag it.
   //  - ts_expect_error (5), eslint_disable (5): Biome cannot cap the number of suppression
   //    comments; noTsIgnore does not cover @ts-expect-error.
   // Gaps are tracked in the T002 task notes; a harness check may take them over later.
