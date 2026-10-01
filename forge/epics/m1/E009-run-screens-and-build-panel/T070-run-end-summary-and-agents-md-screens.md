@@ -5,7 +5,7 @@ title: Run end summary and AGENTS.md screens
 summary: "Run-end screen (^C or Merged to main!) with cause, top-3 damage sources, time per zone, compactions and one rule-picked hint, then the AGENTS.md lesson screen."
 keywords: ["ui", "run-end", "summary", "hints", "agents-md", "lessons"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: opus
 size: M
@@ -49,3 +49,4 @@ A finished run explains why it ended and turns that into one lesson, closing the
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

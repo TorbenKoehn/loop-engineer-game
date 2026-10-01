@@ -5,7 +5,7 @@ title: Build actions and loadout selectors
 summary: "moveTool, equip, unequip, swap and setPolicy with the 80% baseline limit, plus selectors for baseline, starting zone and breakpoints shared by sim and UI."
 keywords: ["build", "loadout", "equip", "selectors", "baseline", "policy"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -51,3 +51,4 @@ Players reshape their loadout between fights and the UI shows exactly the number
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
