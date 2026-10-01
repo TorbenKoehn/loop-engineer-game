@@ -1,0 +1,356 @@
+{
+  "exclude": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "CONCEPT.md"
+  ],
+  "codeGlobs": [
+    "src/**/*.ts",
+    "tools/**/*.ts"
+  ],
+  "boardPath": "forge/BOARD.md",
+  "index": {
+    "skipDirs": [".claude/agents", ".claude/skills/*"],
+    "claudeMdSummary": {
+      "root": "Harness entrypoint",
+      "other": "Directory-scoped agent guidance"
+    },
+    "fallbackDate": "1970-01-01"
+  },
+  "frontmatter": {
+    "base": {
+      "title": {
+        "kind": "string",
+        "required": true
+      },
+      "summary": {
+        "kind": "string",
+        "required": true
+      },
+      "keywords": {
+        "kind": "array",
+        "required": true
+      },
+      "type": {
+        "kind": "enum",
+        "required": true
+      },
+      "status": {
+        "kind": "enum",
+        "required": true
+      },
+      "updated": {
+        "kind": "date",
+        "required": true
+      },
+      "related": {
+        "kind": "array"
+      },
+      "budget_override": {
+        "kind": "object"
+      },
+      "generated": {
+        "kind": "boolean"
+      },
+      "related_code": {
+        "kind": "array"
+      }
+    },
+    "statusSets": {
+      "docs": [
+        "draft",
+        "active",
+        "deprecated"
+      ],
+      "workflow": [
+        "backlog",
+        "ready",
+        "in-progress",
+        "review",
+        "done",
+        "blocked", "cancelled"
+      ]
+    },
+    "types": {
+      "doc": {
+        "statuses": "docs"
+      },
+      "research": {
+        "statuses": "docs"
+      },
+      "adr": {
+        "statuses": "docs"
+      },
+      "gdd": {
+        "statuses": "docs"
+      },
+      "guide": {
+        "statuses": "docs"
+      },
+      "index": {
+        "statuses": "docs"
+      },
+      "epic": {
+        "statuses": "workflow",
+        "fields": {
+          "id": {
+            "kind": "string",
+            "required": true,
+            "pattern": "^E\\d{3}$"
+          },
+          "priority": {
+            "kind": "enum",
+            "required": true,
+            "values": [
+              "p0",
+              "p1",
+              "p2",
+              "p3"
+            ]
+          }
+        }
+      },
+      "task": {
+        "statuses": "workflow",
+        "fields": {
+          "id": {
+            "kind": "string",
+            "required": true,
+            "pattern": "^T\\d{3}$"
+          },
+          "epic": {
+            "kind": "string",
+            "required": true,
+            "pattern": "^E\\d{3}$"
+          },
+          "priority": {
+            "kind": "enum",
+            "required": true,
+            "values": [
+              "p0",
+              "p1",
+              "p2",
+              "p3"
+            ]
+          },
+          "model": {
+            "kind": "enum",
+            "required": true,
+            "values": [
+              "opus",
+              "sonnet"
+            ]
+          },
+          "size": {
+            "kind": "enum",
+            "required": true,
+            "values": [
+              "S",
+              "M"
+            ]
+          },
+          "depends_on": {
+            "kind": "array"
+          },
+          "assignee": {
+            "kind": "string"
+          }
+        }
+      },
+      "review": {
+        "statuses": "docs",
+        "fields": {
+          "id": {
+            "kind": "string",
+            "required": true,
+            "pattern": "^R\\d{3}$"
+          },
+          "task": {
+            "kind": "string",
+            "required": true,
+            "pattern": "^T\\d{3}$"
+          },
+          "verdict": {
+            "kind": "enum",
+            "required": true,
+            "values": [
+              "approved",
+              "changes-requested"
+            ]
+          }
+        }
+      },
+      "retro": {
+        "statuses": "docs",
+        "fields": {
+          "id": {
+            "kind": "string",
+            "required": true,
+            "pattern": "^RT\\d{3}$"
+          }
+        }
+      }
+    },
+    "special": [
+      { "kind": "index", "glob": "**/INDEX.md" },
+      {
+        "kind": "skill",
+        "glob": ".claude/skills/*/SKILL.md",
+        "required": [
+          "name",
+          "description"
+        ],
+        "titleField": "name",
+        "summaryField": "description"
+      },
+      {
+        "kind": "agent",
+        "glob": ".claude/agents/*.md",
+        "required": [
+          "name",
+          "description"
+        ],
+        "titleField": "name",
+        "summaryField": "description"
+      },
+      {
+        "kind": "claude",
+        "glob": "**/CLAUDE.md"
+      },
+      {
+        "kind": "exempt",
+        "glob": ".claude/skills/**"
+      }
+    ]
+  },
+  "budgets": {
+    "md_lines": { "value": 300, "warn_at": 200, "severity": "error", "unit": "lines", "description": "Max lines in a Markdown doc (generated files exempt)", "area": "docs", "enforced_by": "harness" },
+    "md_tokens": { "value": 6000, "warn_at": 4500, "severity": "error", "unit": "tokens (chars/3)", "description": "Max estimated tokens (chars/3) in a Markdown doc", "area": "docs", "enforced_by": "harness" },
+    "md_toc_over_lines": { "value": 100, "severity": "warn", "unit": "lines", "description": "Docs longer than this need a \"## Contents\" section", "area": "docs", "enforced_by": "harness" },
+    "md_heading_depth": { "value": 3, "severity": "warn", "unit": "heading level", "description": "Deepest allowed heading level in a doc body", "area": "docs", "enforced_by": "harness" },
+    "md_code_block_lines": { "value": 40, "severity": "warn", "unit": "lines", "description": "Max lines in one fenced code block (json blocks exempt)", "area": "docs", "enforced_by": "harness" },
+    "broken_links": { "value": 0, "fixed": true, "severity": "error", "unit": "links", "description": "Broken relative Markdown links or related paths", "area": "docs", "enforced_by": "harness" },
+    "fm_title_chars": { "value": 60, "severity": "error", "unit": "chars", "description": "Max length of frontmatter title", "area": "docs", "enforced_by": "harness" },
+    "fm_summary_chars": { "value": 200, "severity": "error", "unit": "chars", "description": "Max length of frontmatter summary", "area": "docs", "enforced_by": "harness" },
+    "fm_keywords_min": { "value": 3, "cmp": "min", "severity": "error", "unit": "items", "description": "Min keywords per doc", "area": "docs", "enforced_by": "harness" },
+    "fm_keywords_max": { "value": 8, "severity": "error", "unit": "items", "description": "Max keywords per doc", "area": "docs", "enforced_by": "harness" },
+    "fm_related_max": { "value": 8, "severity": "warn", "unit": "items", "description": "Max entries in frontmatter related", "area": "docs", "enforced_by": "harness" },
+    "dir_files": { "value": 15, "warn_at": 10, "severity": "error", "unit": "files", "description": "Max files per directory (INDEX.md excluded)", "area": "docs", "enforced_by": "harness" },
+    "dir_subdirs": { "value": 10, "severity": "warn", "unit": "dirs", "description": "Max subdirectories per directory", "area": "docs", "enforced_by": "harness" },
+    "dir_depth": { "value": 4, "severity": "error", "unit": "levels", "description": "Max directory nesting depth from the repo root", "area": "docs", "enforced_by": "harness" },
+    "index_tokens": { "value": 2500, "severity": "warn", "unit": "tokens", "description": "Max estimated tokens in a generated INDEX.md", "area": "docs", "enforced_by": "harness" },
+    "claude_md_lines": { "value": 120, "warn_at": 100, "severity": "error", "unit": "lines", "description": "Max lines in a CLAUDE.md", "area": "docs", "enforced_by": "harness" },
+    "claude_md_tokens": { "value": 2500, "severity": "error", "unit": "tokens", "description": "Max estimated tokens in a CLAUDE.md", "area": "docs", "enforced_by": "harness" },
+    "always_loaded_tokens": { "value": 6000, "severity": "error", "unit": "tokens", "description": "Tokens loaded every session: all CLAUDE.md plus skill and agent descriptions", "area": "docs", "enforced_by": "harness" },
+    "rule_file_lines": { "value": 60, "severity": "warn", "unit": "lines", "description": "Max lines in a .claude/rules file", "area": "docs", "enforced_by": "harness" },
+    "auto_memory_lines": { "value": 150, "severity": "warn", "unit": "lines", "description": "Max lines in the auto-memory MEMORY.md (lives outside the repo)", "area": "docs", "enforced_by": "process" },
+    "skill_md_lines": { "value": 300, "warn_at": 200, "severity": "error", "unit": "lines", "description": "Max lines in a SKILL.md", "area": "docs", "enforced_by": "harness" },
+    "skill_md_tokens": { "value": 5000, "severity": "error", "unit": "tokens", "description": "Max estimated tokens in a SKILL.md", "area": "docs", "enforced_by": "harness" },
+    "skill_name_chars": { "value": 64, "fixed": true, "severity": "error", "unit": "chars", "description": "Max length of a skill name (platform limit)", "area": "docs", "enforced_by": "harness" },
+    "skill_description_chars": { "value": 1024, "warn_at": 300, "fixed": true, "severity": "error", "unit": "chars", "description": "Max length of a skill description (platform limit)", "area": "docs", "enforced_by": "harness" },
+    "skill_count": { "value": 20, "severity": "warn", "unit": "skills", "description": "Max number of skills", "area": "docs", "enforced_by": "harness" },
+    "skill_ref_depth": { "value": 1, "severity": "error", "unit": "levels", "description": "Max link depth from skill reference files", "area": "docs", "enforced_by": "process" },
+    "agent_def_count": { "value": 8, "severity": "warn", "unit": "agents", "description": "Max number of agent definitions", "area": "docs", "enforced_by": "harness" },
+    "agent_descriptions_tokens": { "value": 3000, "severity": "warn", "unit": "tokens", "description": "Max estimated tokens in all agent descriptions combined", "area": "docs", "enforced_by": "harness" },
+    "adr_lines": { "value": 100, "severity": "warn", "unit": "lines", "description": "Max lines in an ADR", "area": "docs", "enforced_by": "harness" },
+    "adr_active": { "value": 15, "severity": "warn", "unit": "ADRs", "description": "Max ADRs with status active", "area": "docs", "enforced_by": "harness" },
+    "doc_stale_days": { "value": 90, "severity": "warn", "unit": "days since updated", "description": "Active docs not updated for this many days are stale", "area": "docs", "enforced_by": "harness" },
+    "harness_review_days": { "value": 14, "severity": "process", "unit": "days", "description": "Review CLAUDE.md, skills and agents at least this often", "area": "docs", "enforced_by": "process" },
+    "ts_file_lines": { "value": 300, "warn_at": 200, "severity": "error", "unit": "lines (no blank/comment)", "description": "Max code lines (no blank/comment) per non-test TS file", "area": "code", "enforced_by": "harness" },
+    "test_file_lines": { "value": 500, "severity": "warn", "unit": "lines", "description": "Max lines per test file", "area": "code", "enforced_by": "harness" },
+    "fn_lines": { "value": 50, "warn_at": 30, "severity": "error", "unit": "lines", "description": "Max lines per function (brace heuristic)", "area": "code", "enforced_by": "harness" },
+    "fn_params": { "value": 4, "severity": "error", "unit": "params", "description": "Max parameters per function", "area": "code", "enforced_by": "biome" },
+    "complexity": { "value": 10, "severity": "error", "unit": "cyclomatic", "description": "Max cyclomatic complexity per function", "area": "code", "enforced_by": "biome" },
+    "nesting_depth": { "value": 3, "severity": "error", "unit": "blocks", "description": "Max block nesting depth", "area": "code", "enforced_by": "biome" },
+    "nested_callbacks": { "value": 3, "severity": "error", "unit": "callbacks", "description": "Max nested callbacks", "area": "code", "enforced_by": "biome" },
+    "line_chars": { "value": 100, "severity": "error", "unit": "chars", "description": "Max characters per code line", "area": "code", "enforced_by": "biome" },
+    "exports_per_module": { "value": 10, "severity": "warn", "unit": "exports", "description": "Max exports per module", "area": "code", "enforced_by": "biome" },
+    "imports_per_module": { "value": 15, "severity": "warn", "unit": "imports", "description": "Max imports per module", "area": "code", "enforced_by": "biome" },
+    "circular_deps": { "value": 0, "fixed": true, "severity": "error", "unit": "cycles", "description": "Circular dependencies between modules", "area": "code", "enforced_by": "biome" },
+    "duplication_pct": { "value": 3, "severity": "warn", "unit": "% duplicated lines", "description": "Max percentage of duplicated lines", "area": "code", "enforced_by": "biome" },
+    "comment_line_chars": { "value": 100, "severity": "error", "unit": "chars", "description": "Max length of a comment line", "area": "code", "enforced_by": "harness" },
+    "comment_block_lines": { "value": 10, "warn_at": 5, "severity": "error", "unit": "lines", "description": "Max consecutive comment lines", "area": "code", "enforced_by": "harness" },
+    "comment_ratio": { "value": 0.25, "severity": "warn", "unit": "comment/code lines", "description": "Max comment/code line ratio per file", "area": "code", "enforced_by": "harness" },
+    "todo_untracked": { "value": 0, "severity": "error", "unit": "markers", "description": "TODO/FIXME/HACK/XXX markers without a T### or B### id", "area": "code", "enforced_by": "harness" },
+    "todo_total": { "value": 15, "severity": "warn", "unit": "markers", "description": "Max TODO/FIXME/HACK/XXX markers repo-wide", "area": "code", "enforced_by": "harness" },
+    "explicit_any": { "value": 0, "severity": "error", "unit": "occurrences", "description": "Explicit any occurrences", "area": "code", "enforced_by": "biome" },
+    "ts_ignore": { "value": 0, "severity": "error", "unit": "occurrences", "description": "@ts-ignore / @ts-nocheck occurrences", "area": "code", "enforced_by": "biome" },
+    "ts_expect_error": { "value": 5, "severity": "warn", "unit": "occurrences", "description": "Max @ts-expect-error occurrences", "area": "code", "enforced_by": "biome" },
+    "eslint_disable": { "value": 5, "severity": "warn", "unit": "occurrences", "description": "Max lint-disable comments", "area": "code", "enforced_by": "biome" },
+    "deps_runtime": { "value": 5, "severity": "error", "unit": "packages", "description": "Max runtime dependencies in package.json", "area": "code", "enforced_by": "harness" },
+    "deps_dev": { "value": 25, "severity": "warn", "unit": "packages", "description": "Max devDependencies in package.json", "area": "code", "enforced_by": "harness" },
+    "dep_release_age_days": { "value": 7, "cmp": "min", "severity": "process", "unit": "days", "description": "Min age of a new dependency version before adoption", "area": "code", "enforced_by": "process" },
+    "bundle_initial_js_kb": { "value": 200, "warn_at": 150, "severity": "error", "unit": "KB gzip", "description": "Max first-screen JS size (gzip)", "area": "perf", "enforced_by": "vitest" },
+    "unit_test_ms": { "value": 200, "severity": "warn", "unit": "ms", "description": "Max duration of one unit test", "area": "perf", "enforced_by": "vitest" },
+    "unit_suite_s": { "value": 30, "severity": "error", "unit": "s", "description": "Max duration of the unit suite", "area": "perf", "enforced_by": "vitest" },
+    "check_all_s": { "value": 120, "severity": "error", "unit": "s", "description": "Max duration of lint+typecheck+unit+build", "area": "perf", "enforced_by": "vitest" },
+    "e2e_suite_s": { "value": 300, "severity": "warn", "unit": "s", "description": "Max duration of the end-to-end suite", "area": "perf", "enforced_by": "vitest" },
+    "flaky_tests": { "value": 0, "severity": "process", "unit": "tests", "description": "Tolerated flaky tests", "area": "perf", "enforced_by": "process" },
+    "coverage_sim_lines": { "value": 90, "cmp": "min", "severity": "error", "unit": "% lines", "description": "Min line coverage of the sim core", "area": "perf", "enforced_by": "vitest" },
+    "coverage_sim_branches": { "value": 85, "cmp": "min", "severity": "error", "unit": "% branches", "description": "Min branch coverage of the sim core", "area": "perf", "enforced_by": "vitest" },
+    "coverage_total_lines": { "value": 70, "cmp": "min", "severity": "warn", "unit": "% lines", "description": "Min total line coverage", "area": "perf", "enforced_by": "vitest" },
+    "frame_ms_p95": { "value": 16.7, "severity": "error", "unit": "ms", "description": "Max p95 frame time in the reference battle", "area": "perf", "enforced_by": "vitest" },
+    "frame_script_ms_p95": { "value": 10, "severity": "warn", "unit": "ms", "description": "Max p95 script time per frame", "area": "perf", "enforced_by": "vitest" },
+    "sim_tick_ms": { "value": 2, "severity": "warn", "unit": "ms", "description": "Max headless sim tick time", "area": "perf", "enforced_by": "vitest" },
+    "long_tasks_battle": { "value": 0, "severity": "warn", "unit": "tasks", "description": "Max long (>50 ms) tasks during a battle", "area": "perf", "enforced_by": "vitest" },
+    "load_interactive_s": { "value": 5, "warn_at": 3, "severity": "error", "unit": "s", "description": "Max time to interactive title screen on Fast 4G", "area": "perf", "enforced_by": "vitest" },
+    "initial_download_kb": { "value": 1500, "severity": "error", "unit": "KB gzip", "description": "Max download size until title is interactive (gzip)", "area": "perf", "enforced_by": "vitest" },
+    "asset_file_kb": { "value": 300, "severity": "warn", "unit": "KB", "description": "Max size of one asset file", "area": "perf", "enforced_by": "vitest" },
+    "texture_px": { "value": 2048, "severity": "error", "unit": "px max side", "description": "Max texture/atlas side length", "area": "perf", "enforced_by": "vitest" },
+    "total_assets_mb": { "value": 25, "severity": "warn", "unit": "MB", "description": "Max total size of built assets", "area": "perf", "enforced_by": "vitest" },
+    "js_heap_mb": { "value": 150, "severity": "warn", "unit": "MB", "description": "Max JS heap after repeated runs", "area": "perf", "enforced_by": "vitest" },
+    "epics_active": { "value": 2, "severity": "error", "unit": "epics", "description": "Max epics in-progress", "area": "forge", "enforced_by": "harness" },
+    "tasks_per_epic": { "value": 12, "warn_at": 8, "severity": "error", "unit": "tasks", "description": "Max tasks per epic", "area": "forge", "enforced_by": "harness" },
+    "subtasks_per_task": { "value": 7, "warn_at": 5, "severity": "error", "unit": "subtasks", "description": "Max checklist items under Subtasks", "area": "forge", "enforced_by": "harness" },
+    "acceptance_criteria_min": { "value": 1, "cmp": "min", "severity": "error", "unit": "items", "description": "Min checklist items under Acceptance Criteria (tasks past backlog)", "area": "forge", "enforced_by": "harness" },
+    "acceptance_criteria_max": { "value": 5, "severity": "warn", "unit": "items", "description": "Max checklist items under Acceptance Criteria", "area": "forge", "enforced_by": "harness" },
+    "task_diff_lines": { "value": 400, "warn_at": 200, "severity": "error", "unit": "lines changed", "description": "Max changed lines per task branch", "area": "forge", "enforced_by": "process" },
+    "task_files_changed": { "value": 15, "severity": "warn", "unit": "files", "description": "Max files changed per task branch", "area": "forge", "enforced_by": "process" },
+    "commit_diff_lines": { "value": 400, "severity": "warn", "unit": "lines changed", "description": "Max changed lines per commit", "area": "forge", "enforced_by": "process" },
+    "commit_subject_chars": { "value": 72, "severity": "error", "unit": "chars", "description": "Max length of a commit subject", "area": "forge", "enforced_by": "process" },
+    "wip_in_progress": { "value": 3, "severity": "error", "unit": "tasks", "description": "Max tasks in-progress", "area": "forge", "enforced_by": "harness" },
+    "wip_review": { "value": 3, "severity": "error", "unit": "tasks", "description": "Max tasks in review", "area": "forge", "enforced_by": "harness" },
+    "wip_blocked": { "value": 3, "severity": "warn", "unit": "tasks", "description": "Max tasks blocked", "area": "forge", "enforced_by": "harness" },
+    "wip_ready": { "value": 8, "severity": "warn", "unit": "tasks", "description": "Max tasks ready", "area": "forge", "enforced_by": "harness" },
+    "backlog_items": { "value": 40, "severity": "warn", "unit": "items", "description": "Max tasks in backlog", "area": "forge", "enforced_by": "harness" },
+    "board_done_visible": { "value": 20, "severity": "warn", "unit": "cards", "description": "Max done cards shown on the generated board", "area": "forge", "enforced_by": "harness" },
+    "in_progress_age_days": { "value": 2, "severity": "warn", "unit": "days", "description": "Days a task may stay in-progress without an update", "area": "forge", "enforced_by": "harness" },
+    "branch_age_days": { "value": 2, "severity": "warn", "unit": "days", "description": "Days an unmerged task branch may live", "area": "forge", "enforced_by": "process" },
+    "blocked_age_days": { "value": 3, "severity": "warn", "unit": "days", "description": "Days a task may stay blocked without an update", "area": "forge", "enforced_by": "harness" },
+    "epic_age_days": { "value": 21, "severity": "warn", "unit": "days", "description": "Days an epic may stay active", "area": "forge", "enforced_by": "process" },
+    "review_rounds": { "value": 2, "severity": "process", "unit": "failed rounds", "description": "Max failed review rounds per task", "area": "forge", "enforced_by": "process" },
+    "task_attempts": { "value": 3, "severity": "process", "unit": "attempts", "description": "Max attempts per task", "area": "forge", "enforced_by": "process" },
+    "open_bugs": { "value": 10, "severity": "warn", "unit": "bugs", "description": "Max open bugs", "area": "forge", "enforced_by": "process" },
+    "critical_bugs_open": { "value": 0, "severity": "process", "unit": "bugs", "description": "Tolerated open critical bugs", "area": "forge", "enforced_by": "process" },
+    "retro_every_tasks": { "value": 10, "severity": "process", "unit": "tasks", "description": "Run a retro after this many done tasks", "area": "forge", "enforced_by": "process" },
+    "retro_actions_max": { "value": 3, "severity": "process", "unit": "actions", "description": "Max actions per retro", "area": "forge", "enforced_by": "process" },
+    "subagent_prompt_tokens": { "value": 2000, "severity": "process", "unit": "tokens", "description": "Max tokens in a delegation prompt", "area": "agents", "enforced_by": "process" },
+    "subagent_report_tokens": { "value": 2000, "severity": "process", "unit": "tokens", "description": "Max tokens in a subagent report", "area": "agents", "enforced_by": "process" },
+    "subagent_turns_impl": { "value": 60, "severity": "error", "unit": "turns", "description": "Max maxTurns for writer agents", "area": "agents", "enforced_by": "harness" },
+    "subagent_turns_research": { "value": 30, "severity": "error", "unit": "turns", "description": "Max maxTurns for read-only agents", "area": "agents", "enforced_by": "harness" },
+    "subagent_context_tokens": { "value": 200000, "severity": "process", "unit": "tokens", "description": "Max peak context of a subagent", "area": "agents", "enforced_by": "process" },
+    "parallel_subagents": { "value": 4, "severity": "process", "unit": "agents", "description": "Max concurrent subagents", "area": "agents", "enforced_by": "process" },
+    "parallel_writers": { "value": 3, "severity": "process", "unit": "agents", "description": "Max concurrent editing subagents", "area": "agents", "enforced_by": "process" },
+    "subagent_spawn_depth": { "value": 1, "severity": "error", "unit": "levels", "description": "Max subagent nesting (settings.json env)", "area": "agents", "enforced_by": "harness" },
+    "orchestrator_context_warn_tokens": { "value": 150000, "severity": "process", "unit": "tokens", "description": "Orchestrator context: write handoff", "area": "agents", "enforced_by": "process" },
+    "orchestrator_context_max_tokens": { "value": 300000, "severity": "process", "unit": "tokens", "description": "Orchestrator context: compact or restart", "area": "agents", "enforced_by": "process" },
+    "route_sonnet_max_diff_lines": { "value": 200, "severity": "process", "unit": "lines", "description": "Largest task estimate routed to Sonnet", "area": "agents", "enforced_by": "process" },
+    "route_sonnet_max_files": { "value": 5, "severity": "process", "unit": "files", "description": "Most files in a task routed to Sonnet", "area": "agents", "enforced_by": "process" },
+    "route_escalate_after_rounds": { "value": 1, "severity": "process", "unit": "rounds", "description": "Failed Sonnet review rounds before escalating", "area": "agents", "enforced_by": "process" },
+    "task_cost_usd": { "value": 5, "severity": "process", "unit": "USD", "description": "Max cost of all runs on one task", "area": "agents", "enforced_by": "process" },
+    "epic_cost_usd": { "value": 60, "severity": "process", "unit": "USD", "description": "Max cost of all runs in one epic", "area": "agents", "enforced_by": "process" },
+    "hook_ms": { "value": 3000, "severity": "warn", "unit": "ms", "description": "Max duration of one hook invocation", "area": "meta", "enforced_by": "process" },
+    "lint_s": { "value": 10, "severity": "error", "unit": "s", "description": "Max runtime of the full harness lint", "area": "meta", "enforced_by": "harness" },
+    "budget_warnings_total": { "value": 25, "severity": "warn", "unit": "warnings", "description": "Max warnings in one full lint run", "area": "meta", "enforced_by": "harness" },
+    "override_max_factor": { "value": 2, "fixed": true, "severity": "error", "unit": "ratio", "description": "Max ratio of an override to the default budget", "area": "meta", "enforced_by": "harness" },
+    "override_reason_min_chars": { "value": 20, "cmp": "min", "fixed": true, "severity": "error", "unit": "chars", "description": "Min length of an override reason", "area": "meta", "enforced_by": "harness" },
+    "override_review_days": { "value": 30, "fixed": true, "severity": "error", "unit": "days", "description": "Max days an override may run (until - today)", "area": "meta", "enforced_by": "harness" },
+    "overrides_total": { "value": 12, "severity": "warn", "unit": "overrides", "description": "Max active overrides repo-wide", "area": "meta", "enforced_by": "harness" }
+  },
+  "writerAgents": [
+    "implementer",
+    "doc-gardener"
+  ]
+}

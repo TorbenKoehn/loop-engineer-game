@@ -1,0 +1,109 @@
+import { parse } from 'yaml';
+import type { Config, Data, Doc, FieldSpec, Finding, SpecialDef } from './types.ts';
+
+export interface Parsed {
+  data: Data | null;
+  body: string;
+  error?: string;
+}
+
+const FENCE = /^---\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;
+
+export function parseFrontmatter(raw: string): Parsed {
+  const m = FENCE.exec(raw);
+  if (!m) return { data: null, body: raw };
+  try {
+    const data: unknown = parse(m[1]!);
+    if (data === null || typeof data !== 'object' || Array.isArray(data)) {
+      return { data: null, body: raw.slice(m[0].length), error: 'frontmatter is not a mapping' };
+    }
+    return { data: data as Data, body: raw.slice(m[0].length) };
+  } catch (e) {
+    return { data: null, body: raw.slice(m[0].length), error: `invalid YAML: ${(e as Error).message}` };
+  }
+}
+
+export function isValidDate(s: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+  const d = new Date(`${s}T00:00:00Z`);
+  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === s;
+}
+
+export function checkField(name: string, value: unknown, spec: FieldSpec): string | null {
+  switch (spec.kind) {
+    case 'string':
+      if (typeof value !== 'string' || value.trim() === '') return `${name} must be a non-empty string`;
+      if (spec.pattern && !new RegExp(spec.pattern).test(value)) {
+        return `${name} "${value}" does not match ${spec.pattern}`;
+      }
+      return null;
+    case 'array':
+      if (!Array.isArray(value) || value.some((v) => typeof v !== 'string')) {
+        return `${name} must be an array of strings`;
+      }
+      return null;
+    case 'enum':
+      if (typeof value !== 'string' || !spec.values?.includes(value)) {
+        return `${name} must be one of: ${spec.values?.join(', ')} (got ${JSON.stringify(value)})`;
+      }
+      return null;
+    case 'date':
+      return typeof value === 'string' && isValidDate(value) ? null : `${name} must be a YYYY-MM-DD date`;
+    case 'object':
+      return value && typeof value === 'object' && !Array.isArray(value) ? null : `${name} must be a mapping`;
+    case 'boolean':
+      return typeof value === 'boolean' ? null : `${name} must be a boolean`;
+  }
+}
+
+function checkFields(file: string, data: Data, fields: Record<string, FieldSpec>): Finding[] {
+  const out: Finding[] = [];
+  for (const [name, spec] of Object.entries(fields)) {
+    if (data[name] === undefined || data[name] === null) {
+      if (spec.required) out.push(f(file, `missing required field "${name}"`));
+      continue;
+    }
+    const err = checkField(name, data[name], spec);
+    if (err) out.push(f(file, err));
+  }
+  return out;
+}
+
+function f(file: string, message: string): Finding {
+  return { file, severity: 'error', rule: 'frontmatter', message };
+}
+
+export function specialFor(rel: string, config: Config, match: (r: string, g: string) => boolean): SpecialDef | undefined {
+  return config.frontmatter.special.find((s) => match(rel, s.glob));
+}
+
+function validateSpecial(doc: Doc, def: SpecialDef): Finding[] {
+  const out: Finding[] = [];
+  for (const name of def.required ?? []) {
+    const v = doc.data?.[name];
+    if (typeof v !== 'string' || v.trim() === '') out.push(f(doc.rel, `missing required field "${name}"`));
+  }
+  return out;
+}
+
+/** Schema validation of a doc's frontmatter. Skips kinds without a schema. */
+export function validateDoc(doc: Doc, config: Config, def?: SpecialDef): Finding[] {
+  if (doc.kind === 'claude' || doc.kind === 'exempt' || doc.kind === 'index') return [];
+  if (doc.parseError) return [f(doc.rel, doc.parseError)];
+  if (!doc.data) return [f(doc.rel, 'missing frontmatter block')];
+  if (def && (doc.kind === 'skill' || doc.kind === 'agent')) return validateSpecial(doc, def);
+  const fm = config.frontmatter;
+  const type = doc.data.type;
+  const typeDef = typeof type === 'string' ? fm.types[type] : undefined;
+  const base = { ...fm.base };
+  base.type = { kind: 'enum', required: true, values: Object.keys(fm.types) };
+  const out = checkFields(doc.rel, doc.data, { ...base, status: { kind: 'string', required: true } });
+  const typeErr = out.filter((x) => !x.message.startsWith('status'));
+  if (!typeDef) return typeErr;
+  const statuses = fm.statusSets[typeDef.statuses] ?? [];
+  const statusSpec: FieldSpec = { kind: 'enum', required: true, values: statuses };
+  const statusErr = doc.data.status === undefined ? null : checkField('status', doc.data.status, statusSpec);
+  const res = [...typeErr, ...checkFields(doc.rel, doc.data, typeDef.fields ?? {})];
+  if (statusErr) res.push(f(doc.rel, statusErr));
+  return res;
+}

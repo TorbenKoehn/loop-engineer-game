@@ -1,0 +1,20 @@
+{
+  "name": "loop-engineer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "harness:index": "node tools/harness/cli.ts index",
+    "harness:budgets": "node tools/harness/cli.ts budgets",
+    "harness:lint": "node tools/harness/cli.ts lint",
+    "harness:board": "node tools/harness/cli.ts board",
+    "harness:check": "node tools/harness/cli.ts check",
+    "harness:new": "node tools/harness/cli.ts new",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3",
+    "yaml": "^2.9.1"
+  }
+}
