@@ -14,7 +14,10 @@ export type Action =
   | { t: 'sell'; item: ItemRef }
   | { t: 'reroll' }
   | { t: 'leaveShop' }
-  | { t: 'abandon' };
+  | { t: 'abandon' }
+  /** `replace` names the AGENTS.md line to overwrite; required when it is full. */
+  | { t: 'pickLesson'; ix: number; replace?: number }
+  | { t: 'skipLesson' };
 
 /** Why apply rejected an action; the state is unchanged. */
 export type ActionError =
@@ -23,7 +26,8 @@ export type ActionError =
   | 'notOffered'
   | 'notReachable'
   | 'insufficientCredits'
-  | 'lastTool';
+  | 'lastTool'
+  | 'noLessonSlot';
 
 export type ApplyResult = { ok: true; state: RunState } | { ok: false; error: ActionError };
 

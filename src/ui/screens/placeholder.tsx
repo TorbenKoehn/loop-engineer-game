@@ -30,6 +30,12 @@ function label(a: Action): string {
       return t('ui.action.leave_shop');
     case 'abandon':
       return t('ui.action.abandon');
+    case 'pickLesson':
+      return a.replace === undefined
+        ? t('ui.action.pick_lesson', { n: a.ix + 1 })
+        : t('ui.action.pick_lesson_replace', { n: a.ix + 1, line: a.replace + 1 });
+    case 'skipLesson':
+      return t('ui.action.skip_lesson');
   }
 }
 

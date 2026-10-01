@@ -113,9 +113,14 @@ describe('fight outcome', () => {
     expect(after.combat?.outcome).toMatchObject({ outcome: 'loss', reason: 'trust' });
     expect(after.agent.trust).toBe(0);
     const end = step(after, { t: 'continue' });
-    expect(end).toMatchObject({ mode: 'runEnd', pending: null, result: { outcome: 'ctrlc' } });
+    expect(end).toMatchObject({
+      mode: 'runEnd',
+      pending: { kind: 'lessonOffer' },
+      result: { outcome: 'ctrlc' },
+    });
     expect(end.stats.cause).toBe(enemyOf(after, end.stats.cause));
-    expect(legalActions(end)).toEqual([]);
+    expect(legalActions(end)).toContainEqual({ t: 'skipLesson' });
+    expect(legalActions(step(end, { t: 'skipLesson' }))).toEqual([]);
   });
 });
 
@@ -132,9 +137,14 @@ describe('run end', () => {
     const combat = won.combat ? { ...won.combat, nodeId: 'p1-boss' } : null;
     expect(node(won, 'p1-boss').type).toBe('release');
     const end = step({ ...won, combat }, { t: 'continue' });
-    expect(end).toMatchObject({ mode: 'runEnd', pending: null, result: { outcome: 'shipped' } });
+    expect(end).toMatchObject({
+      mode: 'runEnd',
+      pending: { kind: 'lessonOffer' },
+      result: { outcome: 'shipped' },
+    });
     expect(end.agent.credits).toBe(won.agent.credits);
-    expect(legalActions(end)).toEqual([]);
+    expect(legalActions(end)).toContainEqual({ t: 'skipLesson' });
+    expect(legalActions(step(end, { t: 'skipLesson' }))).toEqual([]);
   });
 
   it('a real p1-boss win ships the run (fixed seeds, no abandon)', () => {
@@ -202,12 +212,13 @@ describe('run stats', () => {
     });
   });
 
-  it('adds fights up: damage and compactions sum, zone time is the last fight', () => {
+  it('adds fights up: damage and compactions sum, zone time per fight and per run', () => {
     const one = addFight(emptyStats(), log, true);
     const two = addFight(one, log.slice(0, 4).concat(log.slice(9)), false);
     expect(two).toMatchObject({ nodesCleared: 1, cause: 'bug', compactions: 1 });
     expect(two.damageBySource).toEqual({ bug: 8, [DEADLINE]: 2 });
     expect(two.lastFight).toEqual({ zoneMs: [500, 1500, 0, 0], compactions: 0 });
+    expect(two.zoneMs).toEqual([1000, 2000, 1000, 0]);
   });
 
   it('a real fight records damage taken, zone time to endT and the cleared node', () => {

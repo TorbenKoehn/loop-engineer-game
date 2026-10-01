@@ -69,6 +69,7 @@ export function newRun(setup: RunSetup, meta: MetaView): RunState {
     throw new RangeError(`newRun: ${setup.lint.length} lint rules exceed the cap ${meta.lintCap}`);
   }
   return initialState({
+    run: meta.run ?? 0,
     seed: setup.seed,
     harness: setup.harness,
     prompt: null,

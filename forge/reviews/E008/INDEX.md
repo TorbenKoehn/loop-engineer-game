@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E008"
-summary: "Index of forge/reviews/E008: 1 files, 0 subdirectories"
-keywords: ["review", "slice", "stats"]
+summary: "Index of forge/reviews/E008: 2 files, 0 subdirectories"
+keywords: ["review", "agents", "history", "lessons", "meta", "slice", "state", "stats"]
 type: index
 status: active
 updated: 2026-10-01
@@ -16,3 +16,4 @@ generated: true
 | File | Title | Summary | Keywords |
 |---|---|---|---|
 | [R050-T048.md](R050-T048.md) | Review of T048: Run end, slice win and run stats | Review of T048 (approved) | review, slice, stats |
+| [R051-T049.md](R051-T049.md) | Review of T049: Meta state, history and AGENTS.md lessons | Review of T049 (approved) | review, meta, state, history, agents, lessons |

@@ -1,6 +1,7 @@
 // Run end and run stats. Stats come from each fight's event log, no extra sim tracking
 // (docs/game/ux/onboarding.md#why-did-i-lose-run-end-summary, run-state.md#modes).
 import type { CombatEvent, Ref } from '../sim/events.ts';
+import { lessonOffer } from './meta/lessons.ts';
 import type { FightStats, RunResult, RunState, RunStats } from './state.ts';
 
 /** Source name of the Deadline's overtime damage (src `sys`). */
@@ -15,6 +16,7 @@ export const emptyStats = (): RunStats => ({
   cause: null,
   damageBySource: {},
   compactions: 0,
+  zoneMs: Array<number>(ZONE_COUNT).fill(0),
   lastFight: { zoneMs: Array<number>(ZONE_COUNT).fill(0), compactions: 0 },
 });
 
@@ -81,14 +83,19 @@ export function addFight(stats: RunStats, events: readonly CombatEvent[], won: b
     cause: cause ?? stats.cause,
     damageBySource,
     compactions: stats.compactions + lastFight.compactions,
+    zoneMs: stats.zoneMs.map((ms, i) => ms + (lastFight.zoneMs[i] ?? 0)),
     lastFight,
   };
 }
 
-/** Ends the run: no pending choice; the lesson offer (T049) skips abandoned runs. */
-export const endRun = (state: RunState, outcome: RunResult['outcome']): RunState => ({
-  ...state,
-  mode: 'runEnd',
-  pending: null,
-  result: { outcome, td: 0 },
-});
+/** Ends the run; every outcome but abandoned offers 3 AGENTS.md lessons. */
+export function endRun(state: RunState, outcome: RunResult['outcome']): RunState {
+  const ended: RunState = {
+    ...state,
+    mode: 'runEnd',
+    pending: null,
+    result: { outcome, td: 0, lessons: [...state.setup.lessons] },
+  };
+  if (outcome === 'abandoned') return ended;
+  return { ...ended, pending: { kind: 'lessonOffer', lessons: lessonOffer(ended) } };
+}

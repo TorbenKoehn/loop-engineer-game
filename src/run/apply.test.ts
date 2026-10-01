@@ -158,7 +158,8 @@ describe('run properties', () => {
     fc.assert(
       fc.property(seeds, picks, fc.boolean(), (seed, ps, abandons) => {
         let state = newRun(setup(seed), META);
-        for (let n = 0; n < MAX && state.mode !== 'runEnd'; n++) {
+        // Past runEnd only the lesson choice remains; then nothing is legal.
+        for (let n = 0; n < MAX && legalActions(state).length > 0; n++) {
           const legal = legalActions(state).filter(abandons ? Boolean : notAbandon);
           state = step(state, legal[(ps[n % ps.length] as number) % legal.length] as Action);
         }

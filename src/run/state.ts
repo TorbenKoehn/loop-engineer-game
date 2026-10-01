@@ -46,15 +46,19 @@ export interface RunSetup {
   tutorial: boolean;
 }
 
-/** Read-only meta progress a run needs. Only newRun reads it (stub until E008). */
+/** Read-only meta progress a run needs; metaView (src/run/meta) builds it. Only newRun reads it. */
 export interface MetaView {
   unlocked: UnlockId[];
   lessons: LessonId[];
   lintCap: number;
+  /** Number of the new run (meta lastRun + 1); absent = 0, an unnumbered run. */
+  run?: number;
 }
 
 /** RunSetup plus the MetaView copy: apply and replay never read meta again. */
 export interface SetupSnapshot {
+  /** Run id for meta history; 0 = unnumbered (recorded, never deduplicated). */
+  run: number;
   seed: string;
   harness: HarnessId;
   prompt: PromptId | null;
@@ -143,7 +147,9 @@ export type Pending =
   | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] }
   | ShopPending
   /** `item` was gained without space; `next` is the mode after discardItem, `resume` its shop. */
-  | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending };
+  | { kind: 'discard'; item: OwnedItem; next: Mode; resume?: ShopPending }
+  /** The 3 AGENTS.md lessons offered at run end (meta-progression.md#agentsmd-lessons). */
+  | { kind: 'lessonOffer'; lessons: LessonId[] };
 
 /** Zone time and compactions of one fight. */
 export interface FightStats {
@@ -165,6 +171,8 @@ export interface RunStats {
   damageBySource: Record<string, number>;
   /** Compactions this run. */
   compactions: number;
+  /** ms per zone index over all fights of the run. */
+  zoneMs: number[];
   lastFight: FightStats;
 }
 
@@ -172,6 +180,8 @@ export interface RunStats {
 export interface RunResult {
   outcome: 'shipped' | 'ctrlc' | 'abandoned';
   td: number;
+  /** AGENTS.md after the run: the setup's lessons until pickLesson writes a line. */
+  lessons: LessonId[];
 }
 
 /** The resolved fight without its log; the UI recomputes the log from `input`. */

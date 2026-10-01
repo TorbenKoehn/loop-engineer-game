@@ -5,7 +5,7 @@ keywords: [run-state, reducer, actions, state-machine, rng-paths, meta]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts]
+related_code: [src/run/replay.ts, src/run/apply.ts, src/run/new-run.ts, src/run/state.ts, src/run/rewards.ts, src/run/stats.ts, src/run/combat.ts, src/run/meta/meta.ts, src/run/meta/lessons.ts]
 related: [sim-core.md, save.md, ui.md, ../game/systems/run-map.md, ../game/systems/economy.md, adr/adr-005-save-action-log.md]
 ---
 
@@ -37,16 +37,17 @@ export function legalActions(state: RunState): readonly Action[]; // bots, tests
   `'insufficientCredits'`, `'baselineOverLimit'`…) and change nothing. Saves contain
   only accepted actions.
 - `MetaView` is the read-only part of meta progress a run needs (unlocked ids,
-  lessons, lint cap). Only `newRun` reads it and copies it into `RunState.setup`, so
-  `apply` and replays never depend on later meta changes.
+  lessons, lint cap, run number), built by `metaView(meta)`. Only `newRun` reads it and
+  copies it into `RunState.setup`, so `apply` and replays never depend on later meta
+  changes.
 
 ## RunState (shape)
 
 ```ts
 export interface RunState {
   v: 1;                                   // state schema version
-  setup: { seed: string; harness: HarnessId; prompt: PromptId | null; lint: LintId[];
-           unlocked: UnlockSnapshot; lessons: LessonId[]; tutorial: boolean };
+  setup: { run: number; seed: string; harness: HarnessId; prompt: PromptId | null;
+           lint: LintId[]; unlocked: UnlockSnapshot; lessons: LessonId[]; tutorial: boolean };
   mode: Mode;                             // see below
   phase: 1 | 2 | 3; loop: number;
   map: MapState;                          // nodes, edges, types, encounter ids, visited, current
@@ -58,7 +59,8 @@ export interface RunState {
   nextFight: FightModifier[];             // from events
   combat: { nodeId: string; input: CombatInput; outcome: CombatSummary } | null;
   stats: RunStats;                        // counters for summary and achievements
-  result: null | { outcome: 'shipped' | 'ctrlc' | 'abandoned'; td: number };
+  result: null | { outcome: 'shipped' | 'ctrlc' | 'abandoned'; td: number;
+                   lessons: LessonId[] };     // AGENTS.md after the lesson choice
 }
 ```
 
@@ -68,15 +70,16 @@ type RewardCard = { kind: 'tool' | 'skill'; id: ToolId | SkillId; rarity: Rarity
 type Pending =
   | { kind: 'promptOffer'; prompts: PromptId[] }
   | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] } // already paid
-  | { kind: 'discard'; item: OwnedItem; next: Mode };  // gained without space
+  | { kind: 'discard'; item: OwnedItem; next: Mode }   // gained without space
+  | { kind: 'lessonOffer'; lessons: LessonId[] };      // run end, 3 lessons
 // RunStats: { nodesVisited; taskPicksNoRare (pity at 6); nodesCleared (fights won);
-//   cause; damageBySource; compactions; lastFight: { zoneMs[4]; compactions } }
+//   cause; damageBySource; compactions; zoneMs[4]; lastFight: { zoneMs[4]; compactions } }
 ```
 
 `ItemRef` names an equipped slot (`at` = kind, `ix`), a stash index, or the gained item
 awaiting space. RunStats come from each fight's event log (`src/run/stats.ts`): damage
 the agent took by enemy def id or `deadline`, the source of its last hit (`cause`), ms per
-zone index (cold, focused, rot, overflow) and compactions of the last fight.
+zone index (cold, focused, rot, overflow) per run (`zoneMs`) and of the last fight.
 
 `OwnedTool = { id, version, weightMod }`. Everything is plain JSON-compatible data
 (no `Map`, `Set`, `Date`, class instances, `undefined` values).
@@ -93,6 +96,12 @@ setup -> promptPick -> map -> (fight -> combatReview -> reward)
 M1 slice: `continue` after a won Release ends the run (`result.outcome = 'shipped'`, no
 reward); any lost fight ends it as `ctrlc`; `abandon` on the map as `abandoned` (no lesson
 offer). Phase 1-2 boss rewards and `phaseEnd`: E012.
+
+At run end (not abandon) `pending` holds the 3-lesson offer (`src/run/meta/lessons.ts`,
+fork `lessons`). The "ended the run" source is `stats.cause` (the last hit, Deadline =
+Process), for wins too. `pickLesson` appends while AGENTS.md has room (M1 capacity 1) and
+otherwise needs `replace`, the line to overwrite (`noLessonSlot` if missing or invalid);
+`skipLesson` keeps it. Either clears `pending`; then no action is legal.
 
 | Mode | Legal actions |
 |---|---|
@@ -159,9 +168,21 @@ Node ids are `p<phase>-r<row>-c<col>` (`p1-boss` for the boss; Endless prefixes 
 
 ## Meta state
 
-Separate from runs, in `src/run/meta/`: `MetaState = { v, td, unlocked, lessons, history,
-achievements, settings, tips, daily }` with its own pure functions (`endRun(meta,
-runState)`, `buyUnlock(meta, id)`). Settings live here but are never read by the sim.
+Separate from runs, in `src/run/meta/`: `MetaState = { v, lastRun, td, unlocked, lessons,
+history }` with its own pure functions: `newMeta()`, `metaView(meta)` and
+`endRun(meta, run, extras?)`. Later epics add `achievements`, `settings`, `tips`, `daily`
+and `buyUnlock(meta, id)`; settings live here but are never read by the sim.
+
+`endRun` takes a finished run (result set, lesson choice made) and:
+
+- appends a `RunRecord` (meta-progression.md "Run history"; lint as rule ids, sim time as
+  `zoneMs`) and keeps the last 100; `extras` carries what the pure core cannot know, the
+  wall-clock `wallMs` and the replay `save` string (null otherwise);
+- copies `result.lessons` into AGENTS.md;
+- M1: adds the unlock node `power_tools` (`brute_force`) when a visited Critical Bug node
+  was not lost;
+- is idempotent by run id: `metaView` numbers the next run `lastRun + 1`, and runs at or
+  below `lastRun` are ignored. Run 0 (a `MetaView` without `run`) is always recorded.
 
 ## Invariants (property-tested over random legal action sequences)
 

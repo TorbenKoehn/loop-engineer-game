@@ -4,6 +4,7 @@ import { type Action, type ApplyResult, fail } from './actions.ts';
 import { afterCombat, fight } from './combat.ts';
 import { discardItem, discardRefs } from './gain.ts';
 import { reachable } from './map/graph.ts';
+import { lessonActions, pickLesson, skipLesson } from './meta/lessons.ts';
 import { pickReward, rewardActions, skipReward } from './rewards.ts';
 import { buy, enterShop, leaveShop, reroll, sell, shopActions } from './shop.ts';
 import type { MapNode, NodeId, RunState } from './state.ts';
@@ -73,6 +74,10 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return leaveShop(state);
     case 'abandon':
       return abandon(state);
+    case 'pickLesson':
+      return pickLesson(state, action.ix, action.replace);
+    case 'skipLesson':
+      return skipLesson(state);
     default:
       // Unreachable for typed callers; guards actions decoded from saves.
       return fail('unknownAction');
@@ -97,6 +102,8 @@ export function legalActions(state: RunState): readonly Action[] {
       return rewardActions(state);
     case 'shop':
       return shopActions(state);
+    case 'runEnd':
+      return lessonActions(state);
     case 'discard':
       return state.pending?.kind === 'discard'
         ? discardRefs(state.agent, state.pending.item.kind).map((item) => ({
