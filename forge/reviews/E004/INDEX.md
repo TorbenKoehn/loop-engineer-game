@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E004"
-summary: "Index of forge/reviews/E004: 3 files, 0 subdirectories"
-keywords: ["review", "build", "combatinput", "encounter", "fight", "generation", "nodes", "reducer"]
+summary: "Index of forge/reviews/E004: 4 files, 0 subdirectories"
+keywords: ["review", "build", "combatinput", "credits", "encounter", "fight", "generation", "interest"]
 type: index
 status: active
 updated: 2026-10-01
@@ -18,3 +18,4 @@ generated: true
 | [R034-T040.md](R034-T040.md) | Review of T040: Run reducer walking skeleton: new run to map | Review of T040 (approved) | review, reducer, walking, skeleton |
 | [R038-T041.md](R038-T041.md) | Review of T041: Seeded map generation and encounter selecti… | Review of T041 (approved) | review, seeded, generation, encounter, selection |
 | [R040-T042.md](R040-T042.md) | Review of T042: Fight nodes: build CombatInput and resolve | Review of T042 (approved) | review, fight, nodes, build, combatinput, resolve |
+| [R044-T043.md](R044-T043.md) | Review of T043: Rewards: credits, interest and 1-of-3 picks | Review of T043 (approved) | review, rewards, credits, interest, picks |

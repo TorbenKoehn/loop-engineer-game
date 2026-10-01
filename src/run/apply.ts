@@ -1,11 +1,11 @@
 // The pure run reducer: validate, then return a new state; never mutate the input.
 // See docs/architecture/run-state.md#reducer and #modes.
-import type { Action, ActionError, ApplyResult } from './actions.ts';
+import { type Action, type ApplyResult, fail } from './actions.ts';
 import { afterCombat, fight } from './combat.ts';
+import { discardItem, discardRefs } from './gain.ts';
 import { reachable } from './map/graph.ts';
+import { pickReward, rewardActions, skipReward } from './rewards.ts';
 import type { NodeId, RunState } from './state.ts';
-
-const fail = (error: ActionError): ApplyResult => ({ ok: false, error });
 
 function pickPrompt(state: RunState, prompt: string): ApplyResult {
   if (state.mode !== 'promptPick' || state.pending?.kind !== 'promptOffer') {
@@ -32,7 +32,7 @@ function travel(state: RunState, node: NodeId): ApplyResult {
 
 function continueRun(state: RunState): ApplyResult {
   if (state.mode !== 'combatReview') return fail('wrongMode');
-  return { ok: true, state: { ...state, mode: afterCombat(state) } };
+  return { ok: true, state: afterCombat(state) };
 }
 
 export function apply(state: RunState, action: Action): ApplyResult {
@@ -43,6 +43,12 @@ export function apply(state: RunState, action: Action): ApplyResult {
       return travel(state, action.node);
     case 'continue':
       return continueRun(state);
+    case 'pickReward':
+      return pickReward(state, action.ix);
+    case 'skipReward':
+      return skipReward(state);
+    case 'discardItem':
+      return discardItem(state, action.item);
     default:
       // Unreachable for typed callers; guards actions decoded from saves.
       return fail('unknownAction');
@@ -60,6 +66,15 @@ export function legalActions(state: RunState): readonly Action[] {
       return reachable(state.map).map((node) => ({ t: 'travel', node }));
     case 'combatReview':
       return [{ t: 'continue' }];
+    case 'reward':
+      return rewardActions(state);
+    case 'discard':
+      return state.pending?.kind === 'discard'
+        ? discardRefs(state.agent, state.pending.item.kind).map((item) => ({
+            t: 'discardItem',
+            item,
+          }))
+        : [];
     default:
       return [];
   }

@@ -4,6 +4,7 @@ import { content } from '../content/index.ts';
 import type { EncounterDef, EnemyDef } from '../content/types/enemy.ts';
 import { type CombatInput, resolveCombat } from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
+import { enterReward } from './rewards.ts';
 import type { MapNode, RunState } from './state.ts';
 
 /** Fallback when an encounter sets no deadline (docs/game/systems/combat.md). */
@@ -91,6 +92,6 @@ export function fight(state: RunState, node: MapNode): RunState {
   };
 }
 
-/** After a win back to the map (rewards: T043); a loss ends the run (run end: E008). */
-export const afterCombat = (state: RunState): RunState['mode'] =>
-  state.combat?.outcome.outcome === 'win' ? 'map' : 'runEnd';
+/** A win pays out and offers rewards; a loss ends the run (run end: E008). */
+export const afterCombat = (state: RunState): RunState =>
+  state.combat?.outcome.outcome === 'win' ? enterReward(state) : { ...state, mode: 'runEnd' };

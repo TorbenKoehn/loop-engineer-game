@@ -132,12 +132,14 @@ describe('combat seed', () => {
 });
 
 describe('continue', () => {
-  it('moves from combatReview to the map after a win', () => {
+  it('moves from combatReview to rewards after a win, then back to the map', () => {
     const s = onMap();
     const after = step(s, { t: 'travel', node: firstNode(s) });
     expect(after.combat?.outcome.outcome).toBe('win');
     expect(legalActions(after)).toEqual([{ t: 'continue' }]);
-    const next = step(after, { t: 'continue' });
+    const reward = step(after, { t: 'continue' });
+    expect(reward.mode).toBe('reward');
+    const next = step(reward, { t: 'skipReward' });
     expect(next.mode).toBe('map');
     expect(legalActions(next).length).toBeGreaterThan(0);
   });

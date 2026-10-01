@@ -2,6 +2,7 @@
 // Plain JSON data only: no Map, Set, Date, class instances or undefined values.
 // Fights, rewards, events and run end add their fields with their tasks (E004, E008).
 
+import type { Rarity } from '../content/types/basics.ts';
 import type { FightModifier } from '../content/types/event.ts';
 import type {
   EncounterId,
@@ -115,10 +116,25 @@ export interface AgentState {
   oncePerRun: string[];
 }
 
-export type Pending = { kind: 'promptOffer'; prompts: PromptId[] };
+export type ItemKind = OwnedItem['kind'];
+
+/** An owned item: an equipped slot of a kind, a stash index, or the item awaiting space. */
+export type ItemRef = { at: ItemKind | 'stash'; ix: number } | { at: 'gained' };
+
+/** One 1-of-3 reward card (docs/game/systems/economy.md#reward-picks-1-of-3). */
+export type RewardCard = { kind: 'tool' | 'skill'; id: ToolId | SkillId; rarity: Rarity };
+
+export type Pending =
+  | { kind: 'promptOffer'; prompts: PromptId[] }
+  /** Credits and interest are already paid; shown as separate lines. */
+  | { kind: 'reward'; credits: number; interest: number; cards: RewardCard[] }
+  /** `item` was gained without space; `next` is the mode after discardItem. */
+  | { kind: 'discard'; item: OwnedItem; next: Mode };
 
 export interface RunStats {
   nodesVisited: number;
+  /** Task picks in a row offered without a rare card (pity, economy.md). */
+  taskPicksNoRare: number;
 }
 
 /** The resolved fight without its log; the UI recomputes the log from `input`. */

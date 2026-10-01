@@ -19,4 +19,7 @@ export const enUi = {
   'ui.action.continue': 'Continue',
   'ui.action.pick_prompt': 'Pick {name}',
   'ui.action.travel': 'Go to {node}',
+  'ui.action.pick_reward': 'Take card {n}',
+  'ui.action.skip_reward': 'Skip (+{credits} Credits)',
+  'ui.action.discard': 'Discard {item}',
 } as const;

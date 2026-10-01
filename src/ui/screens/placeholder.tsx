@@ -2,13 +2,25 @@
 import type { StringKey } from '../../content/strings/en.ts';
 import type { Action } from '../../run/actions.ts';
 import { legalActions } from '../../run/apply.ts';
+import { SKIP_CREDITS } from '../../run/rewards.ts';
 import { t } from '../i18n.ts';
 import { dispatch, run, type UiMode } from '../store/run.ts';
 
 function label(a: Action): string {
-  if (a.t === 'travel') return t('ui.action.travel', { node: a.node });
-  if (a.t === 'continue') return t('ui.action.continue');
-  return t('ui.action.pick_prompt', { name: t(`prompt.${a.prompt}.name` as StringKey) });
+  switch (a.t) {
+    case 'travel':
+      return t('ui.action.travel', { node: a.node });
+    case 'continue':
+      return t('ui.action.continue');
+    case 'pickPrompt':
+      return t('ui.action.pick_prompt', { name: t(`prompt.${a.prompt}.name` as StringKey) });
+    case 'pickReward':
+      return t('ui.action.pick_reward', { n: a.ix + 1 });
+    case 'skipReward':
+      return t('ui.action.skip_reward', { credits: SKIP_CREDITS });
+    case 'discardItem':
+      return t('ui.action.discard', { item: JSON.stringify(a.item) });
+  }
 }
 
 export function Placeholder(props: { mode: UiMode }) {

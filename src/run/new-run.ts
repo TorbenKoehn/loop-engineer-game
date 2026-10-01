@@ -11,7 +11,8 @@ import type { MetaView, RunSetup, RunState, SetupSnapshot } from './state.ts';
 export const START_CREDITS = 10;
 const PROMPT_OFFER = 3;
 
-function isUnlocked(ref: UnlockRef, unlocked: readonly UnlockId[]): boolean {
+/** Whether content with this unlock is in the run's pool. */
+export function isUnlocked(ref: UnlockRef, unlocked: readonly UnlockId[]): boolean {
   return ref === 'base' || unlocked.includes(ref.node);
 }
 
@@ -57,7 +58,7 @@ export function initialState(setup: SetupSnapshot): RunState {
     pending: { kind: 'promptOffer', prompts: promptOffer(snap.unlocked) },
     nextFight: [],
     combat: null,
-    stats: { nodesVisited: 0 },
+    stats: { nodesVisited: 0, taskPicksNoRare: 0 },
   };
 }
 
