@@ -30,9 +30,9 @@ Players and agents can move a run as one string, which bug reports and the repla
 
 ## Acceptance Criteria
 
-- [ ] decode(encode(save)) deep-equals the save, using the native CompressionStream (test in Node)
-- [ ] decode rejects a wrong prefix, a bad checksum and a newer schema with the plain-English messages from save.md (tests)
-- [ ] A ~400-action run save is ≤ 60 kB as canonical JSON (test)
+- [x] decode(encode(save)) deep-equals the save, using the native CompressionStream (test in Node)
+- [x] decode rejects a wrong prefix, a bad checksum and a newer schema with the plain-English messages from save.md (tests)
+- [x] A ~400-action run save is ≤ 60 kB as canonical JSON (test)
 
 ## Subtasks
 
@@ -48,4 +48,5 @@ Players and agents can move a run as one string, which bug reports and the repla
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: AC evidence: all 3 AC verified in R056 (codec.test.ts); the implementer's task-file edits were lost in the worktree merge
 - 2026-10-01: done (R056)

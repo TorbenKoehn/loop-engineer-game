@@ -36,3 +36,5 @@ before review. Sources: RT003 proposals P1 and P2.
 - [ ] `npm run harness:lint` shows no `dir_files` warning for `src/run` or `src/sim/combat`
 - [ ] `npm run harness:diff` prints the companion docs of a staged diff (vitest case)
 - [ ] `npm run check` exits 0
+
+- Orchestrator 2026-10-01: proposal - harness lint error when a `done` task has unchecked Acceptance Criteria (T051 slipped through).
