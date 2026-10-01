@@ -5,7 +5,7 @@ title: Harness and system prompt data for M1
 summary: "Terminal Purist and IDE Companion harness defs with traits as rules, and the senior, concise and step_by_step system prompts with weights, effects and strings."
 keywords: ["content", "harness", "system-prompts", "traits", "starters"]
 type: task
-status: in-progress
+status: done
 priority: p1
 model: sonnet
 size: S
@@ -30,16 +30,16 @@ Provide the two M1 harnesses and three starter prompts as data so the run reduce
 
 ## Acceptance Criteria
 
-- [ ] Test `harness stats match the GDD` asserts window, speed, accuracy, max Trust, base weight, slots and starter order for both M1 harnesses
-- [ ] Test `prompts match the GDD` asserts weights 8/4/10 and the encoded effects of senior, concise and step_by_step
-- [ ] Muscle Memory and Undo Stack are expressed as DSL rules, step_by_step's double resolve as a registered handler id
-- [ ] Every harness and prompt has name, line and flavour keys in en.ts (test)
+- [x] Test `harness stats match the GDD` asserts window, speed, accuracy, max Trust, base weight, slots and starter order for both M1 harnesses
+- [x] Test `prompts match the GDD` asserts weights 8/4/10 and the encoded effects of senior, concise and step_by_step
+- [x] Muscle Memory and Undo Stack are expressed as DSL rules, step_by_step's double resolve as a registered handler id
+- [x] Every harness and prompt has name, line and flavour keys in en.ts (test)
 
 ## Subtasks
 
-- [ ] Harness defs
-- [ ] Prompt defs
-- [ ] Strings
+- [x] Harness defs
+- [x] Prompt defs
+- [x] Strings
 
 ## Notes
 
@@ -49,3 +49,12 @@ Provide the two M1 harnesses and three starter prompts as data so the run reduce
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: AC1 verified: test `harness stats match the GDD` passed
+- 2026-10-01: AC2 verified: test `prompts match the GDD` passed (8/4/10, effects)
+- 2026-10-01: AC3 verified: passive()/rule() trait rules; step_by_step uses handler double_first_resolve (test)
+- 2026-10-01: AC4 verified: test on name/line/flavour keys in en.ts
+- 2026-10-01: npm run check: all steps passed
+- 2026-10-01: review requested
+- 2026-10-01: addressed R021 F1: stash 4 on both harnesses, asserted in test
+- 2026-10-01: review requested
+- 2026-10-01: done (R023)

@@ -3,6 +3,7 @@
 // `cond.*`, `trait.*`, `verb.*`) are lower-case clauses; text.ts wraps them into sentences.
 // Trigger and cond templates wrap the effect clause `{then}`.
 import { enEnemies } from './en-enemies.ts';
+import { enHarnesses } from './en-harnesses.ts';
 import { enTools } from './en-tools.ts';
 
 export const en = {
@@ -142,6 +143,7 @@ export const en = {
 
   // Content names and flavour (one spread per content area).
   ...enEnemies,
+  ...enHarnesses,
   ...enTools,
 } as const;
 
