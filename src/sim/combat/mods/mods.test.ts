@@ -127,7 +127,8 @@ describe('tool stats', () => {
   });
 
   it('pipeMs lengthens existing pipes only', () => {
-    const tools = [makeTool({ pipeMs: 1000 }), makeTool({ id: 'cat' }), makeTool({ id: 'sed' })];
+    const sed = makeTool({ id: 'sed', tags: ['Edit'] }); // 2 [Shell]: no POSIX breakpoint
+    const tools = [makeTool({ pipeMs: 1000 }), makeTool({ id: 'cat' }), sed];
     const input = withMods(fight({ tools }), mod('pipeMs', 500));
     const pipes = ofKind(resolveCombat(input).events, 'pipe');
     expect(pipes[0]).toMatchObject({ src: 't0', dst: 't1', v: 1500 });

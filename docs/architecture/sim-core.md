@@ -5,7 +5,7 @@ keywords: [sim, determinism, tick, rng, integer-math, combat, api]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts, src/sim/combat/deadline.ts, src/sim/combat/end.ts, src/sim/combat/order/**, src/sim/combat/context/ctx.ts, src/sim/combat/rules/**, src/sim/combat/mods/**]
+related_code: [src/sim/breakpoints.ts, src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts, src/sim/combat/deadline.ts, src/sim/combat/end.ts, src/sim/combat/order/**, src/sim/combat/context/ctx.ts, src/sim/combat/rules/**, src/sim/combat/mods/**]
 related: [event-log.md, overview.md, content-model.md, ../game/systems/combat.md, ../game/systems/context.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -65,7 +65,8 @@ being in the starting line (e.g. Side Quest). The sim resolves spawn ids against
 | `EnemyRt` | `uid` (monotonic spawn id), `def`, `sev`, `maxSev` (Grow raises it), `guard`, `armor` (`layers` left, current layer `hp`), `stage` (index in `def.stages` whose cycle replaces `cycle`, -1 without), `statuses`, `intentIx`, `progress`, `traitState` (`ms` in the fight counted in step 2 for timed traits, `dmg` Grow attack bonus added to each hit after phase scaling); trait logic in `enemy/traits.ts` |
 | `SummonRt` | `uid`, `sourceSlot`, `value`, `bornT`, `lifeMs`, `nextHitT` |
 | `Sim` | `t`, `seq`, `rng`, `agent`, `enemies` (array, index 0 = front), `summons`, `events`, `deadline`, `rules`, `mods` |
-| `RulesRt` | `list` (item rules in slot order: trait, prompt, skills, memories, lessons; `hits`, `lastT` each), `pending` triggers, `usedOncePerRun` |
+| `RulesRt` | `list` (item rules in slot order: trait, prompt, skills, memories, lessons, then active tag breakpoints as `bp:<id>`; `hits`, `lastT` each), `pending` triggers, `usedOncePerRun` |
+| Breakpoints | `breakpoints(tools)` (`src/sim/breakpoints.ts`, exported for run selectors) counts equipped tool tags, a dual-tag tool for both, and returns `count`/`need`/`active` per breakpoint; active ones add their rules: POSIX `pipeMs +500`, Refactor `dmgPct +15` on [Edit], Indexed `output -1` on [Search], TDD `toolFired [Test]` heals 2 |
 | `ModRt` | passive `mod` effects collected once at fight start from `rules.list`: why id `<kind>:<def id>`, `stat`, `v`, `filter`, owning rule (conds). Fight-start stats (`window`, `noiseBlock`, `focusPct`, `rate`) check only the filter; the others check the rule's conds where they apply (damage mods once per activation, which counts for `oncePerFight`) |
 | Custom hooks | passive `custom` effects, asked at fixed points (`mods/custom.ts`): `double_first_resolve` in tool firing (the first activation each fight resolves its effects and output twice with the same mods, `toolFired.d.echo` 1; the rule's `lastT` marks it used), `context_noise_cut` in noise injection, `throttle_shorter` in status application, `web_ignores_outage` (Cache) in tool firing (Web tools ignore Outage), `rot_no_slow` in `toolRate` (Rot does not slow tools), `feedback_loop` in `pipe` (the rightmost tool pipes `ms` plus pipeMs mods into the leftmost). All ids are registered in `src/sim/handlers` |
 

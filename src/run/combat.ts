@@ -2,7 +2,12 @@
 // outcome. See docs/architecture/run-state.md#actions and sim-core.md#api.
 import { content } from '../content/index.ts';
 import type { EncounterDef, EnemyDef } from '../content/types/enemy.ts';
-import { type CombatInput, resolveCombat } from '../sim/index.ts';
+import {
+  type BreakpointProgress,
+  breakpoints,
+  type CombatInput,
+  resolveCombat,
+} from '../sim/index.ts';
 import { forkSeed } from '../sim/rng.ts';
 import { addedEnemies, afterFight, simModifiers } from './events/modifiers.ts';
 import { eliteMemory } from './nodes/memory.ts';
@@ -47,6 +52,10 @@ function spawnDefsOf(line: readonly EnemyDef[]): EnemyDef[] {
   }
   return all.slice(line.length);
 }
+
+/** Breakpoint progress of the equipped tools, as the sim counts it (build panel selector). */
+export const loadoutBreakpoints = (state: RunState): BreakpointProgress[] =>
+  breakpoints(state.agent.tools.map((t) => byId(content.tools, t.id)));
 
 /**
  * The sim input for the fight on `node`; the seed depends only on run seed and node id.

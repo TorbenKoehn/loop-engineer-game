@@ -67,7 +67,8 @@ describe('Legacy Monolith (p1b)', () => {
     ]);
   });
 
-  // A fixed v3 Edit-heavy loadout; all 3 layers break and the Monolith resolves in time.
+  // A fixed v3 Edit-heavy loadout (Refactor and POSIX breakpoints); all 3 layers break and the
+  // Monolith resolves in time.
   it('boss fight resolves', () => {
     const result = resolveCombat(boss(['edit_file', 'sed', 'autocomplete', 'grep', 'cat'], 3));
     const log = serializeLog(result.events);
@@ -75,10 +76,10 @@ describe('Legacy Monolith (p1b)', () => {
     expect([result.outcome, result.reason, result.endT, result.events.length]).toEqual([
       'win',
       'resolved',
-      40_800,
-      243,
+      36_250,
+      226,
     ]);
     expect(of(result.events, 'armorBroken').map((e) => e.d.remaining)).toEqual([2, 1, 0]);
-    expect(hash).toBe('04b5412a1a47fee9b4f0c79bc911d5c21f0dbf897152e6d6ea1a71846e9f6760');
+    expect(hash).toBe('d76d206ffdf857310da776c592da8d4691abc292456f02b322536683d5e48fd1');
   });
 });

@@ -1,8 +1,9 @@
 // Item rules of one fight and the queue of triggers the sim raises for rules/engine.ts.
 import type { Rule, Trigger } from '../../../content/types/index.ts';
+import { breakpoints } from '../../breakpoints.ts';
 import type { CombatInput } from '../types.ts';
 
-/** One rule of the trait, prompt, a skill, memory or lesson; passive ones are mods (mods/). */
+/** One rule of the trait, prompt, a skill, memory, lesson or breakpoint; passive ones are mods. */
 export interface RuleRt {
   /** `<kind>:<def id>#<rule index>`, e.g. `skill:rubber_duck#0`; the oncePerRun key. */
   readonly id: string;
@@ -27,7 +28,7 @@ export interface Fire {
 export type FireSpec = Omit<Fire, 'chain'>;
 
 export interface RulesRt {
-  /** Collection order = slot order: trait, prompt, skills, memories, lessons. */
+  /** Collection order = slot order: trait, prompt, skills, memories, lessons, breakpoints. */
   readonly list: readonly RuleRt[];
   readonly pending: Fire[];
   chain: readonly number[]; // of the rule whose effects run now
@@ -35,7 +36,7 @@ export interface RulesRt {
 }
 
 type Owner = { readonly id: string; readonly rules: readonly Rule[] };
-const KINDS = ['trait', 'prompt', 'skill', 'memory', 'lesson'] as const;
+const KINDS = ['trait', 'prompt', 'skill', 'memory', 'lesson', 'bp'] as const;
 
 export function createRules(input: CombatInput): RulesRt {
   const { trait, prompt, skills, memories, lessons } = input;
@@ -45,6 +46,7 @@ export function createRules(input: CombatInput): RulesRt {
     skills,
     memories,
     lessons,
+    breakpoints(input.agent.tools.map((t) => t.def)).flatMap((b) => (b.active ? [b.def] : [])),
   ];
   const list = owners.flatMap((defs, k) =>
     defs.flatMap((def) =>

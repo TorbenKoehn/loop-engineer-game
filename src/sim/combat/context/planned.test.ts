@@ -39,7 +39,8 @@ const compactions = (s: Sim) => s.events.filter((e) => e.kind === 'compaction');
 
 describe('planned compaction', () => {
   it('policy 80 compacts at 80% (worked example)', () => {
-    const s = sim([tool('cat', 1), tool('big', 15), tool('six', 6)], 80);
+    const six = tool('six', 6, { tags: ['Test'] }); // 2 [Search]: no Indexed breakpoint
+    const s = sim([tool('cat', 1), tool('big', 15), six], 80);
     const [enemy] = s.enemies;
     if (!enemy) throw new Error('setup');
     fire(s, 0); // cat: F 21

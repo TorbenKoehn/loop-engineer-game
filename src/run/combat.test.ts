@@ -11,7 +11,7 @@ import { forkSeed } from '../sim/rng.ts';
 import { hitIntent, intent, makeEnemy } from '../sim/testing/builders.ts';
 import type { Action } from './actions.ts';
 import { apply, legalActions } from './apply.ts';
-import { combatInput } from './combat.ts';
+import { combatInput, loadoutBreakpoints } from './combat.ts';
 import { reachable } from './map/graph.ts';
 import { newRun } from './new-run.ts';
 import type { MapNode, MetaView, RunState } from './state.ts';
@@ -92,6 +92,23 @@ describe('travel to a fight node', () => {
       error: 'notReachable',
     });
     expect(apply(after, { t: 'travel', node: firstNode(after) }).ok).toBe(false);
+  });
+});
+
+describe('breakpoints', () => {
+  it('the build-panel selector counts the equipped tools as the fight does', () => {
+    const state = onMap(); // terminal_purist: grep, cat (Search, Shell), sed (Edit, Shell)
+    const chips = loadoutBreakpoints(state).map((b) => [b.def.tag, b.count, b.def.need]);
+    expect(chips).toEqual([
+      ['Shell', 3, 3],
+      ['Edit', 1, 3],
+      ['Search', 2, 3],
+      ['Test', 0, 2],
+    ]);
+    const input = combatInput(state, node(state, firstNode(state)));
+    expect(createSim(input, false).mods.filter((m) => m.id.startsWith('bp:'))).toMatchObject([
+      { id: 'bp:posix', stat: 'pipeMs', v: 500 },
+    ]);
   });
 });
 

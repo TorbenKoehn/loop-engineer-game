@@ -151,6 +151,8 @@ export type Action =
 lessons, encounter), calls `resolveCombat(input)`, applies
 the outcome (Trust, once-per-run flags, stats folded from the log) and switches to
 `combatReview`. The log is not stored; the UI recomputes it from `input` for playback.
+`loadoutBreakpoints(state)` (`src/run/combat.ts`) gives the build panel the breakpoint
+progress of the equipped tools from the same `breakpoints` function the sim uses.
 
 ## Replay
 

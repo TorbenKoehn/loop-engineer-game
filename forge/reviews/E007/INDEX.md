@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E007"
-summary: "Index of forge/reviews/E007: 5 files, 0 subdirectories"
-keywords: ["review", "traits", "armor", "conditions", "effects", "enemy", "engine", "grow"]
+summary: "Index of forge/reviews/E007: 6 files, 0 subdirectories"
+keywords: ["review", "traits", "armor", "breakpoints", "conditions", "effects", "enemy", "engine"]
 type: index
 status: active
 updated: 2026-10-01
@@ -20,3 +20,4 @@ generated: true
 | [R064-T034.md](R064-T034.md) | Review of T034: Harness traits, system prompts and lessons… | Review of T034 (approved) | review, harness, traits, system, prompts, lessons |
 | [R067-T036.md](R067-T036.md) | Review of T036: Enemy traits Split, Grow, Outage, Blocked | Review of T036 (approved) | review, enemy, traits, split, grow, outage |
 | [R073-T037.md](R073-T037.md) | Review of T037: Armor trait, handler registry and Legacy Mo… | Review of T037 (approved) | review, armor, trait, handler, registry, legacy |
+| [R079-T035.md](R079-T035.md) | Review of T035: Tag breakpoints POSIX, Refactor, Indexed, T… | Review of T035 (approved) | review, breakpoints, posix, refactor, indexed |

@@ -109,13 +109,21 @@ test('Free Tier equips its memory; a Standup choice with an unmet requirement st
 
 test('Idle Cycle: Heal restores the previewed Trust and returns to the map', async ({ page }) => {
   await toIdleCycle(page);
+  // Trust before the rest depends on fight balance: read it, assert the heal relation.
+  const bar = page.getByTestId('status-bar');
+  const [, before = 0, max = 0] = ((await bar.textContent()) ?? '')
+    .match(/Trust (\d+)\/(\d+)/)
+    ?.map(Number) ?? [NaN];
+  expect(max).toBe(80);
+  const gain = Math.ceil((max * 30) / 100);
+  const after = Math.min(max, before + gain);
   const heal = page.getByTestId('rest-heal');
   await expect(heal).toBeFocused();
-  await expect(heal).toContainText('Restore 24 Trust');
-  await expect(heal).toContainText('Trust 42 → 66');
+  await expect(heal).toContainText(`Restore ${gain} Trust`);
+  await expect(heal).toContainText(`Trust ${before} → ${after}`);
   await heal.click();
   await expect(mapHeading(page)).toBeVisible();
-  await expect(page.getByTestId('status-bar')).toContainText('Trust 66/80');
+  await expect(bar).toContainText(`Trust ${after}/${max}`);
 });
 
 test('Idle Cycle: the tool picker upgrades the picked tool and returns to the map', async ({
