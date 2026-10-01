@@ -6,6 +6,7 @@ import { enHarnesses } from './en-harnesses.ts';
 import { enLessons } from './en-lessons.ts';
 import { enSkills } from './en-skills.ts';
 import { enTools } from './en-tools.ts';
+import { enUi } from './en-ui.ts';
 
 /** Every area string module by area name (completeness and duplicate-key tests). */
 export const EN_AREA_MODULES = {
@@ -15,6 +16,7 @@ export const EN_AREA_MODULES = {
   lessons: enLessons,
   skills: enSkills,
   tools: enTools,
+  ui: enUi,
 } as const;
 
 /** All area strings merged; spread once into `en`. */
@@ -25,4 +27,5 @@ export const enAreas = {
   ...enLessons,
   ...enSkills,
   ...enTools,
+  ...enUi,
 } as const;

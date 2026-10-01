@@ -1,0 +1,43 @@
+/* IDE shell layout (docs/game/ux/screens.md "Shell layout"). Layout only; styling is T056. */
+.shell {
+  height: 100vh;
+  display: grid;
+  grid-template:
+    "top top" 32px "explorer editor" 1fr "explorer terminal" auto "status status" 24px
+    / 240px 1fr;
+}
+.shell-top,
+.shell-status {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-inline: 12px;
+}
+.shell-top {
+  grid-area: top;
+  justify-content: space-between;
+}
+.shell-explorer {
+  grid-area: explorer;
+  padding-inline: 12px;
+  background: var(--bg-panel);
+}
+.shell-editor {
+  grid-area: editor;
+  overflow: auto;
+  padding: 16px;
+}
+.shell-terminal {
+  grid-area: terminal;
+  height: 180px;
+  overflow: auto;
+  border-top: 1px solid var(--border);
+}
+.shell-status {
+  grid-area: status;
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.shell-status__end {
+  margin-inline-start: auto;
+}

@@ -1,0 +1,21 @@
+// Shell and screen chrome (docs/game/ux/screens.md). Spread into `en`; keys `ui.<area>.<name>`.
+
+export const enUi = {
+  'ui.title.name': 'Loop Engineer',
+  'ui.title.seed': 'Seed',
+  'ui.title.new_run': 'New run',
+  'ui.title.sandbox': 'Combat sandbox',
+  'ui.shell.breadcrumb': 'phase-{phase}/{mode}',
+  'ui.shell.seed': 'seed {seed}',
+  'ui.shell.explorer': 'Explorer',
+  'ui.shell.terminal': 'Terminal',
+  'ui.shell.error': 'error: {code}',
+  'ui.status.trust': 'Trust',
+  'ui.status.credits': 'Credits',
+  'ui.status.ctx': 'ctx',
+  'ui.status.phase': 'P{phase}',
+  'ui.status.speed': '{speed}x',
+  'ui.screen.todo': 'No screen for {mode} yet.',
+  'ui.action.pick_prompt': 'Pick {name}',
+  'ui.action.travel': 'Go to {node}',
+} as const;

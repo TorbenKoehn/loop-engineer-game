@@ -1,8 +1,12 @@
 // Import boundary: ui may import content, sim, run, save, render-fx, audio.
 // Nothing may import from src/ui. See docs/architecture/overview.md.
-import { Sandbox } from './sandbox/view/sandbox.tsx';
+import { Placeholder } from './screens/placeholder.tsx';
+import { Title } from './screens/title.tsx';
+import { Shell } from './shell/shell.tsx';
+import { mode } from './store/run.ts';
 
-/** Until the IDE shell (T055) exists, the start page is the dev combat sandbox (T098). */
+/** Switches on `mode` to one screen inside the shell; `mode` is the route (ui.md "Screens"). */
 export function App() {
-  return <Sandbox />;
+  const m = mode.value;
+  return <Shell>{m === 'title' ? <Title /> : <Placeholder mode={m} />}</Shell>;
 }

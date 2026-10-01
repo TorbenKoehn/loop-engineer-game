@@ -10,7 +10,7 @@ test('combat sandbox loads, resolves a fight and logs no console errors', async 
   });
   page.on('pageerror', (e) => errors.push(e.message));
 
-  await page.goto('/');
+  await page.goto('/?sandbox');
   await expect(page).toHaveTitle(/Loop Engineer/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(/loop engineer/i);
 
