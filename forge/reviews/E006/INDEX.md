@@ -1,6 +1,6 @@
 ---
 title: "Index: forge/reviews/E006"
-summary: "Index of forge/reviews/E006: 8 files, 0 subdirectories"
+summary: "Index of forge/reviews/E006: 9 files, 0 subdirectories"
 keywords: ["review", "combat", "sandbox", "only", "page", "route", "screen", "view"]
 type: index
 status: active
@@ -23,3 +23,4 @@ generated: true
 | [R048-T100.md](R048-T100.md) | Review of T100: Combat view components on createPlayback | Review of T100 (approved) | review, combat, view, components, createplayback |
 | [R052-T101.md](R052-T101.md) | Review of T101: Combat screen route, dev-only sandbox and e… | Review of T101 (changes-requested) | review, combat, screen, route, only, sandbox |
 | [R053-T101.md](R053-T101.md) | Review of T101: Combat screen route, dev-only sandbox and e… | Review of T101 (approved) | review, combat, screen, route, only, sandbox |
+| [R078-T060.md](R078-T060.md) | Review of T060: Context bar component | Review of T060 (approved) | review, context, component |

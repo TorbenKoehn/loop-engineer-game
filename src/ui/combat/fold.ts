@@ -1,6 +1,7 @@
 // Pure view fold: events up to a time -> what the combat screen shows. It never calls the sim;
 // every number comes from the event log (docs/architecture/ui.md "View fold").
 import type { CombatEvent, EventKind, Ref } from '../../sim/events.ts';
+import { type CtxView, emptyCtx, foldCtx } from './context.ts';
 
 export interface StatusChip {
   readonly status: string;
@@ -74,6 +75,8 @@ export interface CombatView {
   /** Front to back, resolved enemies included (they stay greyed out). */
   readonly enemies: readonly EnemyView[];
   readonly tools: readonly ToolView[];
+  /** The context bar: window, baseline, signal, noise sources and zone. */
+  readonly ctx: CtxView;
   /** The most recent pops, oldest first, at most MAX_POPS. */
   readonly pops: readonly Pop[];
   readonly end?: EndView;
@@ -104,6 +107,7 @@ export function initialView(tools: readonly ToolSlot[]): CombatView {
       guard: 0,
       statuses: [],
     })),
+    ctx: emptyCtx,
     pops: [],
   };
 }
@@ -206,7 +210,7 @@ const handlers: { [K in EventKind]?: Handler<K> } = {
 export function foldEvent(view: CombatView, e: CombatEvent): CombatView {
   const handler = handlers[e.kind] as Handler<EventKind> | undefined;
   const next = handler ? handler(view, e) : view;
-  return { ...next, cursor: view.cursor + 1, t: e.t };
+  return { ...next, ctx: foldCtx(next.ctx, e), cursor: view.cursor + 1, t: e.t };
 }
 
 /** Folds forward from `view.cursor` through every event with `t <= time`. */

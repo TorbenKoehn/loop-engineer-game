@@ -111,3 +111,35 @@ test('New run -> pick -> travel -> fight -> Continue, with controls and persiste
 
   expect(errors).toEqual([]);
 });
+
+// T060: the context bar on the same seeded fight; paused once Context Drift's noise is in.
+test('Context bar shows zone, ticks, F/W and the noise source on hover', async ({ page }) => {
+  await page.goto('/');
+  await page.getByLabel('Seed').fill('K7Q2-M9XA');
+  await page.getByRole('button', { name: 'New run' }).click();
+  await page.getByTestId('harness-terminal_purist').click();
+  await page.getByRole('button', { name: 'Start run' }).click();
+  await page
+    .getByTestId(/^prompt-/)
+    .first()
+    .click();
+  await travel(page, 'p1-r1-c0');
+  const fight = page.getByRole('region', { name: 'Fight' });
+  await fight.getByRole('button', { name: '4x' }).click();
+
+  const bar = page.getByTestId('ctx-bar');
+  await expect(bar).toBeVisible();
+  await expect(page.getByTestId('ctx-fill')).toHaveText(/^\d+\/\d+k$/);
+  await expect(page.getByTestId('ctx-zone')).toHaveAttribute('aria-label', /^Zone: \w+/);
+  await expect(bar.locator('.ctx__tick')).toHaveText(['25%', '70%']);
+  await expect(bar.locator('.ctx__seg--base')).toBeVisible();
+
+  await bar.locator('.ctx__seg--noise').first().waitFor();
+  await fight.getByRole('button', { name: 'Pause' }).click();
+  await bar.locator('.ctx__seg--noise').first().hover();
+  await expect(bar.locator('.ctx__seg--noise .ctx__tip').first()).toHaveText(
+    /^Context Drift: \d+k$/,
+  );
+  // The status bar follows the fight's fill.
+  await expect(page.getByTestId('status-bar')).toContainText(/ctx \d+\/\d+/);
+});

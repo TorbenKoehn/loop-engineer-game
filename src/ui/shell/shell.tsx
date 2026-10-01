@@ -3,7 +3,7 @@ import type { ComponentChildren } from 'preact';
 import type { StringKey } from '../../content/strings/en.ts';
 import type { RunState } from '../../run/state.ts';
 import { fmtNumber, t } from '../i18n.ts';
-import { speed } from '../store/playback.ts';
+import { ctxLive, speed } from '../store/playback.ts';
 import { ctxWindow, lastError, run } from '../store/run.ts';
 
 /** `phase-1/implement › row 3` (screens.md "Shell layout"); the row of the current node. */
@@ -71,7 +71,9 @@ function StatusBar() {
           </span>
           <span title={t('ui.status.credits')}>$ {fmtNumber(r.agent.credits)}</span>
           <span>
-            {t('ui.status.ctx')} –/{fmtNumber(ctxWindow.value)}
+            {t('ui.status.ctx')}{' '}
+            {ctxLive.value ? fmtNumber(ctxLive.value.S + ctxLive.value.N) : '–'}/
+            {fmtNumber(ctxLive.value?.W ?? ctxWindow.value)}
           </span>
           <span>{t('ui.status.phase', { phase: r.phase })}</span>
         </>

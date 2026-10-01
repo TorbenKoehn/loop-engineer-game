@@ -125,7 +125,11 @@ export interface Playback {
   background tab does not jump) and applies all events with `t ≤ simT`.
 - **View fold**: `foldEvent(view, event) -> view` (`src/ui/combat/fold.ts`) is a pure
   function that builds what the screen shows (bars, numbers, chips, intents). It never
-  calls the sim.
+  calls the sim. The context bar's slice (`view.ctx`, `context.ts`) folds `fightStart`,
+  `tokens`, `zoneChanged` and `compaction`; noise keeps one segment per source and is
+  trimmed to the logged `N`. `view/context-bar.tsx` renders it (baseline, signal in the zone
+  pattern, hatched noise with source tooltips, 25%/70% ticks, policy marker, `F/W`, zone
+  label); the status bar reads the live value from `store/playback.ts` `ctxLive`.
 - **Seeking**: checkpoints of `view` every 100 events (`checkpoints.ts`); seeking to an
   index restores the nearest checkpoint and folds forward. Clicking a log line seeks and
   pauses.

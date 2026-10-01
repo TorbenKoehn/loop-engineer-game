@@ -577,6 +577,129 @@
 
 /* Reduced motion: no blinking, floating, sliding or eased bars; state stays visible. */
 
+/* Context bar: baseline, signal in the zone pattern, hatched noise, ticks, policy marker */
+
+.ctx {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 4px 14px;
+  min-height: 40px;
+}
+
+.ctx__label {
+  color: var(--fg-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ctx__track {
+  position: relative;
+  display: flex;
+  height: 22px;
+  margin-block: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ctx__seg {
+  position: relative;
+  min-width: 2px;
+  outline-offset: 1px;
+  border-inline-end: 1px solid var(--bg);
+}
+
+.ctx__seg:first-child {
+  border-start-start-radius: var(--radius);
+  border-end-start-radius: var(--radius);
+}
+
+.ctx__seg--base {
+  background:
+    repeating-linear-gradient(90deg, var(--border) 0 1px, transparent 1px 6px), var(--bg-raised);
+}
+
+.ctx__seg--signal {
+  background-color: color-mix(in srgb, var(--zone-color) 30%, var(--bg-panel));
+  background-image: var(--zone-pattern);
+  box-shadow: inset 0 0 0 1px var(--zone-color);
+}
+
+.ctx__seg--noise {
+  background-color: color-mix(in srgb, var(--noise) 22%, var(--bg-panel));
+  background-image: var(--zone-pattern);
+  box-shadow: inset 0 0 0 1px var(--noise);
+}
+
+.ctx__free {
+  min-width: 0;
+}
+
+.ctx__tick {
+  position: absolute;
+  top: -13px;
+  bottom: -3px;
+  border-inline-start: 1px dashed var(--fg-muted);
+  padding-inline-start: 3px;
+  color: var(--fg-muted);
+  font-size: var(--size-meta);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.ctx__policy {
+  position: absolute;
+  top: 100%;
+  translate: -50% 1px;
+  color: var(--brand-text);
+  font-size: var(--size-meta);
+  line-height: 1;
+  cursor: help;
+}
+
+.ctx__policy.is-off {
+  color: var(--fg-muted);
+  text-decoration: line-through;
+}
+
+.ctx__fill {
+  font-size: var(--size-heading);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ctx__warn {
+  grid-column: 2 / -1;
+  color: var(--warn);
+  font-size: var(--size-meta);
+  font-weight: 700;
+}
+
+.ctx__tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 5;
+  display: none;
+  padding: 2px 8px;
+  white-space: nowrap;
+  color: var(--fg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: var(--size-meta);
+  font-weight: 400;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.ctx__seg:hover > .ctx__tip,
+.ctx__seg:focus-visible > .ctx__tip {
+  display: block;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cursor,
   .pop,

@@ -44,6 +44,8 @@ Every effect is explained in plain English with its formula, so players learn th
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R078 F1): make the context-bar noise-segment tooltips keyboard-focusable and screen-reader accessible (they are hover-only; fix the wrong code comment in context-bar.tsx).
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log
