@@ -95,7 +95,7 @@ test('New run -> pick -> travel -> fight -> Continue, with controls and persiste
   const next = result.getByRole('button', { name: 'Continue' });
   await expect(next).toBeFocused();
   await next.click();
-  await expect(page.getByText('No screen for reward yet.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'PR ready to merge' })).toBeVisible();
   await expect(page.getByRole('banner')).toContainText('phase-1/implement › row 1');
   await expect(fight).toHaveCount(0);
 
@@ -106,7 +106,7 @@ test('New run -> pick -> travel -> fight -> Continue, with controls and persiste
   await expect(speedLabel).toHaveText('⏭ Skip');
   await expect(result).toContainText(/Resolved in/);
   await result.getByRole('button', { name: 'Continue' }).click();
-  await expect(page.getByText('No screen for reward yet.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'PR ready to merge' })).toBeVisible();
   await expect(page.getByRole('banner')).toContainText('phase-1/implement › row 2');
 
   expect(errors).toEqual([]);

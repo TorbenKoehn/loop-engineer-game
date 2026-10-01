@@ -42,6 +42,8 @@ Let Playwright and developers drive deterministic runs without clicking through 
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R069 F1): once hooks exist, add an e2e that drives the discard screen (fill slots via window.__game) - T065 AC3 is unit-tested only.
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

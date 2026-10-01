@@ -1,0 +1,146 @@
+/*
+ * Reward and discard screens (screens.md "Other screens") on the Crimson tokens. Cards read as
+ * diff hunks: additions carry a "+" glyph and removals a "-", so colour is never the only cue.
+ */
+
+.rcard {
+  display: grid;
+  flex: 1 1 260px;
+  max-width: 340px;
+  align-content: start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--fast),
+    background-color var(--fast),
+    box-shadow var(--fast);
+}
+
+.rcard:hover,
+.rcard:focus-visible {
+  border-color: var(--brand-text);
+  background: var(--bg-raised);
+}
+
+.rcard:focus-visible {
+  box-shadow:
+    inset 3px 0 0 var(--brand),
+    0 0 24px -10px var(--brand);
+}
+
+.rcard__file {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--size-meta);
+  color: var(--fg-muted);
+}
+
+.rcard__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.rcard__name {
+  font-size: var(--size-heading);
+}
+
+.rcard__ver {
+  color: var(--credits);
+  font-size: var(--size-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.diff {
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.diff__add {
+  color: var(--good);
+}
+
+.diff__del {
+  color: var(--danger);
+  text-decoration: line-through;
+}
+
+.diff__ctx {
+  color: var(--fg-muted);
+}
+
+.skip,
+.dcard {
+  padding: 8px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: start;
+  cursor: pointer;
+}
+
+.skip:hover,
+.skip:focus-visible,
+.dcard:hover,
+.dcard:focus-visible {
+  border-color: var(--brand-text);
+  background: var(--bg-raised);
+}
+
+.receipt {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 2px 24px;
+  width: max-content;
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--bg-panel);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.receipt div {
+  display: contents;
+}
+
+.receipt dt {
+  color: var(--fg-muted);
+}
+
+.receipt dd {
+  margin: 0;
+  color: var(--credits);
+  text-align: end;
+}
+
+.receipt div:last-child dt,
+.receipt div:last-child dd {
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.cards--col {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dcard__mark {
+  color: var(--brand-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcard {
+    transition: none;
+  }
+}

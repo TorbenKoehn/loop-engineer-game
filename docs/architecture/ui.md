@@ -82,6 +82,14 @@ changes or the screen unmounts. Its view components live in `src/ui/combat/view/
 result strip's Continue dispatches `continue`. The status bar shows the current speed
 (`2x`, `⏭ Skip`).
 
+`RewardScreen` and `DiscardScreen` (`src/ui/screens/reward.tsx`, `discard.tsx`, lazy) render
+`pending` of modes `reward` and `discard`; styles in `theme/reward.css`. Reward cards are
+diff hunks (`+` added lines, `-` the owned version's line for a duplicate tool, whose header
+reads `v1 → v2`, via `nextVersion` in `screens/item-text.ts`); lines come from
+`describeTool`/`describeRule`. The receipt lists Reward, Interest and Total from the pending
+payout (already paid by `enterReward`). Discard lists every ref from `discardRefs` as a
+button dispatching `discardItem`.
+
 ## Combat replay player
 
 ```ts

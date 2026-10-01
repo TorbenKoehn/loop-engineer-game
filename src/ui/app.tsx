@@ -27,6 +27,10 @@ function lazyScreen(load: () => Promise<FunctionComponent>): FunctionComponent {
 }
 
 const MapScreen = lazyScreen(() => import('./screens/map/map-screen.tsx').then((m) => m.MapScreen));
+const RewardScreen = lazyScreen(() => import('./screens/reward.tsx').then((m) => m.RewardScreen));
+const DiscardScreen = lazyScreen(() =>
+  import('./screens/discard.tsx').then((m) => m.DiscardScreen),
+);
 
 /** The screen for the current `mode`; `mode` is the route (ui.md "Screens"). */
 export function Screen() {
@@ -36,6 +40,8 @@ export function Screen() {
   if (m === 'promptPick') return <PromptPick />;
   if (m === 'combatReview') return <CombatScreen />;
   if (m === 'map') return <MapScreen />;
+  if (m === 'reward') return <RewardScreen />;
+  if (m === 'discard') return <DiscardScreen />;
   return <Placeholder mode={m} />;
 }
 
