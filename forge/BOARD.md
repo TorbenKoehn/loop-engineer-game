@@ -107,21 +107,21 @@ generated: true
 | [T092](epics/m0/E023-harness-upkeep/T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | E023 | p2 | opus | M |
 | [T097](epics/m0/E023-harness-upkeep/T097-required-milestone-and-linked-worktree-n.md) | Required --milestone and linked worktree node_modules | E023 | p2 | opus | M |
 
-## Ready (5)
+## Ready (4)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T095](epics/m0/E023-harness-upkeep/T095-harness-diff-measures-production-diff-li.md) | harness:diff measures production diff lines | E023 | p0 | opus | M |
-| [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T088](epics/m0/E023-harness-upkeep/T088-fix-check-runner-and-index-generator-rev.md) | Fix check runner and index generator review nits | E023 | p2 | sonnet | S |
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T099](epics/m1/E005-vertical-slice-content/T099-content-string-registry-without-hub-file.md) | Content string registry without hub-file edits | E005 | p0 | opus | S |
+| [T023](epics/m1/E002-combat-simulation-core/T023-deadline-overtime-and-fight-end-rules.md) | Deadline overtime and fight-end rules | E002 | p1 | opus | S |
 | [T041](epics/m1/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
 
 ## Review (0/3)

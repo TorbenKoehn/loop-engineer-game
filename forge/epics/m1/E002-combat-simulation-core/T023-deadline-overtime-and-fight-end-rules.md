@@ -5,7 +5,7 @@ title: Deadline overtime and fight-end rules
 summary: "Deadline damage k per second after deadlineMs to enemies then agent, bypassing Guardrails; the timeout cap; death checks with ties to the player; agentAfter carry-over."
 keywords: ["sim", "deadline", "overtime", "fight-end", "timeout"]
 type: task
-status: ready
+status: in-progress
 priority: p1
 model: opus
 size: S
@@ -48,3 +48,4 @@ Every fight ends: overtime damage grows each second after the Deadline and a har
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
