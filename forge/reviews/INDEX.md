@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 6 files, 0 subdirectories"
-keywords: ["review", "integer", "biome", "forkable", "seeded", "budgets", "check", "code"]
+summary: "Index of forge/reviews: 7 files, 0 subdirectories"
+keywords: ["review", "integer", "biome", "forkable", "seeded", "vitest", "area", "budgets"]
 type: index
 status: active
 updated: 2026-10-01
@@ -21,3 +21,4 @@ generated: true
 | [R004-T003.md](R004-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (approved) | review, seeded, forkable, integer |
 | [R005-T002.md](R005-T002.md) | Review of T002: Configure Biome with code budgets | Review of T002 (approved) | review, configure, biome, with, code, budgets |
 | [R006-T017.md](R006-T017.md) | Review of T017: Integer math helpers for the sim | Review of T017 (approved) | review, integer, math, helpers |
+| [R007-T008.md](R007-T008.md) | Review of T008: Per-area coverage gates in Vitest | Review of T008 (approved) | review, area, coverage, gates, vitest |

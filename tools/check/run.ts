@@ -2,6 +2,7 @@
 // Run via `npm run check`. Cross-platform (Windows .cmd shims via shell: true).
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
+import { totalLinesWarning } from './coverage-thresholds.ts';
 
 interface Step {
   label: string;
@@ -28,7 +29,7 @@ function biomeSkip(): string | undefined {
 const steps: Step[] = [
   { label: 'typecheck (tsc)', command: 'npm run typecheck' },
   { label: 'lint (biome)', command: 'npm run lint', skipIf: biomeSkip },
-  { label: 'test (vitest)', command: 'npm test' },
+  { label: 'test + coverage (vitest)', command: 'npm run test:coverage' },
   { label: 'harness (harness:check)', command: 'npm run harness:check' },
 ];
 
@@ -48,6 +49,10 @@ for (const [i, step] of steps.entries()) {
   }
   console.log(`\n${tag}: ${step.command}`);
   const result = spawnSync(step.command, { stdio: 'inherit', shell: true });
+  if (result.status === 0 && step.command.includes('test:coverage')) {
+    const warning = totalLinesWarning();
+    if (warning) console.warn(`${tag}: ${warning}`);
+  }
   if (result.status !== 0) {
     console.error(
       `\n[check] FAILED at step ${i + 1}/${total}: ${step.label} (exit ${result.status ?? 'signal'})`,
