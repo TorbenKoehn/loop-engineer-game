@@ -22,7 +22,7 @@ generated: true
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 6/11 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 2/8 |
-| [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 3/7 |
+| [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 4/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 1/8 |
 | [E010](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 0/8 |
 | [E011](epics/m1/E011-juice-audio-settings-and-tutorial/EPIC.md) | Juice, audio, settings and tutorial | backlog | p1 | 0/7 |
@@ -96,14 +96,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (4/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T029](epics/m1/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
 | [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 | [T046](epics/m1/E004-run-structure-and-map/T046-idle-cycle-free-tier-and-elite-memory-no.md) | Idle Cycle, Free Tier and elite memory nodes | E004 | p2 | sonnet | S |
-| [T051](epics/m1/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
 
 ## Review (0/3)
 
@@ -113,9 +112,9 @@ _none_
 
 _none_
 
-## Done (50)
+## Done (51)
 
-_Showing the last 20 of 50 done tasks._
+_Showing the last 20 of 51 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -132,12 +131,12 @@ _Showing the last 20 of 50 done tasks._
 | [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 | [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
 | [T055](epics/m1/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
+| [T051](epics/m1/E008-run-end-meta-state-and-saves/T051-export-and-import-save-string-codec.md) | Export and import save string codec | E008 | p2 | sonnet | S |
 | [T050](epics/m1/E008-run-end-meta-state-and-saves/T050-run-and-meta-save-schema-with-storage-ad.md) | Run and meta save schema with storage adapter | E008 | p1 | opus | M |
 | [T049](epics/m1/E008-run-end-meta-state-and-saves/T049-meta-state-history-and-agents-md-lessons.md) | Meta state, history and AGENTS.md lessons | E008 | p1 | opus | M |
 | [T048](epics/m1/E008-run-end-meta-state-and-saves/T048-run-end-slice-win-and-run-stats.md) | Run end, slice win and run stats | E008 | p1 | opus | M |
 | [T044](epics/m1/E004-run-structure-and-map/T044-package-registry-shop-offers-buy-reroll.md) | Package Registry shop: offers, buy, reroll, sell | E004 | p1 | opus | M |
 | [T043](epics/m1/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
 | [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
-| [T041](epics/m1/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
 
 ## Cancelled (1)
