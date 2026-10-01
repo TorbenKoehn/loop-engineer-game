@@ -15,7 +15,7 @@ generated: true
 
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
-| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 0/6 |
+| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 1/6 |
 | [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 0/0 |
 | [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/0 |
 | [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/0 |
@@ -29,11 +29,10 @@ generated: true
 | [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T005](epics/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
 
-## Ready (4)
+## Ready (3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T001](epics/E001-game-foundation/T001-scaffold-vite-preact-and-strict-typescri.md) | Scaffold Vite, Preact and strict TypeScript app | E001 | p0 | sonnet | S |
 | [T002](epics/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
 | [T003](epics/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
 | [T006](epics/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
@@ -50,8 +49,10 @@ _none_
 
 _none_
 
-## Done (0)
+## Done (1)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T001](epics/E001-game-foundation/T001-scaffold-vite-preact-and-strict-typescri.md) | Scaffold Vite, Preact and strict TypeScript app | E001 | p0 | sonnet | S |
 
 ## Cancelled (0)

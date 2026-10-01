@@ -3,6 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
     "harness:index": "node tools/harness/cli.ts index",
     "harness:budgets": "node tools/harness/cli.ts budgets",
     "harness:lint": "node tools/harness/cli.ts lint",
@@ -12,9 +16,15 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
     "@types/node": "^26.6.3",
     "typescript": "^7.0.2",
+    "vite": "^8.3.2",
     "vitest": "^5.0.3",
     "yaml": "^2.9.1"
+  },
+  "dependencies": {
+    "@preact/signals": "^2.11.3",
+    "preact": "~10.29.8"
   }
 }
