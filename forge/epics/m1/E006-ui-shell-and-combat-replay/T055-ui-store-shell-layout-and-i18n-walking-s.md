@@ -5,7 +5,7 @@ title: UI store, shell layout and i18n walking skeleton
 summary: "Signals store with dispatch over the run reducer, App switching on mode inside the IDE shell (top bar, explorer, editor, terminal, status bar) and t() i18n."
 keywords: ["ui", "store", "signals", "shell", "i18n", "walking-skeleton"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -50,3 +50,4 @@ Prove the browser path end to end: a run state lives in signals, actions go thro
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
