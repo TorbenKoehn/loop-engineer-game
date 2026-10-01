@@ -53,12 +53,13 @@ describe('target selectors', () => {
   });
 });
 
+// Builder fights start Focused: tool damage 6 lands as 7.
 describe('targeting in a fight', () => {
   it('a back tool hits the last enemy', () => {
     const tool = makeTool({ target: 'back', effects: [{ do: 'dmg', v: 6 }] });
     const enemies = [makeEnemy({ cycle: [] }), makeEnemy({ cycle: [] })];
     const { events } = resolveCombat(fight({ tools: [tool], enemies }));
-    expect(damageAt(events, 3000)).toMatchObject([{ src: 't0', dst: 'e2', v: 6 }]);
+    expect(damageAt(events, 3000)).toMatchObject([{ src: 't0', dst: 'e2', v: 7 }]);
   });
 
   it('an all hit is computed separately per enemy, overkill stays with each', () => {
@@ -67,7 +68,7 @@ describe('targeting in a fight', () => {
     const result = resolveCombat(fight({ tools: [tool], enemies }));
     expect(damageAt(result.events, 3000)).toMatchObject([
       { dst: 'e1', v: 4, d: { sev: 0 } },
-      { dst: 'e2', v: 6, d: { sev: 24 } },
+      { dst: 'e2', v: 7, d: { sev: 23 } },
       { dst: 'e3', v: 6, d: { sev: 0 } },
     ]);
     expect(damageAt(result.events, 6000).map((e) => e.dst)).toEqual(['e2']);
@@ -79,7 +80,7 @@ describe('targeting in a fight', () => {
     const tool = makeTool({ target: 'front', effects });
     const result = resolveCombat(fight({ tools: [tool], enemies: [makeEnemy({ cycle: [] })] }));
     expect(damageAt(result.events, 3000)).toMatchObject([
-      { src: 't0', dst: 'e1', v: 6 },
+      { src: 't0', dst: 'e1', v: 7 },
       { src: 't0', dst: 'a', v: 2, d: { sev: 38 } },
     ]);
     expect(result.stats).toEqual({ toolDamage: [30], damageTaken: 10 });

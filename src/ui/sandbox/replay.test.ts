@@ -26,7 +26,11 @@ describe('sandbox log text', () => {
     const texts = fight.log.map((l) => `${l.actor} ${l.text}`);
     expect(texts).toContain('grep fires (v1): Deal 6 damage to the front enemy.');
     expect(texts).toContain('Typo #2 uses Nitpick: Hit for 2.');
-    expect(texts.some((t) => /^grep hits Typo #1 for 6 → Severity \d+\/30$/.test(t))).toBe(true);
+    // The hit amount includes the context zone %, so it comes from the sim's own damage event.
+    const grep = `t${fight.input.agent.tools.findIndex((s) => s.def.id === 'grep')}`;
+    const hit = fight.result.events.find((e) => e.kind === 'damage' && e.src === grep);
+    const grepHits = new RegExp(`^grep hits Typo #1 for ${hit?.v} → Severity \\d+/30$`);
+    expect(texts.some((t) => grepHits.test(t))).toBe(true);
     expect(texts.some((t) => /^you take 2 from Typo #3 → Trust \d+\/80$/.test(t))).toBe(true);
     expect(fight.log.at(-1)).toMatchObject({ actor: 'system', tone: 'win' });
     expect(fight.log.at(-1)?.text).toMatch(/^Every issue resolved in \d+\.\d s/);

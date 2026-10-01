@@ -24,8 +24,9 @@ describe('guard effect', () => {
     });
     const result = resolveCombat(fight({ tools: [lint], version: 2 }));
     const guards = ofKind(result.events, 'guard');
-    expect(guards[0]).toMatchObject({ t: 3000, src: 't0', dst: 'a', v: 9, d: { total: 9 } });
-    expect(guards[1]).toMatchObject({ t: 6000, v: 9, d: { total: 16 } });
+    // v2 is 9, Focused +20% makes 11.
+    expect(guards[0]).toMatchObject({ t: 3000, src: 't0', dst: 'a', v: 11, d: { total: 11 } });
+    expect(guards[1]).toMatchObject({ t: 6000, v: 11, d: { total: 20 } });
     // Typo's Nitpick (hit 2) at 3000 ms lands on the fresh Guardrails, not on Trust.
     const hits = ofKind(result.events, 'damage');
     expect(hits[0]).toMatchObject({ t: 3000, dst: 'a', v: 0, d: { guard: 2, sev: 40 } });
@@ -54,9 +55,10 @@ describe('heal effect', () => {
     });
     const input = wounded(fight({ tools: [askHuman], enemies: [makeEnemy({ cycle: [] })] }), 25);
     const heals = ofKind(resolveCombat(input).events, 'heal');
+    // 10, Focused +20% makes 12.
     expect(heals.slice(0, 2)).toMatchObject([
-      { t: 3000, src: 't0', dst: 'a', v: 10, d: { total: 35 } },
-      { t: 6000, v: 5, d: { total: 40 } },
+      { t: 3000, src: 't0', dst: 'a', v: 12, d: { total: 37 } },
+      { t: 6000, v: 3, d: { total: 40 } },
     ]);
   });
 
@@ -74,10 +76,10 @@ describe('heal effect', () => {
   });
 
   it('enemy hits drain Guardrails before Trust over a fight', () => {
-    const lint = makeTool({ cooldownMs: 1000, target: 'self', effects: [{ do: 'guard', v: 6 }] });
+    const lint = makeTool({ cooldownMs: 1000, target: 'self', effects: [{ do: 'guard', v: 5 }] });
     const enemies = [makeEnemy({ cycle: [hitIntent(20, 3000)] })];
     const result = resolveCombat(fight({ tools: [lint], enemies }));
-    // Guardrails 18 at 3000 ms absorb 18 of 20.
+    // 5, Focused +20% makes 6 per second: Guardrails 18 at 3000 ms absorb 18 of 20.
     const [first] = ofKind(result.events, 'damage');
     expect(first).toMatchObject({ t: 3000, v: 2, d: { guard: 18, sev: 38 } });
   });

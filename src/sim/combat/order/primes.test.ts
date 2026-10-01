@@ -50,7 +50,13 @@ describe('primes', () => {
     expect(edits.slice(-3)).toMatchObject([
       { kind: 'primeUsed', src: 't0', dst: 't2', v: 30, d: { filter: 'tag:Edit' } },
       { kind: 'primeUsed', src: 't1', dst: 't2', v: 20, d: { filter: 'tag:Edit' } },
-      { kind: 'damage', src: 't2', v: 15, d: { pct: 50, why: ['prime:read_file', 'prime:grep'] } },
+      // Focused +20 first, then the primes: 10 x 170% = 17.
+      {
+        kind: 'damage',
+        src: 't2',
+        v: 17,
+        d: { pct: 70, why: ['zone:focused', 'prime:read_file', 'prime:grep'] },
+      },
     ]);
     expect(ofKind(sim, 'prime')).toMatchObject([
       { src: 't0', dst: 't2', v: 30, d: { filter: 'tag:Edit' } },
@@ -61,8 +67,8 @@ describe('primes', () => {
     fireTools(sim); // consumed: the next activation is unprimed
     expect(ofKind(sim, 'damage').at(-1)).toMatchObject({
       src: 't2',
-      v: 10,
-      d: { pct: 0, why: [] },
+      v: 11, // 12 after Focused, overkill capped at the 11 Severity left
+      d: { pct: 20, why: ['zone:focused'] },
     });
   });
 
@@ -90,12 +96,12 @@ describe('primes', () => {
     const sim = setup(primer('read_docs', 40, {}));
     fill(slot(sim, 0));
     fireTools(sim);
-    expect(ofKind(sim, 'damage')).toMatchObject([{ d: { pct: 0 } }]);
+    expect(ofKind(sim, 'damage')).toMatchObject([{ d: { pct: 20, why: ['zone:focused'] } }]);
     expect(slot(sim, 0).primes).toHaveLength(1);
     fill(slot(sim, 0));
     fireTools(sim);
     expect(ofKind(sim, 'damage').at(-1)).toMatchObject({
-      d: { pct: 40, why: ['prime:read_docs'] },
+      d: { pct: 60, why: ['zone:focused', 'prime:read_docs'] },
     });
   });
 

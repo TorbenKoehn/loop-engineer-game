@@ -1,6 +1,13 @@
 // Test builders for sim tests (docs/architecture/testing.md "Rules for agents writing tests").
 // Defaults mirror slice content: makeTool() is grep, makeEnemy() is Typo.
-import type { EnemyDef, Intent, ModelStats, ToolDef, Verb } from '../../content/types/index.ts';
+import type {
+  Accuracy,
+  EnemyDef,
+  Intent,
+  ModelStats,
+  ToolDef,
+  Verb,
+} from '../../content/types/index.ts';
 import type { CombatInput, Version } from '../combat/types.ts';
 
 /** A tool def; defaults to grep (3000 ms, dmg 6/9/13 on the front enemy). */
@@ -53,17 +60,27 @@ export interface FightSpec {
   readonly trust?: number;
   /** Harness charge rate in percent. */
   readonly speed?: number;
+  /** Context window W; the default 60 puts a grep loadout (B 23) in Focused. */
+  readonly window?: number;
+  readonly accuracy?: Accuracy;
   readonly deadlineMs?: number;
   readonly seed?: string;
 }
 
 const MODEL: ModelStats = {
-  window: 200,
+  window: 60,
   speed: 100,
   accuracy: 'normal',
   trust: 40,
   baseWeight: 20,
 };
+
+const modelOf = ({ speed, window, accuracy }: FightSpec): ModelStats => ({
+  ...MODEL,
+  speed: speed ?? MODEL.speed,
+  window: window ?? MODEL.window,
+  accuracy: accuracy ?? MODEL.accuracy,
+});
 
 /** A complete CombatInput: one grep vs one Typo at 40 Trust unless overridden. */
 export function fight(spec: FightSpec = {}): CombatInput {
@@ -73,7 +90,7 @@ export function fight(spec: FightSpec = {}): CombatInput {
   return {
     seed: spec.seed ?? 'test-seed',
     agent: {
-      model: { ...MODEL, speed: spec.speed ?? MODEL.speed },
+      model: modelOf(spec),
       trust,
       maxTrust: trust,
       tools,

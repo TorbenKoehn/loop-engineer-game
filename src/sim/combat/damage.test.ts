@@ -70,7 +70,7 @@ describe('Guardrails', () => {
         armor: 0,
         guard: 4,
         sev: 22,
-        zone: 0,
+        zone: 1, // the builder fight starts Focused
         why: ['skill:x', 'zone:focused'],
       },
     });

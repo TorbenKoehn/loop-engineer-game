@@ -1,5 +1,6 @@
 // Tick step 4: the agent's tools fire left to right, then reset (no carry-over).
 // Primes are consumed by the activation; pipes fill the right neighbour before the loop reaches it.
+import { zoneMods } from './context/ctx.ts';
 import { applyEffects } from './effects.ts';
 import { pipe } from './order/pipes.ts';
 import { consumePrimes } from './order/primes.ts';
@@ -13,7 +14,8 @@ export function fireTools(sim: Sim): void {
     tool.progress = 0;
     const d = { def: tool.def.id, version: tool.version };
     emit(sim, { kind: 'toolFired', src: toolRef(tool), v: overflow, d });
-    applyEffects(sim, tool, consumePrimes(sim, tool));
+    // Zone before the activation: Focused / Cold scale every amount, never tokens.
+    applyEffects(sim, tool, [...zoneMods(sim.agent.ctx), ...consumePrimes(sim, tool)]);
     tool.piped = false; // "was piped" lasts through this activation, then clears
     pipe(sim, tool);
   }

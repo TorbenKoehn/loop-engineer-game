@@ -10,7 +10,7 @@ import { hpOf, isAgent, maxHpOf, selectTargets, setHp, type Unit, unitRef } from
 
 const NO_MODS: readonly Mod[] = [];
 
-/** `mods` (primes now; item mods T033, zone T025) apply to every amount of this activation. */
+/** `mods` (zone, primes; item mods T033) apply to every amount of this activation. */
 export function applyEffects(sim: Sim, tool: ToolRt, mods: readonly Mod[] = NO_MODS): void {
   const act: Activation = { tool, picks: new Map(), mods };
   for (const effect of tool.def.effects) applyEffect(sim, act, effect);

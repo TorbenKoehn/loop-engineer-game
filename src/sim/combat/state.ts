@@ -3,6 +3,7 @@
 import type { EnemyDef, Status, ToolDef, Value } from '../../content/types/index.ts';
 import type { CombatEvent, Ref } from '../events.ts';
 import { createRng, type Rng } from '../rng.ts';
+import { type Ctx, createCtx } from './context/ctx.ts';
 import { type Phase, scaleSev } from './enemy/phase.ts';
 import type { CombatInput, ToolSetup, Version } from './types.ts';
 
@@ -67,6 +68,7 @@ export interface AgentRt {
   readonly speed: number;
   statuses: StatusRt[];
   readonly tools: ToolRt[];
+  readonly ctx: Ctx;
   /** Damage taken this fight (stats). */
   taken: number;
 }
@@ -110,6 +112,7 @@ export function createSim(input: CombatInput, log: boolean): Sim {
       speed: agent.model.speed,
       statuses: [],
       tools: agent.tools.map(createTool),
+      ctx: createCtx(input),
       taken: 0,
     },
     enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1, encounter.phase)),

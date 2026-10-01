@@ -2,6 +2,7 @@
 // lands: Guardrails absorb first, then Trust or Severity; overkill is discarded.
 import type { Ref } from '../events.ts';
 import { pct as scale } from '../int.ts';
+import { zoneIx } from './context/ctx.ts';
 import { emit, type Sim } from './state.ts';
 import { hpOf, isAgent, setHp, type Unit, unitRef } from './targeting.ts';
 
@@ -50,8 +51,9 @@ export function dealDamage(sim: Sim, src: Ref, unit: Unit, a: Amount): number {
   setHp(unit, hpOf(unit) - dealt);
   if (isAgent(unit)) unit.taken += dealt;
   else if (unit.sev === 0) unit.killedBy = src;
-  // TODO(T025): zone pct; armor and damage-taken mods arrive with E007.
-  const d = { base: a.base, flat: a.flat, pct: a.pct, armor: 0, guard, sev: hpOf(unit), zone: 0 };
+  // Armor and damage-taken mods arrive with E007. `zone`: the bar's zone index at the hit.
+  const zone = zoneIx(sim.agent.ctx.zone);
+  const d = { base: a.base, flat: a.flat, pct: a.pct, armor: 0, guard, sev: hpOf(unit), zone };
   emit(sim, { kind: 'damage', src, dst: unitRef(unit), v: dealt, d: { ...d, why: a.why } });
   return dealt;
 }

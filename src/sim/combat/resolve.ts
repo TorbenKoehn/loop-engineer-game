@@ -1,6 +1,6 @@
 // resolveCombat: input -> fixed 50 ms ticks in the combat tick order -> result and event log.
 // Rules: docs/game/systems/combat.md "Tick order"; API: docs/architecture/sim-core.md.
-import type { ModelStats } from '../../content/types/index.ts';
+import { zoneIx } from './context/ctx.ts';
 import { deadlineDamage } from './deadline.ts';
 import { checkEnd, type End, resolveDead, WIN } from './end.ts';
 import { enemiesAct } from './enemy/act.ts';
@@ -13,7 +13,7 @@ import type { CombatInput, CombatOptions, CombatResult } from './types.ts';
 
 export function resolveCombat(input: CombatInput, opts: CombatOptions = {}): CombatResult {
   const sim = createSim(input, opts.log !== false);
-  startFight(sim, input.agent.model);
+  startFight(sim);
   const end = runTicks(sim);
   const { agent } = sim;
   emit(sim, { kind: 'fightEnd', src: 'sys', v: sim.t, d: { ...end, trust: agent.trust } });
@@ -30,11 +30,9 @@ export function resolveCombat(input: CombatInput, opts: CombatOptions = {}): Com
   };
 }
 
-// TODO(T025): real context bar quantities (B, S, N, zone) in fightStart.
-function startFight(sim: Sim, model: ModelStats): void {
-  const { trust, maxTrust } = sim.agent;
-  const B = model.baseWeight;
-  const d = { W: model.window, B, S: B, N: 0, zone: 0, trust, maxTrust };
+function startFight(sim: Sim): void {
+  const { trust, maxTrust, ctx } = sim.agent;
+  const d = { W: ctx.W, B: ctx.B, S: ctx.S, N: ctx.N, zone: zoneIx(ctx.zone), trust, maxTrust };
   emit(sim, { kind: 'fightStart', src: 'sys', v: sim.deadlineMs, d });
   for (const [index, enemy] of sim.enemies.entries()) {
     const spawn = { def: enemy.def.id, index, reason: 'start' } as const;

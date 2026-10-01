@@ -1,6 +1,7 @@
 // The charge-rate formula (docs/game/systems/combat.md "Charge rate") and tick step 3.
 import type { Status } from '../../../content/types/index.ts';
-import { clamp } from '../../int.ts';
+import { clamp, mulDiv } from '../../int.ts';
+import { ROT_RATE_PCT } from '../context/ctx.ts';
 import { type AgentRt, type EnemyRt, type Sim, TICK_MS, type ToolRt } from '../state.ts';
 import { hasStatus } from './statuses.ts';
 
@@ -11,18 +12,23 @@ export const ENEMY_RATE = 100;
 
 export type HasStatus = (status: Status) => boolean;
 
-/** clamp(add, 10, 400), Haste x2, Slow /2 floor, Throttle or Stun 0. TODO(T025): Rot zone. */
-export function chargeRate(add: number, has: HasStatus): number {
+/** clamp(add, 10, 400), Haste x2, Slow /2 floor, Rot x70/100 floor, Throttle or Stun 0. */
+export function chargeRate(add: number, has: HasStatus, rot = false): number {
   if (has('throttle') || has('stun')) return 0;
   let rate = clamp(add, MIN_RATE, MAX_RATE);
   if (has('haste')) rate *= 2;
   if (has('slow')) rate = Math.floor(rate / 2);
+  if (rot) rate = mulDiv(rate, ROT_RATE_PCT, 100);
   return rate;
 }
 
-/** A tool's own statuses plus a Stun on the agent, which stops all of its tools. */
+/** A tool's own statuses, a Stun on the agent (stops all of its tools) and the Rot zone. */
 export const toolRate = (agent: AgentRt, tool: ToolRt): number =>
-  chargeRate(agent.speed, (s) => hasStatus(tool, s) || (s === 'stun' && hasStatus(agent, s)));
+  chargeRate(
+    agent.speed,
+    (s) => hasStatus(tool, s) || (s === 'stun' && hasStatus(agent, s)),
+    agent.ctx.zone === 'rot',
+  );
 
 export const enemyRate = (enemy: EnemyRt): number =>
   chargeRate(ENEMY_RATE, (s) => hasStatus(enemy, s));
