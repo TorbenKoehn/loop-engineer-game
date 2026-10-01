@@ -86,7 +86,7 @@ Rules: at most `override_max_factor` (2) times the default, `reason` of at least
 Errors, checked on every lint:
 
 - `done_needs_review`: a done task needs `forge/reviews/R###-T###.md` with `verdict: approved`.
-- `status_transition`: versus `git show HEAD:<file>`; allowed `backlog>ready>in-progress>review>done`,
+- `status_transition`: versus HEAD content (one batched `git cat-file --batch`); allowed `backlog>ready>in-progress>review>done`,
   `review>in-progress`, any `>blocked`, `blocked>ready|in-progress`; done is terminal.
 - `ac_decrease`: acceptance criteria may not shrink once a task left backlog/ready.
 
@@ -95,7 +95,7 @@ The HEAD comparison is skipped for untracked files and outside a git repo (or be
 ## Doc drift
 
 - `related_code: [src/sim/**, tools/harness]` in frontmatter: warns when a matched file's last commit
-  date (`git log -1 --format=%cs`) is newer than the doc's `updated`, or when an entry matches nothing.
+  date (one batched `git log --name-only` pass) is newer than the doc's `updated`, or when an entry matches nothing.
 - Warns when a doc mentions `npm run <script>` that `package.json` lacks (research, task and epic docs exempt).
 
 ## Hooks

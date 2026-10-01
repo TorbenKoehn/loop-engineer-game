@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { lastCommitDate } from '../../core/git.ts';
 import { matchGlob } from '../../core/glob.ts';
 import type { Doc, Finding } from '../../core/types.ts';
 import type { Check, Ctx } from '../util.ts';
@@ -39,7 +38,7 @@ function driftForEntry(ctx: Ctx, doc: Doc, files: string[], entry: string): Find
     return [warn(doc.rel, 'doc_drift', `related_code matches no file: ${entry}`)];
   const out: Finding[] = [];
   for (const f of hits) {
-    const date = lastCommitDate(ctx.scan.root, f);
+    const date = ctx.lastCommit(f);
     if (date && date > updated)
       out.push(warn(doc.rel, 'doc_drift', `${f} changed ${date}, doc updated ${updated}`));
   }

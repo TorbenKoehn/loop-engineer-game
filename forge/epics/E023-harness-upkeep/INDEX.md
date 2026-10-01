@@ -1,6 +1,6 @@
 ---
 title: "Index: forge/epics/E023-harness-upkeep"
-summary: "Index of forge/epics/E023-harness-upkeep: 9 files, 0 subdirectories"
+summary: "Index of forge/epics/E023-harness-upkeep: 10 files, 0 subdirectories"
 keywords: ["harness", "biome", "code-budgets", "enforced_by", "epics", "milestone", "ts-nocheck", "tsconfig"]
 type: index
 status: active
@@ -24,3 +24,4 @@ generated: true
 | [T091-harness-enforces-per-module-code-budgets.md](T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | Harness lint measures imports_per_module, exports_per_module and nesting_depth per code file, and the budgets table names harness as their enforcer. | imports_per_module, exports_per_module, nesting_depth, harness, code-budgets, enforced_by |
 | [T092-harness-counts-suppression-markers-and-d.md](T092-harness-counts-suppression-markers-and-d.md) | Harness counts suppression markers and duplication | Harness lint counts @ts-expect-error, lint-disable comments and @ts-nocheck repo-wide and measures duplicated-line percentage, closing the last budgets that nothing enforces. | ts_expect_error, eslint_disable, ts-nocheck, duplication_pct, harness, enforced_by |
 | [T093-harden-the-src-sim-determinism-ban.md](T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | Biome rejects aliased Math, globalThis, crypto and computed Math.random access in src/sim; the ban test lints isolated temp files; biome.jsonc stops claiming noTsIgnore covers @ts-nocheck. | sim-ban, determinism, biome, gritql, globalThis, crypto, ts-nocheck |
+| [T094-batch-git-calls-so-harness-lint-stays-un.md](T094-batch-git-calls-so-harness-lint-stays-un.md) | Batch git calls so harness lint stays under lint_s | harness:lint takes ~14 s (budget lint_s 10 s) because forge integrity and drift checks spawn one git process per file; batch them. | task, batch, calls, harness, lint, stays |

@@ -8,6 +8,8 @@ export interface Ctx {
   today: string;
   /** Content of a repo file at git HEAD, or null (untracked, no repo, no commit). */
   head: (rel: string) => string | null;
+  /** Date (YYYY-MM-DD) of the last commit touching a repo file, or null. */
+  lastCommit: (rel: string) => string | null;
   /** Valid, active per-doc overrides: doc path to budget id to value. */
   overrides: Map<string, Map<string, number>>;
   /** Findings about the overrides themselves (invalid, expired, informational). */

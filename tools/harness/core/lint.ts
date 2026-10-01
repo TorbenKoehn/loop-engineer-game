@@ -10,7 +10,7 @@ import { generateBudgetsTable, TABLE_PATH } from '../gen/table.ts';
 import { today } from './date.ts';
 import { forgeItems } from './forge.ts';
 import { validateDoc } from './frontmatter.ts';
-import { gitHead } from './git.ts';
+import { gitHead, lastCommitDates } from './git.ts';
 import { matchGlob } from './glob.ts';
 import { structureFindings } from './structure.ts';
 import type { Finding, Scan } from './types.ts';
@@ -60,6 +60,7 @@ const ORDER = { error: 0, warn: 1, info: 2 } as const;
 export interface LintOpts {
   now?: string;
   head?: (rel: string) => string | null;
+  lastCommit?: (rel: string) => string | null;
   /** Wall-clock start (ms) of the whole run, enabling the lint_s budget. */
   startedAt?: number;
 }
@@ -74,6 +75,14 @@ function tail(ctx: Ctx, found: Finding[], startedAt?: number): Finding[] {
   ];
 }
 
+function gitReaders(scan: Scan, opts: LintOpts): Pick<Ctx, 'head' | 'lastCommit'> {
+  const rels = scan.docs.map((d) => d.rel);
+  return {
+    head: opts.head ?? gitHead(scan.root, rels),
+    lastCommit: opts.lastCommit ?? lastCommitDates(scan.root),
+  };
+}
+
 export function lint(scan: Scan, opts: LintOpts = {}): Finding[] {
   const { config } = scan;
   const now = opts.now ?? today();
@@ -86,7 +95,7 @@ export function lint(scan: Scan, opts: LintOpts = {}): Finding[] {
     scan,
     items: forgeItems(scan.docs),
     today: now,
-    head: opts.head ?? gitHead(scan.root),
+    ...gitReaders(scan, opts),
     overrides: ov.values,
     overrideFindings: ov.findings,
   };
