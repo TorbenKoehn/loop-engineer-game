@@ -5,7 +5,7 @@ title: "Combat screen: agent, tools, enemies, clock"
 summary: "Combat screen with agent card, tool row with cooldown bars and next values, enemy line with intent chips and countdowns, Deadline clock, speed controls and the result strip."
 keywords: ["combat-view", "ui", "tools", "enemies", "intents", "clock"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: M
@@ -56,3 +56,4 @@ A fight is readable at a glance: who fires next, what each enemy will do and whe
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
