@@ -38,11 +38,10 @@ generated: true
 | [E021](epics/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 
-## Backlog (77)
+## Backlog (75)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T018](epics/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T019](epics/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T020](epics/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
@@ -51,7 +50,6 @@ generated: true
 | [T032](epics/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T040](epics/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
-| [T005](epics/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
 | [T010](epics/E005-vertical-slice-content/T010-generated-plain-english-text-from-templa.md) | Generated plain-English text from templates | E005 | p1 | opus | M |
 | [T011](epics/E005-vertical-slice-content/T011-harness-and-system-prompt-data-for-m1.md) | Harness and system prompt data for M1 | E005 | p1 | sonnet | S |
 | [T012](epics/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
@@ -120,18 +118,21 @@ generated: true
 | [T083](epics/E011-juice-audio-settings-and-tutorial/T083-keyboard-controls-for-combat-and-shell.md) | Keyboard controls for combat and shell | E011 | p2 | sonnet | S |
 | [T085](epics/E011-juice-audio-settings-and-tutorial/T085-ascii-portraits-for-slice-harnesses-and.md) | ASCII portraits for slice harnesses and enemies | E011 | p2 | sonnet | S |
 
-## Ready (4)
+## Ready (3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T007](epics/E001-game-foundation/T007-architecture-import-rule-test.md) | Architecture import-rule test | E001 | p0 | sonnet | S |
-| [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
-| [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
+| [T005](epics/E001-game-foundation/T005-playwright-smoke-test-setup.md) | Playwright smoke test setup | E001 | p1 | sonnet | S |
 | [T008](epics/E001-game-foundation/T008-per-area-coverage-gates-in-vitest.md) | Per-area coverage gates in Vitest | E001 | p1 | sonnet | S |
 
-## In Progress (0/3)
+## In Progress (3/3)
 
-_none_
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
+| [T004](epics/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
+| [T009](epics/E005-vertical-slice-content/T009-content-types-and-effect-dsl-builders.md) | Content types and effect DSL builders | E005 | p0 | opus | M |
+| [T017](epics/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 
 ## Review (0/3)
 

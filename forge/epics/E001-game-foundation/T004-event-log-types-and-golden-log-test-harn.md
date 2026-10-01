@@ -5,7 +5,7 @@ title: Event log types and golden-log test harness
 summary: "Define the CombatEvent log types and a golden-log test harness that diffs seed-to-log output against stored snapshots, so sim changes are reviewed as log diffs."
 keywords: ["event-log", "golden", "snapshot", "testing", "types", "combat"]
 type: task
-status: backlog
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -46,3 +46,4 @@ Define the typed event log (toolFired, damage, noise, zone, compaction and so on
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

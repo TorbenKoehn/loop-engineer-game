@@ -5,7 +5,7 @@ title: Integer math helpers for the sim
 summary: "src/sim/int.ts with pct, mulDiv, clamp and ceilDiv exactly as in sim-core.md, safe-integer assertions in dev builds, and exhaustive unit tests."
 keywords: ["sim", "integer-math", "helpers", "determinism", "rounding"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: sonnet
 size: S
@@ -47,3 +47,4 @@ All sim arithmetic goes through one tested module so rounding is identical every
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

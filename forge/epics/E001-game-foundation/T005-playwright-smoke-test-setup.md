@@ -5,7 +5,7 @@ title: Playwright smoke test setup
 summary: "Set up @playwright/test with Chromium and a smoke test that loads the app and asserts visible text and roles, plus an e2e script."
 keywords: ["playwright", "e2e", "smoke", "testing", "chromium"]
 type: task
-status: backlog
+status: ready
 priority: p1
 model: sonnet
 size: S

@@ -5,7 +5,7 @@ title: Content types and effect DSL builders
 summary: "Typed content model in src/content/types and dsl: item, enemy, encounter, harness, prompt and event defs, Rule/Trigger/Cond/Effect unions, verbs, traits and define* helpers."
 keywords: ["content", "types", "dsl", "effects", "triggers", "builders"]
 type: task
-status: ready
+status: in-progress
 priority: p0
 model: opus
 size: M
@@ -50,3 +50,4 @@ Provide the compile-time content model every other module builds on: the sim imp
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
