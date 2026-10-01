@@ -19,7 +19,8 @@
     "e2e": "playwright test",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "golden:update": "node tools/golden/update.ts"
+    "golden:update": "node tools/golden/update.ts",
+    "content:index": "node tools/content/index.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",

@@ -2,14 +2,11 @@
 // dotted lower-case keys, named placeholders only. Kind templates (`effect.*`, `trigger.*`,
 // `cond.*`, `trait.*`, `verb.*`) are lower-case clauses; text.ts wraps them into sentences.
 // Trigger and cond templates wrap the effect clause `{then}`.
-import { enEnemies } from './en-enemies.ts';
-import { enEvents } from './en-events.ts';
-import { enHarnesses } from './en-harnesses.ts';
-import { enLessons } from './en-lessons.ts';
-import { enSkills } from './en-skills.ts';
-import { enTools } from './en-tools.ts';
+import { enAreas } from './areas.gen.ts';
 
-export const en = {
+/** Shared templates and vocabulary. Area names and flavour live in `en-<area>.ts`, merged by
+ * the generated areas.gen.ts (`npm run content:index`); never import them here (T099). */
+export const enCore = {
   // Sentence composition.
   'text.sentence': '{clause}.',
   'text.and': '{a} and {b}',
@@ -143,15 +140,9 @@ export const en = {
   'stat.slots.memory': 'memory slots {n}',
   'stat.reroll_cost': 'reroll cost {n}',
   'stat.heal_pct': 'healing {n}%',
-
-  // Content names and flavour (one spread per content area).
-  ...enEnemies,
-  ...enHarnesses,
-  ...enTools,
-  ...enSkills,
-  ...enEvents,
-  ...enLessons,
 } as const;
+
+export const en = { ...enCore, ...enAreas } as const;
 
 export type StringKey = keyof typeof en;
 /** A complete string table; other locales are Partial and fall back to `en`. */

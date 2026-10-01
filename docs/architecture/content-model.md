@@ -5,7 +5,7 @@ keywords: [content, dsl, effects, triggers, types, validation, data-driven]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/content/types/**, src/content/dsl/**]
+related_code: [src/content/types/**, src/content/dsl/**, src/content/strings/en.ts, tools/content/**]
 related: [sim-core.md, run-state.md, ../game/content/tools.md, ../game/content/skills.md, ../game/ux/localisation.md, adr/adr-004-content-typed-ts.md]
 ---
 
@@ -16,6 +16,7 @@ related: [sim-core.md, run-state.md, ../game/content/tools.md, ../game/content/s
 - The DSL: rules = trigger -> condition -> effect
 - Custom handlers
 - Generated text
+- Adding a content area
 - Validation (`src/content/validate.ts`, run in tests)
 
 Content is TypeScript data in `src/content`, built with small `define*` helpers so typos
@@ -89,7 +90,8 @@ from `src/content/dsl/rule.ts`, never as `{ when, then }` object literals (Biome
 `noThenProperty`: thenables are a hazard).
 
 Tool data lives in `src/content/tools/` (one module per tag group, `tools` array in
-`index.ts`); names and flavour in `src/content/strings/en-tools.ts`, spread into `en`.
+`index.ts`); names and flavour in `src/content/strings/en-tools.ts`, merged into `en` via
+the generated registry (see "Adding a content area").
 Target `tool` is one own tool picked by the effect selectors; `clearStatus` removes a timed
 status (`retry_with_backoff` clears Throttle on `longestCharge`, T012).
 
@@ -122,6 +124,29 @@ Each effect, trigger, condition and trait kind has one string template
 not a per-target key). Tooltips and plain-English
 lines are composed from templates and current values, so text cannot drift from data.
 Flavour lines and names are separate keys.
+
+## Adding a content area
+
+A new area is added by creating files only; `src/content/strings/en.ts` and
+`src/content/index.ts` are hub files and are not edited (T099, RT002 P1).
+
+1. Data: put the defs in their own module in the kind's folder (`src/content/<kind>/`,
+   e.g. `enemies/yak-shave.ts`) and add it to that kind's barrel `<kind>/index.ts`, which
+   owns catalogue order. `src/content/index.ts` imports one barrel per kind and only
+   changes when a new kind is added to `Content`.
+2. Strings: create `src/content/strings/en-<area>.ts` exporting `en<Area>` (`en-yak-shave.ts`
+   exports `enYakShave`), a flat `as const` record.
+3. Run `npm run content:index`. It rewrites the generated `src/content/strings/areas.gen.ts`
+   (one import, registry entry and spread per `en-*.ts`); `en` = `{ ...enCore, ...enAreas }`.
+   Never edit `areas.gen.ts` by hand; on a merge conflict there, rerun the command.
+
+Checks (vitest, so `npm run check` and CI fail on drift):
+`tools/content/strings-registry.test.ts` fails when an `en-*.ts` module is missing from
+`areas.gen.ts` or the file differs from the generator output; `en.test.ts` fails on a key
+defined twice across `enCore` and the area modules (a spread would override it silently) and
+asserts the key count of `en` equals the sum of its parts. Unknown keys stay a `tsc` error.
+The list is a checked-in static module, not a runtime glob, so content runs on plain Node 24
+([ADR-006](adr/adr-006-native-node-imports.md)).
 
 ## Validation (`src/content/validate.ts`, run in tests)
 

@@ -1,7 +1,8 @@
 // Import boundary: content data modules import only src/content.
 // See docs/architecture/overview.md. Also the whole catalogue as one bundle and its version:
 // saves store CONTENT_VERSION (save.md); validate.ts checks the bundle (content-model.md).
-import { phase1Encounters } from './encounters/phase1.ts';
+// One barrel per kind: a new content area registers in its kind's barrel, not here (T099).
+import { encounters } from './encounters/index.ts';
 import { enemies } from './enemies/index.ts';
 import { events } from './events/index.ts';
 import { harnesses } from './harnesses.ts';
@@ -56,7 +57,7 @@ export const content: Content = {
   memories,
   lessons,
   enemies,
-  encounters: phase1Encounters,
+  encounters,
   events,
   harnesses,
   prompts,

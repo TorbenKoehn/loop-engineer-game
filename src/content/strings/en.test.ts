@@ -7,7 +7,8 @@ import {
   TRIGGER_KINDS,
   VERB_KINDS,
 } from '../types/kinds.ts';
-import { en } from './en.ts';
+import { EN_AREA_MODULES } from './areas.gen.ts';
+import { en, enCore, type StringKey } from './en.ts';
 
 const KEY = /^[a-z0-9_]+(\.[a-z0-9_]+)+$/;
 const BRACES = /[{}]/g;
@@ -50,5 +51,24 @@ describe('en string table', () => {
   it('maps camelCase kinds to snake_case keys', () => {
     expect(kindKey('effect', 'removeCtx')).toBe('effect.remove_ctx');
     expect(kindKey('stat', 'slots.tool')).toBe('stat.slots.tool');
+  });
+
+  it('merges core and area modules without losing or overriding a key (T099)', () => {
+    const parts: Record<string, string>[] = [enCore, ...Object.values(EN_AREA_MODULES)];
+    const owner = new Map<string, number>();
+    parts.forEach((part, i) => {
+      for (const key of Object.keys(part)) {
+        expect(owner.get(key), `duplicate key ${key}`).toBeUndefined();
+        owner.set(key, i);
+      }
+    });
+    const total = parts.reduce((n, part) => n + Object.keys(part).length, 0);
+    expect(Object.keys(en).length).toBe(total);
+  });
+
+  it('rejects unknown string keys at compile time', () => {
+    // @ts-expect-error an area key that no en-<area>.ts module defines
+    const unknown: StringKey = 'tool.no_such_tool.name';
+    expect(unknown in en).toBe(false);
   });
 });

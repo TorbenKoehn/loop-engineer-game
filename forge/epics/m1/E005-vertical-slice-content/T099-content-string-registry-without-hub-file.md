@@ -5,7 +5,7 @@ title: Content string registry without hub-file edits
 summary: "Adding a content area must not require editing en.ts or src/content/index.ts; five parallel content tasks conflicted on these hub files (RT002 P1)."
 keywords: ["task", "content", "string", "registry", "without", "file"]
 type: task
-status: in-progress
+status: done
 priority: p0
 model: opus
 size: S
@@ -28,20 +28,41 @@ Every content task so far added one import + one spread to `src/content/strings/
 
 ## Acceptance Criteria
 
-- [ ] Adding a new `en-<area>.ts` strings module and a new content area folder requires no hand edit of `en.ts` or `src/content/index.ts` (documented procedure + a test that fails if a module is missing from the registry)
-- [ ] All existing keys and the content bundle are unchanged (existing tests pass; a test asserts key count equality before/after)
-- [ ] The procedure is documented in docs/architecture/content-model.md
+- [x] Adding a new `en-<area>.ts` strings module and a new content area folder requires no hand edit of `en.ts` or `src/content/index.ts` (documented procedure + a test that fails if a module is missing from the registry)
+- [x] All existing keys and the content bundle are unchanged (existing tests pass; a test asserts key count equality before/after)
+- [x] The procedure is documented in docs/architecture/content-model.md
 
 ## Subtasks
 
-- [ ] Choose mechanism (generated list vs verified convention) and note why in Notes
-- [ ] Implement and migrate existing areas
-- [ ] Completeness test
-- [ ] Doc update
+- [x] Choose mechanism (generated list vs verified convention) and note why in Notes
+- [x] Implement and migrate existing areas
+- [x] Completeness test
+- [x] Doc update
 
 ## Notes
+
+- Mechanism: generated list (`tools/content/strings-registry.ts`, `npm run content:index`
+  -> checked-in `src/content/strings/areas.gen.ts`), not a hand-kept verified convention.
+  Why: a hand-kept list is itself a hub file that conflicts; a conflict in a generated file
+  is resolved by rerunning the generator, and a vitest test (part of `npm run check`) fails
+  when it is stale. No runtime glob (ADR-006). `en = { ...enCore, ...enAreas }`.
+- Bundle: added the `src/content/encounters/index.ts` barrel so `src/content/index.ts`
+  imports one barrel per kind; a new area registers in its kind's barrel (owns order).
+- Key count test asserts `|en| == |enCore| + sum |area|` with no key defined twice, not a
+  literal 246: a literal would become a new hub that every content task edits. The literal
+  before/after numbers are in the Log (246 both, identical sorted-JSON hash).
+- package.json: one script line `content:index` (plus a trailing comma on the line above).
+- Suggestion (out of scope): `.gitattributes` `src/content/strings/areas.gen.ts merge=union`
+  would let git auto-merge parallel additions; the staleness test then forces a regenerate.
 
 ## Log
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (opus)
+- 2026-10-01: chose generated registry (see Notes); added tools/content, areas.gen.ts, encounters barrel
+- 2026-10-01: AC1 verified: probe src/content/strings/en-zz-probe.ts made `npx vitest run tools/content` fail ("lists every en-<area>.ts module on disk"); `npm run content:index` fixed it with no edit to en.ts or src/content/index.ts; a probe re-defining `tool.grep.name` failed en.test.ts ("duplicate key"); probe removed
+- 2026-10-01: AC2 verified: node dump of en and content before/after: keys 246/246, sorted-strings sha256 85e81d82fed9c116 both, bundle JSON sha256 b84b50ef9fc7d9cc both; en.test.ts "merges core and area modules without losing or overriding a key" asserts count equality
+- 2026-10-01: AC3 verified: docs/architecture/content-model.md section "Adding a content area"
+- 2026-10-01: npm run check: all steps passed (tsc, biome, vitest 344 passed, harness:check 0 errors)
+- 2026-10-01: review requested
+- 2026-10-01: done (R036)
