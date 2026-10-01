@@ -66,7 +66,8 @@ activation counts as one change of `F` (one zone update).
 ## Noise
 
 Enemy action "inject n noise": `n' = n × phaseNoiseScale / 100`, then `× 2` in Rot, then
-blockers (`.gitignore`) subtract, then `N += n'`. Noise is cleared by any compaction.
+lesson cuts (`context_noise_cut`: noise from Context-family enemies `× (100 − pct) / 100`,
+floor), then blockers (`.gitignore`) subtract, then `N += n'`. Noise is cleared by any compaction.
 Effects that scale with context use `S` only ("noise makes no contribution").
 On hover, noise segments show their source ("Context Drift: 6k").
 

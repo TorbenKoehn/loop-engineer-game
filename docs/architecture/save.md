@@ -37,7 +37,7 @@ export interface RunSaveV1 {
 }
 export interface MetaSaveV1 {
   schema: 1;
-  meta: MetaState;            // td, unlocked, lessons, history (≤ 100), achievements, settings, tips
+  meta: MetaState;            // td, unlocked, lessons, history (≤ 100), lastRun, achievements, settings, tips
   checksum: string;
 }
 ```
@@ -69,6 +69,9 @@ another schema or shape (`schema`) and a wrong checksum (`checksum`).
   playback of the already-resolved fight.
 - Run end (`saveRunEnd`): meta is written first, then the run save and its backup are
   removed (so a crash cannot lose TD or duplicate it: `endRun` is idempotent by run id).
+- After a runtime fallback to memory, later writes (including `saveRunEnd`) touch memory
+  only, so a stale `le:run:current` can remain in localStorage and a reload may offer that
+  run again. Its meta is stale too, so TD is not duplicated. Continue/recovery (T053) handles it.
 - Expected size: a full run is about 400 actions; save ≤ 60 kB.
 
 ## Export / import string

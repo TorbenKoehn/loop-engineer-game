@@ -30,6 +30,9 @@ Rules:
 - Throttle and Stun override Haste (rate 0). Progress is kept, never lost.
 - Duration modifiers (e.g. Lockfile "−50% Throttle/Slow") apply when the status is
   applied: `d' = floor(d × (100 − mod) / 100)`, min 50 ms.
+- `stunDurPct` also shortens the auto-compaction Stun (decision: GDD owner).
+- `throttle_shorter` (enemy Throttle on a tool): its flat ms cut applies first, then the
+  % mods, then the floor `max(min, 50 ms)`.
 - An agent-wide Haste/Slow applies the status to every tool individually.
 - "Fastest tool" = the tool with the lowest `cooldownMs × 100 / currentRate` at the moment
   of the effect; ties: leftmost. Tools at rate 0 are skipped.
@@ -49,10 +52,10 @@ Traits are passive rules on an enemy. Each has a one-line card text.
 
 | Trait | Exact rule | Used by |
 |---|---|---|
-| **Split(n, pct)** | On resolve, spawn `n` copies of the child enemy at `pct%` of the parent's max Severity, at its index | Dependency Hell |
-| **Grow(ms, sev, dmg)** | Every `ms`: max and current Severity `+sev`, attack value `+dmg` | Scope Creep |
-| **Outage(tag)** | While alive, tools with `tag` fire and add output but their effects do nothing ("timed out") | Unreachable Service, Root Cause |
-| **Blocked** | Takes 0 damage while any non-Blocked enemy is alive (Deadline still hits) | Yak Shave |
+| **Split(n, pct)** | On resolve, spawn `n` copies of the child enemy at `pct%` of the parent's max Severity, at its index (floor). Children beyond the 5-enemy cap are dropped (logged); new children start with 0 progress | Dependency Hell |
+| **Grow(ms, sev, dmg)** | Every `ms`: max and current Severity `+sev`, attack value `+dmg`. Ticks in step 2, before `every` rules; not phase-scaled; `ms` must be a multiple of 50 | Scope Creep |
+| **Outage(tag)** | While alive, tools with `tag` fire and add output but their effects do nothing ("timed out"). "Alive" = Severity > 0 at hit time. Timed-out activations still consume primes and run `toolFired` rules and pipe | Unreachable Service, Root Cause |
+| **Blocked** | Takes 0 damage while any non-Blocked enemy is alive (Severity > 0 at hit time; Deadline `bypass` hits still land). Damage applies once only Blocked enemies are left | Yak Shave |
 | **Clone** | The first time Severity ≤ 50% of max, spawn a copy with equal current Severity and no Clone trait behind it | Copy-Paste Clone |
 | **Flaky(ms)** | Toggles Fail/Pass every `ms`, starting Fail. While Pass: takes 0 damage except from [Test] tools | Flaky Test, CI Test stage |
 | **Linked(ms)** | When one linked partner resolves, the others must resolve within `ms`, or the first returns at 50% max Severity | Merge Conflict |

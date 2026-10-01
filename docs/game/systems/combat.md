@@ -40,7 +40,8 @@ right, enemies go front to back. Every state change emits an event.
    (no carry-over). A tool filled by a pipe during this step fires in the same step if it
    is to the right. After each activation: apply effects, add output, run `toolFired`
    rules, check compaction, run `compaction` rules, update the zone once, pipe.
-5. If all enemies are resolved: **win**, stop.
+5. If all enemies are resolved and no split children are waiting to enter: **win**, stop.
+   On-death spawns are resolved first; children that refill the line keep the fight going.
 6. Enemies act: each intent with `progress ≥ windupMs × 100` resolves, then the enemy
    advances to its next intent (cycle) and progress resets. After each enemy action the
    rules it raised (`damaged`, `trustBelow`, `compaction`) run.
@@ -112,7 +113,8 @@ pct    = zone (+20 Focused + focusPct | −coldPenalty Cold) + Σ % mods, min �
 amount = max(1, floor(((base + flat) × (100 + pct) + 50) / 100))
 ```
 
-The same formula applies to Guardrails and healing from tools. Then, on an enemy:
+The same formula applies to Guardrails and healing from tools, except that `dmgFlat` and
+`dmgPct` mods are damage-only (not Guardrails or healing). Then, on an enemy:
 Outage/Elusive/Blocked checks (may set amount to 0) -> armor -> enemy Guardrails ->
 Severity. On the agent: enemy amount -> agent damage-taken mods (lessons, skills, min 1)
 -> Guardrails -> Trust. Overkill is discarded. Every step appears in the log line.
