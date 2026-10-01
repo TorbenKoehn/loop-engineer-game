@@ -4,7 +4,8 @@
     "**/.git/**",
     "**/dist/**",
     "**/coverage/**",
-    "CONCEPT.md"
+    "CONCEPT.md",
+    ".claude/worktrees/**"
   ],
   "codeGlobs": [
     "src/**/*.ts",

@@ -16,7 +16,8 @@
       "!**/*.md"
     ]
   },
-  "vcs": { "enabled": false },
+  // Worktrees under .claude/worktrees are excluded via .gitignore.
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   // Budget line_chars (100): formatter lineWidth.
   "formatter": {
     "enabled": true,
