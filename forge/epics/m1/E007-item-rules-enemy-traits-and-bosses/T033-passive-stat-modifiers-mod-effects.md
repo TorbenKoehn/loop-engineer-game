@@ -44,6 +44,8 @@ Always-on item effects change the sim numbers through one mechanism, and each ap
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R054): F2 - a compaction rule that removes context can log two zoneChanged in one activation; keep at most one. F3 - add a content validation rule that `every` intervals are multiples of 50 ms (src/content/validation).
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log

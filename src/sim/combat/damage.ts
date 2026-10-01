@@ -3,6 +3,7 @@
 import type { Ref } from '../events.ts';
 import { pct as scale } from '../int.ts';
 import { zoneIx } from './context/ctx.ts';
+import { raise } from './rules/state.ts';
 import { emit, type Sim } from './state.ts';
 import { hpOf, isAgent, setHp, type Unit, unitRef } from './targeting.ts';
 
@@ -49,8 +50,12 @@ export function dealDamage(sim: Sim, src: Ref, unit: Unit, a: Amount): number {
   const dealt = Math.min(hpOf(unit), a.amount - guard);
   unit.guard -= guard;
   setHp(unit, hpOf(unit) - dealt);
-  if (isAgent(unit)) unit.taken += dealt;
-  else if (unit.sev === 0) unit.killedBy = src;
+  if (isAgent(unit)) {
+    unit.taken += dealt;
+    // Rule triggers: an enemy hit before Guardrails; Trust after any hit that cost Trust.
+    if (src.startsWith('e')) raise(sim.rules, { on: 'damaged', n: a.amount });
+    if (dealt > 0) raise(sim.rules, { on: 'trustBelow', n: unit.trust });
+  } else if (unit.sev === 0) unit.killedBy = src;
   // Armor and damage-taken mods arrive with E007. `zone`: the bar's zone index at the hit.
   const zone = zoneIx(sim.agent.ctx.zone);
   const d = { base: a.base, flat: a.flat, pct: a.pct, armor: 0, guard, sev: hpOf(unit), zone };

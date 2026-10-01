@@ -1,4 +1,5 @@
 // Tick step 6: enemies act front to back, then advance to their next intent and reset progress.
+import { runRules } from '../rules/engine.ts';
 import { emit, enemyRef, PROGRESS_PER_MS, type Sim } from '../state.ts';
 import { advanceIntent, announceIntent, currentIntent } from './cycle.ts';
 import { CONTEXT, type ContextHooks, runVerb } from './verbs.ts';
@@ -12,6 +13,7 @@ export function enemiesAct(sim: Sim, ctx: ContextHooks = CONTEXT): void {
     const d = { intent: intent.id, verbs };
     emit(sim, { kind: 'enemyActed', src: enemyRef(enemy), dst: 'a', d });
     for (const verb of intent.verbs) runVerb({ sim, enemy, intent: intent.id, ctx }, verb);
+    runRules(sim); // damaged, trustBelow, compaction
     enemy.progress = 0;
     advanceIntent(enemy);
     announceIntent(sim, enemy);

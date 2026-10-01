@@ -21,7 +21,7 @@ generated: true
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 5/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
 | [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 6/11 |
-| [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
+| [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 1/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 2/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 0/8 |
 | [E010](epics/m1/E010-balance-sim-bots-and-m1-exit-gates/EPIC.md) | Balance sim, bots and M1 exit gates | backlog | p1 | 0/8 |
@@ -103,11 +103,9 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (0/3)
 
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
+_none_
 
 ## Review (0/3)
 
@@ -117,9 +115,9 @@ _none_
 
 _none_
 
-## Done (46)
+## Done (47)
 
-_Showing the last 20 of 46 done tasks._
+_Showing the last 20 of 47 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -142,6 +140,6 @@ _Showing the last 20 of 46 done tasks._
 | [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
 | [T041](epics/m1/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
 | [T040](epics/m1/E004-run-structure-and-map/T040-run-reducer-walking-skeleton-new-run-to.md) | Run reducer walking skeleton: new run to map | E004 | p0 | opus | M |
-| [T028](epics/m1/E003-context-window-mechanic/T028-auto-compaction-on-overflow.md) | Auto-compaction on overflow | E003 | p1 | opus | M |
+| [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 
 ## Cancelled (1)

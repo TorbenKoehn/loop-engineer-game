@@ -1,6 +1,7 @@
 // Auto-compaction on overflow (docs/game/systems/context.md "Auto-compaction (Overflow)").
 // Planned compaction and the policy: T029.
 import { mulDiv } from '../../int.ts';
+import { raise } from '../rules/state.ts';
 import { emit, type Sim, toolRef } from '../state.ts';
 import { applyStatus, clearStatus } from '../status/statuses.ts';
 import { updateZone } from './zone.ts';
@@ -31,6 +32,7 @@ function autoCompact(sim: Sim): void {
   emit(sim, { kind: 'compaction', src: 'ctx', v: AUTO_COMPACT_STUN_MS, d });
   applyStatus(sim, 'ctx', agent, { status: 'stun', ms: AUTO_COMPACT_STUN_MS });
   lost?.drop();
+  raise(sim.rules, { on: 'compaction' });
 }
 
 interface Buff {

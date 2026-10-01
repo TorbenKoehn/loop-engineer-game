@@ -7,6 +7,7 @@ import { checkEnd, type End, resolveDead, WIN } from './end.ts';
 import { enemiesAct } from './enemy/act.ts';
 import { announceIntent } from './enemy/cycle.ts';
 import { fireTools } from './fire.ts';
+import { runRules } from './rules/engine.ts';
 import { createSim, emit, enemyRef, type Sim, TICK_MS } from './state.ts';
 import { chargeAll } from './status/charge.ts';
 import { tickStatuses } from './status/statuses.ts';
@@ -16,6 +17,7 @@ export function resolveCombat(input: CombatInput, opts: CombatOptions = {}): Com
   const sim = createSim(input, opts.log !== false);
   startFight(sim);
   const end = runTicks(sim);
+  if (end.outcome === 'win') runRules(sim, { on: 'fightWon' });
   const { agent } = sim;
   emit(sim, { kind: 'fightEnd', src: 'sys', v: sim.t, d: { ...end, trust: agent.trust } });
   return {
@@ -24,7 +26,7 @@ export function resolveCombat(input: CombatInput, opts: CombatOptions = {}): Com
     agentAfter: {
       trust: agent.trust,
       maxTrust: agent.maxTrust,
-      usedOncePerRun: input.agent.usedOncePerRun,
+      usedOncePerRun: sim.rules.usedOncePerRun,
     },
     events: sim.events,
     stats: { toolDamage: agent.tools.map((tool) => tool.dealt), damageTaken: agent.taken },
@@ -41,6 +43,7 @@ function startFight(sim: Sim): void {
     emit(sim, { kind: 'spawn', src: 'sys', dst: enemyRef(enemy), v: enemy.sev, d: spawn });
   }
   for (const enemy of sim.enemies) announceIntent(sim, enemy);
+  runRules(sim, { on: 'fightStart' }); // t = 0, slot order
 }
 
 function runTicks(sim: Sim): End {
@@ -50,10 +53,11 @@ function runTicks(sim: Sim): End {
   }
 }
 
-/** One tick. Step 2 (timed traits) arrives with E007. */
+/** One tick. Step 2: timed rules; timed traits arrive with E007. */
 function tick(sim: Sim): End | undefined {
   sim.t += TICK_MS; // 1
   tickStatuses(sim);
+  runRules(sim, { on: 'every' }); // 2
   chargeAll(sim); // 3
   fireTools(sim); // 4
   if (sim.enemies.every((e) => e.sev <= 0)) {
@@ -62,5 +66,6 @@ function tick(sim: Sim): End | undefined {
   }
   enemiesAct(sim); // 6
   deadlineDamage(sim); // 7
+  runRules(sim);
   return checkEnd(sim); // 8, then the timeout cap
 }

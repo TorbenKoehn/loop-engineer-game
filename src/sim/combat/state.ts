@@ -5,6 +5,7 @@ import type { CombatEvent, Ref } from '../events.ts';
 import { createRng, type Rng } from '../rng.ts';
 import { type Ctx, createCtx } from './context/ctx.ts';
 import { type Phase, scaleSev } from './enemy/phase.ts';
+import { createRules, type RulesRt } from './rules/state.ts';
 import type { CombatInput, ToolSetup, Version } from './types.ts';
 
 export const TICK_MS = 50;
@@ -95,6 +96,8 @@ export interface Sim {
   enemies: EnemyRt[];
   /** Step of the last pipe and t of the chain's first pipe. */
   readonly pipeChain: { step: number; startT: number };
+  /** Item rules and raised triggers (rules/engine.ts). */
+  readonly rules: RulesRt;
 }
 
 export function createSim(input: CombatInput, log: boolean): Sim {
@@ -121,6 +124,7 @@ export function createSim(input: CombatInput, log: boolean): Sim {
     },
     enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1, encounter.phase)),
     pipeChain: { step: 0, startT: 0 },
+    rules: createRules(input),
   };
 }
 

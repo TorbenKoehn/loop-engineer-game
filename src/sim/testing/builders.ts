@@ -2,12 +2,16 @@
 // Defaults mirror slice content: makeTool() is grep, makeEnemy() is Typo.
 import type {
   Accuracy,
+  Cond,
   Effect,
   EnemyDef,
   Intent,
   MemoryDef,
   ModelStats,
+  Rule,
+  SkillDef,
   ToolDef,
+  Trigger,
   Verb,
 } from '../../content/types/index.ts';
 import type { CombatInput, Version } from '../combat/types.ts';
@@ -47,6 +51,22 @@ export function makeMemory(
   const rules = [{ when: { on: 'passive' }, then }] as const;
   return { id: 'gitignore', rarity: 'common', weight: 1, rules, unlock: 'base', ...over };
 }
+
+/** A rule as the DSL builder writes it (shorthand `then`, never a thenable literal). */
+export function makeRule(when: Trigger, then: readonly Effect[], conds?: readonly Cond[]): Rule {
+  return conds ? { when, if: conds, then } : { when, then };
+}
+
+/** A weightless skill (the baseline stays unchanged) holding `rules`. */
+export function makeSkill(id: string, ...rules: readonly Rule[]): SkillDef {
+  return { id, rarity: 'common', weight: 0, rules, unlock: 'base' };
+}
+
+/** `input` with these skills in slot order. */
+export const withSkills = (input: CombatInput, ...skills: readonly SkillDef[]): CombatInput => ({
+  ...input,
+  skills,
+});
 
 /** An enemy def; defaults to Typo (Severity 30, Nitpick: hit 2 every 3000 ms). */
 export function makeEnemy(over: Partial<EnemyDef> = {}): EnemyDef {
