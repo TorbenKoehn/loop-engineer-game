@@ -5,6 +5,7 @@ import { enEnemies } from './en-enemies.ts';
 import { enEvents } from './en-events.ts';
 import { enHarnesses } from './en-harnesses.ts';
 import { enLessons } from './en-lessons.ts';
+import { enLog } from './en-log.ts';
 import { enRunEnd } from './en-run-end.ts';
 import { enSkills } from './en-skills.ts';
 import { enTools } from './en-tools.ts';
@@ -17,6 +18,7 @@ export const EN_AREA_MODULES = {
   events: enEvents,
   harnesses: enHarnesses,
   lessons: enLessons,
+  log: enLog,
   runEnd: enRunEnd,
   skills: enSkills,
   tools: enTools,
@@ -30,6 +32,7 @@ export const enAreas = {
   ...enEvents,
   ...enHarnesses,
   ...enLessons,
+  ...enLog,
   ...enRunEnd,
   ...enSkills,
   ...enTools,

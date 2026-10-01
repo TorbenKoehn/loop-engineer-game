@@ -1,6 +1,6 @@
 // The fight itself: the agent card on the left, the enemy line on the right (front first).
 import { fmtSeconds, t } from '../../i18n.ts';
-import type { Replay } from '../fight.ts';
+import { isPicked, type Replay } from '../fight.ts';
 import type { EnemyView } from '../fold.ts';
 import { enemyName, harnessName, intentName } from '../names.ts';
 import { windupLeft } from '../timeline.ts';
@@ -30,8 +30,9 @@ function AgentCard(props: { r: Replay }) {
   const time = pb.simT.value;
   const { agent, pops } = pb.view.value;
   const hit = isRecent(agent.hitAt, time, FLASH_MS, pb.speed.value);
+  const picked = isPicked(props.r, 'a') ? ' is-picked' : '';
   return (
-    <article class={`card card--agent${hit ? ' is-hit' : ''}`} data-testid="agent-card">
+    <article class={`card card--agent${hit ? ' is-hit' : ''}${picked}`} data-testid="agent-card">
       <header class="card__head">
         <span class="card__title">{harnessName(fight.harness)}</span>
         <span class="card__kind">{t('ui.combat.agent')}</span>
@@ -83,6 +84,7 @@ function EnemyCard(props: { enemy: EnemyView; r: Replay; front: boolean }) {
     resolved && 'is-resolved',
     props.front && 'is-front',
     isRecent(enemy.hitAt, time, FLASH_MS, r.pb.speed.value) && 'is-hit',
+    isPicked(r, enemy.ref) && 'is-picked',
   ];
   return (
     <article class={cls.filter(Boolean).join(' ')} data-testid={`enemy-${enemy.ref}`}>

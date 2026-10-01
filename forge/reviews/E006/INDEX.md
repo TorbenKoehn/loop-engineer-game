@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E006"
-summary: "Index of forge/reviews/E006: 9 files, 0 subdirectories"
-keywords: ["review", "combat", "sandbox", "only", "page", "route", "screen", "view"]
+summary: "Index of forge/reviews/E006: 11 files, 0 subdirectories"
+keywords: ["review", "combat", "sandbox", "lines", "only", "page", "route", "screen"]
 type: index
 status: active
 updated: 2026-10-01
@@ -24,3 +24,5 @@ generated: true
 | [R052-T101.md](R052-T101.md) | Review of T101: Combat screen route, dev-only sandbox and e… | Review of T101 (changes-requested) | review, combat, screen, route, only, sandbox |
 | [R053-T101.md](R053-T101.md) | Review of T101: Combat screen route, dev-only sandbox and e… | Review of T101 (approved) | review, combat, screen, route, only, sandbox |
 | [R078-T060.md](R078-T060.md) | Review of T060: Context bar component | Review of T060 (approved) | review, context, component |
+| [R083-T061.md](R083-T061.md) | Review of T061: Combat log with why lines and seeking | Review of T061 (changes-requested) | review, combat, with, lines, seeking |
+| [R084-T061.md](R084-T061.md) | Review of T061: Combat log with why lines and seeking | Review of T061 (approved) | review, combat, with, lines, seeking |

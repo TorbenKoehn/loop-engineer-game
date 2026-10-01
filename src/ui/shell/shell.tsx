@@ -2,8 +2,9 @@
 import type { ComponentChildren } from 'preact';
 import type { StringKey } from '../../content/strings/en.ts';
 import type { RunState } from '../../run/state.ts';
+import { CombatLog } from '../combat/log/log.tsx';
 import { fmtNumber, t } from '../i18n.ts';
-import { ctxLive, speed } from '../store/playback.ts';
+import { ctxLive, replayLive, speed } from '../store/playback.ts';
 import { ctxWindow, lastError, run } from '../store/run.ts';
 
 /** `phase-1/implement › row 3` (screens.md "Shell layout"); the row of the current node. */
@@ -51,11 +52,17 @@ function Explorer() {
   );
 }
 
+/** Errors, and the combat log while a fight is open (screens.md "Shell layout"). */
 function Terminal() {
   const code = lastError.value;
+  const r = replayLive.value;
   return (
-    <section class="shell-terminal" aria-label={t('ui.shell.terminal')}>
+    <section
+      class={`shell-terminal${r ? ' shell-terminal--log' : ''}`}
+      aria-label={t('ui.shell.terminal')}
+    >
       {code && <p role="alert">{t('ui.shell.error', { code })}</p>}
+      {r && <CombatLog r={r} />}
     </section>
   );
 }

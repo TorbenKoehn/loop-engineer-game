@@ -20,7 +20,7 @@ generated: true
 | [E003/](E003/INDEX.md) | Index of forge/reviews/E003: 5 files, 0 subdirectories | review, compaction, context, auto, baseline, blockers, compact, effect |
 | [E004/](E004/INDEX.md) | Index of forge/reviews/E004: 9 files, 0 subdirectories | review, build, cycle, elite, fight, free, idle, tier |
 | [E005/](E005/INDEX.md) | Index of forge/reviews/E005: 12 files, 0 subdirectories | review, data, content, harness, memories, prompt, skills, slice |
-| [E006/](E006/INDEX.md) | Index of forge/reviews/E006: 9 files, 0 subdirectories | review, combat, sandbox, only, page, route, screen, view |
+| [E006/](E006/INDEX.md) | Index of forge/reviews/E006: 11 files, 0 subdirectories | review, combat, sandbox, lines, only, page, route, screen |
 | [E007/](E007/INDEX.md) | Index of forge/reviews/E007: 6 files, 0 subdirectories | review, traits, armor, breakpoints, conditions, effects, enemy, engine |
 | [E008/](E008/INDEX.md) | Index of forge/reviews/E008: 5 files, 0 subdirectories | review, save, meta, agents, codec, export, fixtures, framework |
 | [E009/](E009/INDEX.md) | Index of forge/reviews/E009: 7 files, 0 subdirectories | review, screen, package, registry, screens, shop, agents, cycle |

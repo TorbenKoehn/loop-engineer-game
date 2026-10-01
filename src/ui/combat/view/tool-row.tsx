@@ -2,7 +2,7 @@
 // next effect value and output per card; pipes render as `|` between cards.
 import { Fragment } from 'preact';
 import { t } from '../../i18n.ts';
-import type { Replay } from '../fight.ts';
+import { isPicked, type Replay } from '../fight.ts';
 import type { ToolView } from '../fold.ts';
 import { toolFlavour, toolName } from '../names.ts';
 import { chargeAt } from '../timeline.ts';
@@ -19,7 +19,7 @@ function ToolCard(props: { tool: ToolView; r: Replay }) {
   const fired = isRecent(tool.firedAt, time, FLASH_MS, r.pb.speed.value);
   return (
     <article
-      class={`tool${fired ? ' is-fired' : ''}`}
+      class={`tool${fired ? ' is-fired' : ''}${isPicked(r, tool.ref) ? ' is-picked' : ''}`}
       title={toolFlavour(tool.def)}
       data-testid={`tool-${tool.slot}`}
     >

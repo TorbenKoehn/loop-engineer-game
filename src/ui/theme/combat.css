@@ -3,6 +3,7 @@
  * the Crimson tokens; colours only via custom properties. Motion: blink, pops, flashes; all
  * off under prefers-reduced-motion.
  */
+@import "./log.css";
 
 .cursor {
   color: var(--brand-text);

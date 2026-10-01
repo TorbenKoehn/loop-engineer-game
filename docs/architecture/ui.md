@@ -150,6 +150,14 @@ export interface Playback {
   hits; it is disabled in reduced motion (fx side) and ignored at `skip`.
 - The log text, tooltips' "why" lines and the run-end summary are rendered from the same
   events via `t()` templates.
+- **Combat log** (`src/ui/combat/log/`): the shell terminal renders it while `replayLive`
+  (`store/playback.ts`) holds the open fight. `format.ts` turns each event into
+  `[mm:ss.mmm] source -> target: verb (why)` (`log.*` strings in `en-log.ts`); `why.ts` names
+  each damage why id with its value from data already at hand (primeUsed `v`, zone constants,
+  the item's passive mod effects; ambiguous items are named bare). `list.ts` holds the
+  filters (All/Damage/Context/Enemies), the row window (≤ 200 rows, 22 px each) and the keys.
+  Lines stay listed up to the furthest point played; a click or arrows/Page/Home/End/Enter
+  seek to a line and pause, and `isPicked` (`fight.ts`) outlines the line's source and target.
 
 ## Fx and audio bus
 
