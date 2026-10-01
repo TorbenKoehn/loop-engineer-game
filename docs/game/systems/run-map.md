@@ -5,6 +5,7 @@ keywords: [map, run-structure, node-types, generation, encounters, phases]
 type: gdd
 status: active
 updated: 2026-10-01
+related_code: [src/run/map/**]
 related: [economy.md, combat.md, ../content/events.md, ../content/phase-1-implement.md, ../../architecture/run-state.md]
 ---
 
@@ -78,17 +79,22 @@ RNG: `fork(runSeed, 'map/' + phase)`. Grid: 7 rows × 5 columns.
   If missing after assignment, convert a random Task on an allowed row (re-check the
   same-type adjacency rule).
 - Phase 1 of the very first run (tutorial): row 1 is a single node with the tutorial
-  encounter.
+  encounter, in column 2 (all 4 paths start there; the different-start rule is skipped).
+- Replacement when Package Registry or Critical Bug is missing: convert a random Task on
+  an allowed row, else a random Standup. No node of that type exists yet, so no
+  adjacency re-check is needed.
 
 ## Encounter selection
 
 RNG: `fork(runSeed, 'encounter/' + nodeId)`. Each phase has an **easy pool** (used on
 rows 1–3) and a **hard pool** (rows 5–6), and an elite pool.
 
-- Draw uniformly from the pool, excluding encounters already fought this phase; reset the
-  exclusion if the pool is exhausted.
+- Draw uniformly from the pool, excluding encounters already fought this phase, defined
+  at generation as the encounters of any ancestor node (any node that can precede it on a
+  path); reset the exclusion if it would exclude the whole pool.
 - The first Task of a run is always drawn from the easy pool's first two entries.
-- The same elite never appears twice in one phase.
+- The same elite never appears twice in one phase once a second elite exists; until then
+  (phase 1 has only p1x1) the elite repeats.
 - Event modifiers (e.g. "Quick tiny change" adds Scope Creep) append enemies to the back.
 - The encounter is chosen when the map is generated, so the map can show it on hover
   ("Task: Context Drift + Typo"). Elites show only "Critical Bug".

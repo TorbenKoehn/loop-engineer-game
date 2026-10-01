@@ -41,7 +41,7 @@ right, enemies go front to back. Every state change emits an event.
 5. If all enemies are resolved: **win**, stop.
 6. Enemies act: each intent with `progress ≥ windupMs × 100` resolves, then the enemy
    advances to its next intent (cycle) and progress resets.
-7. Deadline damage if `t ≥ deadlineMs` and `t` is a multiple of 1000 (below).
+7. Deadline damage at each full second after `deadlineMs` (`deadlineMs + 1000k`, below).
 8. Death checks: enemies at Severity ≤ 0 are resolved (on-death traits run, spawns are
    inserted at the dead enemy's index). If all enemies are resolved: win. Else if
    Trust ≤ 0: **loss**.
@@ -70,6 +70,15 @@ A tool with `pipe: P` adds `P × 100` progress to the tool directly to its right
 fires (capped at full). Pipe bonuses from skills/breakpoints add to `P`. Pipes do nothing
 to Throttled or Stunned tools and never wrap around (except via the Feedback Loop skill).
 A tool "was piped" if it received pipe progress since its own last activation.
+
+A **pipe chain** is a run of pipes within 1000 ms of the chain's first pipe (1-based
+step count in the `pipe` event); the next pipe after that window starts a new chain.
+
+**Primes** are one-shot: each is bound at creation to one tool and consumed at the start
+of that tool's next activation (a prime made during an activation waits for the one after).
+The target is the matching tool predicted to fire soonest (ties: leftmost; Throttled or
+Stunned tools last). `count: n` primes n different tools. A consumed prime emits
+`primeUsed` and applies to damage, Guardrails and healing alike.
 
 ## Targeting
 

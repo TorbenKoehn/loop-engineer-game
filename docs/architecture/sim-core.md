@@ -5,7 +5,7 @@ keywords: [sim, determinism, tick, rng, integer-math, combat, api]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts]
+related_code: [src/sim/rng.ts, src/sim/int.ts, src/sim/combat/types.ts, src/sim/combat/state.ts, src/sim/combat/resolve.ts, src/sim/combat/deadline.ts, src/sim/combat/end.ts, src/sim/combat/order/**]
 related: [event-log.md, overview.md, content-model.md, ../game/systems/combat.md, ../game/systems/context.md, adr/adr-002-deterministic-sim.md]
 ---
 

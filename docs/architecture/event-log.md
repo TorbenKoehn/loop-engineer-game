@@ -77,7 +77,7 @@ re-deriving rules. Adding a kind or a field is a **log format change**: bump
 
 - Events are appended in the exact order effects happen within the tick order; `seq`
   breaks ties for equal `t`.
-- One activation produces, in order: `toolFired`, its effect events (`damage`, `guard`,
+- One activation produces, in order: `toolFired`, `primeUsed*` (one per consumed prime), its effect events (`damage`, `guard`,
   …), `tokens` (output), `zoneChanged?`, `compaction?`, `pipe?`, skill-triggered events.
 - The UI must never reorder events; playback is strictly by `seq`.
 
