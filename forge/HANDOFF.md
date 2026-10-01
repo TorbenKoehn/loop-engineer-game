@@ -16,9 +16,16 @@ User goal (2026-10-01): finish the complete game in AA quality (M1 → M2 → M3
 
 ## In flight
 
-- T002 (Biome): implementer resumed after hitting its turn limit.
-- Doc-gardener: applying planner open-question decisions (event names, coverage SSOT,
-  ADR-006 native .ts imports, RNG API doc, `npm run check` in CLAUDE.md).
+- T020 (statuses, worktree), T015 (events/lessons, worktree), T096 (Biome ban, main tree).
+- Done so far: 20 tasks (see BOARD.md). WIP limit 3 in-progress is hard: count main-tree tasks too.
+
+## Retro 2 candidates (collect evidence)
+
+- en.ts gets one import + spread per content area; parallel content tasks conflict every time.
+  Consider one barrel file generated or one strings module per area loaded via a list.
+- Never send a worktree agent to edit the main tree (permission classifier blocks it);
+  rework happens in the worktree, then reset main and re-apply.
+- Reviewers flag generated BOARD.md as "unstaged"; tell them it is orchestrator bookkeeping.
 
 ## Decisions (2026-10-01)
 
