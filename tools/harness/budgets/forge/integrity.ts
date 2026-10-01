@@ -31,7 +31,7 @@ const doneNeedsReview: Check = {
         .filter(
           (r) =>
             r.doc.data!.verdict === 'approved' &&
-            /(?:^|\/)forge\/reviews\/R\d{3}-T\d{3}\.md$/.test(r.doc.rel),
+            /(?:^|\/)forge\/reviews\/(?:E\d{3}\/)?R\d{3}-T\d{3}\.md$/.test(r.doc.rel),
         )
         .map((r) => String(r.doc.data!.task)),
     );
@@ -41,7 +41,7 @@ const doneNeedsReview: Check = {
         err(
           t.doc.rel,
           'done_needs_review',
-          `${t.id} is done without an approved review (forge/reviews/R###-${t.id}.md)`,
+          `${t.id} is done without an approved review (forge/reviews/E###/R###-${t.id}.md)`,
         ),
       );
   },

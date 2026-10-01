@@ -45,9 +45,28 @@ function reviewRefs(items: Item[]): Finding[] {
   return out;
 }
 
+function milestoneDirs(items: Item[]): Finding[] {
+  const out: Finding[] = [];
+  for (const e of ofType(items, 'epic')) {
+    const m = e.doc.data!.milestone;
+    if (typeof m !== 'string') continue;
+    const parent = e.doc.rel.split('/').at(-3);
+    if (parent !== m)
+      out.push(
+        err(e.doc.rel, 'milestone', `milestone ${m} does not match parent directory ${parent}`),
+      );
+  }
+  return out;
+}
+
 function idFindings(scan: Scan): Finding[] {
   const items = forgeItems(scan.docs);
-  return [...duplicateIds(items), ...taskRefs(items), ...reviewRefs(items)];
+  return [
+    ...duplicateIds(items),
+    ...taskRefs(items),
+    ...reviewRefs(items),
+    ...milestoneDirs(items),
+  ];
 }
 
 export const structureFindings = idFindings;

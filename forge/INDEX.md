@@ -17,7 +17,7 @@ generated: true
 |---|---|---|
 | [epics/](epics/INDEX.md) | Index of forge/epics: 0 files, 23 subdirectories | m2, m3, agents-md, boss, content, accessibility, art, ascii-art |
 | [retros/](retros/INDEX.md) | Index of forge/retros: 1 files, 0 subdirectories | diff-budget, e001, hotfix, retro, sizing, worktrees |
-| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 15 files, 0 subdirectories | review, integer, biome, combat, enemy, forkable, harness, seeded |
+| [reviews/](reviews/INDEX.md) | Index of forge/reviews: 15 files, 1 subdirectories | review, integer, biome, combat, enemy, forkable, harness, seeded |
 
 ## Files
 

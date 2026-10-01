@@ -14,6 +14,7 @@ export interface ScaffoldOpts {
   task?: string;
   verdict?: string;
   date?: string;
+  milestone?: string;
 }
 
 export function slugify(s: string): string {
@@ -78,10 +79,14 @@ function oneOf(v: string, allowed: string[], flag: string): string {
 }
 
 const P = ['p0', 'p1', 'p2', 'p3'];
+const MILESTONES = ['m0', 'm1', 'm2', 'm3'];
+const TITLE_MAX = 60;
 
 function epicDoc(scan: Scan, o: ScaffoldOpts): { rel: string; text: string } {
   const title = need(o.title, 'title');
   const id = nextId(existingIds(scan), 'E');
+  const milestone =
+    o.milestone === undefined ? undefined : oneOf(o.milestone, MILESTONES, 'milestone');
   const fm = frontmatter({
     id,
     title,
@@ -90,10 +95,12 @@ function epicDoc(scan: Scan, o: ScaffoldOpts): { rel: string; text: string } {
     type: 'epic',
     status: 'backlog',
     priority: oneOf(o.priority ?? 'p2', P, 'priority'),
+    ...(milestone ? { milestone } : {}),
     updated: o.date ?? today(),
   });
   const body = `\n# ${id}: ${title}\n\n## Goal\n\n## Scope\n\n## Out of Scope\n\n## Definition of Done\n\n- [ ] \n`;
-  return { rel: `forge/epics/${id}-${slugify(title)}/EPIC.md`, text: fm + body };
+  const dir = `forge/epics/${milestone ? `${milestone}/` : ''}${id}-${slugify(title)}`;
+  return { rel: `${dir}/EPIC.md`, text: fm + body };
 }
 
 function taskDoc(scan: Scan, o: ScaffoldOpts): { rel: string; text: string } {
@@ -126,20 +133,26 @@ function reviewDoc(scan: Scan, o: ScaffoldOpts): { rel: string; text: string } {
   if (!task) throw new Error(`task ${taskId} not found`);
   const verdict = oneOf(need(o.verdict, 'verdict'), ['approved', 'changes-requested'], 'verdict');
   const id = nextId(existingIds(scan), 'R');
+  const dir = `forge/reviews/${String(task.doc.data!.epic)}`;
+  const prefix = `Review of ${taskId}: `;
+  const title =
+    prefix.length + task.title.length <= TITLE_MAX
+      ? prefix + task.title
+      : `${prefix}${task.title.slice(0, TITLE_MAX - prefix.length - 1).trimEnd()}…`;
   const fm = frontmatter({
     id,
     task: taskId,
     verdict,
-    title: `Review of ${taskId}: ${task.title}`,
+    title,
     summary: `Review of ${taskId} (${verdict})`,
     keywords: keywords(task.title, ['review']),
     type: 'review',
     status: 'active',
     updated: o.date ?? today(),
-    related: [path.posix.relative('forge/reviews', task.doc.rel)],
+    related: [path.posix.relative(dir, task.doc.rel)],
   });
   const body = `\n# ${id}: Review of ${taskId}\n\n## Summary\n\n## Findings\n\n## Verdict\n\n${verdict}\n`;
-  return { rel: `forge/reviews/${id}-${taskId}.md`, text: fm + body };
+  return { rel: `${dir}/${id}-${taskId}.md`, text: fm + body };
 }
 
 function retroDoc(scan: Scan, o: ScaffoldOpts): { rel: string; text: string } {

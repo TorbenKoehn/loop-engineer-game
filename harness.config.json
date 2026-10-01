@@ -110,6 +110,16 @@
               "p2",
               "p3"
             ]
+          },
+          "milestone": {
+            "kind": "enum",
+            "required": false,
+            "values": [
+              "m0",
+              "m1",
+              "m2",
+              "m3"
+            ]
           }
         }
       },

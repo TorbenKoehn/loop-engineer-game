@@ -43,6 +43,7 @@ function runNew(root: string, argv: string[]): void {
       size: { type: 'string' },
       task: { type: 'string' },
       verdict: { type: 'string' },
+      milestone: { type: 'string' },
     },
   });
   const rel = scaffold(root, positionals[0] ?? '', values);

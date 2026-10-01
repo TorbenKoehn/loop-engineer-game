@@ -7,7 +7,7 @@ import { generateBoard } from '../gen/board.ts';
 import { writeIndexes } from '../gen/index.ts';
 import { nextId, scaffold, slugify } from '../gen/scaffold.ts';
 import { writeBudgetsTable } from '../gen/table.ts';
-import { makeRepo } from './testutil.ts';
+import { doc, makeRepo } from './testutil.ts';
 
 describe('scaffold', () => {
   it('allocates next free ids per prefix', () => {
@@ -33,7 +33,7 @@ describe('scaffold', () => {
     expect(t2).toBe('forge/epics/E002-second/T002-other-task.md');
     expect(
       scaffold(root, 'review', { task: 'T001', verdict: 'approved', date: '2026-10-01' }),
-    ).toBe('forge/reviews/R001-T001.md');
+    ).toBe('forge/reviews/E001/R001-T001.md');
     expect(scaffold(root, 'retro', { title: 'Sprint one', date: '2026-10-01' })).toBe(
       'forge/retros/RT001-sprint-one.md',
     );
@@ -63,6 +63,65 @@ describe('scaffold', () => {
     expect(() => scaffold(root, 'task', { epic: 'E001', title: 'x' })).toThrow(/not found/);
     scaffold(root, 'epic', { title: 'E' });
     expect(() => scaffold(root, 'task', { epic: 'E001', title: 'x', size: 'L' })).toThrow(/--size/);
+  });
+
+  it('scaffolds an epic under its milestone dir', () => {
+    const root = makeRepo();
+    const rel = scaffold(root, 'epic', { title: 'Nested', milestone: 'm2', date: '2026-10-01' });
+    expect(rel).toBe('forge/epics/m2/E001-nested/EPIC.md');
+    expect(fs.readFileSync(path.join(root, rel), 'utf8')).toContain('milestone: m2');
+  });
+
+  it('scaffolds a task next to a nested epic', () => {
+    const root = makeRepo();
+    scaffold(root, 'epic', { title: 'Nested', milestone: 'm1' });
+    const rel = scaffold(root, 'task', { epic: 'E001', title: 'Inner' });
+    expect(rel).toBe('forge/epics/m1/E001-nested/T001-inner.md');
+    expect(fs.readFileSync(path.join(root, rel), 'utf8')).toContain('[E001](EPIC.md)');
+  });
+
+  it('rejects an unknown milestone', () => {
+    const root = makeRepo();
+    expect(() => scaffold(root, 'epic', { title: 'x', milestone: 'm9' })).toThrow(/m0, m1, m2, m3/);
+  });
+
+  it('review title fits fm_title_chars', () => {
+    const root = makeRepo();
+    scaffold(root, 'epic', { title: 'E' });
+    const long = 'A'.repeat(60);
+    scaffold(root, 'task', { epic: 'E001', title: long });
+    const rel = scaffold(root, 'review', { task: 'T001', verdict: 'approved' });
+    const m = /^title: (.*)$/m.exec(fs.readFileSync(path.join(root, rel), 'utf8'));
+    const title = JSON.parse(m![1]!.startsWith('"') ? m![1]! : JSON.stringify(m![1]!)) as string;
+    expect(title.length).toBeLessThanOrEqual(60);
+    expect(title.startsWith('Review of T001')).toBe(true);
+  });
+
+  it('milestone must match parent dir', () => {
+    const epic = (m: string): string =>
+      doc({
+        type: 'epic',
+        id: 'E001',
+        priority: 'p2',
+        status: 'backlog',
+        ...(m ? { milestone: m } : {}),
+      });
+    const errs = (files: Record<string, string>): string[] =>
+      lint(scanRepo(makeRepo(files)), { now: '2026-10-01', head: () => null })
+        .filter((f) => f.rule === 'milestone')
+        .map((f) => f.severity);
+    expect(errs({ 'forge/epics/m1/E001-x/EPIC.md': epic('m2') })).toEqual(['error']);
+    expect(errs({ 'forge/epics/m2/E001-x/EPIC.md': epic('m2') })).toEqual([]);
+    expect(errs({ 'forge/epics/E001-x/EPIC.md': epic('') })).toEqual([]);
+  });
+
+  it('scaffolds a review under its epic dir', () => {
+    const root = makeRepo();
+    scaffold(root, 'epic', { title: 'E', milestone: 'm0' });
+    scaffold(root, 'task', { epic: 'E001', title: 'T' });
+    expect(scaffold(root, 'review', { task: 'T001', verdict: 'approved' })).toBe(
+      'forge/reviews/E001/R001-T001.md',
+    );
   });
 
   it('shows WIP counts on the board', () => {

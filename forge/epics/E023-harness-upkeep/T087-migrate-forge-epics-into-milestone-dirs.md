@@ -37,6 +37,7 @@ E002-E011; `m2` = E012-E018; `m3` = E019-E022. This is a scripted, mechanical mo
 - [ ] Every EPIC.md has a `milestone` field, and `harness.config.json` marks the field required
 - [ ] `npm run harness:check` exits 0 with no `broken_links`, `dir_subdirs` or `dir_depth` finding under `forge/`
 - [ ] `grep -rn "forge/epics/\*/" .claude docs tools/harness/README.md` returns no match (globs and examples name the milestone level)
+- [ ] `forge/reviews` contains only per-epic directories (E###) and INDEX.md; all review links resolve
 - [ ] `npm run check` exits 0
 
 ## Subtasks
@@ -47,6 +48,8 @@ E002-E011; `m2` = E012-E018; `m3` = E019-E022. This is a scripted, mechanical mo
 - [ ] Regenerate INDEX.md and BOARD.md with `npm run harness:check`
 
 ## Notes
+
+- Orchestrator 2026-10-01: also fix the garbled `done_needs_review` bullet in tools/harness/README.md (R016 F1).
 
 - 2026-10-01: Schedule only when no task is in-progress or in a worktree: it moves every task file, so open patches would not apply.
 - 2026-10-01: Touches more than `task_files_changed` files by nature (renames); the diff should be link-path lines only. Reviewer: judge the file count as a scripted move.
