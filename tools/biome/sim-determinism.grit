@@ -1,0 +1,11 @@
+// Bans nondeterministic APIs in src/sim (loaded for src/sim only via biome.json).
+language js
+
+or {
+  `Math.random($_)` as $call,
+  `Date.now($_)` as $call,
+  `new Date($_)` as $call,
+  `performance.now($_)` as $call
+} where {
+  register_diagnostic(span=$call, message="Nondeterministic API in src/sim: use the seeded RNG and tick counter.", severity="error")
+}

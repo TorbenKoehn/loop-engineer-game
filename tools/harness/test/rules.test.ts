@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { transitionAllowed } from '../budgets/forge/integrity.ts';
 import { matchRelatedCode } from '../budgets/docs/drift.ts';
+import { transitionAllowed } from '../budgets/forge/integrity.ts';
 import { lint } from '../core/lint.ts';
 import { scanRepo } from '../core/scan.ts';
 import { generateBudgetsTable } from '../gen/table.ts';
@@ -8,24 +8,41 @@ import { doc, makeRepo } from './testutil.ts';
 
 const NOW = '2026-10-01';
 
-function run(files: Record<string, string>, rule: string, head: (rel: string) => string | null = () => null): string[] {
+function run(
+  files: Record<string, string>,
+  rule: string,
+  head: (rel: string) => string | null = () => null,
+): string[] {
   const found = lint(scanRepo(makeRepo(files)), { now: NOW, head });
   return found.filter((f) => f.rule === rule).map((f) => `${f.severity}:${f.file}`);
 }
 
 const task = (status: string, criteria = 2, extra: Record<string, string> = {}): string => {
   const items = Array.from({ length: criteria }, (_, i) => `- [ ] c${i}`).join('\n');
-  const fields = { type: 'task', id: 'T001', epic: 'E001', priority: 'p1', model: 'sonnet', size: 'S', status, ...extra };
+  const fields = {
+    type: 'task',
+    id: 'T001',
+    epic: 'E001',
+    priority: 'p1',
+    model: 'sonnet',
+    size: 'S',
+    status,
+    ...extra,
+  };
   return doc(fields, `# T\n\n## Acceptance Criteria\n${items}\n`);
 };
 
 const TASK = 'forge/epics/E001-x/T001-a.md';
-const review = (verdict: string): string => doc({ type: 'review', id: 'R001', task: 'T001', verdict });
+const review = (verdict: string): string =>
+  doc({ type: 'review', id: 'R001', task: 'T001', verdict });
 
 describe('forge integrity', () => {
   it('requires an approved review for done tasks', () => {
     expect(run({ [TASK]: task('done') }, 'done_needs_review')).toEqual([`error:${TASK}`]);
-    const changes = { [TASK]: task('done'), 'forge/reviews/R001-T001.md': review('changes-requested') };
+    const changes = {
+      [TASK]: task('done'),
+      'forge/reviews/R001-T001.md': review('changes-requested'),
+    };
     expect(run(changes, 'done_needs_review')).toEqual([`error:${TASK}`]);
     const ok = { [TASK]: task('done'), 'forge/reviews/R001-T001.md': review('approved') };
     expect(run(ok, 'done_needs_review')).toEqual([]);
@@ -49,10 +66,14 @@ describe('forge integrity', () => {
 
   it('compares status and acceptance criteria with HEAD', () => {
     const files = { [TASK]: task('done'), 'forge/reviews/R001-T001.md': review('approved') };
-    expect(run({ [TASK]: task('review') }, 'status_transition', () => task('done'))).toEqual([`error:${TASK}`]);
+    expect(run({ [TASK]: task('review') }, 'status_transition', () => task('done'))).toEqual([
+      `error:${TASK}`,
+    ]);
     expect(run(files, 'status_transition', () => task('review'))).toEqual([]);
     expect(run(files, 'status_transition', () => null)).toEqual([]);
-    expect(run({ [TASK]: task('review', 1) }, 'ac_decrease', () => task('in-progress', 3))).toEqual([`error:${TASK}`]);
+    expect(run({ [TASK]: task('review', 1) }, 'ac_decrease', () => task('in-progress', 3))).toEqual(
+      [`error:${TASK}`],
+    );
     expect(run({ [TASK]: task('ready', 1) }, 'ac_decrease', () => task('backlog', 3))).toEqual([]);
   });
 
@@ -72,7 +93,7 @@ describe('doc rules', () => {
   });
 
   it('checks heading depth, long code blocks and toc', () => {
-    const fence = '```ts\n' + 'x\n'.repeat(45) + '```\n';
+    const fence = `\`\`\`ts\n${'x\n'.repeat(45)}\`\`\`\n`;
     const body = `#### deep\n${fence}${'line\n'.repeat(110)}`;
     expect(run({ 'docs/a.md': doc({}, body) }, 'md_heading_depth')).toEqual(['warn:docs/a.md']);
     expect(run({ 'docs/a.md': doc({}, body) }, 'md_code_block_lines')).toEqual(['warn:docs/a.md']);
@@ -82,7 +103,10 @@ describe('doc rules', () => {
   it('warns on npm run mentions without a script and on unmatched related_code', () => {
     const files = {
       'package.json': '{"scripts":{"test":"x"}}',
-      'docs/a.md': doc({ related_code: '[src/nothing/**]' }, 'Run `npm run test` or `npm run nope`.\n'),
+      'docs/a.md': doc(
+        { related_code: '[src/nothing/**]' },
+        'Run `npm run test` or `npm run nope`.\n',
+      ),
     };
     expect(run(files, 'npm_script')).toEqual(['warn:docs/a.md']);
     expect(run(files, 'doc_drift')).toEqual(['warn:docs/a.md']);

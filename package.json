@@ -7,6 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
     "harness:index": "node tools/harness/cli.ts index",
     "harness:budgets": "node tools/harness/cli.ts budgets",
     "harness:lint": "node tools/harness/cli.ts lint",
@@ -17,6 +19,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.14",
     "@preact/preset-vite": "^2.10.6",
     "@types/node": "^26.6.3",
     "fast-check": "^4.10.2",

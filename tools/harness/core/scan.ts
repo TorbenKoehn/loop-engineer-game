@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { matchAny, matchGlob } from './glob.ts';
-import { parseFrontmatter } from './frontmatter.ts';
 import { loadConfig } from './config.ts';
+import { parseFrontmatter } from './frontmatter.ts';
+import { matchAny, matchGlob } from './glob.ts';
 import type { Config, DirInfo, Doc, DocKind, Scan } from './types.ts';
 
 export function countLines(text: string): number {
@@ -36,29 +36,39 @@ function sortedEntries(abs: string): fs.Dirent[] {
   return fs.readdirSync(abs, { withFileTypes: true }).sort((a, b) => (a.name < b.name ? -1 : 1));
 }
 
-export function scanRepo(root: string, config: Config = loadConfig(root)): Scan {
-  const docs: Doc[] = [];
-  const code: Scan['code'] = [];
-  const dirs = new Map<string, DirInfo>();
+interface Walk {
+  root: string;
+  config: Config;
+  docs: Doc[];
+  code: Scan['code'];
+  dirs: Map<string, DirInfo>;
+}
 
-  const walk = (rel: string): void => {
-    const info: DirInfo = { files: [], subdirs: [] };
-    dirs.set(rel, info);
-    for (const e of sortedEntries(path.join(root, rel))) {
-      const childRel = rel ? `${rel}/${e.name}` : e.name;
-      if (matchAny(childRel, config.exclude)) continue;
-      if (e.isDirectory()) {
-        info.subdirs.push(e.name);
-        walk(childRel);
-      } else if (e.isFile()) {
-        info.files.push(e.name);
-        if (e.name.endsWith('.md')) docs.push(readDoc(root, childRel, config));
-        else if (e.name.endsWith('.ts') && matchAny(childRel, config.codeGlobs)) {
-          code.push({ rel: childRel, text: fs.readFileSync(path.join(root, childRel), 'utf8').replace(/\r\n/g, '\n') });
-        }
-      }
-    }
-  };
-  walk('');
-  return { root, config, docs, code, dirs };
+/** Records a file in its directory and, if it is a doc or code file, in the scan. */
+function visitFile(w: Walk, info: DirInfo, name: string, childRel: string): void {
+  info.files.push(name);
+  if (name.endsWith('.md')) w.docs.push(readDoc(w.root, childRel, w.config));
+  else if (name.endsWith('.ts') && matchAny(childRel, w.config.codeGlobs)) {
+    const text = fs.readFileSync(path.join(w.root, childRel), 'utf8').replace(/\r\n/g, '\n');
+    w.code.push({ rel: childRel, text });
+  }
+}
+
+function walkDir(w: Walk, rel: string): void {
+  const info: DirInfo = { files: [], subdirs: [] };
+  w.dirs.set(rel, info);
+  for (const e of sortedEntries(path.join(w.root, rel))) {
+    const childRel = rel ? `${rel}/${e.name}` : e.name;
+    if (matchAny(childRel, w.config.exclude)) continue;
+    if (e.isDirectory()) {
+      info.subdirs.push(e.name);
+      walkDir(w, childRel);
+    } else if (e.isFile()) visitFile(w, info, e.name, childRel);
+  }
+}
+
+export function scanRepo(root: string, config: Config = loadConfig(root)): Scan {
+  const w: Walk = { root, config, docs: [], code: [], dirs: new Map() };
+  walkDir(w, '');
+  return { root, config, docs: w.docs, code: w.code, dirs: w.dirs };
 }

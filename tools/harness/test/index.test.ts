@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { generateIndexes, writeIndexes } from '../gen/index.ts';
 import { lint } from '../core/lint.ts';
 import { scanRepo } from '../core/scan.ts';
+import { generateIndexes, writeIndexes } from '../gen/index.ts';
 import { doc, makeRepo } from './testutil.ts';
 
 const files = {
@@ -36,19 +36,29 @@ describe('index generation', () => {
   it('skips skill folders and lists skills in skills/INDEX.md', () => {
     const idx = generateIndexes(scanRepo(makeRepo(files)));
     expect(idx.has('.claude/skills/foo/INDEX.md')).toBe(false);
-    expect(idx.get('.claude/skills/INDEX.md')).toContain('[foo/SKILL.md](foo/SKILL.md) | foo | Does foo');
+    expect(idx.get('.claude/skills/INDEX.md')).toContain(
+      '[foo/SKILL.md](foo/SKILL.md) | foo | Does foo',
+    );
     expect(idx.get('INDEX.md')).toContain('Harness entrypoint');
   });
 
   it('passes lint once generated, and flags stale indexes', () => {
     const root = makeRepo(files);
-    expect(lint(scanRepo(root), { now: '2026-10-01', head: () => null }).some((f) => f.rule === 'index')).toBe(true);
+    expect(
+      lint(scanRepo(root), { now: '2026-10-01', head: () => null }).some((f) => f.rule === 'index'),
+    ).toBe(true);
     writeIndexes(scanRepo(root));
     fs.writeFileSync(path.join(root, 'forge-placeholder.txt'), 'x');
-    const stale = lint(scanRepo(root), { now: '2026-10-01', head: () => null }).filter((f) => f.rule === 'index');
+    const stale = lint(scanRepo(root), { now: '2026-10-01', head: () => null }).filter(
+      (f) => f.rule === 'index',
+    );
     expect(stale).toEqual([]);
     fs.appendFileSync(path.join(root, 'docs/INDEX.md'), 'tamper\n');
-    expect(lint(scanRepo(root), { now: '2026-10-01', head: () => null }).filter((f) => f.rule === 'index')).toHaveLength(1);
+    expect(
+      lint(scanRepo(root), { now: '2026-10-01', head: () => null }).filter(
+        (f) => f.rule === 'index',
+      ),
+    ).toHaveLength(1);
   });
 });
 
@@ -57,7 +67,9 @@ describe('agents index', () => {
     const root = makeRepo({ '.claude/agents/a.md': '---\nname: a\ndescription: Agent A\n---\n' });
     writeIndexes(scanRepo(root));
     expect(fs.existsSync(path.join(root, '.claude/agents/INDEX.md'))).toBe(false);
-    expect(fs.readFileSync(path.join(root, '.claude/INDEX.md'), 'utf8')).toContain('[agents/a.md](agents/a.md) | a | Agent A');
+    expect(fs.readFileSync(path.join(root, '.claude/INDEX.md'), 'utf8')).toContain(
+      '[agents/a.md](agents/a.md) | a | Agent A',
+    );
     fs.writeFileSync(path.join(root, '.claude/agents/INDEX.md'), 'x');
     writeIndexes(scanRepo(root));
     expect(fs.existsSync(path.join(root, '.claude/agents/INDEX.md'))).toBe(false);
@@ -66,7 +78,12 @@ describe('agents index', () => {
 
 describe('skill keywords', () => {
   it('fills the Keywords column from metadata.keywords', () => {
-    const root = makeRepo({ '.claude/skills/s/SKILL.md': '---\nname: s\ndescription: D\nmetadata:\n  keywords: [alpha, beta]\n---\n' });
-    expect(generateIndexes(scanRepo(root)).get('.claude/skills/INDEX.md')).toContain('| alpha, beta |');
+    const root = makeRepo({
+      '.claude/skills/s/SKILL.md':
+        '---\nname: s\ndescription: D\nmetadata:\n  keywords: [alpha, beta]\n---\n',
+    });
+    expect(generateIndexes(scanRepo(root)).get('.claude/skills/INDEX.md')).toContain(
+      '| alpha, beta |',
+    );
   });
 });

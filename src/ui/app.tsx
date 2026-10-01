@@ -1,8 +1,8 @@
 // Import boundary: ui may import content, sim, run, save, render-fx, audio.
 // Nothing may import from src/ui. See docs/architecture/overview.md.
-import { signal } from "@preact/signals";
-import { GAME_TITLE } from "../content/index.ts";
-import { SIM_VERSION } from "../sim/index.ts";
+import { signal } from '@preact/signals';
+import { GAME_TITLE } from '../content/index.ts';
+import { SIM_VERSION } from '../sim/index.ts';
 
 const loops = signal(0);
 

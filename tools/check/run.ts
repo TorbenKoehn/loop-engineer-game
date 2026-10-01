@@ -1,42 +1,58 @@
 // Unified check gate: tsc -> biome -> vitest -> harness:check, fail fast.
 // Run via `npm run check`. Cross-platform (Windows .cmd shims via shell: true).
-import { spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync } from 'node:fs';
 
 interface Step {
   label: string;
   command: string;
-  /** Returns a reason to skip the step, or undefined to run it. */
+  /** Returns a reason to skip the step, or undefined to run it. Throws a message to fail. */
   skipIf?: () => string | undefined;
 }
 
+const BIOME_PKG = '@biomejs/biome';
+
+/** Skip Biome only when it is not declared; declared but not installed is a hard failure. */
+function biomeSkip(): string | undefined {
+  const pkg = JSON.parse(readFileSync('package.json', 'utf8')) as {
+    devDependencies?: Record<string, string>;
+    dependencies?: Record<string, string>;
+  };
+  const declared = BIOME_PKG in { ...pkg.dependencies, ...pkg.devDependencies };
+  if (!declared) return `${BIOME_PKG} is not declared in package.json`;
+  if (!existsSync(`node_modules/${BIOME_PKG}/package.json`))
+    throw new Error(`${BIOME_PKG} is declared but not installed: run npm install`);
+  return undefined;
+}
+
 const steps: Step[] = [
-  { label: "typecheck (tsc)", command: "npx tsc --noEmit" },
-  {
-    label: "lint (biome)",
-    command: "npx biome check .",
-    skipIf: () =>
-      existsSync("node_modules/@biomejs/biome/package.json")
-        ? undefined
-        : "Biome is not installed (add @biomejs/biome as devDependency)",
-  },
-  { label: "test (vitest)", command: "npm test" },
-  { label: "harness (harness:check)", command: "npm run harness:check" },
+  { label: 'typecheck (tsc)', command: 'npm run typecheck' },
+  { label: 'lint (biome)', command: 'npm run lint', skipIf: biomeSkip },
+  { label: 'test (vitest)', command: 'npm test' },
+  { label: 'harness (harness:check)', command: 'npm run harness:check' },
 ];
 
 const total = steps.length;
 for (const [i, step] of steps.entries()) {
   const tag = `[check ${i + 1}/${total}] ${step.label}`;
-  const skip = step.skipIf?.();
+  let skip: string | undefined;
+  try {
+    skip = step.skipIf?.();
+  } catch (e) {
+    console.error(`\n${tag}: FAILED - ${(e as Error).message}`);
+    process.exit(1);
+  }
   if (skip) {
     console.log(`${tag}: SKIPPED - ${skip}`);
     continue;
   }
   console.log(`\n${tag}: ${step.command}`);
-  const result = spawnSync(step.command, { stdio: "inherit", shell: true });
+  const result = spawnSync(step.command, { stdio: 'inherit', shell: true });
   if (result.status !== 0) {
-    console.error(`\n[check] FAILED at step ${i + 1}/${total}: ${step.label} (exit ${result.status ?? "signal"})`);
+    console.error(
+      `\n[check] FAILED at step ${i + 1}/${total}: ${step.label} (exit ${result.status ?? 'signal'})`,
+    );
     process.exit(result.status || 1);
   }
 }
-console.log("\n[check] all steps passed");
+console.log('\n[check] all steps passed');

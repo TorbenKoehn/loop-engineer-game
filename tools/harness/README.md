@@ -126,7 +126,7 @@ test/    *.test.ts testutil
 
 1. Add it to `budgets` in `harness.config.json` with `area` and `enforced_by`; run `npm run harness:budgets`.
 2. For `enforced_by: harness`, write a `Check` (`{ id, run(ctx) => Finding[] }`) in the matching
-   `budgets/*` module. Use `check(ctx, id, file, actual, doc?, what?)` from `budgets/util.ts`; it applies
+   `budgets/*` module. Use `check(ctx, id, at(file, what?) | inDoc(doc, what?), actual)` from `budgets/util.ts`; it applies
    `cmp`, `warn_at`, severity and the doc's override.
 3. Append the check to the module's exported list; `budgets/index.ts` registers it.
 4. Add a test in `tools/harness/test/`.

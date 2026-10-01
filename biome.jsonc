@@ -1,0 +1,92 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  // Scope: src, tools, tests and root configs. Generated/doc Markdown, node_modules, dist and
+  // coverage are ignored. Docs/forge budgets are enforced by `npm run harness:check`, not here.
+  "files": {
+    "includes": [
+      "src/**",
+      "tools/**",
+      "tests/**",
+      "vite.config.ts",
+      "biome.jsonc",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/coverage",
+      "!**/.vite",
+      "!**/*.md"
+    ]
+  },
+  "vcs": { "enabled": false },
+  // Budget line_chars (100): formatter lineWidth.
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": { "formatter": { "quoteStyle": "single" } },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "complexity": {
+        // Budget complexity (10): Biome only offers cognitive complexity, which is stricter
+        // than cyclomatic; the same limit is used.
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": { "maxAllowedComplexity": 10 }
+        },
+        // Budget fn_params (4).
+        "useMaxParams": { "level": "error", "options": { "max": 4 } }
+      },
+      "nursery": {
+        // Budget nested_callbacks (3).
+        "noExcessiveNestedCallbacks": { "level": "error", "options": { "max": 3 } }
+      },
+      "suspicious": {
+        // Budget explicit_any (0).
+        "noExplicitAny": "error",
+        // Budget ts_ignore (0): bans @ts-ignore (and blanket @ts-nocheck-style comments).
+        "noTsIgnore": "error",
+        // Budget circular_deps (0).
+        "noImportCycles": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      // Determinism: src/sim must not touch time, DOM or ambient randomness.
+      // Math.random, Date.now, new Date and performance.now come from the GritQL plugin;
+      // the rest are restricted globals. Proven by tools/biome/sim-ban.test.ts.
+      "includes": ["src/sim/**"],
+      "plugins": ["./tools/biome/sim-determinism.grit"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "window": "No DOM in src/sim",
+                  "document": "No DOM in src/sim",
+                  "setTimeout": "No timers in src/sim",
+                  "setInterval": "No timers in src/sim",
+                  "requestAnimationFrame": "No timers in src/sim",
+                  "Date": "Nondeterministic: use the tick counter"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+  // Not expressible in Biome, so not enforced here (budgets marked enforced_by biome):
+  //  - nesting_depth (3): no block-nesting rule; cognitive complexity penalises nesting.
+  //  - exports_per_module (10), imports_per_module (15): no rule counts them.
+  //  - duplication_pct (3): Biome has no duplication detector.
+  //  - ts_expect_error (5), eslint_disable (5): Biome cannot cap the number of suppression
+  //    comments; noTsIgnore does not cover @ts-expect-error.
+  // Gaps are tracked in the T002 task notes; a harness check may take them over later.
+}

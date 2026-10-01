@@ -1,11 +1,11 @@
 import { parseArgs } from 'node:util';
-import { writeBoard } from './gen/board.ts';
 import { findRoot } from './core/config.ts';
-import { writeIndexes } from './gen/index.ts';
-import { writeBudgetsTable } from './gen/table.ts';
 import { formatFindings, hasErrors, lint } from './core/lint.ts';
-import { scaffold } from './gen/scaffold.ts';
 import { scanRepo } from './core/scan.ts';
+import { writeBoard } from './gen/board.ts';
+import { writeIndexes } from './gen/index.ts';
+import { scaffold } from './gen/scaffold.ts';
+import { writeBudgetsTable } from './gen/table.ts';
 
 export function runIndex(root: string): void {
   const changed = writeIndexes(scanRepo(root));
@@ -75,7 +75,9 @@ export function main(argv: string[]): number {
       runNew(root, rest);
       return 0;
     default:
-      console.error('usage: cli.ts index|board|budgets|lint [--json]|check|new <epic|task|review|retro> [--flags]');
+      console.error(
+        'usage: cli.ts index|board|budgets|lint [--json]|check|new <epic|task|review|retro> [--flags]',
+      );
       return 2;
   }
 }

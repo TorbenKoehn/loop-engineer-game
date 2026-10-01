@@ -26,6 +26,8 @@ export function doc(fields: Record<string, string> = {}, body = '# Body\n'): str
     updated: '2026-09-01',
     ...fields,
   };
-  const fm = Object.entries(base).map(([k, v]) => `${k}: ${v}`).join('\n');
+  const fm = Object.entries(base)
+    .map(([k, v]) => `${k}: ${v}`)
+    .join('\n');
   return `---\n${fm}\n---\n${body}`;
 }

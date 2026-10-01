@@ -16,11 +16,28 @@ function resolveLink(doc: Doc, target: string): string | null {
   return path.posix.normalize(abs);
 }
 
-const exists = (scan: Scan, rel: string): boolean => rel.startsWith('..') || fs.existsSync(path.join(scan.root, rel));
+const exists = (scan: Scan, rel: string): boolean =>
+  rel.startsWith('..') || fs.existsSync(path.join(scan.root, rel));
 
 function relatedTargets(doc: Doc): string[] {
   const rel = doc.data?.related;
   return Array.isArray(rel) ? rel.filter((r): r is string => typeof r === 'string') : [];
+}
+
+/** Unresolved link or related targets of one doc, as [what, target] pairs. */
+function brokenTargets(scan: Scan, doc: Doc): [string, string][] {
+  const out: [string, string][] = [];
+  for (const t of linkTargets(splitMd(doc.body).prose)) {
+    const rel = resolveLink(doc, t);
+    if (rel !== null && !exists(scan, rel)) out.push(['link', t]);
+  }
+  for (const r of relatedTargets(doc)) {
+    const rel = resolveLink(doc, r);
+    const fromRoot = path.posix.normalize(r.split('#')[0] ?? r);
+    if (rel !== null && !exists(scan, rel) && !exists(scan, fromRoot))
+      out.push(['related path', r]);
+  }
+  return out;
 }
 
 const brokenLinks: Check = {
@@ -28,22 +45,16 @@ const brokenLinks: Check = {
   run: (ctx) => {
     const sev = budget(ctx.scan.config, 'broken_links').severity;
     if (sev !== 'error' && sev !== 'warn') return [];
-    const out: Finding[] = [];
-    for (const doc of ctx.scan.docs) {
-      const bad = (what: string, t: string): void => {
-        out.push({ file: doc.rel, severity: sev, rule: 'broken_links', message: `${what} does not resolve: ${t}` });
-      };
-      for (const t of linkTargets(splitMd(doc.body).prose)) {
-        const rel = resolveLink(doc, t);
-        if (rel !== null && !exists(ctx.scan, rel)) bad('link', t);
-      }
-      for (const r of relatedTargets(doc)) {
-        const rel = resolveLink(doc, r);
-        const fromRoot = path.posix.normalize(r.split('#')[0]!);
-        if (rel !== null && !exists(ctx.scan, rel) && !exists(ctx.scan, fromRoot)) bad('related path', r);
-      }
-    }
-    return out;
+    return ctx.scan.docs.flatMap((doc) =>
+      brokenTargets(ctx.scan, doc).map(
+        ([what, t]): Finding => ({
+          file: doc.rel,
+          severity: sev,
+          rule: 'broken_links',
+          message: `${what} does not resolve: ${t}`,
+        }),
+      ),
+    );
   },
 };
 

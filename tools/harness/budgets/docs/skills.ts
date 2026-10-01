@@ -1,6 +1,6 @@
 import type { Doc } from '../../core/types.ts';
-import { check, tokens } from '../util.ts';
 import type { Check, Ctx } from '../util.ts';
+import { at, check, inDoc, tokens } from '../util.ts';
 
 const str = (v: unknown): string => (typeof v === 'string' ? v : '');
 const ofKind = (ctx: Ctx, kind: Doc['kind']): Doc[] => ctx.scan.docs.filter((d) => d.kind === kind);
@@ -11,10 +11,10 @@ const skills: Check = {
   run: (ctx) => {
     const list = ofKind(ctx, 'skill');
     const per = list.flatMap((d) => [
-      ...check(ctx, 'skill_name_chars', d.rel, str(d.data?.name).length, d),
-      ...check(ctx, 'skill_description_chars', d.rel, description(d).length, d),
+      ...check(ctx, 'skill_name_chars', inDoc(d), str(d.data?.name).length),
+      ...check(ctx, 'skill_description_chars', inDoc(d), description(d).length),
     ]);
-    return [...per, ...check(ctx, 'skill_count', '.claude/skills', list.length, undefined, 'skills')];
+    return [...per, ...check(ctx, 'skill_count', at('.claude/skills', 'skills'), list.length)];
   },
 };
 
@@ -28,11 +28,11 @@ const agents: Check = {
       const max = d.data?.maxTurns;
       if (typeof max !== 'number') return [];
       const id = writers.has(str(d.data?.name)) ? 'subagent_turns_impl' : 'subagent_turns_research';
-      return check(ctx, id, d.rel, max, d, 'maxTurns');
+      return check(ctx, id, inDoc(d, 'maxTurns'), max);
     });
     return [
-      ...check(ctx, 'agent_def_count', '.claude/agents', list.length, undefined, 'agents'),
-      ...check(ctx, 'agent_descriptions_tokens', '.claude/agents', total, undefined, 'agent descriptions'),
+      ...check(ctx, 'agent_def_count', at('.claude/agents', 'agents'), list.length),
+      ...check(ctx, 'agent_descriptions_tokens', at('.claude/agents', 'agent descriptions'), total),
       ...turns,
     ];
   },
@@ -41,9 +41,18 @@ const agents: Check = {
 const alwaysLoaded: Check = {
   id: 'always_loaded_tokens',
   run: (ctx) => {
-    const sum = (docs: Doc[], f: (d: Doc) => string): number => docs.reduce((n, d) => n + tokens(f(d)), 0);
-    const total = sum(ofKind(ctx, 'claude'), (d) => d.raw) + sum(ofKind(ctx, 'skill'), description) + sum(ofKind(ctx, 'agent'), description);
-    return check(ctx, 'always_loaded_tokens', '.', total, undefined, 'CLAUDE.md + skill/agent descriptions');
+    const sum = (docs: Doc[], f: (d: Doc) => string): number =>
+      docs.reduce((n, d) => n + tokens(f(d)), 0);
+    const total =
+      sum(ofKind(ctx, 'claude'), (d) => d.raw) +
+      sum(ofKind(ctx, 'skill'), description) +
+      sum(ofKind(ctx, 'agent'), description);
+    return check(
+      ctx,
+      'always_loaded_tokens',
+      at('.', 'CLAUDE.md + skill/agent descriptions'),
+      total,
+    );
   },
 };
 

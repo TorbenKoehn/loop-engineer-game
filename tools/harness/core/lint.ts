@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { check } from '../budgets/util.ts';
-import type { Ctx } from '../budgets/util.ts';
 import { runBudgets } from '../budgets/index.ts';
 import { resolveOverrides } from '../budgets/overrides.ts';
+import type { Ctx } from '../budgets/util.ts';
+import { at, check } from '../budgets/util.ts';
 import { generateBoard } from '../gen/board.ts';
 import { generateIndexes } from '../gen/index.ts';
 import { generateBudgetsTable, TABLE_PATH } from '../gen/table.ts';
@@ -22,24 +22,36 @@ function read(root: string, rel: string): string | null {
   return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8').replace(/\r\n/g, '\n') : null;
 }
 
-function freshness(scan: Scan, now: string): Finding[] {
+const stale = (file: string, rule: string, message: string): Finding => ({
+  file,
+  severity: 'error',
+  rule,
+  message,
+});
+
+function indexFreshness(scan: Scan): Finding[] {
   const out: Finding[] = [];
   const hint = 'run `npm run harness:index`';
-  const stale = (file: string, rule: string, message: string): void => {
-    out.push({ file, severity: 'error', rule, message });
-  };
   const expected = generateIndexes(scan);
   for (const [rel, content] of expected) {
     const cur = read(scan.root, rel);
-    if (cur === null) stale(rel, 'index', `INDEX.md missing; ${hint}`);
-    else if (cur !== content) stale(rel, 'index', `INDEX.md out of date; ${hint}`);
+    if (cur === null) out.push(stale(rel, 'index', `INDEX.md missing; ${hint}`));
+    else if (cur !== content) out.push(stale(rel, 'index', `INDEX.md out of date; ${hint}`));
   }
   for (const d of scan.docs) {
-    if (d.kind === 'index' && !expected.has(d.rel)) stale(d.rel, 'index', `orphan INDEX.md; ${hint}`);
+    if (d.kind === 'index' && !expected.has(d.rel))
+      out.push(stale(d.rel, 'index', `orphan INDEX.md; ${hint}`));
   }
+  return out;
+}
+
+function freshness(scan: Scan, now: string): Finding[] {
+  const out = indexFreshness(scan);
   const board = scan.config.boardPath;
-  if (read(scan.root, board) !== generateBoard(scan)) stale(board, 'board', 'BOARD.md out of date; run `npm run harness:board`');
-  if (read(scan.root, TABLE_PATH) !== generateBudgetsTable(scan, now)) stale(TABLE_PATH, 'budgets_table', 'out of date; run `npm run harness:budgets`');
+  if (read(scan.root, board) !== generateBoard(scan))
+    out.push(stale(board, 'board', 'BOARD.md out of date; run `npm run harness:board`'));
+  if (read(scan.root, TABLE_PATH) !== generateBudgetsTable(scan, now))
+    out.push(stale(TABLE_PATH, 'budgets_table', 'out of date; run `npm run harness:budgets`'));
   return out;
 }
 
@@ -54,9 +66,12 @@ export interface LintOpts {
 
 function tail(ctx: Ctx, found: Finding[], startedAt?: number): Finding[] {
   const warnings = found.filter((f) => f.severity === 'warn').length;
-  const extra = check(ctx, 'budget_warnings_total', '.', warnings, undefined, 'warnings');
+  const extra = check(ctx, 'budget_warnings_total', at('.', 'warnings'), warnings);
   if (startedAt === undefined) return extra;
-  return [...extra, ...check(ctx, 'lint_s', '.', Math.round((Date.now() - startedAt) / 100) / 10, undefined, 'lint run')];
+  return [
+    ...extra,
+    ...check(ctx, 'lint_s', at('.', 'lint run'), Math.round((Date.now() - startedAt) / 100) / 10),
+  ];
 }
 
 export function lint(scan: Scan, opts: LintOpts = {}): Finding[] {
@@ -77,8 +92,12 @@ export function lint(scan: Scan, opts: LintOpts = {}): Finding[] {
   };
   const all = [...schema, ...structureFindings(scan), ...runBudgets(ctx), ...freshness(scan, now)];
   all.push(...tail(ctx, all, opts.startedAt));
-  return all.sort(
-    (a, b) => (a.file < b.file ? -1 : a.file > b.file ? 1 : ORDER[a.severity] - ORDER[b.severity] || (a.rule < b.rule ? -1 : 1)),
+  return all.sort((a, b) =>
+    a.file < b.file
+      ? -1
+      : a.file > b.file
+        ? 1
+        : ORDER[a.severity] - ORDER[b.severity] || (a.rule < b.rule ? -1 : 1),
   );
 }
 

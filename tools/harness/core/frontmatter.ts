@@ -19,7 +19,11 @@ export function parseFrontmatter(raw: string): Parsed {
     }
     return { data: data as Data, body: raw.slice(m[0].length) };
   } catch (e) {
-    return { data: null, body: raw.slice(m[0].length), error: `invalid YAML: ${(e as Error).message}` };
+    return {
+      data: null,
+      body: raw.slice(m[0].length),
+      error: `invalid YAML: ${(e as Error).message}`,
+    };
   }
 }
 
@@ -29,31 +33,34 @@ export function isValidDate(s: string): boolean {
   return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === s;
 }
 
+type FieldCheck = (name: string, value: unknown, spec: FieldSpec) => string | null;
+
+const isMapping = (v: unknown): boolean => !!v && typeof v === 'object' && !Array.isArray(v);
+
+const fieldChecks: Record<FieldSpec['kind'], FieldCheck> = {
+  string: (name, value, spec) => {
+    if (typeof value !== 'string' || value.trim() === '')
+      return `${name} must be a non-empty string`;
+    if (spec.pattern && !new RegExp(spec.pattern).test(value))
+      return `${name} "${value}" does not match ${spec.pattern}`;
+    return null;
+  },
+  array: (name, value) =>
+    Array.isArray(value) && value.every((v) => typeof v === 'string')
+      ? null
+      : `${name} must be an array of strings`,
+  enum: (name, value, spec) =>
+    typeof value === 'string' && spec.values?.includes(value)
+      ? null
+      : `${name} must be one of: ${spec.values?.join(', ')} (got ${JSON.stringify(value)})`,
+  date: (name, value) =>
+    typeof value === 'string' && isValidDate(value) ? null : `${name} must be a YYYY-MM-DD date`,
+  object: (name, value) => (isMapping(value) ? null : `${name} must be a mapping`),
+  boolean: (name, value) => (typeof value === 'boolean' ? null : `${name} must be a boolean`),
+};
+
 export function checkField(name: string, value: unknown, spec: FieldSpec): string | null {
-  switch (spec.kind) {
-    case 'string':
-      if (typeof value !== 'string' || value.trim() === '') return `${name} must be a non-empty string`;
-      if (spec.pattern && !new RegExp(spec.pattern).test(value)) {
-        return `${name} "${value}" does not match ${spec.pattern}`;
-      }
-      return null;
-    case 'array':
-      if (!Array.isArray(value) || value.some((v) => typeof v !== 'string')) {
-        return `${name} must be an array of strings`;
-      }
-      return null;
-    case 'enum':
-      if (typeof value !== 'string' || !spec.values?.includes(value)) {
-        return `${name} must be one of: ${spec.values?.join(', ')} (got ${JSON.stringify(value)})`;
-      }
-      return null;
-    case 'date':
-      return typeof value === 'string' && isValidDate(value) ? null : `${name} must be a YYYY-MM-DD date`;
-    case 'object':
-      return value && typeof value === 'object' && !Array.isArray(value) ? null : `${name} must be a mapping`;
-    case 'boolean':
-      return typeof value === 'boolean' ? null : `${name} must be a boolean`;
-  }
+  return fieldChecks[spec.kind](name, value, spec);
 }
 
 function checkFields(file: string, data: Data, fields: Record<string, FieldSpec>): Finding[] {
@@ -73,7 +80,11 @@ function f(file: string, message: string): Finding {
   return { file, severity: 'error', rule: 'frontmatter', message };
 }
 
-export function specialFor(rel: string, config: Config, match: (r: string, g: string) => boolean): SpecialDef | undefined {
+export function specialFor(
+  rel: string,
+  config: Config,
+  match: (r: string, g: string) => boolean,
+): SpecialDef | undefined {
   return config.frontmatter.special.find((s) => match(rel, s.glob));
 }
 
@@ -81,7 +92,8 @@ function validateSpecial(doc: Doc, def: SpecialDef): Finding[] {
   const out: Finding[] = [];
   for (const name of def.required ?? []) {
     const v = doc.data?.[name];
-    if (typeof v !== 'string' || v.trim() === '') out.push(f(doc.rel, `missing required field "${name}"`));
+    if (typeof v !== 'string' || v.trim() === '')
+      out.push(f(doc.rel, `missing required field "${name}"`));
   }
   return out;
 }
@@ -92,18 +104,23 @@ export function validateDoc(doc: Doc, config: Config, def?: SpecialDef): Finding
   if (doc.parseError) return [f(doc.rel, doc.parseError)];
   if (!doc.data) return [f(doc.rel, 'missing frontmatter block')];
   if (def && (doc.kind === 'skill' || doc.kind === 'agent')) return validateSpecial(doc, def);
+  return validateSchema(doc, doc.data, config);
+}
+
+function validateSchema(doc: Doc, data: Data, config: Config): Finding[] {
   const fm = config.frontmatter;
-  const type = doc.data.type;
+  const type = data.type;
   const typeDef = typeof type === 'string' ? fm.types[type] : undefined;
   const base = { ...fm.base };
   base.type = { kind: 'enum', required: true, values: Object.keys(fm.types) };
-  const out = checkFields(doc.rel, doc.data, { ...base, status: { kind: 'string', required: true } });
+  const out = checkFields(doc.rel, data, { ...base, status: { kind: 'string', required: true } });
   const typeErr = out.filter((x) => !x.message.startsWith('status'));
   if (!typeDef) return typeErr;
   const statuses = fm.statusSets[typeDef.statuses] ?? [];
   const statusSpec: FieldSpec = { kind: 'enum', required: true, values: statuses };
-  const statusErr = doc.data.status === undefined ? null : checkField('status', doc.data.status, statusSpec);
-  const res = [...typeErr, ...checkFields(doc.rel, doc.data, typeDef.fields ?? {})];
+  const statusErr =
+    data.status === undefined ? null : checkField('status', data.status, statusSpec);
+  const res = [...typeErr, ...checkFields(doc.rel, data, typeDef.fields ?? {})];
   if (statusErr) res.push(f(doc.rel, statusErr));
   return res;
 }

@@ -1,20 +1,21 @@
 const cache = new Map<string, RegExp>();
 
+/** Regex source and consumed length for the glob token at `i`. */
+function token(pattern: string, i: number): { re: string; len: number } {
+  const c = pattern[i] ?? '';
+  if (c === '*' && pattern[i + 1] === '*')
+    return pattern[i + 2] === '/' ? { re: '(?:.*/)?', len: 3 } : { re: '.*', len: 2 };
+  if (c === '*') return { re: '[^/]*', len: 1 };
+  if (c === '?') return { re: '[^/]', len: 1 };
+  return { re: c.replace(/[.+^${}()|[\]\\]/g, '\\$&'), len: 1 };
+}
+
 function toRegExp(pattern: string): RegExp {
   let re = '';
-  for (let i = 0; i < pattern.length; i++) {
-    const c = pattern[i]!;
-    if (c === '*' && pattern[i + 1] === '*') {
-      if (pattern[i + 2] === '/') {
-        re += '(?:.*/)?';
-        i += 2;
-      } else {
-        re += '.*';
-        i += 1;
-      }
-    } else if (c === '*') re += '[^/]*';
-    else if (c === '?') re += '[^/]';
-    else re += c.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+  for (let i = 0; i < pattern.length; ) {
+    const t = token(pattern, i);
+    re += t.re;
+    i += t.len;
   }
   return new RegExp(`^${re}$`);
 }

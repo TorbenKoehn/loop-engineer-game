@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { loadConfig } from '../core/config.ts';
 import { isValidDate, parseFrontmatter, validateDoc } from '../core/frontmatter.ts';
 import { matchGlob } from '../core/glob.ts';
-import { loadConfig } from '../core/config.ts';
 import { readDoc } from '../core/scan.ts';
 import { doc, makeRepo } from './testutil.ts';
 
@@ -35,7 +35,12 @@ describe('frontmatter', () => {
   });
 
   it('flags missing fields, bad enums and bad dates', () => {
-    const msgs = check(doc({ status: 'nope', updated: '2026/01/01', type: 'doc' }, '').replace('summary: A summary\n', ''));
+    const msgs = check(
+      doc({ status: 'nope', updated: '2026/01/01', type: 'doc' }, '').replace(
+        'summary: A summary\n',
+        '',
+      ),
+    );
     expect(msgs.join('\n')).toMatch(/missing required field "summary"/);
     expect(msgs.join('\n')).toMatch(/status must be one of/);
     expect(msgs.join('\n')).toMatch(/updated must be a YYYY-MM-DD/);

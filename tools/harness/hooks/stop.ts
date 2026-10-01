@@ -1,9 +1,9 @@
-import { writeBoard } from '../gen/board.ts';
 import { hookRoot } from '../core/config.ts';
-import { writeIndexes } from '../gen/index.ts';
-import { writeBudgetsTable } from '../gen/table.ts';
 import { lint } from '../core/lint.ts';
 import { scanRepo } from '../core/scan.ts';
+import { writeBoard } from '../gen/board.ts';
+import { writeIndexes } from '../gen/index.ts';
+import { writeBudgetsTable } from '../gen/table.ts';
 import { parsePayload, readStdin } from './io.ts';
 
 const MAX_SHOWN = 15;
@@ -20,7 +20,9 @@ try {
   if (errors.length > 0 && !active) {
     const shown = errors.slice(0, MAX_SHOWN).map((f) => `- ${f.file} [${f.rule}] ${f.message}`);
     const more = errors.length > MAX_SHOWN ? [`... and ${errors.length - MAX_SHOWN} more`] : [];
-    console.error(['harness lint failed; fix these before finishing:', ...shown, ...more].join('\n'));
+    console.error(
+      ['harness lint failed; fix these before finishing:', ...shown, ...more].join('\n'),
+    );
     code = 2;
   }
 } catch (e) {

@@ -105,7 +105,8 @@ function totalWeight<T>(entries: readonly Weighted<T>[]): number {
     }
     total += e.weight;
   }
-  if (total < 1 || total > TWO32) throw new RangeError(`weighted: total must be in [1, 2^32], got ${total}`);
+  if (total < 1 || total > TWO32)
+    throw new RangeError(`weighted: total must be in [1, 2^32], got ${total}`);
   return total;
 }
 
@@ -140,7 +141,9 @@ export function serialize(rng: Rng): string {
 export function restore(json: string): Rng {
   const o: unknown = JSON.parse(json);
   const ok =
-    Array.isArray(o) && o.length === 4 && o.every((v) => Number.isInteger(v) && v >= 0 && v < TWO32);
+    Array.isArray(o) &&
+    o.length === 4 &&
+    o.every((v) => Number.isInteger(v) && v >= 0 && v < TWO32);
   if (!ok) throw new TypeError('restore: invalid RNG state, expected [a, b, c, d] uint32');
   return [o[0], o[1], o[2], o[3]];
 }

@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { lint } from '../core/lint.ts';
+import { scanRepo } from '../core/scan.ts';
 import { generateBoard } from '../gen/board.ts';
 import { writeIndexes } from '../gen/index.ts';
-import { writeBudgetsTable } from '../gen/table.ts';
-import { lint } from '../core/lint.ts';
 import { nextId, scaffold, slugify } from '../gen/scaffold.ts';
-import { scanRepo } from '../core/scan.ts';
+import { writeBudgetsTable } from '../gen/table.ts';
 import { makeRepo } from './testutil.ts';
 
 describe('scaffold', () => {
@@ -31,17 +31,30 @@ describe('scaffold', () => {
     const t2 = scaffold(root, 'task', { epic: 'E002', title: 'Other task', date: '2026-10-01' });
     expect(t1).toBe('forge/epics/E001-core-loop/T001-first-task.md');
     expect(t2).toBe('forge/epics/E002-second/T002-other-task.md');
-    expect(scaffold(root, 'review', { task: 'T001', verdict: 'approved', date: '2026-10-01' })).toBe('forge/reviews/R001-T001.md');
-    expect(scaffold(root, 'retro', { title: 'Sprint one', date: '2026-10-01' })).toBe('forge/retros/RT001-sprint-one.md');
+    expect(
+      scaffold(root, 'review', { task: 'T001', verdict: 'approved', date: '2026-10-01' }),
+    ).toBe('forge/reviews/R001-T001.md');
+    expect(scaffold(root, 'retro', { title: 'Sprint one', date: '2026-10-01' })).toBe(
+      'forge/retros/RT001-sprint-one.md',
+    );
     const task = fs.readFileSync(path.join(root, t1), 'utf8');
-    for (const h of ['## Goal', '## Context', '## Acceptance Criteria', '## Subtasks', '## Notes', '## Log']) {
+    for (const h of [
+      '## Goal',
+      '## Context',
+      '## Acceptance Criteria',
+      '## Subtasks',
+      '## Notes',
+      '## Log',
+    ]) {
       expect(task).toContain(h);
     }
     const scan = scanRepo(root);
     fs.writeFileSync(path.join(root, scan.config.boardPath), generateBoard(scan));
     writeBudgetsTable(scanRepo(root));
     writeIndexes(scanRepo(root));
-    const errors = lint(scanRepo(root), { now: '2026-10-01', head: () => null }).filter((f) => f.severity === 'error');
+    const errors = lint(scanRepo(root), { now: '2026-10-01', head: () => null }).filter(
+      (f) => f.severity === 'error',
+    );
     expect(errors).toEqual([]);
   });
 
@@ -57,7 +70,10 @@ describe('scaffold', () => {
     scaffold(root, 'epic', { title: 'E' });
     const rel = scaffold(root, 'task', { epic: 'E001', title: 'x' });
     const abs = path.join(root, rel);
-    fs.writeFileSync(abs, fs.readFileSync(abs, 'utf8').replace('status: backlog', 'status: in-progress'));
+    fs.writeFileSync(
+      abs,
+      fs.readFileSync(abs, 'utf8').replace('status: backlog', 'status: in-progress'),
+    );
     const board = generateBoard(scanRepo(root));
     expect(board).toContain('## In Progress (1/3)');
     expect(board).toContain('| E001 |');

@@ -1,3 +1,4 @@
+import type { Finding } from '../core/types.ts';
 import { codeChecks } from './code/code.ts';
 import { dirChecks } from './dirs.ts';
 import { docChecks } from './docs/docs.ts';
@@ -9,7 +10,6 @@ import { integrityChecks } from './forge/integrity.ts';
 import { metaChecks } from './meta.ts';
 import { overrideChecks } from './overrides.ts';
 import type { Check, Ctx } from './util.ts';
-import type { Finding } from '../core/types.ts';
 
 /** Add a budget check by appending a Check to one of these lists (and the budget to config). */
 export const registry: Check[] = [

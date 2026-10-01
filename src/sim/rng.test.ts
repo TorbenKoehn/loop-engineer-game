@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
+import type { Rng } from './rng.ts';
 import {
   createRng,
   fork,
@@ -14,7 +15,6 @@ import {
   shuffle,
   weighted,
 } from './rng.ts';
-import type { Rng } from './rng.ts';
 
 const take = (r: Rng, n: number) => Array.from({ length: n }, () => nextU32(r));
 
@@ -31,10 +31,14 @@ describe('rng golden (independent reference)', () => {
     expect(xs[999]).toBe(1810128320);
   });
   it('seed K7Q2-M9XA yields the reference sequence', () => {
-    expect(take(createRng('K7Q2-M9XA'), 5)).toEqual([1816276898, 3579975248, 3831263920, 2491312191, 3589079935]);
+    expect(take(createRng('K7Q2-M9XA'), 5)).toEqual([
+      1816276898, 3579975248, 3831263920, 2491312191, 3589079935,
+    ]);
   });
   it('fork K7Q2-M9XA/combat/p1-r3-c2 yields the reference sequence', () => {
-    expect(take(fork('K7Q2-M9XA', 'combat/p1-r3-c2'), 3)).toEqual([4244083357, 2713881700, 242476162]);
+    expect(take(fork('K7Q2-M9XA', 'combat/p1-r3-c2'), 3)).toEqual([
+      4244083357, 2713881700, 242476162,
+    ]);
   });
   it('empty seed yields the reference sequence', () => {
     expect(take(createRng(''), 3)).toEqual([780688151, 1369530603, 4170761935]);
@@ -108,15 +112,20 @@ describe('rng integer helpers', () => {
   });
   it('int is inclusive and pick returns members (property)', () => {
     fc.assert(
-      fc.property(fc.string(), fc.integer({ min: -1000, max: 1000 }), fc.nat(500), (seed, lo, w) => {
-        const r = createRng(seed);
-        for (let i = 0; i < 20; i++) {
-          const x = int(r, lo, lo + w);
-          expect(Number.isInteger(x) && x >= lo && x <= lo + w).toBe(true);
-        }
-        const arr = ['a', 'b', 'c'];
-        expect(arr).toContain(pick(r, arr));
-      }),
+      fc.property(
+        fc.string(),
+        fc.integer({ min: -1000, max: 1000 }),
+        fc.nat(500),
+        (seed, lo, w) => {
+          const r = createRng(seed);
+          for (let i = 0; i < 20; i++) {
+            const x = int(r, lo, lo + w);
+            expect(Number.isInteger(x) && x >= lo && x <= lo + w).toBe(true);
+          }
+          const arr = ['a', 'b', 'c'];
+          expect(arr).toContain(pick(r, arr));
+        },
+      ),
     );
   });
   it('covers every value of a small range', () => {
@@ -133,18 +142,30 @@ describe('rng integer helpers', () => {
   });
 });
 
+const asc = (x: number, y: number): number => x - y;
+
+function weightedNeverPicksZero(seed: string, ws: number[]): void {
+  fc.pre(ws.some((w) => w > 0));
+  const r = createRng(seed);
+  const entries = ws.map((weight, value) => ({ value, weight }));
+  for (let i = 0; i < 30; i++) expect(ws[weighted(r, entries)]).toBeGreaterThan(0);
+}
+
 describe('rng weighted and shuffle', () => {
   it('weighted never picks a zero weight and covers positive ones (property)', () => {
     fc.assert(
-      fc.property(fc.string(), fc.array(fc.nat(5), { minLength: 1, maxLength: 6 }), (seed, ws) => {
-        fc.pre(ws.some((w) => w > 0));
-        const r = createRng(seed);
-        const entries = ws.map((weight, value) => ({ value, weight }));
-        for (let i = 0; i < 30; i++) expect(ws[weighted(r, entries)]).toBeGreaterThan(0);
-      }),
+      fc.property(
+        fc.string(),
+        fc.array(fc.nat(5), { minLength: 1, maxLength: 6 }),
+        weightedNeverPicksZero,
+      ),
     );
     const r = createRng('w');
-    const entries = [{ value: 'a', weight: 1 }, { value: 'b', weight: 0 }, { value: 'c', weight: 3 }];
+    const entries = [
+      { value: 'a', weight: 1 },
+      { value: 'b', weight: 0 },
+      { value: 'c', weight: 3 },
+    ];
     const seen = new Set(Array.from({ length: 200 }, () => weighted(r, entries)));
     expect([...seen].sort()).toEqual(['a', 'c']);
   });
@@ -153,7 +174,12 @@ describe('rng weighted and shuffle', () => {
     expect(() => weighted(r, [])).toThrow();
     expect(() => weighted(r, [{ value: 1, weight: 0 }])).toThrow();
     expect(() => weighted(r, [{ value: 1, weight: 1.5 }])).toThrow();
-    expect(() => weighted(r, [{ value: 1, weight: -1 }, { value: 2, weight: 3 }])).toThrow();
+    expect(() =>
+      weighted(r, [
+        { value: 1, weight: -1 },
+        { value: 2, weight: 3 },
+      ]),
+    ).toThrow();
   });
   it('shuffle is a deterministic permutation and leaves the input intact (property)', () => {
     fc.assert(
@@ -161,7 +187,7 @@ describe('rng weighted and shuffle', () => {
         const before = arr.slice();
         const out = shuffle(createRng(seed), arr);
         expect(arr).toEqual(before);
-        expect(out.slice().sort((x, y) => x - y)).toEqual(arr.slice().sort((x, y) => x - y));
+        expect(out.slice().sort(asc)).toEqual(arr.slice().sort(asc));
         expect(shuffle(createRng(seed), arr)).toEqual(out);
       }),
     );
@@ -171,6 +197,8 @@ describe('rng weighted and shuffle', () => {
 describe('rng purity', () => {
   it('rng.ts uses no Math.random, Date, performance, crypto, timers or DOM', () => {
     const src = readFileSync(new URL('./rng.ts', import.meta.url), 'utf8');
-    expect(src).not.toMatch(/Math\.random|\bDate\b|performance|crypto|setTimeout|setInterval|\bwindow\b|\bdocument\b/);
+    expect(src).not.toMatch(
+      /Math\.random|\bDate\b|performance|crypto|setTimeout|setInterval|\bwindow\b|\bdocument\b/,
+    );
   });
 });

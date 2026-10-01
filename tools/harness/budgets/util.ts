@@ -1,5 +1,5 @@
-import type { Item } from '../core/forge.ts';
 import { budget } from '../core/config.ts';
+import type { Item } from '../core/forge.ts';
 import type { Doc, Finding, Scan } from '../core/types.ts';
 
 export interface Ctx {
@@ -28,7 +28,6 @@ export interface Limit {
 
 export const tokens = (s: string): number => Math.ceil(s.length / 3);
 
-
 /** Effective limit for a budget, honouring a doc's validated budget_override. */
 export function limit(ctx: Ctx, id: string, doc?: Doc): Limit | null {
   const def = budget(ctx.scan.config, id);
@@ -39,8 +38,19 @@ export function limit(ctx: Ctx, id: string, doc?: Doc): Limit | null {
   return { value: def.value, warnAt: def.warn_at, min, severity: def.severity };
 }
 
+/** Where a measurement was taken: file, optional doc (for overrides) and label. */
+export interface Loc {
+  file: string;
+  doc?: Doc;
+  what?: string;
+}
+
+export const at = (file: string, what?: string): Loc => ({ file, what });
+export const inDoc = (doc: Doc, what?: string): Loc => ({ file: doc.rel, doc, what });
+
 /** Compare a measurement with its budget (max or min); warns between warn_at and the hard value. */
-export function check(ctx: Ctx, id: string, file: string, actual: number, doc?: Doc, what = ''): Finding[] {
+export function check(ctx: Ctx, id: string, loc: Loc, actual: number): Finding[] {
+  const { file, doc, what = '' } = loc;
   const l = limit(ctx, id, doc);
   if (!l) return [];
   const unit = budget(ctx.scan.config, id).unit;
@@ -55,4 +65,5 @@ export function check(ctx: Ctx, id: string, file: string, actual: number, doc?: 
   return [];
 }
 
-export const isGenerated = (doc: Doc): boolean => doc.kind === 'index' || doc.data?.generated === true;
+export const isGenerated = (doc: Doc): boolean =>
+  doc.kind === 'index' || doc.data?.generated === true;

@@ -23,9 +23,13 @@ function valueCell(b: BudgetDef): string {
 }
 
 function section(label: string, rows: [string, BudgetDef][]): string[] {
-  const head = ['| Budget | Value | Warn at | Severity | Enforced by | Description |', '|---|---|---|---|---|---|'];
-  const body = rows.map(([id, b]) =>
-    `| \`${id}\` | ${cell(valueCell(b))} | ${b.warn_at ?? ''} | ${b.severity} | ${b.enforced_by} | ${cell(b.description)} |`,
+  const head = [
+    '| Budget | Value | Warn at | Severity | Enforced by | Description |',
+    '|---|---|---|---|---|---|',
+  ];
+  const body = rows.map(
+    ([id, b]) =>
+      `| \`${id}\` | ${cell(valueCell(b))} | ${b.warn_at ?? ''} | ${b.severity} | ${b.enforced_by} | ${cell(b.description)} |`,
   );
   return [`## ${label}`, '', ...head, ...body, ''];
 }

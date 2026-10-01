@@ -2,7 +2,12 @@ import { execFileSync } from 'node:child_process';
 
 function git(root: string, args: string[]): string | null {
   try {
-    return execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], timeout: 5000 });
+    return execFileSync('git', args, {
+      cwd: root,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      timeout: 5000,
+    });
   } catch {
     return null;
   }

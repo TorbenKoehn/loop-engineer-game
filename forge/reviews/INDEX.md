@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews"
-summary: "Index of forge/reviews: 4 files, 0 subdirectories"
-keywords: ["review", "forkable", "integer", "seeded", "biome", "check", "preact", "scaffold"]
+summary: "Index of forge/reviews: 5 files, 0 subdirectories"
+keywords: ["review", "biome", "forkable", "integer", "seeded", "budgets", "check", "code"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R002-T006.md](R002-T006.md) | Review of T006: Unified check script | Review of T006 (approved) | review, unified, check, script, biome, vitest |
 | [R003-T003.md](R003-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (changes-requested) | review, seeded, forkable, integer |
 | [R004-T003.md](R004-T003.md) | Review of T003: Seeded forkable integer RNG | Review of T003 (approved) | review, seeded, forkable, integer |
+| [R005-T002.md](R005-T002.md) | Review of T002: Configure Biome with code budgets | Review of T002 (approved) | review, configure, biome, with, code, budgets |

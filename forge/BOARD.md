@@ -15,7 +15,7 @@ generated: true
 
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
-| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 3/8 |
+| [E001](epics/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 4/8 |
 | [E002](epics/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 0/8 |
 | [E003](epics/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
@@ -133,22 +133,21 @@ generated: true
 
 _none_
 
-## Review (1/3)
+## Review (0/3)
 
-| ID | Title | Epic | Priority | Model | Size |
-|---|---|---|---|---|---|
-| [T002](epics/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
+_none_
 
 ## Blocked (0)
 
 _none_
 
-## Done (3)
+## Done (4)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T006](epics/E001-game-foundation/T006-unified-check-script-tsc-biome-vitest-ha.md) | Unified check script (tsc, biome, vitest, harness) | E001 | p0 | sonnet | S |
 | [T003](epics/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
+| [T002](epics/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
 | [T001](epics/E001-game-foundation/T001-scaffold-vite-preact-and-strict-typescri.md) | Scaffold Vite, Preact and strict TypeScript app | E001 | p0 | sonnet | S |
 
 ## Cancelled (0)

@@ -1,5 +1,5 @@
-import { check } from '../util.ts';
 import type { Check } from '../util.ts';
+import { at, check } from '../util.ts';
 import { codeLines, commentLines, isComment, isTest } from './lines.ts';
 
 const MARKER = /\b(?:TODO|FIXME|HACK|XXX)\b/;
@@ -10,7 +10,13 @@ const lineChars: Check = {
   id: 'comment_line_chars',
   run: (ctx) =>
     ctx.scan.code.flatMap((f) =>
-      f.text.split('\n').flatMap((l, i) => (isComment(l) ? check(ctx, 'comment_line_chars', f.rel, l.length, undefined, `line ${i + 1}`) : [])),
+      f.text
+        .split('\n')
+        .flatMap((l, i) =>
+          isComment(l)
+            ? check(ctx, 'comment_line_chars', at(f.rel, `line ${i + 1}`), l.length)
+            : [],
+        ),
     ),
 };
 
@@ -24,7 +30,9 @@ const blockLines: Check = {
       for (let i = 0; i <= lines.length; i++) {
         if (i < lines.length && isComment(lines[i]!)) run++;
         else {
-          found.push(...check(ctx, 'comment_block_lines', f.rel, run, undefined, `comment ending line ${i}`));
+          found.push(
+            ...check(ctx, 'comment_block_lines', at(f.rel, `comment ending line ${i}`), run),
+          );
           run = 0;
         }
       }
@@ -37,7 +45,14 @@ const ratio: Check = {
   run: (ctx) =>
     ctx.scan.code.flatMap((f) => {
       const code = codeLines(f.text);
-      return code < 20 ? [] : check(ctx, 'comment_ratio', f.rel, Math.round((commentLines(f.text) / code) * 100) / 100);
+      return code < 20
+        ? []
+        : check(
+            ctx,
+            'comment_ratio',
+            at(f.rel),
+            Math.round((commentLines(f.text) / code) * 100) / 100,
+          );
     }),
 };
 
@@ -51,12 +66,21 @@ function markers(text: string): { line: number; tracked: boolean }[] {
 const todos: Check = {
   id: 'todo',
   run: (ctx) => {
-    const found = ctx.scan.code.filter((f) => !isTest(f.rel)).map((f) => ({ f, m: markers(f.text) }));
+    const found = ctx.scan.code
+      .filter((f) => !isTest(f.rel))
+      .map((f) => ({ f, m: markers(f.text) }));
     const untracked = found.flatMap(({ f, m }) =>
-      m.filter((x) => !x.tracked).flatMap((x) => check(ctx, 'todo_untracked', f.rel, 1, undefined, `line ${x.line}`).map((r) => ({ ...r, file: f.rel }))),
+      m
+        .filter((x) => !x.tracked)
+        .flatMap((x) =>
+          check(ctx, 'todo_untracked', at(f.rel, `line ${x.line}`), 1).map((r) => ({
+            ...r,
+            file: f.rel,
+          })),
+        ),
     );
     const total = found.reduce((n, { m }) => n + m.length, 0);
-    return [...untracked, ...check(ctx, 'todo_total', '.', total, undefined, 'markers')];
+    return [...untracked, ...check(ctx, 'todo_total', at('.', 'markers'), total)];
   },
 };
 

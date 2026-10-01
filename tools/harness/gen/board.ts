@@ -1,9 +1,9 @@
 import path from 'node:path';
 import { budget } from '../core/config.ts';
-import { forgeItems, ofType } from '../core/forge.ts';
 import type { Item } from '../core/forge.ts';
-import { GENERATED_MARK, writeIfChanged } from './index.ts';
+import { forgeItems, ofType } from '../core/forge.ts';
 import type { Scan } from '../core/types.ts';
+import { GENERATED_MARK, writeIfChanged } from './index.ts';
 
 const COLUMNS: { status: string; label: string; wip?: string }[] = [
   { status: 'backlog', label: 'Backlog' },
@@ -31,10 +31,20 @@ function taskTable(tasks: Item[], boardDir: string): string[] {
     const v = (k: string): string => (typeof d[k] === 'string' ? (d[k] as string) : '');
     return `| [${t.id}](${link}) | ${cell(t.title)} | ${v('epic')} | ${t.priority} | ${v('model')} | ${v('size')} |`;
   });
-  return ['| ID | Title | Epic | Priority | Model | Size |', '|---|---|---|---|---|---|', ...rows, ''];
+  return [
+    '| ID | Title | Epic | Priority | Model | Size |',
+    '|---|---|---|---|---|---|',
+    ...rows,
+    '',
+  ];
 }
 
-function column(tasks: Item[], col: (typeof COLUMNS)[number], scan: Scan, boardDir: string): string[] {
+function column(
+  tasks: Item[],
+  col: (typeof COLUMNS)[number],
+  scan: Scan,
+  boardDir: string,
+): string[] {
   let items = tasks.filter((t) => t.status === col.status);
   let head = `## ${col.label} (${items.length})`;
   if (col.wip) head = `## ${col.label} (${items.length}/${budget(scan.config, col.wip).value})`;
@@ -53,14 +63,19 @@ function column(tasks: Item[], col: (typeof COLUMNS)[number], scan: Scan, boardD
 function epicTable(items: Item[], tasks: Item[], scan: Scan, boardDir: string): string[] {
   const epics = ofType(items, 'epic').sort((a, b) => (a.id < b.id ? -1 : 1));
   const active = epics.filter((e) => e.status === 'in-progress').length;
-  const lines = [`## Epic Progress (active ${active}/${budget(scan.config, 'epics_active').value})`, ''];
+  const lines = [
+    `## Epic Progress (active ${active}/${budget(scan.config, 'epics_active').value})`,
+    '',
+  ];
   if (epics.length === 0) return [...lines, '_none_', ''];
   lines.push('| Epic | Title | Status | Priority | Done/Total |', '|---|---|---|---|---|');
   for (const e of epics) {
     const mine = tasks.filter((t) => t.doc.data!.epic === e.id);
     const done = mine.filter((t) => t.status === 'done').length;
     const link = path.posix.relative(boardDir, e.doc.rel);
-    lines.push(`| [${e.id}](${link}) | ${cell(e.title)} | ${e.status} | ${e.priority} | ${done}/${mine.length} |`);
+    lines.push(
+      `| [${e.id}](${link}) | ${cell(e.title)} | ${e.status} | ${e.priority} | ${done}/${mine.length} |`,
+    );
   }
   return [...lines, ''];
 }
@@ -69,8 +84,12 @@ export function generateBoard(scan: Scan): string {
   const items = forgeItems(scan.docs);
   const tasks = ofType(items, 'task');
   const boardDir = path.posix.dirname(scan.config.boardPath);
-  const dates = items.map((i) => i.doc.data!.updated).filter((d): d is string => typeof d === 'string');
-  const updated = dates.length ? dates.reduce((a, b) => (a > b ? a : b)) : scan.config.index.fallbackDate;
+  const dates = items
+    .map((i) => i.doc.data!.updated)
+    .filter((d): d is string => typeof d === 'string');
+  const updated = dates.length
+    ? dates.reduce((a, b) => (a > b ? a : b))
+    : scan.config.index.fallbackDate;
   const lines = [
     '---',
     'title: "Forge Board"',

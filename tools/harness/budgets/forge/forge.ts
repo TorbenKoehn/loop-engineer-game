@@ -1,7 +1,7 @@
-import { checklistCount, ofType } from '../../core/forge.ts';
 import type { Item } from '../../core/forge.ts';
-import { check } from '../util.ts';
+import { checklistCount, ofType } from '../../core/forge.ts';
 import type { Check, Ctx } from '../util.ts';
+import { at, check, inDoc } from '../util.ts';
 
 const tasks = (ctx: Ctx): Item[] => ofType(ctx.items, 'task');
 
@@ -10,7 +10,7 @@ const tasksPerEpic: Check = {
   run: (ctx) =>
     ofType(ctx.items, 'epic').flatMap((e) => {
       const n = tasks(ctx).filter((t) => t.doc.data!.epic === e.id).length;
-      return check(ctx, 'tasks_per_epic', e.doc.rel, n, e.doc, `epic ${e.id}`);
+      return check(ctx, 'tasks_per_epic', inDoc(e.doc, `epic ${e.id}`), n);
     }),
 };
 
@@ -20,9 +20,9 @@ const checklists: Check = {
     tasks(ctx).flatMap((t) => {
       const ac = checklistCount(t.doc.body, 'Acceptance Criteria');
       return [
-        ...check(ctx, 'subtasks_per_task', t.doc.rel, checklistCount(t.doc.body, 'Subtasks'), t.doc),
-        ...check(ctx, 'acceptance_criteria_max', t.doc.rel, ac, t.doc),
-        ...(t.status === 'backlog' ? [] : check(ctx, 'acceptance_criteria_min', t.doc.rel, ac, t.doc)),
+        ...check(ctx, 'subtasks_per_task', inDoc(t.doc), checklistCount(t.doc.body, 'Subtasks')),
+        ...check(ctx, 'acceptance_criteria_max', inDoc(t.doc), ac),
+        ...(t.status === 'backlog' ? [] : check(ctx, 'acceptance_criteria_min', inDoc(t.doc), ac)),
       ];
     }),
 };
@@ -41,7 +41,7 @@ const wip: Check = {
   run: (ctx) =>
     COUNTED.flatMap(([id, status, type]) => {
       const n = ofType(ctx.items, type).filter((t) => t.status === status).length;
-      return check(ctx, id, ctx.scan.config.boardPath, n, undefined, `${n} ${type}s ${status}`);
+      return check(ctx, id, at(ctx.scan.config.boardPath, `${n} ${type}s ${status}`), n);
     }),
 };
 
@@ -57,8 +57,12 @@ const age: Check = {
       tasks(ctx)
         .filter((t) => t.status === status && typeof t.doc.data!.updated === 'string')
         .flatMap((t) => {
-          const days = Math.round((Date.parse(ctx.today) - Date.parse(String(t.doc.data!.updated))) / 86_400_000);
-          return Number.isNaN(days) ? [] : check(ctx, id, t.doc.rel, days, t.doc, `${t.id} ${status} since update`);
+          const days = Math.round(
+            (Date.parse(ctx.today) - Date.parse(String(t.doc.data!.updated))) / 86_400_000,
+          );
+          return Number.isNaN(days)
+            ? []
+            : check(ctx, id, inDoc(t.doc, `${t.id} ${status} since update`), days);
         }),
     ),
 };

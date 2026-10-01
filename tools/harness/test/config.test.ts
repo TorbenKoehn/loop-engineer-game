@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { budget } from '../core/config.ts';
+import { scanRepo } from '../core/scan.ts';
 import { generateBoard } from '../gen/board.ts';
 import { generateIndexes } from '../gen/index.ts';
-import { scanRepo } from '../core/scan.ts';
 import { doc, makeRepo } from './testutil.ts';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -24,21 +24,21 @@ const PATTERNS = [
   /\['((?:\w+_)+\w+)', '((?:\w+_)+\w+)'\]/g,
 ];
 
+const looksLikeBudgetId = (id: string): boolean =>
+  /_/.test(id) && /^(?:[a-z]+_)+[a-z0-9]+$/.test(id) && !/^(?:in_progress|done)/.test(id);
+
+function referencedIds(text: string): string[] {
+  return PATTERNS.flatMap((re) => [...text.matchAll(re)].flatMap((m) => m.slice(1)));
+}
+
 describe('budget lookups', () => {
   it('every budget id referenced in source exists in the config', () => {
     const config = scanRepo(makeRepo({})).config;
     const missing: string[] = [];
     for (const file of sourceFiles(root)) {
-      const text = fs.readFileSync(file, 'utf8');
-      for (const re of PATTERNS) {
-        for (const m of text.matchAll(re)) {
-          for (const id of m.slice(1)) {
-            if (/_/.test(id) && !config.budgets[id] && /^(?:[a-z]+_)+[a-z0-9]+$/.test(id) && !/^(?:in_progress|done)/.test(id)) {
-              missing.push(`${path.basename(file)}: ${id}`);
-            }
-          }
-        }
-      }
+      const ids = referencedIds(fs.readFileSync(file, 'utf8'));
+      for (const id of ids.filter((x) => looksLikeBudgetId(x) && !config.budgets[x]))
+        missing.push(`${path.basename(file)}: ${id}`);
     }
     expect(missing).toEqual([]);
   });

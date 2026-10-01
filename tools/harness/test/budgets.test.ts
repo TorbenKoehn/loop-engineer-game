@@ -40,8 +40,11 @@ describe('budgets', () => {
       const f = findings({ 'docs/a.md': doc({ budget_override: ov }) }, 'budget_override');
       expect(f).toEqual(['error:docs/a.md']);
     }
-    const expired = '{md_lines: {value: 400, reason: "long enough reason here", until: 2026-09-20}}';
-    expect(findings({ 'docs/a.md': doc({ budget_override: expired }) }, 'budget_override')).toEqual(['warn:docs/a.md']);
+    const expired =
+      '{md_lines: {value: 400, reason: "long enough reason here", until: 2026-09-20}}';
+    expect(findings({ 'docs/a.md': doc({ budget_override: expired }) }, 'budget_override')).toEqual(
+      ['warn:docs/a.md'],
+    );
   });
 
   it('warns between warn_at and the hard limit', () => {
@@ -56,15 +59,21 @@ describe('budgets', () => {
   });
 
   it('measures function lengths heuristically', () => {
-    const src = 'export function a() {\n  return 1;\n}\nconst b = (x: number) => {\n  if (x) {\n    return 2;\n  }\n  return 3;\n};\n';
-    expect(functionLengths(src).map((f) => [f.name, f.lines])).toEqual([['a', 3], ['b', 6]]);
+    const src =
+      'export function a() {\n  return 1;\n}\nconst b = (x: number) => {\n  if (x) {\n    return 2;\n  }\n  return 3;\n};\n';
+    expect(functionLengths(src).map((f) => [f.name, f.lines])).toEqual([
+      ['a', 3],
+      ['b', 6],
+    ]);
   });
 
   it('keeps generated files fresh in lint', () => {
     const files = { 'docs/a.md': doc() };
     const root = makeRepo(files);
     const scan = scanRepo(root);
-    expect(lint(scan, { now: '2026-10-01', head: () => null }).filter((f) => f.rule === 'index').length).toBeGreaterThan(0);
+    expect(
+      lint(scan, { now: '2026-10-01', head: () => null }).filter((f) => f.rule === 'index').length,
+    ).toBeGreaterThan(0);
     expect(generateBoard(scan)).toContain('## In Progress (0/3)');
     expect(generateIndexes(scan).has('docs/INDEX.md')).toBe(true);
   });
