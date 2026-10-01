@@ -5,7 +5,7 @@ title: Per-area coverage gates in Vitest
 summary: "Vitest v8 coverage with per-area thresholds from the testing strategy (sim 95/90, run 90/85, save 90/85, content 90, ui logic 70) and a test:coverage script."
 keywords: ["coverage", "vitest", "thresholds", "quality-gate", "testing"]
 type: task
-status: ready
+status: in-progress
 priority: p1
 model: sonnet
 size: S
@@ -50,3 +50,4 @@ Make the coverage budgets enforceable from the first sim commit, so vertical-sli
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)
