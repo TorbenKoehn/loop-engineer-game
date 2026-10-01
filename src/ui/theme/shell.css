@@ -2,6 +2,7 @@
 @import "./screens.css";
 @import "./map.css";
 @import "./reward.css";
+@import "./shop.css";
 
 .shell {
   height: 100vh;

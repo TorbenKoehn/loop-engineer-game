@@ -1,0 +1,83 @@
+/*
+ * Package Registry (screens.md "Other screens") on the Crimson tokens. Offers read as
+ * `name@version` package lines; a sale carries a SALE tag and an unaffordable offer states
+ * its reason in text, so colour is never the only cue.
+ */
+
+.pkg {
+  display: grid;
+  flex: 1 1 190px;
+  max-width: 210px;
+  align-content: start;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--fast),
+    background-color var(--fast);
+}
+
+.pkg:hover:not(:disabled),
+.pkg:focus-visible {
+  border-color: var(--brand-text);
+  background: var(--bg-raised);
+}
+
+.pkg:disabled {
+  color: var(--fg-muted);
+  cursor: not-allowed;
+}
+
+.pkg__id {
+  color: var(--brand-text);
+  font-size: var(--size-heading);
+  overflow-wrap: anywhere;
+}
+
+.pkg__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pkg__price {
+  color: var(--credits);
+  font-size: var(--size-heading);
+}
+
+.pkg__why {
+  color: var(--warn);
+  font-size: var(--size-meta);
+}
+
+.shop__credits {
+  margin: 0;
+  color: var(--credits);
+}
+
+.shop__sell {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.shop__sell h3 {
+  margin: 0;
+  font-size: var(--size-body);
+  color: var(--fg-muted);
+}
+
+.shop__err {
+  margin: 0;
+  color: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pkg {
+    transition: none;
+  }
+}

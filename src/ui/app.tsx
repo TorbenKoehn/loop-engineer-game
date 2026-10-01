@@ -31,6 +31,7 @@ const RewardScreen = lazyScreen(() => import('./screens/reward.tsx').then((m) =>
 const DiscardScreen = lazyScreen(() =>
   import('./screens/discard.tsx').then((m) => m.DiscardScreen),
 );
+const ShopScreen = lazyScreen(() => import('./screens/shop.tsx').then((m) => m.ShopScreen));
 
 /** The screen for the current `mode`; `mode` is the route (ui.md "Screens"). */
 export function Screen() {
@@ -42,6 +43,7 @@ export function Screen() {
   if (m === 'map') return <MapScreen />;
   if (m === 'reward') return <RewardScreen />;
   if (m === 'discard') return <DiscardScreen />;
+  if (m === 'shop') return <ShopScreen />;
   return <Placeholder mode={m} />;
 }
 

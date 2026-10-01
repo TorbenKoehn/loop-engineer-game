@@ -106,7 +106,7 @@ export function buy(state: RunState, ix: number): ApplyResult {
   return ok({ ...s, pending: s.pending?.kind === 'discard' ? { ...s.pending, resume } : resume });
 }
 
-const rerollCost = (shop: ShopPending): number => REROLL_BASE + REROLL_STEP * shop.rerolls;
+export const rerollCost = (shop: ShopPending): number => REROLL_BASE + REROLL_STEP * shop.rerolls;
 
 /** Rerolls all offers and the sale; the n-th reroll this visit uses `shop/<nodeId>/reroll/<n>`. */
 export function reroll(state: RunState): ApplyResult {
