@@ -5,7 +5,7 @@ title: Crimson theme tokens and typography
 summary: "Crimson colour and zone tokens as CSS custom properties, self-hosted JetBrains Mono at the documented sizes, and reusable zone encoding classes (colour, pattern, label)."
 keywords: ["theme", "css", "tokens", "typography", "crimson", "zones"]
 type: task
-status: in-progress
+status: done
 priority: p1
 model: sonnet
 size: S
@@ -30,15 +30,15 @@ Give every screen the slice look from one token set, so later themes only swap t
 
 ## Acceptance Criteria
 
-- [ ] All Crimson and zone tokens from art-direction.md are custom properties on :root, and components use no raw hex colours (grep evidence)
-- [ ] JetBrains Mono 400/700 latin subset is self-hosted, ≤ 100 kB, base 15 px, line height 1.45
-- [ ] Zone classes combine colour, pattern and label for Cold, Focused, Rot and Overflow
+- [x] All Crimson and zone tokens from art-direction.md are custom properties on :root, and components use no raw hex colours (grep evidence)
+- [x] JetBrains Mono 400/700 latin subset is self-hosted, ≤ 100 kB, base 15 px, line height 1.45
+- [x] Zone classes combine colour, pattern and label for Cold, Focused, Rot and Overflow
 
 ## Subtasks
 
-- [ ] Token sheet
-- [ ] Font files and @font-face
-- [ ] Zone classes
+- [x] Token sheet
+- [x] Font files and @font-face
+- [x] Zone classes
 
 ## Notes
 
@@ -48,3 +48,9 @@ Give every screen the slice look from one token set, so later themes only swap t
 
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
+- 2026-10-01: AC1 verified: 17 tokens on :root[data-theme=crimson] (contrast.test.ts matches art-direction table); theme.test.ts asserts no raw hex in src css/tsx outside crimson.css
+- 2026-10-01: AC2 verified: public/fonts 400+700 latin woff2 (21168+21908 B, OFL license file); --size-body 15px, --line 1.45; fonts.css @font-face
+- 2026-10-01: AC3 verified: zones.css .zone--cold/focused/rot/overflow set colour token, pattern, label+glyph (theme.test.ts)
+- 2026-10-01: npm run check, build, e2e green
+- 2026-10-01: review requested
+- 2026-10-01: done (R042)

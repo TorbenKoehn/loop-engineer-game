@@ -27,7 +27,7 @@
 }
 
 :root {
-  /* JetBrains Mono is self-hosted later (T055); until then the closest local monospace. */
+  /* JetBrains Mono is self-hosted (fonts.css); local monospace fonts are the fallback. */
   --font-mono:
     "JetBrains Mono", "Cascadia Mono", "Cascadia Code", "Fira Code", "SF Mono", Menlo, Consolas,
     "Liberation Mono", "DejaVu Sans Mono", monospace;

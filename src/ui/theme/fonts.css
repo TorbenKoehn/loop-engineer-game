@@ -1,0 +1,16 @@
+/* JetBrains Mono, latin subset, self-hosted (SIL OFL 1.1, see public/fonts/JetBrainsMono-OFL.txt).
+ * Source: @fontsource/jetbrains-mono 5.3.0. Two files, about 43 kB total (budget 100 kB). */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2");
+}

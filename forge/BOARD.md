@@ -20,7 +20,7 @@ generated: true
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 1/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 3/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 9/9 |
-| [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 2/9 |
+| [E006](epics/m1/E006-ui-shell-and-combat-replay/EPIC.md) | UI shell and combat replay | backlog | p1 | 3/9 |
 | [E007](epics/m1/E007-item-rules-enemy-traits-and-bosses/EPIC.md) | Item rules, enemy traits and bosses | backlog | p0 | 0/8 |
 | [E008](epics/m1/E008-run-end-meta-state-and-saves/EPIC.md) | Run end, meta state and saves | backlog | p1 | 0/7 |
 | [E009](epics/m1/E009-run-screens-and-build-panel/EPIC.md) | Run screens and build panel | backlog | p1 | 0/8 |
@@ -110,13 +110,12 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (2/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
 | [T043](epics/m1/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
-| [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
 
 ## Review (0/3)
 
@@ -126,9 +125,9 @@ _none_
 
 _none_
 
-## Done (35)
+## Done (36)
 
-_Showing the last 20 of 35 done tasks._
+_Showing the last 20 of 36 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -139,6 +138,7 @@ _Showing the last 20 of 35 done tasks._
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
 | [T055](epics/m1/E006-ui-shell-and-combat-replay/T055-ui-store-shell-layout-and-i18n-walking-s.md) | UI store, shell layout and i18n walking skeleton | E006 | p1 | opus | M |
 | [T042](epics/m1/E004-run-structure-and-map/T042-fight-nodes-build-combatinput-and-resolv.md) | Fight nodes: build CombatInput and resolve | E004 | p1 | opus | M |
 | [T041](epics/m1/E004-run-structure-and-map/T041-seeded-map-generation-and-encounter-sele.md) | Seeded map generation and encounter selection | E004 | p1 | opus | M |
@@ -151,6 +151,5 @@ _Showing the last 20 of 35 done tasks._
 | [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T018](epics/m1/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T017](epics/m1/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
-| [T016](epics/m1/E005-vertical-slice-content/T016-content-validation-and-m1-slice-id-test.md) | Content validation and M1 slice id test | E005 | p1 | opus | M |
 
 ## Cancelled (0)

@@ -1,0 +1,67 @@
+/*
+ * Zone encoding (docs/game/ux/art-direction.md "Zone encoding"): colour + pattern + label.
+ * Use `<span class="zone zone--cold"></span>`; the label and edge glyph come from ::before so
+ * colour is never the only signal. Colours come from tokens only.
+ */
+.zone {
+  --zone-color: var(--noise);
+  --zone-label: "NOISE";
+  --zone-glyph: "#";
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.75ch;
+  border: 1px solid var(--zone-color);
+  border-radius: var(--radius);
+  color: var(--zone-color);
+  background-color: var(--bg-panel);
+  background-image: var(--zone-pattern, none);
+  font-weight: 700;
+}
+.zone::before {
+  content: var(--zone-glyph) " " var(--zone-label);
+  padding-inline: 0.5ch;
+  background: var(--bg-panel);
+}
+.zone--cold {
+  --zone-color: var(--cold);
+  --zone-label: "COLD";
+  --zone-glyph: "*";
+  /* dotted */
+  --zone-pattern: radial-gradient(var(--zone-color) 1px, transparent 1.5px);
+  background-size: 4px 4px;
+}
+.zone--focused {
+  --zone-color: var(--good);
+  --zone-label: "FOCUSED";
+  --zone-glyph: "=";
+  /* solid */
+  --zone-pattern: linear-gradient(var(--zone-color), var(--zone-color));
+}
+.zone--rot {
+  --zone-color: var(--warn);
+  --zone-label: "ROT";
+  --zone-glyph: "~";
+  /* hatched */
+  --zone-pattern: repeating-linear-gradient(45deg, var(--zone-color) 0 1px, transparent 1px 4px);
+}
+.zone--overflow {
+  --zone-color: var(--danger);
+  --zone-label: "OVERFLOW";
+  --zone-glyph: "!";
+  /* dense, blinking at 2 Hz */
+  --zone-pattern: repeating-linear-gradient(45deg, var(--zone-color) 0 2px, transparent 2px 4px);
+  animation: zone-blink 500ms steps(1) infinite;
+}
+.zone--noise {
+  --zone-pattern: repeating-linear-gradient(-45deg, var(--noise) 0 1px, transparent 1px 5px);
+}
+@keyframes zone-blink {
+  50% {
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zone--overflow {
+    animation: none;
+  }
+}
