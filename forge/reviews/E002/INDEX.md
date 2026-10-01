@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E002"
-summary: "Index of forge/reviews/E002: 3 files, 0 subdirectories"
-keywords: ["review", "combat", "enemy", "skeleton", "tool", "walking", "helpers", "integer"]
+summary: "Index of forge/reviews/E002: 4 files, 0 subdirectories"
+keywords: ["review", "combat", "enemy", "skeleton", "tool", "walking", "damage", "formula"]
 type: index
 status: active
 updated: 2026-10-01
@@ -18,3 +18,4 @@ generated: true
 | [R006-T017.md](R006-T017.md) | Review of T017: Integer math helpers for the sim | Review of T017 (approved) | review, integer, math, helpers |
 | [R014-T018.md](R014-T018.md) | Review of T018: combat walking skeleton | Round 1, changes-requested: code meets all 5 AC and follows the tick order, but the 583-line diff breaches task_diff_lines (400) with no allowed override. | review, combat, walking, skeleton, tool, enemy |
 | [R015-T018.md](R015-T018.md) | Review of T018: Combat skeleton, one tool vs one enemy | Review of T018 (approved) | review, combat, walking, skeleton, tool, enemy |
+| [R019-T019.md](R019-T019.md) | Review of T019: Targeting, damage formula and Guardrails | Review of T019 (approved) | review, targeting, damage, formula, guardrails |

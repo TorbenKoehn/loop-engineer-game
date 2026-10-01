@@ -1,5 +1,5 @@
 // Tick step 6: enemies act front to back, then advance to the next intent of their cycle.
-import { damageData } from './fire.ts';
+import { computeAmount, dealDamage } from './damage.ts';
 import { type EnemyRt, emit, enemyRef, PROGRESS_PER_MS, type Sim } from './state.ts';
 
 /** Emits `intentSet` for the enemy's current intent. */
@@ -29,11 +29,7 @@ export function enemiesAct(sim: Sim): void {
   }
 }
 
+/** Enemy amount -> agent Guardrails -> Trust. Damage-taken mods: T033. */
 function hitAgent(sim: Sim, enemy: EnemyRt, base: number): void {
-  const { agent } = sim;
-  const dealt = Math.min(base, agent.trust);
-  agent.trust -= dealt;
-  agent.taken += dealt;
-  const d = damageData(base, agent.trust);
-  emit(sim, { kind: 'damage', src: enemyRef(enemy), dst: 'a', v: dealt, d });
+  dealDamage(sim, enemyRef(enemy), sim.agent, computeAmount(base));
 }

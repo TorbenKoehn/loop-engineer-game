@@ -27,6 +27,8 @@ export interface EnemyRt {
   readonly def: EnemyDef;
   sev: number;
   readonly maxSev: number;
+  /** Guardrails, capped at maxSev. */
+  guard: number;
   intentIx: number;
   progress: number;
   /** Ref of the source that dealt the final hit. */
@@ -36,6 +38,8 @@ export interface EnemyRt {
 export interface AgentRt {
   trust: number;
   readonly maxTrust: number;
+  /** Guardrails, capped at maxTrust. */
+  guard: number;
   /** Charge rate in percent. Flat mods: T020. */
   readonly rate: number;
   readonly tools: ToolRt[];
@@ -67,6 +71,7 @@ export function createSim(input: CombatInput, log: boolean): Sim {
     agent: {
       trust: agent.trust,
       maxTrust: agent.maxTrust,
+      guard: 0,
       rate: clamp(agent.model.speed, MIN_RATE, MAX_RATE),
       tools: agent.tools.map((s, slot) => ({ ...s, slot, progress: 0, dealt: 0 })),
       taken: 0,
@@ -76,6 +81,7 @@ export function createSim(input: CombatInput, log: boolean): Sim {
       def,
       sev: def.sev,
       maxSev: def.sev,
+      guard: 0,
       intentIx: 0,
       progress: 0,
       killedBy: 'sys' as Ref,

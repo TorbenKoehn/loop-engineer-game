@@ -16,7 +16,7 @@ generated: true
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
 | [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 7/8 |
-| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 2/8 |
+| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 3/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 3/8 |
@@ -128,11 +128,10 @@ generated: true
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 | [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T012](epics/m1/E005-vertical-slice-content/T012-m1-tool-catalogue-data-12-tools.md) | M1 tool catalogue data (12 tools) | E005 | p1 | opus | M |
 
 ## Review (0/3)
@@ -143,7 +142,7 @@ _none_
 
 _none_
 
-## Done (16)
+## Done (17)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -151,6 +150,7 @@ _none_
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T018](epics/m1/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T017](epics/m1/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
 | [T014](epics/m1/E005-vertical-slice-content/T014-phase-1-enemies-elite-boss-and-encounter.md) | Phase-1 enemies, elite, boss and encounter pools | E005 | p1 | opus | M |
