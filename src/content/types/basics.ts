@@ -12,4 +12,13 @@ export type V3 = readonly [number, number, number];
 /** A fixed number or a per-version triple. */
 export type Value = V3 | number;
 
-export type TargetSel = 'front' | 'back' | 'lowest' | 'all' | 'self' | 'rightTool' | 'tools';
+/** 'tool': one own tool, picked by the effect's selector (e.g. retry_with_backoff). */
+export type TargetSel =
+  | 'front'
+  | 'back'
+  | 'lowest'
+  | 'all'
+  | 'self'
+  | 'tool'
+  | 'rightTool'
+  | 'tools';

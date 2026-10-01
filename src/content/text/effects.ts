@@ -52,6 +52,10 @@ const renderers: Renderers = {
     sel: selectorText(c.strings, e.sel),
     ms: msText(c.strings, valueAt(e.ms, c.version)),
   }),
+  clearStatus: (e, c) => ({
+    status: render(c.strings, `status.${e.status}`),
+    sel: selectorText(c.strings, e.sel),
+  }),
   charge: (e, c) => ({
     sel: selectorText(c.strings, e.sel),
     ms: msText(c.strings, valueAt(e.ms, c.version)),

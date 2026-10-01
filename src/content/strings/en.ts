@@ -3,6 +3,7 @@
 // `cond.*`, `trait.*`, `verb.*`) are lower-case clauses; text.ts wraps them into sentences.
 // Trigger and cond templates wrap the effect clause `{then}`.
 import { enEnemies } from './en-enemies.ts';
+import { enTools } from './en-tools.ts';
 
 export const en = {
   // Sentence composition.
@@ -20,6 +21,7 @@ export const en = {
   'effect.heal': 'restore {n} Trust',
   'effect.prime': 'your next {what} hits {pct}% harder',
   'effect.status': '{status} {sel} for {ms}',
+  'effect.clear_status': 'clear {status} from {sel}',
   'effect.charge': 'give {sel} {ms} of charge',
   'effect.remove_ctx': 'remove {n} context (noise first)',
   'effect.compact': 'compact the context now',
@@ -84,6 +86,7 @@ export const en = {
   'target.lowest': 'the weakest enemy',
   'target.all': 'all enemies',
   'target.self': 'yourself',
+  'target.tool': 'one of your tools',
   'target.right_tool': 'the tool to the right',
   'target.tools': 'all your tools',
   'sel.fastest': 'your fastest tool',
@@ -137,7 +140,9 @@ export const en = {
   'stat.reroll_cost': 'reroll cost {n}',
   'stat.heal_pct': 'healing {n}%',
 
+  // Content names and flavour (one spread per content area).
   ...enEnemies,
+  ...enTools,
 } as const;
 
 export type StringKey = keyof typeof en;

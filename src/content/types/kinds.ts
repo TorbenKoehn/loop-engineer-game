@@ -32,6 +32,7 @@ export const EFFECT_KINDS = [
   'heal',
   'prime',
   'status',
+  'clearStatus',
   'charge',
   'removeCtx',
   'compact',

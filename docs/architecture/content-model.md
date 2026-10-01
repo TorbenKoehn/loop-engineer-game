@@ -28,7 +28,7 @@ literal: names and lines are string keys ([localisation](../game/ux/localisation
 export type Tag = 'Search' | 'Edit' | 'Test' | 'Shell' | 'Web' | 'Agent';
 export type Rarity = 'common' | 'uncommon' | 'rare';
 export type V3 = readonly [number, number, number];        // v1, v2, v3 values
-export type TargetSel = 'front' | 'back' | 'lowest' | 'all' | 'self' | 'rightTool' | 'tools';
+export type TargetSel = 'front' | 'back' | 'lowest' | 'all' | 'self' | 'tool' | 'rightTool' | 'tools';
 
 export interface ToolDef {
   id: ToolId; tags: readonly [Tag] | readonly [Tag, Tag]; rarity: Rarity;
@@ -76,6 +76,7 @@ export type Effect =
   | { do: 'guard'; v: V3 | number } | { do: 'heal'; v: V3 | number }
   | { do: 'prime'; filter: Filter; pct: V3 | number; count?: number }
   | { do: 'status'; status: Status; ms: V3 | number; sel: Selector }
+  | { do: 'clearStatus'; status: Status; sel: Selector }
   | { do: 'charge'; ms: V3 | number; sel: Selector } | { do: 'removeCtx'; v: V3 | number }
   | { do: 'compact' } | { do: 'summon'; v: V3; lifeMs: number; everyMs: number; report: number }
   | { do: 'mod'; stat: ModStat; v: number; filter?: Filter }   // passive stat modifiers
@@ -86,6 +87,11 @@ export interface Rule { when: Trigger; if?: readonly Cond[]; then: readonly Effe
 Rules are written with the `rule(when, then, conds?)` and `passive(...effects)` builders
 from `src/content/dsl/rule.ts`, never as `{ when, then }` object literals (Biome
 `noThenProperty`: thenables are a hazard).
+
+Tool data lives in `src/content/tools/` (one module per tag group, `tools` array in
+`index.ts`); names and flavour in `src/content/strings/en-tools.ts`, spread into `en`.
+Target `tool` is one own tool picked by the effect selectors; `clearStatus` removes a timed
+status (`retry_with_backoff` clears Throttle on `longestCharge`, T012).
 
 `ModStat` covers the passive numbers: `rate`, `dmgPct`, `dmgFlat`, `output`, `window`,
 `pipeMs`, `focusPct`, `noiseBlock`, `throttleDurPct`, `stunDurPct`, `dmgTakenPct`,

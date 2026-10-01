@@ -73,6 +73,8 @@ export type Effect =
   | { readonly do: 'heal'; readonly v: Value }
   | { readonly do: 'prime'; readonly filter: Filter; readonly pct: Value; readonly count?: number }
   | { readonly do: 'status'; readonly status: Status; readonly ms: Value; readonly sel: Selector }
+  /** Removes a timed status, e.g. Throttle (retry_with_backoff). */
+  | { readonly do: 'clearStatus'; readonly status: Status; readonly sel: Selector }
   | { readonly do: 'charge'; readonly ms: Value; readonly sel: Selector }
   | { readonly do: 'removeCtx'; readonly v: Value }
   | { readonly do: 'compact' }
