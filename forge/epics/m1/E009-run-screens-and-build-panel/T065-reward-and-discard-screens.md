@@ -5,7 +5,7 @@ title: Reward and discard screens
 summary: "PR-style reward screen with 3 diff cards, Skip (+6) and a credits receipt with interest, plus the discard screen when a gained item has no space."
 keywords: ["ui", "rewards", "discard", "credits", "screens"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: sonnet
 size: S
@@ -47,3 +47,4 @@ After a win the player sees exactly what was earned and makes the pick decision.
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (sonnet)

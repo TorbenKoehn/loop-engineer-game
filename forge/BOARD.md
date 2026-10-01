@@ -40,7 +40,7 @@ generated: true
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
 | [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | backlog | p1 | 0/0 |
 
-## Backlog (38)
+## Backlog (36)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -62,11 +62,9 @@ generated: true
 | [T030](epics/m1/E003-context-window-mechanic/T030-context-scaled-effects-and-window-modifi.md) | Context-scaled effects and window modifiers | E003 | p2 | opus | S |
 | [T031](epics/m1/E003-context-window-mechanic/T031-context-invariant-property-tests-and-wor.md) | Context invariant property tests and worked example | E003 | p2 | sonnet | S |
 | [T038](epics/m1/E007-item-rules-enemy-traits-and-bosses/T038-yak-shave-elite-spawn-rules.md) | Yak Shave elite spawn rules | E007 | p2 | opus | S |
-| [T047](epics/m1/E004-run-structure-and-map/T047-standup-events-and-next-fight-modifiers.md) | Standup events and next-fight modifiers | E004 | p2 | opus | M |
 | [T053](epics/m1/E008-run-end-meta-state-and-saves/T053-autosave-continue-and-corrupt-save-recov.md) | Autosave, continue and corrupt-save recovery | E008 | p2 | opus | M |
 | [T054](epics/m1/E008-run-end-meta-state-and-saves/T054-desync-detection-and-replay-vs-snapshot.md) | Desync detection and replay-vs-snapshot test | E008 | p2 | opus | M |
 | [T062](epics/m1/E006-ui-shell-and-combat-replay/T062-tooltips-with-plain-english-lines-and-fo.md) | Tooltips with plain-English lines and formula | E006 | p2 | opus | M |
-| [T065](epics/m1/E009-run-screens-and-build-panel/T065-reward-and-discard-screens.md) | Reward and discard screens | E009 | p2 | sonnet | S |
 | [T066](epics/m1/E009-run-screens-and-build-panel/T066-package-registry-shop-screen.md) | Package Registry shop screen | E009 | p2 | sonnet | S |
 | [T067](epics/m1/E009-run-screens-and-build-panel/T067-standup-idle-cycle-and-free-tier-screens.md) | Standup, Idle Cycle and Free Tier screens | E009 | p2 | opus | M |
 | [T069](epics/m1/E009-run-screens-and-build-panel/T069-build-preview-6-s-firing-order-dry-run.md) | Build preview: 6 s firing order dry run | E009 | p2 | opus | M |
@@ -91,11 +89,13 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (1/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T036](epics/m1/E007-item-rules-enemy-traits-and-bosses/T036-enemy-traits-split-grow-outage-blocked.md) | Enemy traits Split, Grow, Outage, Blocked | E007 | p1 | opus | M |
+| [T047](epics/m1/E004-run-structure-and-map/T047-standup-events-and-next-fight-modifiers.md) | Standup events and next-fight modifiers | E004 | p2 | opus | M |
+| [T065](epics/m1/E009-run-screens-and-build-panel/T065-reward-and-discard-screens.md) | Reward and discard screens | E009 | p2 | sonnet | S |
 
 ## Review (0/3)
 

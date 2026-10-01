@@ -5,7 +5,7 @@ title: Standup events and next-fight modifiers
 summary: "Standup nodes draw an unseen phase-1 event, every M1 choice applies its exact outcome including 50% rolls, unmet requirements are illegal, and next-fight modifiers reach CombatInput."
 keywords: ["events", "standup", "modifiers", "choices", "run"]
 type: task
-status: backlog
+status: in-progress
 priority: p2
 model: opus
 size: M
@@ -49,3 +49,4 @@ Events add small, readable decisions whose outcomes are exactly what the buttons
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)
