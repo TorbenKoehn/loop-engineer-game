@@ -99,6 +99,18 @@ amounts the UI cannot read from data (heal amount, upgradable tools, the Free Ti
 whether it equips, stashes or needs room) come from `preview(action)` in `store/run.ts`, which
 runs `apply` without dispatching, so no rule is copied into the UI.
 
+`RunEndScreen` (`screens/run-end/run-end.tsx`, lazy, mode `runEnd`; styles in
+`theme/run-end.css`) shows `^C` (loss, abandon) or "Merged to main!" in 64 px `--brand`, the
+cause, top-3 damage sources and last-fight zone time as text bars, compactions and one hint.
+`screens/run-end/summary.ts` computes it purely from `RunStats` and the last fight's log
+(recomputed from `run.combat.input`); `pickHint` takes the first matching onboarding rule
+(Rot > 40%, > 3 Throttles on the agent or its tools, died to the Deadline) or a default.
+With a lesson offer open, Continue opens `AgentsMd` (`agents-md.tsx`): AGENTS.md as numbered
+Markdown lines with frontmatter, one button per `lessonActions` pick (write, or replace a line
+when full) and Keep as it is (`skipLesson`). After the choice `closeRun` (`store/run.ts`)
+copies the written lessons into the `meta` signal and returns to the title; an abandoned run
+goes back directly. No Training Data is shown in M1.
+
 ## Combat replay player
 
 ```ts

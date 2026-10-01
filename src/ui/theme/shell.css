@@ -4,6 +4,7 @@
 @import "./reward.css";
 @import "./shop.css";
 @import "./nodes.css";
+@import "./run-end.css";
 
 .shell {
   height: 100vh;

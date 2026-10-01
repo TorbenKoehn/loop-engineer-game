@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E009"
-summary: "Index of forge/reviews/E009: 6 files, 0 subdirectories"
-keywords: ["review", "screen", "package", "registry", "shop", "cycle", "discard", "free"]
+summary: "Index of forge/reviews/E009: 7 files, 0 subdirectories"
+keywords: ["review", "screen", "package", "registry", "screens", "shop", "agents", "cycle"]
 type: index
 status: active
 updated: 2026-10-01
@@ -21,3 +21,4 @@ generated: true
 | [R070-T066.md](R070-T066.md) | Review of T066: Package Registry shop screen | Review of T066 (changes-requested) | review, package, registry, shop, screen |
 | [R071-T066.md](R071-T066.md) | Review of T066: Package Registry shop screen | Review of T066 (approved) | review, package, registry, shop, screen |
 | [R075-T067.md](R075-T067.md) | Review of T067: Standup, Idle Cycle and Free Tier screens | Review of T067 (approved) | review, standup, idle, cycle, free, tier |
+| [R081-T070.md](R081-T070.md) | Review of T070: Run end summary and AGENTS.md screens | Review of T070 (approved) | review, summary, agents, screens |

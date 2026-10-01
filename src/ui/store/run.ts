@@ -43,6 +43,15 @@ export function dispatch(action: Action): void {
   actionLog.value = [...actionLog.value, action];
 }
 
+/** Leaves a finished run for the title; its AGENTS.md carries into the next run. */
+export function closeRun(): void {
+  const lessons = run.value?.result?.lessons;
+  if (lessons) meta.value = { ...meta.value, lessons: [...lessons] };
+  run.value = null;
+  lastError.value = null;
+  actionLog.value = [];
+}
+
 /** The state `action` would lead to, or null if rejected: previews use the reducer itself. */
 export function preview(action: Action): RunState | null {
   const res = run.value ? apply(run.value, action) : null;

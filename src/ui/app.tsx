@@ -39,11 +39,15 @@ const RestScreen = lazyScreen(() => import('./screens/nodes/rest.tsx').then((m) 
 const FreeTierScreen = lazyScreen(() =>
   import('./screens/nodes/free-tier.tsx').then((m) => m.FreeTierScreen),
 );
+const RunEndScreen = lazyScreen(() =>
+  import('./screens/run-end/run-end.tsx').then((m) => m.RunEndScreen),
+);
 
 const NODE_SCREENS: Partial<Record<UiMode, FunctionComponent>> = {
   event: StandupScreen,
   rest: RestScreen,
   treasure: FreeTierScreen,
+  runEnd: RunEndScreen,
 };
 
 /** The screen for the current `mode`; `mode` is the route (ui.md "Screens"). */
