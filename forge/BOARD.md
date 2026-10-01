@@ -38,7 +38,7 @@ generated: true
 | [E021](epics/m3/E021-m3-art-themes-and-title/EPIC.md) | M3 Art, themes and title | backlog | p3 | 0/0 |
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 6/12 |
-| [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 1/7 |
+| [E024](epics/m0/E024-harness-upkeep-2/EPIC.md) | Harness upkeep 2 | ready | p1 | 2/7 |
 
 ## Backlog (30)
 
@@ -86,11 +86,10 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T103](epics/m0/E024-harness-upkeep-2/T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | E024 | p0 | sonnet | S |
 | [T061](epics/m1/E006-ui-shell-and-combat-replay/T061-combat-log-with-why-lines-and-seeking.md) | Combat log with why lines and seeking | E006 | p1 | opus | M |
 
 ## Review (0/3)
@@ -101,12 +100,13 @@ _none_
 
 _none_
 
-## Done (69)
+## Done (70)
 
-_Showing the last 20 of 69 done tasks._
+_Showing the last 20 of 70 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T103](epics/m0/E024-harness-upkeep-2/T103-forge-lint-ties-status-ac-boxes-and-log.md) | Forge lint ties status, AC boxes and Log | E024 | p0 | sonnet | S |
 | [T102](epics/m0/E024-harness-upkeep-2/T102-npm-run-check-runs-build-and-e2e.md) | npm run check runs build and e2e | E024 | p0 | sonnet | S |
 | [T101](epics/m1/E006-ui-shell-and-combat-replay/T101-combat-screen-route-dev-only-sandbox-and.md) | Combat screen route, dev-only sandbox and e2e | E006 | p1 | opus | M |
 | [T100](epics/m1/E006-ui-shell-and-combat-replay/T100-combat-view-components-on-createplayback.md) | Combat view components on createPlayback | E006 | p1 | opus | M |
@@ -126,6 +126,5 @@ _Showing the last 20 of 69 done tasks._
 | [T064](epics/m1/E009-run-screens-and-build-panel/T064-map-screen-with-reachable-nodes-and-trav.md) | Map screen with reachable nodes and travel | E009 | p1 | opus | M |
 | [T063](epics/m1/E009-run-screens-and-build-panel/T063-title-harness-select-and-system-prompt-s.md) | Title, harness select and system prompt screens | E009 | p1 | opus | M |
 | [T060](epics/m1/E006-ui-shell-and-combat-replay/T060-context-bar-component.md) | Context bar component | E006 | p1 | sonnet | S |
-| [T058](epics/m1/E006-ui-shell-and-combat-replay/T058-combat-replay-player-and-view-fold.md) | Combat replay player and view fold | E006 | p1 | opus | M |
 
 ## Cancelled (1)

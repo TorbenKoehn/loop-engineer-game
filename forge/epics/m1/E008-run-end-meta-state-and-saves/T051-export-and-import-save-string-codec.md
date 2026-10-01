@@ -49,4 +49,7 @@ Players and agents can move a run as one string, which bug reports and the repla
 - 2026-10-01: created
 - 2026-10-01: started attempt 1 (sonnet)
 - 2026-10-01: AC evidence: all 3 AC verified in R056 (codec.test.ts); the implementer's task-file edits were lost in the worktree merge
+- 2026-10-01: AC1 verified: R056 AC1: npx vitest run src/save (25 passed, round-trip toEqual through native streams)
+- 2026-10-01: AC2 verified: R056 AC2: codec.test.ts asserts the prefix, checksum and newer-schema errors with the save.md messages
+- 2026-10-01: AC3 verified: R056 AC3: 400-action synthetic save about 18 kB canonical JSON, under 60 kB
 - 2026-10-01: done (R056)

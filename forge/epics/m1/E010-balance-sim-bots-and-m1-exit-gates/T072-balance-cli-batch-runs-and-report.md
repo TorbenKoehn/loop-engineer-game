@@ -58,4 +58,5 @@ One command produces the numbers the M1 exit criteria are judged by.
 - 2026-10-01: AC3 verified: npx vitest run tools/balance (24 passed) incl. 'the same arguments write byte-identical JSON and Markdown'; the 1000-run JSON had sha256 0de28d97... on three CLI runs
 - 2026-10-01: AC4 runtime, 1000 greedy runs per harness: terminal_purist 2.4 s, ide_companion 3.3-3.4 s (one run under load: 6.1 s / 3.1 s); about 6 s wall for both
 - 2026-10-01: review requested
+- 2026-10-01: AC4 verified: runtime recorded in the Log above; R074 AC4 confirms (4.8 s terminal_purist, 3.9 s ide_companion)
 - 2026-10-01: done (R074)

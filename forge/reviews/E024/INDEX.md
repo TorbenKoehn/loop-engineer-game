@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E024"
-summary: "Index of forge/reviews/E024: 2 files, 0 subdirectories"
-keywords: ["build", "check", "review", "runs"]
+summary: "Index of forge/reviews/E024: 3 files, 0 subdirectories"
+keywords: ["review", "build", "check", "runs", "boxes", "forge", "lint", "status"]
 type: index
 status: active
 updated: 2026-10-01
@@ -17,3 +17,4 @@ generated: true
 |---|---|---|---|
 | [R076-T102.md](R076-T102.md) | Review of T102: npm run check runs build and e2e | Review of T102 (changes-requested) | review, check, runs, build |
 | [R077-T102.md](R077-T102.md) | Review of T102: npm run check runs build and e2e | Review of T102 (approved) | review, check, runs, build |
+| [R080-T103.md](R080-T103.md) | Review of T103: Forge lint ties status, AC boxes and Log | Review of T103 (approved) | review, forge, lint, ties, status, boxes |

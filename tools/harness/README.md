@@ -90,6 +90,9 @@ Errors, checked on every lint:
 - `status_transition`: versus HEAD content (one batched `git cat-file --batch`); allowed `backlog>ready>in-progress>review>done`,
   `review>in-progress`, any `>blocked`, `blocked>ready|in-progress`; done is terminal.
 - `ac_decrease`: acceptance criteria may not shrink once a task left backlog/ready.
+- `done_ac_unchecked`: a `done` task may not have an unchecked acceptance criterion.
+- `ac_checked_needs_log`: in `review` or `done`, each checked AC n needs a Log line containing `AC<n>` and `verified` (`AC1, AC2 verified` covers both).
+- `done_log_not_done`: a Log line `done (R###)` on a task whose status is not `done`.
 
 The HEAD comparison is skipped for untracked files and outside a git repo (or before the first commit).
 

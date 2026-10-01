@@ -61,4 +61,10 @@ migrate the existing epics. The same scaffolder also writes review titles longer
 - 2026-10-01: lint reviews found in forge/reviews/ and forge/reviews/E###/ (integrity.ts regex); README updated
 - 2026-10-01: npm run check fails only at harness:check on pre-existing R015 title (62 chars); blocked
 - 2026-10-01: orchestrator shortened R015 title (blocker); status review
+- 2026-10-01: AC1 verified: R016 AC1-AC6: npx vitest run tools/harness (45 passed, named test `scaffolds an epic under its milestone dir`)
+- 2026-10-01: AC2 verified: R016: `scaffolds a task next to a nested epic` passes
+- 2026-10-01: AC3 verified: R016: `rejects an unknown milestone` passes
+- 2026-10-01: AC4 verified: R016: `review title fits fm_title_chars` passes
+- 2026-10-01: AC5 verified: R016: `milestone must match parent dir` passes
+- 2026-10-01: AC6 verified: R016: `scaffolds a review under its epic dir` passes
 - 2026-10-01: done (R016)

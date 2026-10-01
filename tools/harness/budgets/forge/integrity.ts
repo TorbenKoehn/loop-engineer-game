@@ -3,6 +3,7 @@ import { checklistCount, ofType } from '../../core/forge.ts';
 import { parseFrontmatter } from '../../core/frontmatter.ts';
 import type { Finding } from '../../core/types.ts';
 import type { Check, Ctx } from '../util.ts';
+import { bookkeepingChecks } from './bookkeeping.ts';
 
 const err = (file: string, rule: string, message: string): Finding => ({
   file,
@@ -86,4 +87,4 @@ const vsHead: Check = {
       .flatMap((i) => againstHead(ctx, i)),
 };
 
-export const integrityChecks: Check[] = [doneNeedsReview, vsHead];
+export const integrityChecks: Check[] = [doneNeedsReview, vsHead, ...bookkeepingChecks];
