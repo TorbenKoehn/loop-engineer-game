@@ -5,7 +5,7 @@ title: Tool outputs and context removal
 summary: "Tool output tokens added to signal after effects, negative output and removeCtx removing noise first and never below baseline, with tokens events in the documented order."
 keywords: ["context", "outputs", "tokens", "removal", "summarize"]
 type: task
-status: backlog
+status: in-progress
 priority: p1
 model: opus
 size: S
@@ -43,8 +43,11 @@ Every tool call costs context, and removal tools buy it back, with the exact ord
 
 ## Notes
 
+- Orchestrator 2026-10-01 (R041 F2): add a test that tool output tokens ignore the zone bonus ("never for tokens", context.md), and call `updateZone` after F changes.
+
 - 2026-10-01: Meets the Definition of Ready; held in backlog because of wip_ready (8). Promote when all depends_on are done.
 
 ## Log
 
 - 2026-10-01: created
+- 2026-10-01: started attempt 1 (opus)

@@ -39,14 +39,13 @@ generated: true
 | [E022](epics/m3/E022-m3-aa-release-readiness/EPIC.md) | M3 AA release readiness | backlog | p3 | 0/0 |
 | [E023](epics/m0/E023-harness-upkeep/EPIC.md) | Harness upkeep | ready | p1 | 5/12 |
 
-## Backlog (58)
+## Backlog (57)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
 | [T032](epics/m1/E007-item-rules-enemy-traits-and-bosses/T032-rule-engine-triggers-and-conditions.md) | Rule engine: triggers and conditions | E007 | p0 | opus | M |
 | [T033](epics/m1/E007-item-rules-enemy-traits-and-bosses/T033-passive-stat-modifiers-mod-effects.md) | Passive stat modifiers (mod effects) | E007 | p0 | opus | M |
 | [T024](epics/m1/E002-combat-simulation-core/T024-sim-determinism-property-tests-and-refer.md) | Sim determinism property tests and reference goldens | E002 | p1 | opus | M |
-| [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
 | [T027](epics/m1/E003-context-window-mechanic/T027-enemy-noise-injection-and-blockers.md) | Enemy noise injection and blockers | E003 | p1 | opus | S |
 | [T028](epics/m1/E003-context-window-mechanic/T028-auto-compaction-on-overflow.md) | Auto-compaction on overflow | E003 | p1 | opus | M |
 | [T029](epics/m1/E003-context-window-mechanic/T029-planned-compaction-policy-and-compact-ef.md) | Planned compaction policy and compact effect | E003 | p1 | opus | M |
@@ -111,10 +110,11 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (2/3)
+## In Progress (3/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
+| [T026](epics/m1/E003-context-window-mechanic/T026-tool-outputs-and-context-removal.md) | Tool outputs and context removal | E003 | p1 | opus | S |
 | [T043](epics/m1/E004-run-structure-and-map/T043-rewards-credits-interest-and-1-of-3-pick.md) | Rewards: credits, interest and 1-of-3 picks | E004 | p1 | opus | M |
 | [T056](epics/m1/E006-ui-shell-and-combat-replay/T056-crimson-theme-tokens-and-typography.md) | Crimson theme tokens and typography | E006 | p1 | sonnet | S |
 
