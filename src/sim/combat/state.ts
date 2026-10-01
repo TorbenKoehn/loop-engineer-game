@@ -16,6 +16,8 @@ export interface StatusRt {
   readonly status: Status;
   /** ms left; expires at <= 0. */
   remaining: number;
+  /** seq of the statusOn that last applied or stacked it (most recent buff on compaction). */
+  seq: number;
 }
 
 /** A one-shot damage-formula buff waiting for its tool's next activation. */
@@ -27,6 +29,8 @@ export interface PrimeRt {
   readonly pct: number;
   /** Filter as logged, e.g. `tag:Edit`. */
   readonly filter: string;
+  /** seq of its `prime` event (most recent buff on compaction). */
+  readonly seq: number;
 }
 
 export interface ToolRt {

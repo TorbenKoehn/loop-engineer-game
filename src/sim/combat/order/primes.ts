@@ -52,7 +52,7 @@ export function addPrimes(sim: Sim, src: Ref, srcId: string, spec: PrimeSpec): v
     .sort((a, b) => a.ticks - b.ticks || a.tool.slot - b.tool.slot)
     .slice(0, spec.count);
   for (const { tool } of next) {
-    tool.primes.push({ src, id: `prime:${srcId}`, pct: spec.pct, filter });
+    tool.primes.push({ src, id: `prime:${srcId}`, pct: spec.pct, filter, seq: sim.seq });
     emit(sim, { kind: 'prime', src, dst: toolRef(tool), v: spec.pct, d: { filter } });
   }
 }

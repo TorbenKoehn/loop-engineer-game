@@ -64,10 +64,11 @@ export function applyStatus(sim: Sim, src: Ref, h: Holder, app: StatusApp): void
   const adds = app.status === 'haste' || app.status === 'slow';
   let entry = h.statuses.find((s) => s.status === app.status);
   if (!entry) {
-    entry = { status: app.status, remaining: 0 };
+    entry = { status: app.status, remaining: 0, seq: sim.seq };
     h.statuses.push(entry);
   }
   entry.remaining = Math.min(cap, adds ? entry.remaining + ms : Math.max(entry.remaining, ms));
+  entry.seq = sim.seq; // the statusOn below
   const d = { status: app.status, remaining: entry.remaining };
   emit(sim, { kind: 'statusOn', src, dst: holderRef(h), v: ms, d });
 }

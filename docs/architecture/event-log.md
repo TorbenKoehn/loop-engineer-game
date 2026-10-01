@@ -5,7 +5,7 @@ keywords: [event-log, combat, serialisation, golden-tests, replay, determinism]
 type: doc
 status: active
 updated: 2026-10-01
-related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts]
+related_code: [src/sim/events.ts, src/sim/combat/enemy/spawn.ts, src/sim/combat/status/statuses.ts, src/sim/combat/status/status-effects.ts, src/sim/combat/context/zone.ts, src/sim/combat/context/tokens.ts, src/sim/combat/context/compaction.ts]
 related: [sim-core.md, ui.md, testing.md, adr/adr-002-deterministic-sim.md]
 ---
 
@@ -72,6 +72,9 @@ Conventions:
 - **`statusOff` on expiry**: `src: 'sys'`, `v: 0`.
 - **`statusOff` via `clearStatus`**: `src` is the clearing tool, `v` is the ms that were
   left on the status (cut short).
+- **`compaction`**: `d.S` is the signal after the reset (`N` is 0). `lostBuff` names the
+  buff an auto-compaction removed: `<tool ref>:haste` (followed by `statusOff` from `ctx`)
+  or `<tool ref>:<prime id>`, e.g. `t2:prime:read_file`; absent when none was held.
 
 `why` lists modifier ids in application order (`zone:focused`, `skill:unix_philosophy`,
 `prime:read_file`), so the UI can render "14 dmg (Focused +20%, piped +30%)" without
@@ -83,8 +86,11 @@ re-deriving rules. Adding a kind or a field is a **log format change**: bump
 - Events are appended in the exact order effects happen within the tick order; `seq`
   breaks ties for equal `t`.
 - One activation produces, in order: `toolFired`, `primeUsed*` (one per consumed prime), its effect events (`damage`, `guard`,
-  …), `tokens` (output), `zoneChanged?` (at most one per activation: the zone is updated
-  once, after `F` changed), `compaction?`, `pipe?`, skill-triggered events.
+  …), `tokens` (output), `compaction?` (with its `statusOn` Stun and the lost buff's
+  `statusOff?`), `zoneChanged?` (at most one per activation: the zone is updated once,
+  after `F` and any compaction changed it, so `zoneChanged` never enters Overflow),
+  `pipe?`, skill-triggered events. A noise injection orders `tokens`, `compaction?`,
+  `zoneChanged?` the same way.
 - The UI must never reorder events; playback is strictly by `seq`.
 
 ## Canonical serialisation and hashing

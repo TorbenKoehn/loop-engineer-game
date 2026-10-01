@@ -1,7 +1,7 @@
 // resolveCombat: input -> fixed 50 ms ticks in the combat tick order -> result and event log.
 // Rules: docs/game/systems/combat.md "Tick order"; API: docs/architecture/sim-core.md.
+import { checkOverflow } from './context/compaction.ts';
 import { zoneIx } from './context/ctx.ts';
-import { updateZone } from './context/zone.ts';
 import { deadlineDamage } from './deadline.ts';
 import { checkEnd, type End, resolveDead, WIN } from './end.ts';
 import { enemiesAct } from './enemy/act.ts';
@@ -35,7 +35,7 @@ function startFight(sim: Sim): void {
   const { trust, maxTrust, ctx } = sim.agent;
   const d = { W: ctx.W, B: ctx.B, S: ctx.S, N: ctx.N, zone: zoneIx(ctx.zone), trust, maxTrust };
   emit(sim, { kind: 'fightStart', src: 'sys', v: sim.deadlineMs, d });
-  updateZone(sim); // the one overflow check after the start modifiers; compaction: T028
+  checkOverflow(sim); // the one overflow check after the start modifiers
   for (const [index, enemy] of sim.enemies.entries()) {
     const spawn = { def: enemy.def.id, index, reason: 'start' } as const;
     emit(sim, { kind: 'spawn', src: 'sys', dst: enemyRef(enemy), v: enemy.sev, d: spawn });

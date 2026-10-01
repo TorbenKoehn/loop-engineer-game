@@ -74,7 +74,8 @@ describe('status, clearStatus and charge effects', () => {
     slot(sim, 2).progress = 2900 * 100;
     throttle(sim, 2); // 100 ms left at rate 100, but frozen
     applyEffects(sim, slot(sim, 0));
-    expect(slot(sim, 2).statuses).toEqual([{ status: 'haste', remaining: 2000 }]);
+    const haste = { status: 'haste', remaining: 2000, seq: expect.any(Number) };
+    expect(slot(sim, 2).statuses).toEqual([haste]);
     expect(ofKind(sim, 'statusOff')).toMatchObject([{ src: 't0', dst: 't2', v: 1000 }]);
   });
 
