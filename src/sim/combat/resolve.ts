@@ -3,7 +3,9 @@
 import type { ModelStats } from '../../content/types/index.ts';
 import { announceIntent, enemiesAct } from './enemies.ts';
 import { fireTools } from './fire.ts';
-import { createSim, ENEMY_RATE, emit, enemyRef, type Sim, TICK_MS } from './state.ts';
+import { createSim, emit, enemyRef, type Sim, TICK_MS } from './state.ts';
+import { chargeAll } from './status/charge.ts';
+import { tickStatuses } from './status/statuses.ts';
 import type { CombatInput, CombatOptions, CombatResult, EndReason, Outcome } from './types.ts';
 
 /** Hard cap after the Deadline: the fight is lost by timeout. */
@@ -59,8 +61,9 @@ function runTicks(sim: Sim): End {
 
 /** One tick. Steps 2 (traits) and 7 (Deadline) are not part of the skeleton. */
 function tick(sim: Sim): End | undefined {
-  sim.t += TICK_MS; // 1. TODO(T020): status timers
-  charge(sim); // 3
+  sim.t += TICK_MS; // 1
+  tickStatuses(sim);
+  chargeAll(sim); // 3
   fireTools(sim); // 4
   if (sim.enemies.every((e) => e.sev <= 0)) {
     resolveDead(sim); // 5: ties favour the player, enemies do not act
@@ -71,11 +74,6 @@ function tick(sim: Sim): End | undefined {
   if (sim.enemies.length === 0) return WIN;
   if (sim.agent.trust <= 0) return LOSS_TRUST;
   return overtime(sim);
-}
-
-function charge(sim: Sim): void {
-  for (const tool of sim.agent.tools) tool.progress += TICK_MS * sim.agent.rate;
-  for (const enemy of sim.enemies) enemy.progress += TICK_MS * ENEMY_RATE;
 }
 
 /** Death checks: resolves enemies at Severity <= 0, front to back. */

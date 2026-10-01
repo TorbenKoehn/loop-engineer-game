@@ -16,7 +16,7 @@ generated: true
 | Epic | Title | Status | Priority | Done/Total |
 |---|---|---|---|---|
 | [E001](epics/m0/E001-game-foundation/EPIC.md) | Game foundation | ready | p0 | 7/8 |
-| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 3/8 |
+| [E002](epics/m1/E002-combat-simulation-core/EPIC.md) | Combat simulation core | backlog | p0 | 4/8 |
 | [E003](epics/m1/E003-context-window-mechanic/EPIC.md) | Context window mechanic | backlog | p0 | 0/7 |
 | [E004](epics/m1/E004-run-structure-and-map/EPIC.md) | Run structure and map | backlog | p1 | 0/8 |
 | [E005](epics/m1/E005-vertical-slice-content/EPIC.md) | Vertical slice content | backlog | p0 | 6/8 |
@@ -123,23 +123,25 @@ generated: true
 | [T089](epics/m0/E023-harness-upkeep/T089-code-budgets-cover-tsx-files.md) | Code budgets cover tsx files | E023 | p2 | sonnet | S |
 | [T091](epics/m0/E023-harness-upkeep/T091-harness-enforces-per-module-code-budgets.md) | Harness enforces per-module code budgets | E023 | p2 | sonnet | S |
 
-## In Progress (3/3)
+## In Progress (1/3)
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
-| [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
 | [T015](epics/m1/E005-vertical-slice-content/T015-m1-events-next-fight-modifiers-and-lesso.md) | M1 events, next-fight modifiers and lessons | E005 | p1 | sonnet | S |
+
+## Review (1/3)
+
+| ID | Title | Epic | Priority | Model | Size |
+|---|---|---|---|---|---|
 | [T096](epics/m0/E023-harness-upkeep/T096-one-determinism-ban-biome-covers-src-sim.md) | One determinism ban: Biome covers src/sim and src/run | E023 | p2 | sonnet | S |
-
-## Review (0/3)
-
-_none_
 
 ## Blocked (0)
 
 _none_
 
-## Done (20)
+## Done (21)
+
+_Showing the last 20 of 21 done tasks._
 
 | ID | Title | Epic | Priority | Model | Size |
 |---|---|---|---|---|---|
@@ -147,6 +149,7 @@ _none_
 | [T093](epics/m0/E023-harness-upkeep/T093-harden-the-src-sim-determinism-ban.md) | Harden the src/sim determinism ban | E023 | p2 | sonnet | S |
 | [T087](epics/m0/E023-harness-upkeep/T087-migrate-forge-epics-into-milestone-dirs.md) | Migrate forge epics into milestone dirs | E023 | p2 | sonnet | M |
 | [T086](epics/m0/E023-harness-upkeep/T086-scaffolder-places-epics-in-milestone-dir.md) | Scaffolder places epics in milestone dirs | E023 | p2 | sonnet | S |
+| [T020](epics/m1/E002-combat-simulation-core/T020-statuses-and-charge-rate-formula.md) | Statuses and charge-rate formula | E002 | p0 | opus | M |
 | [T019](epics/m1/E002-combat-simulation-core/T019-targeting-damage-formula-and-guardrails.md) | Targeting, damage formula and Guardrails | E002 | p0 | opus | M |
 | [T018](epics/m1/E002-combat-simulation-core/T018-combat-walking-skeleton-one-tool-vs-one.md) | Combat walking skeleton: one tool vs one enemy | E002 | p0 | opus | M |
 | [T017](epics/m1/E002-combat-simulation-core/T017-integer-math-helpers-for-the-sim.md) | Integer math helpers for the sim | E002 | p0 | sonnet | S |
@@ -162,6 +165,5 @@ _none_
 | [T004](epics/m0/E001-game-foundation/T004-event-log-types-and-golden-log-test-harn.md) | Event log types and golden-log test harness | E001 | p0 | opus | M |
 | [T003](epics/m0/E001-game-foundation/T003-seeded-forkable-integer-rng.md) | Seeded forkable integer RNG | E001 | p0 | sonnet | S |
 | [T002](epics/m0/E001-game-foundation/T002-configure-biome-with-code-budgets.md) | Configure Biome with code budgets | E001 | p0 | sonnet | S |
-| [T001](epics/m0/E001-game-foundation/T001-scaffold-vite-preact-and-strict-typescri.md) | Scaffold Vite, Preact and strict TypeScript app | E001 | p0 | sonnet | S |
 
 ## Cancelled (0)

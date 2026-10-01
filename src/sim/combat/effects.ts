@@ -3,24 +3,21 @@
 import type { Effect, Value } from '../../content/types/index.ts';
 import type { Ref } from '../events.ts';
 import { type Amount, computeAmount, dealDamage, type Mod } from './damage.ts';
-import { emit, type Sim, type ToolRt, toolRef } from './state.ts';
+import { emit, type Sim, type ToolRt, toolRef, valueAt } from './state.ts';
+import { type Activation, applyStatusEffect, isStatusEffect } from './status/status-effects.ts';
 import { hpOf, isAgent, maxHpOf, selectTargets, setHp, type Unit, unitRef } from './targeting.ts';
-import type { Version } from './types.ts';
 
-const VERSION_IX = { 1: 0, 2: 1, 3: 2 } as const;
 /** Item mods (T033) and zone (T025) join here. */
 const NO_MODS: readonly Mod[] = [];
 
-export function valueAt(v: Value, version: Version): number {
-  return typeof v === 'number' ? v : v[VERSION_IX[version]];
-}
-
 export function applyEffects(sim: Sim, tool: ToolRt): void {
-  for (const effect of tool.def.effects) applyEffect(sim, tool, effect);
+  const act: Activation = { tool, picks: new Map() };
+  for (const effect of tool.def.effects) applyEffect(sim, act, effect);
 }
 
-// Other kinds belong to their owners: status and charge (T020), prime (T022), context (E003).
-function applyEffect(sim: Sim, tool: ToolRt, effect: Effect): void {
+// Other kinds belong to their owners: prime (T022), context (E003).
+function applyEffect(sim: Sim, act: Activation, effect: Effect): void {
+  const { tool } = act;
   const src = toolRef(tool);
   if (effect.do === 'dmg') {
     for (const unit of selectTargets(sim, effect.target ?? tool.def.target)) {
@@ -29,6 +26,7 @@ function applyEffect(sim: Sim, tool: ToolRt, effect: Effect): void {
     }
   } else if (effect.do === 'guard') gainGuard(sim, src, sim.agent, amountOf(tool, effect.v));
   else if (effect.do === 'heal') heal(sim, src, sim.agent, amountOf(tool, effect.v));
+  else if (isStatusEffect(effect)) applyStatusEffect(sim, act, effect);
 }
 
 const amountOf = (tool: ToolRt, v: Value): Amount =>

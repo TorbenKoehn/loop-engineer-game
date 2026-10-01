@@ -1,23 +1,27 @@
 // Mutable working copy of one fight, created from CombatInput; plus the event emitter.
 // Plain data only, so a snapshot is structuredClone-able (docs/architecture/sim-core.md).
-import type { EnemyDef, ToolDef } from '../../content/types/index.ts';
+import type { EnemyDef, Status, ToolDef, Value } from '../../content/types/index.ts';
 import type { CombatEvent, Ref } from '../events.ts';
-import { clamp } from '../int.ts';
 import { createRng, type Rng } from '../rng.ts';
 import type { CombatInput, Version } from './types.ts';
 
 export const TICK_MS = 50;
 /** Progress unit is ms x 100; a rate is an integer percent. */
 export const PROGRESS_PER_MS = 100;
-export const ENEMY_RATE = 100;
-const MIN_RATE = 10;
-const MAX_RATE = 400;
+
+/** One timed status on a unit; a unit's list is in application order. */
+export interface StatusRt {
+  readonly status: Status;
+  /** ms left; expires at <= 0. */
+  remaining: number;
+}
 
 export interface ToolRt {
   readonly slot: number;
   readonly def: ToolDef;
   readonly version: Version;
   progress: number;
+  statuses: StatusRt[];
   /** Damage dealt this fight (stats). */
   dealt: number;
 }
@@ -31,6 +35,7 @@ export interface EnemyRt {
   guard: number;
   intentIx: number;
   progress: number;
+  statuses: StatusRt[];
   /** Ref of the source that dealt the final hit. */
   killedBy: Ref;
 }
@@ -40,8 +45,9 @@ export interface AgentRt {
   readonly maxTrust: number;
   /** Guardrails, capped at maxTrust. */
   guard: number;
-  /** Charge rate in percent. Flat mods: T020. */
-  readonly rate: number;
+  /** Harness speed: the unclamped charge-rate base in percent. Flat rate mods: T033. */
+  readonly speed: number;
+  statuses: StatusRt[];
   readonly tools: ToolRt[];
   /** Damage taken this fight (stats). */
   taken: number;
@@ -72,22 +78,27 @@ export function createSim(input: CombatInput, log: boolean): Sim {
       trust: agent.trust,
       maxTrust: agent.maxTrust,
       guard: 0,
-      rate: clamp(agent.model.speed, MIN_RATE, MAX_RATE),
-      tools: agent.tools.map((s, slot) => ({ ...s, slot, progress: 0, dealt: 0 })),
+      speed: agent.model.speed,
+      statuses: [],
+      tools: agent.tools.map((s, slot) => ({ ...s, slot, progress: 0, statuses: [], dealt: 0 })),
       taken: 0,
     },
-    enemies: encounter.enemies.map((def, i) => ({
-      uid: i + 1,
-      def,
-      sev: def.sev,
-      maxSev: def.sev,
-      guard: 0,
-      intentIx: 0,
-      progress: 0,
-      killedBy: 'sys' as Ref,
-    })),
+    enemies: encounter.enemies.map((def, i) => createEnemy(def, i + 1)),
   };
 }
+
+/** A fresh enemy at full Severity on its first intent. */
+export const createEnemy = (def: EnemyDef, uid: number): EnemyRt => ({
+  uid,
+  def,
+  sev: def.sev,
+  maxSev: def.sev,
+  guard: 0,
+  intentIx: 0,
+  progress: 0,
+  statuses: [],
+  killedBy: 'sys',
+});
 
 type Unstamped<E> = E extends CombatEvent ? Omit<E, 'seq' | 't'> : never;
 export type NewEvent = Unstamped<CombatEvent>;
@@ -96,6 +107,13 @@ export type NewEvent = Unstamped<CombatEvent>;
 export function emit(sim: Sim, e: NewEvent): void {
   if (sim.log) sim.events.push({ seq: sim.seq, t: sim.t, ...e } as CombatEvent);
   sim.seq++;
+}
+
+const VERSION_IX = { 1: 0, 2: 1, 3: 2 } as const;
+
+/** A fixed value, or the entry of a v1/v2/v3 triple for `version`. */
+export function valueAt(v: Value, version: Version): number {
+  return typeof v === 'number' ? v : v[VERSION_IX[version]];
 }
 
 export const toolRef = (tool: ToolRt): Ref => `t${tool.slot}`;

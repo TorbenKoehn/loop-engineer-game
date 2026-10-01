@@ -1,7 +1,7 @@
 ---
 title: "Index: forge/reviews/E002"
-summary: "Index of forge/reviews/E002: 4 files, 0 subdirectories"
-keywords: ["review", "combat", "enemy", "skeleton", "tool", "walking", "damage", "formula"]
+summary: "Index of forge/reviews/E002: 5 files, 0 subdirectories"
+keywords: ["review", "combat", "enemy", "formula", "skeleton", "tool", "walking", "charge"]
 type: index
 status: active
 updated: 2026-10-01
@@ -19,3 +19,4 @@ generated: true
 | [R014-T018.md](R014-T018.md) | Review of T018: combat walking skeleton | Round 1, changes-requested: code meets all 5 AC and follows the tick order, but the 583-line diff breaches task_diff_lines (400) with no allowed override. | review, combat, walking, skeleton, tool, enemy |
 | [R015-T018.md](R015-T018.md) | Review of T018: Combat skeleton, one tool vs one enemy | Review of T018 (approved) | review, combat, walking, skeleton, tool, enemy |
 | [R019-T019.md](R019-T019.md) | Review of T019: Targeting, damage formula and Guardrails | Review of T019 (approved) | review, targeting, damage, formula, guardrails |
+| [R025-T020.md](R025-T020.md) | Review of T020: Statuses and charge-rate formula | Review of T020 (approved) | review, statuses, charge, rate, formula |
